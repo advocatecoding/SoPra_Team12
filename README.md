@@ -1,1 +1,1 @@
-# Software-Praktikum_Team12
+# SoPra_Team12
