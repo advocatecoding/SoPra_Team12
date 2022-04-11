@@ -8,6 +8,9 @@ class Zeitinverallbuchung(bo):
         self.__buchungsart = None
         self.__zeit = 0
 
+        if self.__buchungsart is None:
+            print("Wir haben ein Pause")
+
 
     def set_zeitintervallbuchung(self, zeit, person, aktivität, buchungsart):
         self.set_person(person)

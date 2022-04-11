@@ -6,8 +6,6 @@ class Zeitintervall(bo.BusinessObject):
         super().__init__()
         self.time = 0
 
-    def get_type(self, time):
-        print(time.get_start_ereignis())
 
     def set_zeitintervall(self, time):
         time1 = time.get_start_ereignis()

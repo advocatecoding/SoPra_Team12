@@ -10,6 +10,7 @@ from bo.Person import Person
 from bo.Zeitintervallbuchung import Zeitinverallbuchung
 from bo.Zeitintervall import Zeitintervall
 from bo.Projektarbeit import Projektarbeit
+from bo.Pause import Pause
 
 import datetime
 
@@ -29,12 +30,17 @@ if __name__ == '__main__':
     kommen1 = Kommen(kommen)
     gehen1 = Gehen(gehen)
     ereignisbuchung1 = Ereignisbuchung(kommen1.get_start(), gehen1.get_end())
-    zeitintervall1 = Zeitintervall()
-    zeitintervall1.get_type(ereignisbuchung1)
-    zeitintervall1.set_zeitintervall(ereignisbuchung1)
-    zu_buchende_zeit = zeitintervall1.get_zeitintervall()
+    #zeitintervall1 = Zeitintervall()
+    #zeitintervall1.get_type(ereignisbuchung1)
+    projektarbeit1 = Projektarbeit()
+    pause1 = Pause()
+    pause1.set_zeitintervall(ereignisbuchung1)
+    #zeitintervall1.set_zeitintervall(ereignisbuchung1)
+    #projektarbeit1.set_zeitintervall(ereignisbuchung1)
+    #zu_buchende_zeit = zeitintervall1.get_zeitintervall()
+    zu_buchende_zeit = pause1.get_zeitintervall()
     zeitinervallbuchung1 = Zeitinverallbuchung()
-    zeitinervallbuchung1.set_zeitintervallbuchung(zu_buchende_zeit, mitarbeiter1, aktivität1, zeitintervall1)
+    zeitinervallbuchung1.set_zeitintervallbuchung(zu_buchende_zeit, mitarbeiter1, aktivität1, None)
 
     print(zeitinervallbuchung1.get_person().get_name())
     print(zeitinervallbuchung1.get_zeit())
