@@ -45,4 +45,3 @@ if __name__ == '__main__':
     print(zeitinervallbuchung1.get_person().get_name())
     print(zeitinervallbuchung1.get_zeit())
     print(zeitinervallbuchung1.get_aktivität())
-
