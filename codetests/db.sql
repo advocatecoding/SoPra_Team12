@@ -153,6 +153,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
    CREATE TABLE IF NOT EXISTS `Mitarbeiter_in_Projekt` (
   `person_id` VARCHAR(45) NOT NULL ,
   `projekt_id` VARCHAR(45) NOT NULL ,
+  `verkaufte_stunden` INT NULL,
   PRIMARY KEY (`person_id`,`projekt_id`),
 	FOREIGN KEY (`person_id`)
 	REFERENCES `Person` (`person_id`)
