@@ -5,4 +5,4 @@ class Ereignis(bo.BusinessObject):
 
     def __init__(self, zeitpunkt):
         super().__init__()
-        self.zeitpunkt = zeitpunkt
+        self.__zeitpunkt = zeitpunkt

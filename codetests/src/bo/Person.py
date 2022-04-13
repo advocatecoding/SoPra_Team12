@@ -1,13 +1,11 @@
 from bo import BusinessObject as bo
 
-class Person:
+class Person(bo.BusinessObject):
 
-    def __init__(self, name, id):
+    def __init__(self, name):
+        super().__init__()
         self.__name = name
-        self.__id = id
 
-    def get_id(self):
-        return self.__id
 
     def get_name(self):
         return self.__name
