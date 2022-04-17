@@ -11,25 +11,25 @@ USE `Zeiterfassung` ;
 -- -----------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Person` (
   `person_id` VARCHAR(45) NOT NULL ,
-  `vorname` varchar(100) NOT NULL DEFAULT '',
-  `nachname` varchar(100) NOT NULL DEFAULT '',
+  `vorname` VARCHAR(45) NULL,
+  `nachname` VARCHAR(45) NULL,
   `mail_adresse` VARCHAR(150) NULL,
   `benutzername` VARCHAR(150) NULL,
   `urlaubstage` INT NULL,
-  `überstunden` INT NULL,
+  `ueberstunden` INT NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`person_id`));
   
 -- -----------------------------------------------------------------------
--- Tabelle erstellen 'Aktivität'
+-- Tabelle erstellen 'Aktivitaet'
 -- -----------------------------------------------------------------------
-  CREATE TABLE IF NOT EXISTS `Aktivität` (
-  `aktivität_id` VARCHAR(45) NOT NULL ,
+  CREATE TABLE IF NOT EXISTS `Aktivitaet` (
+  `aktivitaet_id` VARCHAR(45) NOT NULL ,
   `bezeichnung` VARCHAR(45) NOT NULL ,
   `dauer` INT NULL,
-  `kapazität` INT NULL,
+  `kapazitaet` INT NULL,
   `letzte_aenderung` DATETIME NULL,
-  PRIMARY KEY (`aktivität_id`));
+  PRIMARY KEY (`aktivitaet_id`));
   
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Projekt'
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
   `projekt_id` VARCHAR(45) NOT NULL ,
   `person_id` VARCHAR(45) NOT NULL ,
   `auftraggeber` VARCHAR(150) NULL,
-  `kapazität` INT NULL,
+  `kapazitaet` INT NULL,
   `dauer` INT NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`projekt_id`),
@@ -95,7 +95,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
   `zeit_id` VARCHAR(45) NOT NULL ,
   `projekt_id` VARCHAR(45) NOT NULL ,
   `person_id` VARCHAR(45) NOT NULL ,
-  `aktivität_id` VARCHAR(45) NOT NULL ,
+  `aktivitaet_id` VARCHAR(45) NOT NULL ,
   `zeit_start` DATETIME NULL,
   `zeit_ende` DATETIME NULL,
   `letzte_aenderung` DATETIME NULL,
@@ -108,8 +108,8 @@ CREATE TABLE IF NOT EXISTS `Person` (
     REFERENCES `Person` (`person_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-    FOREIGN KEY (`aktivität_id`)
-    REFERENCES `Aktivität` (`aktivität_id`)
+    FOREIGN KEY (`aktivitaet_id`)
+    REFERENCES `Aktivitaet` (`aktivitaet_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION);  
     
@@ -132,14 +132,14 @@ CREATE TABLE IF NOT EXISTS `Person` (
     ON UPDATE NO ACTION);  
     
 -- -----------------------------------------------------------------------
--- Tabelle erstellen 'Aktivität_in_Projekt'
+-- Tabelle erstellen 'Aktivitaet_in_Projekt'
 -- -----------------------------------------------------------------------
-   CREATE TABLE IF NOT EXISTS `Aktivität_in_Projekt` (
-  `aktivität_id` VARCHAR(45) NOT NULL ,
+   CREATE TABLE IF NOT EXISTS `Aktivitaet_in_Projekt` (
+  `aktivitaet_id` VARCHAR(45) NOT NULL ,
   `projekt_id` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`aktivität_id`,`projekt_id`),
-	FOREIGN KEY (`aktivität_id`)
-	REFERENCES `Aktivität` (`aktivität_id`)
+  PRIMARY KEY (`aktivitaet_id`,`projekt_id`),
+	FOREIGN KEY (`aktivitaet_id`)
+	REFERENCES `Aktivitaet` (`aktivitaet_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
     FOREIGN KEY (`projekt_id`)
@@ -169,13 +169,14 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Person Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, überstunden, letzte_aenderung)  
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
 VALUES('1', 'Talha', 'Yildirim', 'talha.windows@gmail.com', 'Karen', 365, 0, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, überstunden, letzte_aenderung)  
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
 VALUES('2', 'Aykut', 'Demir', 'kafabey@hotmail.de', 'Kafa Bey', 365, 0, '2022-04-13 02:30:00');
 
 -- --------------------------------------------------------------------------------------------------------------------------
 -- Tabelle 'Person' anzeigen
 -- --------------------------------------------------------------------------------------------------------------------------
 -- SELECT * FROM `Person`;
-SELECT * FROM `Person`;
+SELECT * FROM `Mitarbeiter_in_Projekt`;
+SELECT * FROM `Aktivitaet`;
