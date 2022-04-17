@@ -12,6 +12,8 @@ from bo.Zeitintervall import Zeitintervall
 from bo.Projektarbeit import Projektarbeit
 from bo.Pause import Pause
 
+from db.PersonMapper import PersonMapper
+
 import datetime
 
 
@@ -19,6 +21,12 @@ class Administration(object):
 
     def __init__(self):
         pass
+
+    def get_all_personen(self):
+        """ Wir geben alle Personen aus """
+        with PersonMapper() as mapper:
+            return mapper.find_all()
+"""
 
 if __name__ == '__main__':
     mitarbeiter1 = Person("Harry")
@@ -48,4 +56,4 @@ if __name__ == '__main__':
 
     print(zeitinervallbuchung1.get_person())
     print(zeitinervallbuchung1.get_zeit())
-    print(zeitinervallbuchung1.get_aktivität())
+    print(zeitinervallbuchung1.get_aktivität())"""

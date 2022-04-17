@@ -12,7 +12,6 @@ class Mapper(AbstractContextManager, ABC):
         """Wird ausgeführt, sobald die Klasse mit dem "with" Befehl aufgerufen wird"""
 
         """Es soll eine Verbindung zur Datenbank erstellt werden"""
-
         self._cnx = connector.connect(user='root', password='Bootsontheground1!',
                                   host='127.0.0.1',
                                   database='Zeiterfassung', auth_plugin='mysql_native_password')

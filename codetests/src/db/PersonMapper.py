@@ -7,13 +7,23 @@ class PersonMapper(Mapper):
         super().__init__()
 
     def find_all(self):
-        #result = []
+        result = []
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT * from Person")
+        cursor.execute("SELECT vorname, nachname from Person")
         person_daten = cursor.fetchall()
 
-        print(person_daten)
+        for (vorname, nachname) in person_daten:
+            person = Person()
+            person.set_vorname(vorname)
+            person.set_nachname(nachname)
+            print(person.get_vorname())
+            result.append(person)
+            print(result)
+
+        self._cnx.commit()
         cursor.close()
+
+        return result
 
 """ Tesing """
 if __name__ == '__main__':

@@ -20,6 +20,7 @@ import People from '@mui/icons-material/People';
 import PermMedia from '@mui/icons-material/PermMedia';
 import Dns from '@mui/icons-material/Dns';
 import Public from '@mui/icons-material/Public';
+import PersonenList from './components/PersonenList'
 
 const data = [
   { icon: <PermMedia />, label: 'Aktivität A' },
@@ -56,16 +57,20 @@ function Start() {
   return (
     <div>
       <Typography  style={textColor} align='center' variant='h6'>HdM WebApp</Typography>
+      {/* Abstand */}
 			<Box sx= {{mt: 5}}></Box>
-      
       <Grid container justifyContent='center'>
 					<Button variant="outlined" style={{color: "#00bcd4", borderColor: "#00bcd4", borderWidth:"2px", borderRadius:"50px"}} >
 						Projekt anlegen
 					</Button>
       </Grid>
+      {/* Abstand */}
 			<Box sx= {{mt: 5}}></Box>
-      <Box sx={{ display: 'flex' }}>
-        
+
+      {/* Sidebar */}
+      
+      <Grid container spacing={2}>
+      <Grid item lg = {4}>
       <ThemeProvider
         theme={createTheme({
           components: {
@@ -82,11 +87,7 @@ function Start() {
           },
         })}
       >
-        <Grid container spacing={0}></Grid>
-        <Grid item= {2}>
-
-        
-        <Paper elevation={0} sx={{ maxWidth: 256 }}>
+        <Paper elevation={0} >
           <FireNav component="nav" disablePadding>
             
             <Divider />
@@ -252,15 +253,15 @@ function Start() {
             </Box>
           </FireNav>
         </Paper>
-        </Grid>
-
-        <Grid item={10}>
-            <Item>Beispielfeld</Item>
-        </Grid>
-
-
+        
       </ThemeProvider>
-    </Box>
+      </Grid>
+      {/* Personenliste wird angezeigt */}
+      <Grid item lg ={8}>
+          <PersonenList></PersonenList>
+        </Grid>
+      </Grid>
+      
     
     </div>
   )
