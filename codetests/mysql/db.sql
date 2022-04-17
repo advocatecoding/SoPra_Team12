@@ -3,7 +3,7 @@
 -- ------------------------------------------------------------------------
 DROP DATABASE IF EXISTS Zeiterfassung;
 CREATE DATABASE IF NOT EXISTS Zeiterfassung;
-CREATE SCHEMA IF NOT EXISTS `Zeiterfassung` DEFAULT CHARACTER SET utf8 ;
+CREATE SCHEMA IF NOT EXISTS `Zeiterfassung` DEFAULT CHARACTER SET utf8mb4;
 USE `Zeiterfassung` ;
 
 -- -----------------------------------------------------------------------
