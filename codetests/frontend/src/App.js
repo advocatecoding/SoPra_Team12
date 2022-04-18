@@ -1,31 +1,22 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { Container, ThemeProvider, CssBaseline } from '@material-ui/core';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { Container } from '@material-ui/core';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import SignIn from './SignIn';
 import Start from './Start';
 
-/**
- * The main bank administration app. It uses Googles firebase to log into the bank end. For routing the 
- * user to the respective pages, react-router-dom ist used.
- *
- @see See Google [firebase.auth()](https://firebase.google.com/docs/reference/js/firebase.auth.Auth)
- @see See Google [firebase.auth().signInWithRedirect](https://firebase.google.com/docs/reference/js/firebase.auth.Auth#signinwithredirect)
- @see [react-router-dom](https://reacttraining.com/react-router/web/guides/quick-start)
- *
- * @author [Christoph Kunz](https://github.com/christophkunz)
- */
+
 class App extends React.Component {
 
-    #firebaseConfig = {
-        apiKey: "AIzaSyDYY1X2Mtxg5xeSHsuFWNK8vuw_qwAfgM4",
-        authDomain: "bankbeispiel-426c2.firebaseapp.com",
-        projectId: "bankbeispiel-426c2",
-        storageBucket: "bankbeispiel-426c2.appspot.com",
-        messagingSenderId: "54183409381",
-        appId: "1:54183409381:web:b21f7ca930084dccfb860c"
-    };
+	#firebaseConfig = {
+		apiKey: "AIzaSyDYY1X2Mtxg5xeSHsuFWNK8vuw_qwAfgM4",
+		authDomain: "bankbeispiel-426c2.firebaseapp.com",
+		projectId: "bankbeispiel-426c2",
+		storageBucket: "bankbeispiel-426c2.appspot.com",
+		messagingSenderId: "54183409381",
+		appId: "1:54183409381:web:0a9e41063984f7d3fb860c"
+	  };
 
 	/** Constructor of the app, which initializes firebase  */
 	constructor(props) {
@@ -42,8 +33,6 @@ class App extends React.Component {
 
 	/** 
 	 * Create an error boundary for this app and recieve all errors from below the component tree.
-	 * 
-	 * @See See Reacts [Error Boundaries](https://reactjs.org/docs/error-boundaries.html)
  	 */
 	static getDerivedStateFromError(error) {
 		// Update state so the next render will show the fallback UI.
@@ -91,8 +80,6 @@ class App extends React.Component {
 
   /** 
    * Handles the sign in request of the SignIn component uses the firebase.auth() component to sign in.
-	 * @see See Google [firebase.auth()](https://firebase.google.com/docs/reference/js/firebase.auth.Auth)
-	 * @see See Google [firebase.auth().signInWithRedirect](https://firebase.google.com/docs/reference/js/firebase.auth.Auth#signinwithredirect)
 	 */
 	handleSignIn = () => {
 		this.setState({
@@ -105,8 +92,6 @@ class App extends React.Component {
 	/**
 	 * Lifecycle method, which is called when the component gets inserted into the browsers DOM.
 	 * Initializes the firebase SDK.
-	 * 
-	 * @see See Googles [firebase init process](https://firebase.google.com/docs/web/setup)
 	 */
 	componentDidMount() {
 		firebase.initializeApp(this.#firebaseConfig);
@@ -116,10 +101,10 @@ class App extends React.Component {
 
 	/** Renders the whole app */
 	render() {
-		const { currentUser, appError, authError, authLoading } = this.state;
+		const { currentUser } = this.state;
 		return (
           <Router basename={process.env.PUBLIC_URL}>
-					<Container maxWidth='md'>
+					<Container maxWidth='xl'>
 						{
 							// Is a user signed in?
 							currentUser ?

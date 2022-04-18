@@ -25,12 +25,18 @@ zeiterfassung = api.namespace("zeit", desription="Funktionen des ")
 #bo = api.model('BusinessObject', {})
 
 bo = api.model("BusinessObject", {
-
+    "id": fields.String(attribute="_person_id", description="Id"),
+    "datum_aenderung": fields.String(attribute="_person_id", description="Datum der letzten Änderung")
 })
 
-person = api.inherit('Person', {
+person = api.inherit('Person', bo, {
+    "person_id": fields.String(attribute="_person_id", description="Person Id"),
     "vorname": fields.String(attribute="_vorname", description="Vorname der Person"),
-    "nachname": fields.String(attribute="_nachname", description="Nachname der Person")
+    "nachname": fields.String(attribute="_nachname", description="Nachname der Person"),
+    "mail_adresse": fields.String(attribute="_mail_adresse", description="Mail-Adresse der Person"),
+    "benutzername": fields.String(attribute="_benutzername", description="Benutzer der Person"),
+    "urlaubstage": fields.Integer(attribute="_urlaubstage", description="Anzahl der Urlaubstage" ),
+    "überstunden": fields.Integer(attribute="_ueberstunden", description="Anzahl der Überstunden")
 })
 
 @zeiterfassung.route("/personen")

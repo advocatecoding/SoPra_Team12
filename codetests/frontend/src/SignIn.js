@@ -1,19 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Grid, Typography, withStyles, Box } from '@material-ui/core';
-import { cyan } from "@mui/material/colors";
-import { createTheme } from '@mui/material/styles';
-
-
-/** 
- * Renders a landing page for users who are not signed in. Provides a sign in button 
- * for using an existing google account to sign in. The component uses firebase to 
- * do redirect based signin process.
- * 
- * @see See Googles [firebase authentication](https://firebase.google.com/docs/web/setup)
- * @see See Googles [firebase API reference](https://firebase.google.com/docs/reference/js)
- * 
- */
 
 
 class SignIn extends Component {
@@ -28,11 +15,11 @@ class SignIn extends Component {
 	/** Renders the sign in page, if user objext is null */
 	render() {
 		const { classes } = this.props;
-
 		return (
 			<div>
-				<Typography className={classes.root} style={textColor} align='center' variant='h6'>Welcome to the HdM React/Python Project Showcase</Typography>
-				<Typography className={classes.root} style={textColor} align='center'>It appears, that you are not signed in.</Typography>
+				<Box sx= {{mt: 5}}></Box>
+				<Typography className={classes.root} style={textColor} align='center' variant='h5'>Willkommen zur Zeiterfassung HdM WebApp</Typography>
+				<Typography className={classes.root} style={textColor} align='center'>Es sieht so aus, als ob Sie noch nicht angemeldet sind.</Typography>
 				<Box sx= {{mt: 5}}></Box>
 				<Typography className={classes.root} style={{color: "#00bcd4"}} align='center'>Um die HdMWebapp zu nutzen, müssen Sie sich</Typography>
 				<Box sx= {{mt: 2}}></Box>

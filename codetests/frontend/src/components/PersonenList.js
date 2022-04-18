@@ -16,6 +16,7 @@ import IconButton from '@mui/material/IconButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
+
 class PersonenList extends Component {
     constructor(props) {
         super(props)
@@ -55,7 +56,7 @@ class PersonenList extends Component {
 
     render() {
         const { items } = this.state;
-        const list = [1, 2, 3, 4, 5]
+        //const list = [1, 2, 3, 4, 5]
         return (
             <div style={{ width: "100%" }}>
                 {this.state.personen.map((x) =>
@@ -63,8 +64,10 @@ class PersonenList extends Component {
                         <IconButton>
                             <AccountCircleIcon style={{color:"#00bcd4", fontSize:"40px"}}></AccountCircleIcon>
                         </IconButton>
-                        <Typography color="white" variant="h5">
-                            {x.vorname} {x.nachname}
+                        <Typography color="white" variant="h6">
+                            Name: {x.vorname} {x.nachname} 
+                            <br></br>
+                            Benutzername: {x.benutzername}
                         </Typography>
                     </ListItem>
                 )}
