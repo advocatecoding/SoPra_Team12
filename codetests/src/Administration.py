@@ -26,6 +26,29 @@ class Administration(object):
         """ Wir geben alle Personen aus """
         with PersonMapper() as mapper:
             return mapper.find_all()
+
+
+""" Projekt test 
+        if __name__ == '__main__':
+            mitarbeiter1 = Person("Aykut")
+            mitarbeiter1.set_id(1)
+            mitarbeiter2 = Person("Talha")
+            mitarbeiter2.set_id(2)
+
+            projekt1 = Projekt("Autonomes fahren", "Mercedes")
+            print(projekt1.get_name())
+            projekt1.set_id(1)
+
+            projekt1.set_team(mitarbeiter2, 30, mitarbeiter1, 15)
+            print("Team:", projekt1.get_team())
+
+            Aktivität1 = Aktivität("Pfeilen", 200, 14)
+            Aktivität2 = Aktivität("Dressurreiten", 200, 14)
+
+            projekt1.set_aktivitäten(Aktivität1, Aktivität2)
+            print(projekt1.get_aktivitäten())
+        """
+
 """
 
 if __name__ == '__main__':
