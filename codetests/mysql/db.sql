@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
   CREATE TABLE IF NOT EXISTS `Aktivitaet` (
   `aktivitaet_id` VARCHAR(45) NOT NULL ,
   `bezeichnung` VARCHAR(45) NOT NULL ,
-  `dauer` INT NULL,
+  `dauer` DATETIME NULL,
   `kapazitaet` INT NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`aktivitaet_id`));
@@ -38,8 +38,6 @@ CREATE TABLE IF NOT EXISTS `Person` (
   `projekt_id` VARCHAR(45) NOT NULL ,
   `person_id` VARCHAR(45) NOT NULL ,
   `auftraggeber` VARCHAR(150) NULL,
-  `kapazitaet` INT NULL,
-  `dauer` INT NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`projekt_id`),
   FOREIGN KEY (`person_id`)
@@ -174,9 +172,32 @@ VALUES('1', 'Talha', 'Yildirim', 'talha.windows@gmail.com', 'Karen', 365, 0, '20
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
 VALUES('2', 'Aykut', 'Demir', 'kafabey@hotmail.de', 'Kafa Bey', 365, 0, '2022-04-13 02:30:00');
 
+-- ---------------------------------------------------------------------------------------------------------------------------
+-- Projekt Entitäten erstellen
+-- ---------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `Projekt` (projekt_id, person_id, auftraggeber, letzte_aenderung)  
+VALUES('1', '1', 'Daimler','2022-04-19 02:33:00');
+INSERT INTO `Projekt` (projekt_id, person_id, auftraggeber, letzte_aenderung)  
+VALUES('2', '2', 'Porsche','2022-04-19 12:33:00');
+
+-- ---------------------------------------------------------------------------------------------------------------------------
+-- Aktivität Entitäten erstellen
+-- ---------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('1', 'Klassendiagram erstellen', '2022-04-30 14:00:00','120', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('2', 'Datenbankentwurf erstellen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
+
+-- ---------------------------------------------------------------------------------------------------------------------------
+-- Aktivität_in_Projekt Entitäten erstellen
+-- ---------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_id, projekt_id)  
+VALUES('1', '1');
+INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_id, projekt_id)  
+VALUES('2', '1');
+
 -- --------------------------------------------------------------------------------------------------------------------------
--- Tabelle 'Person' anzeigen
+-- Tabelle 'Aktivitaet_in_Projekt' anzeigen
 -- --------------------------------------------------------------------------------------------------------------------------
 -- SELECT * FROM `Person`;
-SELECT * FROM `Mitarbeiter_in_Projekt`;
-SELECT * FROM `Aktivitaet`;
+SELECT * FROM `Aktivitaet_in_Projekt`;
