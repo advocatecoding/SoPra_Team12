@@ -24,6 +24,16 @@ class Projekt(bo.BusinessObject):
         return self.__get_auftraggeber
 
 
+
+    def set_dauer(self, value):
+        self.__dauer = value
+        return self.__dauer
+
+    def get_dauer(self):
+        return self.__get_dauer
+
+
+
     def set_team(self,*args):
         z = 2
         for i in args:
@@ -44,3 +54,4 @@ class Projekt(bo.BusinessObject):
 
     def get_aktivitäten(self):
         return self.__aktivitäten
+
