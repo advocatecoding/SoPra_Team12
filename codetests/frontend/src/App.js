@@ -5,6 +5,8 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import SignIn from './SignIn';
 import Start from './Start';
+import Start2 from './Start2';
+import Header from './components/header/Header'
 
 
 class App extends React.Component {
@@ -105,11 +107,12 @@ class App extends React.Component {
 		return (
           <Router basename={process.env.PUBLIC_URL}>
 					<Container maxWidth='xl'>
+					<Header></Header>
 						{
 							// Is a user signed in?
 							currentUser ?
 								<>
-									<Start></Start>
+									<Start2></Start2>
 								</>
 								:
 								// else show the sign in page

@@ -17,7 +17,8 @@ import Home from '@mui/icons-material/Home';
 import AddIcon from '@mui/icons-material/Add';
 import PermMedia from '@mui/icons-material/PermMedia';
 import PersonenList from './components/PersonenList'
-import Header from "./components/header/Header"
+import ExpandLess from '@mui/icons-material/ExpandLess';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 
 const data = [
   { icon: <PermMedia />, label: 'Aktivität A' },
@@ -53,7 +54,7 @@ function Start() {
   const [open, setOpen] = React.useState(true);
   return (
     <div >
-      <Header></Header>
+      
       {/* Abstand */}
       <Box sx={{ mt: 5 }}></Box>
       <Grid container justifyContent='center'>
@@ -85,7 +86,6 @@ function Start() {
           >
             <Paper elevation={0} >
               <FireNav component="nav" disablePadding>
-
                 <Divider />
                 <ListItem component="div" disablePadding>
                   <ListItemButton sx={{ height: 56 }}>
@@ -193,6 +193,7 @@ function Start() {
                         />
                       </ListItemButton>
                     ))}
+
                   <ListItemButton
                     alignItems="flex-start"
                     onClick={() => setOpen(!open)}

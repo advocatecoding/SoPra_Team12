@@ -1,5 +1,5 @@
 #from bo.Projekt import Projekt
-from bo.Aktivität import Aktivität
+from bo.Aktivitaet import Aktivitaet
 from bo.Gehen import Gehen
 from bo.Kommen import Kommen
 from bo.Arbeitszeitkonto import Arbeitszeitkonto
@@ -12,7 +12,9 @@ from bo.Zeitintervall import Zeitintervall
 from bo.Projektarbeit import Projektarbeit
 from bo.Pause import Pause
 
+from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
+from db.AktivitaetMapper import AktivitaetMapper
 
 import datetime
 
@@ -26,6 +28,16 @@ class Administration(object):
         """ Wir geben alle Personen aus """
         with PersonMapper() as mapper:
             return mapper.find_all()
+
+    def get_all_projekte(self):
+        """ Wir geben alle Personen aus """
+        with ProjektMapper() as mapper:
+            return mapper.find_all()
+        
+    def get_aktivitaeten_by_projekt_id(self, projekt_id):
+        with AktivitaetMapper() as mapper:
+            return mapper.find_aktivitaeten_by_projekt_id(projekt_id)
+        
 
 
 """ Projekt test 

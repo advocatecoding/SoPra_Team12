@@ -9,17 +9,17 @@ class PersonMapper(Mapper):
     def find_all(self):
         result = []
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, überstunden from Person")
+        cursor.execute("SELECT person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden from Person")
         person_daten = cursor.fetchall()
 
-        for (person_id, vorname, nachname,  mail_adresse, benutzername, urlaubstage, überstunden) in person_daten:
+        for (person_id, vorname, nachname,  mail_adresse, benutzername, urlaubstage, ueberstunden) in person_daten:
             person = Person()
             person.set_vorname(vorname)
             person.set_nachname(nachname)
             person.set_benutzername(benutzername)
             person.set_mail_adresse(mail_adresse)
             person.set_urlaubstage(urlaubstage)
-            person.set_ueberstunden(überstunden)
+            person.set_ueberstunden(ueberstunden)
             person.set_id(person_id)
             result.append(person)
             print(result)

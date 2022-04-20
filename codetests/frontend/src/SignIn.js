@@ -18,7 +18,7 @@ class SignIn extends Component {
 		return (
 			<div>
 				<Box sx= {{mt: 5}}></Box>
-				<Typography className={classes.root} style={textColor} align='center' variant='h5'>Willkommen zur Zeiterfassung HdM WebApp</Typography>
+				<Typography className={classes.root} style={textColor} align='center' >Willkommen in der Zeiterfassung HdM WebApp!</Typography>
 				<Typography className={classes.root} style={textColor} align='center'>Es sieht so aus, als ob Sie noch nicht angemeldet sind.</Typography>
 				<Box sx= {{mt: 5}}></Box>
 				<Typography className={classes.root} style={{color: "#00bcd4"}} align='center'>Um die HdMWebapp zu nutzen, müssen Sie sich</Typography>
