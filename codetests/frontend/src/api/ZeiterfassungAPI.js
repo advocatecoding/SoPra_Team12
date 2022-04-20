@@ -3,18 +3,13 @@ import PersonBO from './PersonBO';
 export default class ZeiterfassungAPI {
 
     static #api = null
-
     #serverUrl = "http://localhost:5500/zeit"
-
-
     #getPersonsURL = () => `${this.#serverUrl}/personen`;
-
 
     /**
      * Wir erstellen eine Sigelton Instanz
      * @public
      */
-
     static getAPI() {
         if (this.#api == null) {
       this.#api = new ZeiterfassungAPI();

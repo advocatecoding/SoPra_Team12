@@ -39,6 +39,19 @@ person = api.inherit('Person', bo, {
     "überstunden": fields.Integer(attribute="_ueberstunden", description="Anzahl der Überstunden")
 })
 
+projekt = api.inherit('Projekt', bo, {
+    "projektname": fields.String(attribute="_projektname", description="Projektname"),
+    "auftraggeber": fields.String(attribute="_auftraggeber", description="Auftraggeber des Projekts"),
+})
+
+
+aktivitaet = api.inherit('Aktivitaet', bo, {
+    "aktivitaetname": fields.String(attribute="_name", description="Aktivitätenname"),
+})
+
+
+
+
 @zeiterfassung.route("/personen")
 class PersonenListOperations(Resource):
     @zeiterfassung.marshal_with(person)
@@ -47,6 +60,27 @@ class PersonenListOperations(Resource):
         adm = Administration()
         personen = adm.get_all_personen()
         return personen
+
+@zeiterfassung.route("/projekte")
+class PersonenListOperations(Resource):
+    @zeiterfassung.marshal_with(projekt)
+    def get(self):
+        """ Auslesen der Personen-Objekte """
+        adm = Administration()
+        projekte = adm.get_all_projekte()
+        return projekte
+
+""" Aktivitäten werden zur zugeordneten Projekt_ID ausgegeben """
+@zeiterfassung.route("/aktivitaten/<int:projekt_id>")
+@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projekts")
+class PersonenListOperations(Resource):
+    @zeiterfassung.marshal_with(aktivitaet)
+    def get(self, projekt_id):
+        """ Auslesen der Personen-Objekte """
+        adm = Administration()
+        aktivitaeten = adm.get_aktivitaeten_by_projekt_id(projekt_id)
+        print(aktivitaeten)
+        return aktivitaeten
 
 
 """ Server läuft auf localhost:5500 bzw. 127.0.0.1:5500 """

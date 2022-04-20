@@ -2,7 +2,7 @@
 -- Datenbank Zeiterfassung
 -- ------------------------------------------------------------------------
 DROP DATABASE IF EXISTS Zeiterfassung;
-CREATE DATABASE IF NOT EXISTS Zeiterfassung;
+CREATE DATABASE IF NOT EXISTS Zeiterfassung DEFAULT CHARACTER SET utf8mb4;
 CREATE SCHEMA IF NOT EXISTS `Zeiterfassung` DEFAULT CHARACTER SET utf8mb4;
 USE `Zeiterfassung` ;
 
@@ -37,6 +37,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
   CREATE TABLE IF NOT EXISTS `Projekt` (
   `projekt_id` VARCHAR(45) NOT NULL ,
   `person_id` VARCHAR(45) NOT NULL ,
+  `projektname` VARCHAR(150) NULL,
   `auftraggeber` VARCHAR(150) NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`projekt_id`),
@@ -133,10 +134,10 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- Tabelle erstellen 'Aktivitaet_in_Projekt'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Aktivitaet_in_Projekt` (
-  `aktivitaet_id` VARCHAR(45) NOT NULL ,
+  `aktivitaet_idd` VARCHAR(45) NOT NULL ,
   `projekt_id` VARCHAR(45) NOT NULL ,
-  PRIMARY KEY (`aktivitaet_id`,`projekt_id`),
-	FOREIGN KEY (`aktivitaet_id`)
+  PRIMARY KEY (`aktivitaet_idd`,`projekt_id`),
+	FOREIGN KEY (`aktivitaet_idd`)
 	REFERENCES `Aktivitaet` (`aktivitaet_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -175,10 +176,10 @@ VALUES('2', 'Aykut', 'Demir', 'kafabey@hotmail.de', 'Kafa Bey', 365, 0, '2022-04
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Projekt Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
-INSERT INTO `Projekt` (projekt_id, person_id, auftraggeber, letzte_aenderung)  
-VALUES('1', '1', 'Daimler','2022-04-19 02:33:00');
-INSERT INTO `Projekt` (projekt_id, person_id, auftraggeber, letzte_aenderung)  
-VALUES('2', '2', 'Porsche','2022-04-19 12:33:00');
+INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
+VALUES('1', '1',"Projekt X", 'Daimler','2022-04-19 02:33:00');
+INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
+VALUES('2', '2',"Projekt Y", 'Porsche','2022-04-19 12:33:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Aktivität Entitäten erstellen
@@ -187,17 +188,27 @@ INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_
 VALUES('1', 'Klassendiagram erstellen', '2022-04-30 14:00:00','120', '2022-04-19 02:33:00');
 INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
 VALUES('2', 'Datenbankentwurf erstellen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('3', 'Rechnung schreiben', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Aktivität_in_Projekt Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
-INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_id, projekt_id)  
+INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
 VALUES('1', '1');
-INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_id, projekt_id)  
+INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
 VALUES('2', '1');
+INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
+VALUES('3', '2');
 
 -- --------------------------------------------------------------------------------------------------------------------------
--- Tabelle 'Aktivitaet_in_Projekt' anzeigen
+-- Auslesen von Projekten und den zugehörigen Ativitäten, durch den INNER JOIN Befehl 
 -- --------------------------------------------------------------------------------------------------------------------------
--- SELECT * FROM `Person`;
-SELECT * FROM `Aktivitaet_in_Projekt`;
+
+-- SELECT bezeichnung, projekt_id FROM Aktivitaet INNER JOIN Aktivitaet_in_Projekt
+-- WHERE aktivitaet_idd = aktivitaet_id AND projekt_id = 1;
+	
+
+
+
+
