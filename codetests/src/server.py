@@ -25,12 +25,11 @@ zeiterfassung = api.namespace("zeit", desription="Funktionen des ")
 #bo = api.model('BusinessObject', {})
 
 bo = api.model("BusinessObject", {
-    "id": fields.String(attribute="_person_id", description="Id"),
-    "datum_aenderung": fields.String(attribute="_person_id", description="Datum der letzten Änderung")
+    "id": fields.String(attribute="_id", description="Id"),
+    "letzte_änderung": fields.String(attribute="_letzte_aenderung", description="Datum der letzten Änderung")
 })
 
 person = api.inherit('Person', bo, {
-    "person_id": fields.String(attribute="_person_id", description="Person Id"),
     "vorname": fields.String(attribute="_vorname", description="Vorname der Person"),
     "nachname": fields.String(attribute="_nachname", description="Nachname der Person"),
     "mail_adresse": fields.String(attribute="_mail_adresse", description="Mail-Adresse der Person"),
@@ -65,7 +64,7 @@ class PersonenListOperations(Resource):
 class PersonenListOperations(Resource):
     @zeiterfassung.marshal_with(projekt)
     def get(self):
-        """ Auslesen der Personen-Objekte """
+        """ Auslesen der Projekt-Objekte """
         adm = Administration()
         projekte = adm.get_all_projekte()
         return projekte
@@ -76,7 +75,7 @@ class PersonenListOperations(Resource):
 class PersonenListOperations(Resource):
     @zeiterfassung.marshal_with(aktivitaet)
     def get(self, projekt_id):
-        """ Auslesen der Personen-Objekte """
+        """ Auslesen der Aktivitäten innerhalb eines Projektes"""
         adm = Administration()
         aktivitaeten = adm.get_aktivitaeten_by_projekt_id(projekt_id)
         print(aktivitaeten)

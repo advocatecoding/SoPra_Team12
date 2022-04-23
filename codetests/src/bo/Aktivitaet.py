@@ -11,9 +11,11 @@ class Aktivitaet(bo.BusinessObject):
         self.__arbeitszeit = {}
 
     def get_name(self):
+        """Auslesen des Aktivitätsnamen."""
         return self._name
 
     def set_name(self, value):
+        """Setzen der Aktivitätsnamen."""
         self._name = value
 
     def set_arbeitszeit(self, arbeiter, zeit):
