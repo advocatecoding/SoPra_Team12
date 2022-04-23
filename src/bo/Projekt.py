@@ -1,31 +1,31 @@
 from bo import BusinessObject as bo
 
 class Projekt(bo.BusinessObject):
-    def __init__(self,name,auftraggeber):
+    def __init__(self):
         super().__init__()
-        self.__name = name
-        self.__aktiviäten = list()
-        self.__auftraggeber = auftraggeber
+        self._projektname = ""
+        self._aktivitaeten = list()
+        self._auftraggeber = ""
         self.__team = {}
 
     def set_name(self,name):
         """Setzen des Projektnamens."""
-        self.__name = name
-        return self.__name
+        self._projektname = name
+        return self._projektname
 
     def get_name(self):
         """Auslesen des Projektnamens."""
-        return self.__name
+        return self._projektname
 
 
     def set_auftraggeber(self,auftraggeber):
         """Setzen des Auftraggebers."""
-        self.__auftraggeber = auftraggeber
-        return self.__auftraggeber
+        self._auftraggeber = auftraggeber
+        return self._auftraggeber
 
     def get_auftraggeber(self):
         """Auslesen des Auftraggebers."""
-        return self.__get_auftraggeber
+        return self._auftraggeber
 
 
     """ Ist das hier überhaupt nötig
@@ -42,7 +42,7 @@ class Projekt(bo.BusinessObject):
         """Setzen des Projektteams inklusive der verkauften Zeiten."""
         z = 2
         for i in args:
-            if (z%2 != 0):
+            if z%2 != 0:
                 verkaufte_stunden = i
                 self.__team[mitarbeiter] = verkaufte_stunden
             else:
@@ -54,12 +54,12 @@ class Projekt(bo.BusinessObject):
         return self.__team
 
 
-    def set_aktivitäten(self, *aktivitäten):
+    def set_aktivitaeten(self, *aktivitäten):
         """Setzen der Aktivitäten."""
-        self.__aktivitäten = aktivitäten
-        return self.__aktivitäten
+        self._aktivitaeten = aktivitäten
+        return self._aktivitaeten
 
-    def get_aktivitäten(self):
+    def get_aktivitaeten(self):
         """Auslesen der Aktivitäten."""
-        return self.__aktivitäten
+        return self._aktivitaeten
 

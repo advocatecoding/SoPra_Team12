@@ -20,7 +20,7 @@ CORS(app, ressources=r'/zeit/*')
 api = Api(app, version='1.0', title="Zeiterfassung API")
 
 """ Namespace definieren (es wird "zeit" gewählt, da Zeiterfassung ein zu langes Wort ist, also aus Bequemlichkeitsgründen) """
-zeiterfassung = api.namespace("zeit", desription="Funktionen des ")
+zeiterfassung = api.namespace("zeit", desription="Funktionen der Zeiterfassung WebApp")
 
 #bo = api.model('BusinessObject', {})
 
