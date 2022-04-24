@@ -150,11 +150,11 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- Tabelle erstellen 'Mitarbeiter_in_Projekt'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Mitarbeiter_in_Projekt` (
-  `person_id` VARCHAR(45) NOT NULL ,
+  `person_idd` VARCHAR(45) NOT NULL ,
   `projekt_id` VARCHAR(45) NOT NULL ,
   `verkaufte_stunden` INT NULL,
-  PRIMARY KEY (`person_id`,`projekt_id`),
-	FOREIGN KEY (`person_id`)
+  PRIMARY KEY (`person_idd`,`projekt_id`),
+	FOREIGN KEY (`person_idd`)
 	REFERENCES `Person` (`person_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
@@ -201,12 +201,33 @@ VALUES('2', '1');
 INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
 VALUES('3', '2');
 
+
+
+-- ---------------------------------------------------------------------------------------------------------------------------
+-- Mitarbeiter_in_Projekt Entitäten erstellen
+-- ---------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden)  
+VALUES('1', '1','150');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden)  
+VALUES('2', '1','180');
+
+
+
+
 -- --------------------------------------------------------------------------------------------------------------------------
 -- Auslesen von Projekten und den zugehörigen Ativitäten, durch den INNER JOIN Befehl 
 -- --------------------------------------------------------------------------------------------------------------------------
 
--- SELECT bezeichnung, projekt_id FROM Aktivitaet INNER JOIN Aktivitaet_in_Projekt
--- WHERE aktivitaet_idd = aktivitaet_id AND projekt_id = 1;
+ -- SELECT bezeichnung, projekt_id FROM Aktivitaet INNER JOIN Aktivitaet_in_Projekt
+ -- WHERE aktivitaet_idd = aktivitaet_id AND projekt_id = 1;
+ 
+
+-- --------------------------------------------------------------------------------------------------------------------------
+-- Auslesen von Personen und deren verkauften Stunden in einem Projekt, durch den INNER JOIN Befehl 
+-- --------------------------------------------------------------------------------------------------------------------------
+ SELECT  vorname, nachname, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt
+ WHERE person_idd = person_id;
+ 
 	
 
 

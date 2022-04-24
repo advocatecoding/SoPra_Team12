@@ -9,14 +9,17 @@ class ProjektMapper(Mapper):
     def find_all(self):
         result = []
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT projektname, auftraggeber from Projekt")
+        cursor.execute("SELECT projektname, auftraggeber, projekt_id, person_id, letzte_aenderung from Projekt")
         projekt_daten = cursor.fetchall()
 
-        for (name, auftraggeber) in projekt_daten:
+        for (projektname, auftraggeber, projekt_id,  person_id, letzte_aenderung) in projekt_daten:
             print(projekt_daten)
             projekt = Projekt()
-            projekt.set_name(name)
+            projekt.set_name(projektname)
             projekt.set_auftraggeber(auftraggeber)
+            projekt.set_id(projekt_id)
+            projekt.set_projektleiter(person_id)
+            projekt.set_letzte_aenderung(letzte_aenderung)
             result.append(projekt)
         """
         for i in result:

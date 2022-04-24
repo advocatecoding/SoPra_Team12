@@ -14,14 +14,15 @@ class AktivitaetMapper(Mapper):
         #result = []
         aktivitaten = []
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT  projekt_id, bezeichnung, aktivitaet_id FROM Aktivitaet INNER JOIN Aktivitaet_in_Projekt "
+        cursor.execute("SELECT  projekt_id, bezeichnung, aktivitaet_id, letzte_aenderung FROM Aktivitaet INNER JOIN Aktivitaet_in_Projekt "
                        "WHERE aktivitaet_idd = aktivitaet_id AND projekt_id={}".format(projekt_id))
         aktivitaten_daten = cursor.fetchall()
 
-        for (projekt_id, bezeichnung, aktivitaet_id) in aktivitaten_daten:
+        for (projekt_id, bezeichnung, aktivitaet_id, letzte_aenderung) in aktivitaten_daten:
             aktivitaet = Aktivitaet()
             aktivitaet.set_id(aktivitaet_id)
             aktivitaet.set_name(bezeichnung)
+            aktivitaet.set_letzte_aenderung(letzte_aenderung)
             """ In "aktivitaeten" werden die Aktivitaeten-Objekte gespeichert """
             aktivitaten.append(aktivitaet)
             projekt = Projekt()

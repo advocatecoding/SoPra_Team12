@@ -7,11 +7,20 @@ class Projekt(bo.BusinessObject):
         self._aktivitaeten = list()
         self._auftraggeber = ""
         self.__team = {}
+        self._projektleiter = ""
 
-    def set_name(self,name):
+
+    def set_projektleiter(self,projektleiter):
+        """Setzen des Projektleiters."""
+        self._projektleiter = projektleiter
+
+    def get_projektleiter(self):
+        """Auslesen des Projektleiters."""
+        return self._projektleiter
+
+    def set_name(self, name):
         """Setzen des Projektnamens."""
         self._projektname = name
-        return self._projektname
 
     def get_name(self):
         """Auslesen des Projektnamens."""
@@ -21,7 +30,6 @@ class Projekt(bo.BusinessObject):
     def set_auftraggeber(self,auftraggeber):
         """Setzen des Auftraggebers."""
         self._auftraggeber = auftraggeber
-        return self._auftraggeber
 
     def get_auftraggeber(self):
         """Auslesen des Auftraggebers."""
@@ -31,7 +39,6 @@ class Projekt(bo.BusinessObject):
     """ Ist das hier überhaupt nötig
     def set_dauer(self, value):
         self.__dauer = value
-        return self.__dauer
 
     def get_dauer(self):
         return self.__get_dauer
@@ -57,7 +64,6 @@ class Projekt(bo.BusinessObject):
     def set_aktivitaeten(self, *aktivitäten):
         """Setzen der Aktivitäten."""
         self._aktivitaeten = aktivitäten
-        return self._aktivitaeten
 
     def get_aktivitaeten(self):
         """Auslesen der Aktivitäten."""
