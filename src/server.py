@@ -22,7 +22,6 @@ api = Api(app, version='1.0', title="Zeiterfassung API")
 """ Namespace definieren (es wird "zeit" gewählt, da Zeiterfassung ein zu langes Wort ist, also aus Bequemlichkeitsgründen) """
 zeiterfassung = api.namespace("zeit", desription="Funktionen der Zeiterfassung WebApp")
 
-#bo = api.model('BusinessObject', {})
 
 bo = api.model("BusinessObject", {
     "id": fields.String(attribute="_id", description="Id"),
@@ -62,7 +61,7 @@ class PersonenListOperations(Resource):
         return personen
 
 @zeiterfassung.route("/projekte")
-class PersonenListOperations(Resource):
+class ProjekteListOperations(Resource):
     @zeiterfassung.marshal_with(projekt)
     def get(self):
         """ Auslesen der Projekt-Objekte """
@@ -73,7 +72,7 @@ class PersonenListOperations(Resource):
 """ Aktivitäten werden zur zugeordneten Projekt_ID ausgegeben """
 @zeiterfassung.route("/aktivitaten/<int:projekt_id>")
 @zeiterfassung.param("projekt_id", "Die Id des gewünschten Projekts")
-class PersonenListOperations(Resource):
+class AktivitaetenByProjektId(Resource):
     @zeiterfassung.marshal_with(aktivitaet)
     def get(self, projekt_id):
         """ Auslesen der Aktivitäten innerhalb eines Projektes"""
