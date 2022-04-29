@@ -1,4 +1,4 @@
-#!/Users/macbookpro/Desktop/Sopra/sopra-venv/bin/python
+#!/Users/macbookpro/Desktop/Sopra/sopra-venv-windows/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
