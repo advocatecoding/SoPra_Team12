@@ -88,7 +88,7 @@ class AktivitaetenByProjektId(Resource):
 class DeletePersonById(Resource):
     @zeiterfassung.marshal_with(person)
     def delete(self, person_id):
-        """Löschen eines bestimmten Customer-Objekts.
+        """Löschen einer Person Instanz.
 
         Das zu löschende Objekt wird durch die ```id``` in dem URI bestimmt.
         """
@@ -99,10 +99,11 @@ class DeletePersonById(Resource):
 
 """ Person Objekt wird angelegt"""
 @zeiterfassung.route("/create_person/")
-@zeiterfassung.expect(person)  # Wir erwarten ein Customer-Objekt von Client-Seite.
+@zeiterfassung.expect(person)  # Wir erwarten eine Person Instanz von Client-Seite.
 class CreatePersonById(Resource):
     @zeiterfassung.marshal_with(person, code=201)
     def post(self):
+        """ Person Instanz erstellen """
         adm = Administration()
         proposal = Person.from_dict(api.payload)
 
