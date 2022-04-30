@@ -60,5 +60,22 @@ class Person(bo.BusinessObject):
         self._ueberstunden = value
 
 
+    def from_dict(dictionary=dict()):
+        """Umwandeln eines Python dict() in einen Customer()."""
+        obj = Person()
+        obj.set_id(dictionary["id"])  # eigentlich Teil von BusinessObject !
+        obj.set_vorname(dictionary["vorname"])
+        obj.set_nachname(dictionary["nachname"])
+        obj.set_mail_adresse(dictionary["mail_adresse"])
+        obj.set_benutzername(dictionary["benutzername"])
+        obj.set_urlaubstage(dictionary["urlaubstage"])
+        obj.set_ueberstunden(dictionary["überstunden"])
+        obj.set_letzte_aenderung(dictionary["letzte_änderung"])
+
+        return obj
+
+
+
+
 
 

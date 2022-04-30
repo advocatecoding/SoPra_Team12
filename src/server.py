@@ -82,6 +82,52 @@ class AktivitaetenByProjektId(Resource):
         return aktivitaeten
 
 
+""" Person Objekt wird gelöscht """
+@zeiterfassung.route("/delete_person/<int:person_id>")
+@zeiterfassung.param("person_id", "Die Id der gewünschten Person")
+class DeletePersonById(Resource):
+    @zeiterfassung.marshal_with(person)
+    def delete(self, person_id):
+        """Löschen eines bestimmten Customer-Objekts.
+
+        Das zu löschende Objekt wird durch die ```id``` in dem URI bestimmt.
+        """
+        adm = Administration()
+        person = adm.get_person_by_person_id(person_id)
+        print(person)
+        return person
+
+""" Person Objekt wird angelegt"""
+@zeiterfassung.route("/create_person/")
+@zeiterfassung.expect(person)  # Wir erwarten ein Customer-Objekt von Client-Seite.
+class CreatePersonById(Resource):
+    @zeiterfassung.marshal_with(person, code=201)
+    def post(self):
+        adm = Administration()
+        proposal = Person.from_dict(api.payload)
+
+        if proposal is not None:
+            """ Wir verwenden lediglich Vor- und Nachnamen des Proposals für die Erzeugung
+            eines Customer-Objekts. Das serverseitig erzeugte Objekt ist das maßgebliche und 
+            wird auch dem Client zurückgegeben. 
+            """
+            c = adm.create_person(proposal.get_vorname(), proposal.get_nachname(), proposal.get_mail_adresse(), proposal.get_benutzername(), proposal.get_letzte_aenderung())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
+
+
+
+
+
+
+
+
+
+
+
 """ Server läuft auf localhost:5500 bzw. 127.0.0.1:5500 """
 if __name__ == '__main__':
     app.run(port= 5500, debug=True)

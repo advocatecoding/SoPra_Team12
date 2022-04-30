@@ -10,7 +10,7 @@ USE `Zeiterfassung` ;
 -- Tabelle erstellen 'Person'
 -- -----------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Person` (
-  `person_id` VARCHAR(45) NOT NULL ,
+  `person_id` INT NOT NULL ,
   `vorname` VARCHAR(45) NULL,
   `nachname` VARCHAR(45) NULL,
   `mail_adresse` VARCHAR(150) NULL,
@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- -----------------------------------------------------------------------  
   CREATE TABLE IF NOT EXISTS `Projekt` (
   `projekt_id` VARCHAR(45) NOT NULL ,
-  `person_id` VARCHAR(45) NOT NULL ,
+  `person_id` INT NOT NULL,
   `projektname` VARCHAR(150) NULL,
   `auftraggeber` VARCHAR(150) NULL,
   `letzte_aenderung` DATETIME NULL,
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
    CREATE TABLE IF NOT EXISTS `Urlaub` (
   `urlaub_id` VARCHAR(45) NOT NULL ,
   `projekt_id` VARCHAR(45) NOT NULL ,
-  `person_id` VARCHAR(45) NOT NULL ,
+  `person_id` INT NOT NULL ,
   `start_datum` DATETIME NULL,
   `end_datum` DATETIME NULL,
   `letzte_aenderung` DATETIME NULL,
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
    CREATE TABLE IF NOT EXISTS `Pause` (
   `pause_id` VARCHAR(45) NOT NULL ,
   `projekt_id` VARCHAR(45) NOT NULL ,
-  `person_id` VARCHAR(45) NOT NULL ,
+  `person_id` INT NOT NULL ,
   `pause_start` DATETIME NULL,
   `pause_ende` DATETIME NULL,
   `letzte_aenderung` DATETIME NULL,
@@ -93,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
    CREATE TABLE IF NOT EXISTS `Zeitintervallbuchung` (
   `zeit_id` VARCHAR(45) NOT NULL ,
   `projekt_id` VARCHAR(45) NOT NULL ,
-  `person_id` VARCHAR(45) NOT NULL ,
+  `person_id` INT NOT NULL ,
   `aktivitaet_id` VARCHAR(45) NOT NULL ,
   `zeit_start` DATETIME NULL,
   `zeit_ende` DATETIME NULL,
@@ -117,7 +117,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Arbeitszeitkonto` (
   `zeit_id` VARCHAR(45) NOT NULL ,
-  `person_id` VARCHAR(45) NOT NULL ,
+  `person_id` INT NOT NULL ,
   `zeit_gesamt` INT NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`person_id`,`zeit_id`),
@@ -150,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- Tabelle erstellen 'Mitarbeiter_in_Projekt'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Mitarbeiter_in_Projekt` (
-  `person_idd` VARCHAR(45) NOT NULL ,
+  `person_idd` INT NOT NULL ,
   `projekt_id` VARCHAR(45) NOT NULL ,
   `verkaufte_stunden` INT NULL,
   PRIMARY KEY (`person_idd`,`projekt_id`),
@@ -172,6 +172,8 @@ INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, 
 VALUES('1', 'Talha', 'Yildirim', 'talha.windows@gmail.com', 'Karen', 365, 0, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
 VALUES('2', 'Aykut', 'Demir', 'kafabey@hotmail.de', 'Kafa Bey', 365, 0, '2022-04-13 02:30:00');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
+VALUES('3', 'Eray', 'Hergül', 'erayhergül@hotmail.de', 'Vintage', 365, 0, '2022-04-13 02:30:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Projekt Entitäten erstellen
@@ -228,8 +230,6 @@ VALUES('2', '1','180');
  SELECT  vorname, nachname, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt
  WHERE person_idd = person_id;
  
-	
-
-
+ 
 
 

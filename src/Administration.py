@@ -11,7 +11,7 @@ from bo.Zeitintervallbuchung import Zeitinverallbuchung
 from bo.Zeitintervall import Zeitintervall
 from bo.Projektarbeit import Projektarbeit
 from bo.Pause import Pause
-
+from bo import BusinessObject as bo
 from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
 from db.AktivitaetMapper import AktivitaetMapper
@@ -37,7 +37,33 @@ class Administration(object):
     def get_aktivitaeten_by_projekt_id(self, projekt_id):
         with AktivitaetMapper() as mapper:
             return mapper.find_aktivitaeten_by_projekt_id(projekt_id)
-        
+
+    def get_person_by_person_id(self, person_id):
+        with PersonMapper() as mapper:
+            #person = self.get_all_personen()
+            return mapper.delete(person_id)
+        """ if not (person is None):
+                for person_id in person:
+                    self.delete(person_id)
+            """
+
+    def create_person(self, vorname, nachname, mail_adresse, benutzername, letzte_aenderung):
+        """Eine Person anlegen."""
+        person = Person()
+        person.set_id(1211)
+        person.set_vorname(vorname)
+        person.set_nachname(nachname)
+        person.set_mail_adresse(mail_adresse)
+        person.set_benutzername(benutzername)
+        person.set_urlaubstage(30)
+        person.set_ueberstunden(0)
+        person.set_letzte_aenderung(letzte_aenderung)
+
+        with PersonMapper() as mapper:
+            return mapper.insert(person)
+
+
+
 
 
 """ Projekt test 
