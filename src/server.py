@@ -22,6 +22,9 @@ api = Api(app, version='1.0', title="Zeiterfassung API")
 """ Namespace definieren (es wird "zeit" gewählt, da Zeiterfassung ein zu langes Wort ist, also aus Bequemlichkeitsgründen) """
 zeiterfassung = api.namespace("zeit", desription="Funktionen der Zeiterfassung WebApp")
 
+""" api.payload: 
+    Bei Eingabe der Werte wird jeweils immer ein Key und ein Value gespeichert, wodurch eine dictionary-Struktur 
+    erstellt wird. Dies wird als api.payload gespeichert. """
 
 bo = api.model("BusinessObject", {
     "id": fields.String(attribute="_id", description="Id"),
@@ -89,7 +92,6 @@ class DeletePersonById(Resource):
     @zeiterfassung.marshal_with(person)
     def delete(self, person_id):
         """Löschen einer Person Instanz.
-
         Das zu löschende Objekt wird durch die ```id``` in dem URI bestimmt.
         """
         adm = Administration()
@@ -105,27 +107,17 @@ class CreatePersonById(Resource):
     def post(self):
         """ Person Instanz erstellen """
         adm = Administration()
-        proposal = Person.from_dict(api.payload)
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
+        Attribute aus den Werten von api.payload setzen. person_object = Person-Objekt """
+        person_object = Person.from_dict(api.payload)
 
-        if proposal is not None:
-            """ Wir verwenden lediglich Vor- und Nachnamen des Proposals für die Erzeugung
-            eines Customer-Objekts. Das serverseitig erzeugte Objekt ist das maßgebliche und 
-            wird auch dem Client zurückgegeben. 
-            """
-            c = adm.create_person(proposal.get_vorname(), proposal.get_nachname(), proposal.get_mail_adresse(), proposal.get_benutzername(), proposal.get_letzte_aenderung())
+        if person_object is not None:
+            """ Wir erstellen in Administration eine Person mithilfe der Daten vom api.payload """
+            c = adm.create_person(person_object.get_vorname(), person_object.get_nachname(), person_object.get_mail_adresse(), person_object.get_benutzername())
             return c, 200
         else:
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
             return '', 500
-
-
-
-
-
-
-
-
-
 
 
 

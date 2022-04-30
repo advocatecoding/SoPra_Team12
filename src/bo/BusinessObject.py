@@ -1,4 +1,5 @@
 from abc import ABC
+from datetime import datetime
 
 class BusinessObject(ABC):
     def __init__(self):
@@ -14,5 +15,5 @@ class BusinessObject(ABC):
     def get_letzte_aenderung(self):
         return self._letzte_aenderung
 
-    def set_letzte_aenderung(self, value):
-        self._letzte_aenderung = value
+    def set_letzte_aenderung(self):
+        self._letzte_aenderung = datetime.now()

@@ -21,7 +21,7 @@ class PersonMapper(Mapper):
             person.set_urlaubstage(urlaubstage)
             person.set_ueberstunden(ueberstunden)
             person.set_id(person_id)
-            person.set_letzte_aenderung(letzte_aenderung)
+            person.set_letzte_aenderung()
             result.append(person)
             print(result)
 
@@ -46,14 +46,8 @@ class PersonMapper(Mapper):
         cursor.close()
         return person
 
-
-
-
-
-
-
     def insert(self, person):
-        """Einfügen eines Customer-Objekts in die Datenbank.
+        """Einfügen eines neuen Person-Objekts in die Datenbank.
 
         Dabei wird auch der Primärschlüssel des übergebenen Objekts geprüft und ggf.
         berichtigt.
@@ -77,11 +71,6 @@ class PersonMapper(Mapper):
         cursor.close()
 
         return person
-
-
-
-
-
 
 
 

@@ -47,8 +47,9 @@ class Administration(object):
                     self.delete(person_id)
             """
 
-    def create_person(self, vorname, nachname, mail_adresse, benutzername, letzte_aenderung):
+    def create_person(self, vorname, nachname, mail_adresse, benutzername):
         """Eine Person anlegen."""
+
         person = Person()
         person.set_id(1211)
         person.set_vorname(vorname)
@@ -57,7 +58,8 @@ class Administration(object):
         person.set_benutzername(benutzername)
         person.set_urlaubstage(30)
         person.set_ueberstunden(0)
-        person.set_letzte_aenderung(letzte_aenderung)
+        """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
+        person.set_letzte_aenderung()
 
         with PersonMapper() as mapper:
             return mapper.insert(person)

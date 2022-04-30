@@ -61,7 +61,7 @@ class Person(bo.BusinessObject):
 
 
     def from_dict(dictionary=dict()):
-        """Umwandeln eines Python dict() in einen Customer()."""
+        """Umwandeln eines Python dict() in eine Person()."""
         obj = Person()
         obj.set_id(dictionary["id"])  # eigentlich Teil von BusinessObject !
         obj.set_vorname(dictionary["vorname"])
@@ -70,7 +70,7 @@ class Person(bo.BusinessObject):
         obj.set_benutzername(dictionary["benutzername"])
         obj.set_urlaubstage(dictionary["urlaubstage"])
         obj.set_ueberstunden(dictionary["überstunden"])
-        obj.set_letzte_aenderung(dictionary["letzte_änderung"])
+        obj.set_letzte_aenderung()
 
         return obj
 
