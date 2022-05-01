@@ -92,7 +92,7 @@ class DeletePersonById(Resource):
     @zeiterfassung.marshal_with(person)
     def delete(self, person_id):
         """Löschen einer Person Instanz.
-        Das zu löschende Objekt wird durch die ```id``` in dem URI bestimmt.
+        Das zu löschende Objekt wird anhand der id bestimmt.
         """
         adm = Administration()
         person = adm.get_person_by_person_id(person_id)

@@ -21,7 +21,7 @@ class PersonMapper(Mapper):
             person.set_urlaubstage(urlaubstage)
             person.set_ueberstunden(ueberstunden)
             person.set_id(person_id)
-            person.set_letzte_aenderung()
+            person.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
             result.append(person)
             print(result)
 
@@ -47,14 +47,11 @@ class PersonMapper(Mapper):
         return person
 
     def insert(self, person):
-        """Einfügen eines neuen Person-Objekts in die Datenbank.
-
-        Dabei wird auch der Primärschlüssel des übergebenen Objekts geprüft und ggf.
-        berichtigt.
-
-        :param person das zu speichernde Objekt
-        :return das bereits übergebene Objekt, jedoch mit ggf. korrigierter ID.
+        """ Einfügen eines neuen Person-Objekts in die Datenbank.
+        parameter: Person Instanz die in der Datenbank gespeichert werden soll
+        return: Die Person Instanz mit korrigierter bzw. inkrementierte ID
         """
+
         cursor = self._cnx.cursor()
         cursor.execute("SELECT MAX(person_id) AS maxid FROM person ")
         tuples = cursor.fetchall()
@@ -63,6 +60,7 @@ class PersonMapper(Mapper):
             person.set_id(maxid[0] + 1)
 
 
+        """ Hier wird die Person Instanz in die Datenbank mit dem Insert Befehl gespeichert """
         command = "INSERT INTO person (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
         data = (person.get_id(), person.get_vorname(), person.get_nachname(), person.get_mail_adresse(), person.get_benutzername(), person.get_urlaubstage(), person.get_ueberstunden(), person.get_letzte_aenderung())
         cursor.execute(command, data)

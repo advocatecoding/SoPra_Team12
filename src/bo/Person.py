@@ -63,7 +63,7 @@ class Person(bo.BusinessObject):
     def from_dict(dictionary=dict()):
         """Umwandeln eines Python dict() in eine Person()."""
         obj = Person()
-        obj.set_id(dictionary["id"])  # eigentlich Teil von BusinessObject !
+        obj.set_id(dictionary["id"])
         obj.set_vorname(dictionary["vorname"])
         obj.set_nachname(dictionary["nachname"])
         obj.set_mail_adresse(dictionary["mail_adresse"])
