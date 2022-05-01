@@ -112,7 +112,7 @@ class App extends React.Component {
 							// Is a user signed in?
 							currentUser ?
 								<>
-									<Start2></Start2>
+									<Start></Start>
 								</>
 								:
 								// else show the sign in page
