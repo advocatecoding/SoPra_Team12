@@ -22,7 +22,7 @@ class AktivitaetMapper(Mapper):
             aktivitaet = Aktivitaet()
             aktivitaet.set_id(aktivitaet_id)
             aktivitaet.set_name(bezeichnung)
-            aktivitaet.set_letzte_aenderung(letzte_aenderung)
+            aktivitaet.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
             """ In "aktivitaeten" werden die Aktivitaeten-Objekte gespeichert """
             aktivitaten.append(aktivitaet)
             projekt = Projekt()

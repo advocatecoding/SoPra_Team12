@@ -19,7 +19,7 @@ class ProjektMapper(Mapper):
             projekt.set_auftraggeber(auftraggeber)
             projekt.set_id(projekt_id)
             projekt.set_projektleiter(person_id)
-            projekt.set_letzte_aenderung(letzte_aenderung)
+            projekt.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
             result.append(projekt)
         """
         for i in result:
