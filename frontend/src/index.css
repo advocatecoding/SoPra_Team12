@@ -1,0 +1,155 @@
+body{
+    font-family: roboto;
+}
+
+:root {
+    --bg: #262A2E;
+    --bg-accent: #484a4d;
+    --text-color: #00bcd4;
+    --nav-size: 60px;
+    --border-radius: 8px;
+    --speed: 450ms;
+}
+
+.button1 {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}
+
+.icon {
+    transform: scale(2);
+}
+
+code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+        monospace;
+}
+
+ul {
+    list-style: none;
+    margin: 10;
+    padding: 0;
+}
+
+a {
+    color: var(--text-color);
+    text-decoration: none;
+    cursor: default;
+}
+
+/* Icon Button */
+.icon-button {
+    width: 35px;
+    height: 35px;
+    background-color: #484a4d;
+    border-radius: 20%;
+    padding: 10px;
+    margin: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 300ms;
+}
+
+.icon-button:hover {
+    filter: brightness(2.2);
+}
+
+.icon-button svg {
+    fill: var(--text-color);
+    width: 20px;
+    height: 20px;
+}
+
+
+/* ProjektListe Menu */
+
+.dropdown {
+    width: 400px;
+    background-color: var(--bg);
+    border: var(--border);
+    border-radius: var(--border-radius);
+    padding: 1rem;
+    overflow: hidden;
+    transition: height var(--speed) ease;
+}
+
+.menu {
+    width: 100%;
+}
+
+.menu-item {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-radius: var(--border-radius);
+    transition: background var(--speed);
+    padding: 0.5rem;
+}
+
+.parent {
+    display: flex;
+    justify-content: flex-end;
+    right: 0;
+}
+
+
+.menu-children button {
+    min-width: 50px;
+    max-width: 50px;
+}
+
+.menu-item .icon-button {
+    margin-right: 0.5rem;
+}
+
+
+.menu-item .icon-button:hover {
+    filter: none;
+}
+
+
+.icon-right {
+    margin-left: 50px;
+}
+
+/* CSSTransition classes  */
+.menu-primary-enter {
+    position: absolute;
+    transform: translateX(-10%);
+}
+
+.menu-primary-enter-active {
+    transform: translateX(0%);
+    transition: all var(--speed) ease-out;
+}
+
+.menu-primary-exit {
+    position: absolute;
+}
+
+.menu-primary-exit-active {
+    transform: translateX(-30%);
+    transition: all var(--speed) ease-out;
+}
+
+
+.menu-secondary-enter {
+    transform: translateX(110%);
+}
+
+.menu-secondary-enter-active {
+    transform: translateX(0%);
+    transition: all var(--speed) ease-out;
+}
+
+/*.menu-secondary-exit {}*/
+
+.menu-secondary-exit-active {
+    transform: translateX(110%);
+    transition: all var(--speed) ease-out;
+}
