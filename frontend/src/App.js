@@ -101,6 +101,8 @@ class App extends React.Component {
 		firebase.auth().onAuthStateChanged(this.handleAuthStateChange);
 	}
 
+
+
 	/** Renders the whole app */
 	render() {
 		const { currentUser } = this.state;
@@ -109,13 +111,13 @@ class App extends React.Component {
 					<Container maxWidth='xl'>
 					<Header></Header>
 						{
-							// Is a user signed in?
+							// Ist der Benutzer schon eingeloggt -> Dann soll <Start> geladen werden
 							currentUser ?
 								<>
 									<Start></Start>
 								</>
 								:
-								// else show the sign in page
+								// Wenn der Benutzer nicht eingeloggt ist -> Dann soll <SignIn> geladen werden
 								<>
 									<SignIn onSignIn={this.handleSignIn} />
 								</>

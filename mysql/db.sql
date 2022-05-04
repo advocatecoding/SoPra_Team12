@@ -18,6 +18,8 @@ CREATE TABLE IF NOT EXISTS `Person` (
   `urlaubstage` INT NULL,
   `ueberstunden` INT NULL,
   `letzte_aenderung` DATETIME NULL,
+  -- Damit nicht mehrmals der gleiche Benutzername verwendet werden kann
+  UNIQUE (benutzername),
   PRIMARY KEY (`person_id`));
   
 -- -----------------------------------------------------------------------
@@ -230,6 +232,8 @@ VALUES('2', '1','180');
  SELECT  vorname, nachname, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt
  WHERE person_idd = person_id;
  
+ 
+ select * from Person
  
 
 
