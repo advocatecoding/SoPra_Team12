@@ -73,8 +73,8 @@ class PersonMapper(Mapper):
     def update(self, person):
         cursor = self._cnx.cursor()
 
-        command = "UPDATE person " + "SET vorname=%s, nachname=%s, mail_adresse=%s, urlaubstage=%s WHERE person_id=%s"
-        data = (person.get_vorname(), person.get_nachname(), person.get_mail_adresse(), person.get_urlaubstage(),
+        command = "UPDATE person " + "SET vorname=%s, nachname=%s, mail_adresse=%s, urlaubstage=%s, letzte_aenderung=%s WHERE person_id=%s"
+        data = (person.get_vorname(), person.get_nachname(), person.get_mail_adresse(), person.get_urlaubstage(), person.get_letzte_aenderung(),
                 person.get_id())
         cursor.execute(command, data)
 
