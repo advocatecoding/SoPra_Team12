@@ -6,8 +6,8 @@ class Gehen(Ereignis):
         super().__init__(zeitpunkt)
         self.__zeitpunkt = zeitpunkt
 
-    def set_end(self, value):
+    def set_ende(self, value):
         self.__zeitpunkt = value
 
-    def get_end(self):
+    def get_ende(self):
         return self.__zeitpunkt

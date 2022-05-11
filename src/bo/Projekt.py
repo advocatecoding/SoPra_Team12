@@ -6,9 +6,16 @@ class Projekt(bo.BusinessObject):
         self._projektname = ""
         self._aktivitaeten = list()
         self._auftraggeber = ""
+        self.__projektlaufzeit = None
         self.__team = {}
         self._projektleiter = None
 
+
+    def get_projektlaufzeit(self):
+        return self.__projektlaufzeit
+
+    def set_projektlaufzeit(self, value):
+        self.__projektlaufzeit = value
 
     def set_projektleiter(self,projektleiter):
         """Setzen des Projektleiters."""

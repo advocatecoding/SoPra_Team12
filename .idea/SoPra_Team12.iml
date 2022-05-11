@@ -5,17 +5,10 @@
       <sourceFolder url="file://$MODULE_DIR$/codetests/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/frontend/node_modules" />
-      <excludeFolder url="file://$MODULE_DIR$/venv-windows" />
       <excludeFolder url="file://$MODULE_DIR$/sopra-venv" />
+      <excludeFolder url="file://$MODULE_DIR$/venv-windows" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.10 (sopra-venv)" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-  </component>
-  <component name="PyNamespacePackagesService">
-    <option name="namespacePackageFolders">
-      <list>
-        <option value="$MODULE_DIR$/sopra-venv/lib/python3.10/site-packages/mysql_connector_python-8.0.28.dist-info" />
-      </list>
-    </option>
   </component>
 </module>

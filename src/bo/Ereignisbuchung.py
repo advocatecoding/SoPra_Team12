@@ -2,7 +2,18 @@ from bo import BusinessObject as bo
 
 
 class Ereignisbuchung(bo.BusinessObject):
+    def __init__(self, ereignis):
+        super().__init__()
+        self.__ereignis = ereignis
+        self.__ereignis_type = type(self.__ereignis).__name__
 
+
+    def get_ereignis_type(self):
+        return self.__ereignis_type
+
+
+
+"""
     def __init__(self, start_ereignis, end_ereignis):
         super().__init__()
         self.__start_ereignis = start_ereignis
@@ -20,3 +31,4 @@ class Ereignisbuchung(bo.BusinessObject):
 
     def get_end_ereignis(self):
         return self.__end_ereignis
+"""
