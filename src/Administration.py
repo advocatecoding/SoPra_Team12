@@ -64,9 +64,6 @@ class Administration(object):
         with PersonMapper() as mapper:
             return mapper.insert(person)
 
-    def update_person(self, person):
-        with PersonMapper() as mapper:
-            return mapper.update(person)
 
 
 

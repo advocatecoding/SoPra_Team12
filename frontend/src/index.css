@@ -69,6 +69,7 @@ a {
 /* ProjektListe Menu */
 
 .dropdown {
+    width: 400px;
     background-color: var(--bg);
     border: var(--border);
     border-radius: var(--border-radius);

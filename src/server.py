@@ -63,56 +63,6 @@ class PersonenListOperations(Resource):
         personen = adm.get_all_personen()
         return personen
 
-    @zeiterfassung.marshal_with(person, code=201)
-    @zeiterfassung.expect(person)
-    def post(self):
-        """ Person Instanz erstellen """
-        adm = Administration()
-        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
-        Attribute aus den Werten von api.payload setzen. person_object = Person-Objekt """
-        person_object = Person.from_dict(api.payload)
-
-        if person_object is not None:
-            """ Wir erstellen in Administration eine Person mithilfe der Daten vom api.payload """
-            c = adm.create_person(person_object.get_vorname(), person_object.get_nachname(),
-                                  person_object.get_mail_adresse(), person_object.get_benutzername())
-            return c, 200
-        else:
-            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
-            return '', 500
-
-""" Person Objekt wird gelöscht """
-@zeiterfassung.route("/personen/<int:person_id>")
-@zeiterfassung.param("person_id", "Die Id der gewünschten Person")
-class PersonOberationsById(Resource):
-    @zeiterfassung.marshal_with(person)
-    def delete(self, person_id):
-        """Löschen einer Person Instanz.
-        Das zu löschende Objekt wird anhand der id bestimmt.
-        """
-        adm = Administration()
-        person = adm.get_person_by_person_id(person_id)
-        print(person)
-        return person
-
-    @zeiterfassung.marshal_with(person)
-    @zeiterfassung.expect(person, validate=True)
-    def put(self, person_id):
-        """ Person Instanz updaten """
-        adm = Administration()
-        person_object = Person.from_dict(api.payload)
-
-        if person_object is not None:
-            """Hierdurch wird die id des zu überschreibenden (vgl. Update) Customer-Objekts gesetzt.
-            Siehe Hinweise oben.
-            """
-            person_object.set_id(person_id)
-            adm.update_person(person_object)
-            return '', 200
-        else:
-            return '', 500
-
-
 @zeiterfassung.route("/projekte")
 class ProjekteListOperations(Resource):
     @zeiterfassung.marshal_with(projekt)
@@ -121,7 +71,6 @@ class ProjekteListOperations(Resource):
         adm = Administration()
         projekte = adm.get_all_projekte()
         return projekte
-
 
 """ Aktivitäten werden zur zugeordneten Projekt_ID ausgegeben """
 @zeiterfassung.route("/aktivitaten/<int:projekt_id>")
@@ -134,6 +83,42 @@ class AktivitaetenByProjektId(Resource):
         aktivitaeten = adm.get_aktivitaeten_by_projekt_id(projekt_id)
         print(aktivitaeten)
         return aktivitaeten
+
+
+""" Person Objekt wird gelöscht """
+@zeiterfassung.route("/delete_person/<int:person_id>")
+@zeiterfassung.param("person_id", "Die Id der gewünschten Person")
+class DeletePersonById(Resource):
+    @zeiterfassung.marshal_with(person)
+    def delete(self, person_id):
+        """Löschen einer Person Instanz.
+        Das zu löschende Objekt wird anhand der id bestimmt.
+        """
+        adm = Administration()
+        person = adm.get_person_by_person_id(person_id)
+        print(person)
+        return person
+
+""" Person Objekt wird angelegt"""
+@zeiterfassung.route("/create_person/")
+@zeiterfassung.expect(person)  # Wir erwarten eine Person Instanz von Client-Seite.
+class CreatePersonById(Resource):
+    @zeiterfassung.marshal_with(person, code=201)
+    def post(self):
+        """ Person Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
+        Attribute aus den Werten von api.payload setzen. person_object = Person-Objekt """
+        person_object = Person.from_dict(api.payload)
+
+        if person_object is not None:
+            """ Wir erstellen in Administration eine Person mithilfe der Daten vom api.payload """
+            c = adm.create_person(person_object.get_vorname(), person_object.get_nachname(), person_object.get_mail_adresse(), person_object.get_benutzername())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
 
 
 """ Server läuft auf localhost:5500 bzw. 127.0.0.1:5500 """
