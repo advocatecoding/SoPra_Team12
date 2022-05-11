@@ -58,7 +58,7 @@ class PersonenList extends Component {
         const { items } = this.state;
         //const list = [1, 2, 3, 4, 5]
         return (
-            <div style={{ width: "100%" }}>
+            <div >
                 {this.state.personen.map((x) =>
                     <ListItem>
                         <IconButton>

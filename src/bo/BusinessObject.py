@@ -19,7 +19,6 @@ class BusinessObject(ABC):
         """Wir möchten die Sekunden und kleinere Einheiten nicht anzeigen anlassen"""
         self._letzte_aenderung =  datetime.now().replace(second=0, microsecond=0)
 
-
     def set_letzte_aenderung_fuer_get_methode(self, value):
         """Notwendig damit keine neuen Werte für letzte_änderung gesetzt wird, wenn man sich Datensätze ausgeben lassen möchte"""
         self._letzte_aenderung =  value

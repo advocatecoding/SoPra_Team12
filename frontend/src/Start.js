@@ -26,13 +26,12 @@ function Start() {
       <Box sx={{ mt: 5 }}></Box>
 
       {/* Sidebar -> Projektübersicht */}
-      <Grid container justify="space-between">
-        <Grid item xs={4}>
+      <Grid container justify="space-between" gap={2} >
+        <Grid xs={4} style={{minWidth:"300px"}}>
            <ProjektListe></ProjektListe>        
         </Grid>
-
         {/* Personenliste wird angezeigt */}
-        <Grid item xs={8} style={{ backgroundColor: "#262A2E", borderRadius:"8px", height:"600px"}}>
+        <Grid xs={7} style={{ backgroundColor: "grey", borderRadius:"8px", maxWidth:"900px", height:"600px"}}>
           <PersonenList></PersonenList>
         </Grid>
       </Grid>

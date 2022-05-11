@@ -70,7 +70,16 @@ class PersonMapper(Mapper):
 
         return person
 
+    def update(self, person):
+        cursor = self._cnx.cursor()
 
+        command = "UPDATE person " + "SET vorname=%s, nachname=%s, mail_adresse=%s, urlaubstage=%s WHERE person_id=%s"
+        data = (person.get_vorname(), person.get_nachname(), person.get_mail_adresse(), person.get_urlaubstage(),
+                person.get_id())
+        cursor.execute(command, data)
+
+        self._cnx.commit()
+        cursor.close()
 
 
 """ Tesing """
