@@ -16,7 +16,11 @@ __pycache__/
 **/.DS_Store
 
 
+# Venv
+venv/
 
+*.iml
+*.xml
 
 
 # C extensions
