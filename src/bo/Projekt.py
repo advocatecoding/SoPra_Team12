@@ -7,7 +7,7 @@ class Projekt(bo.BusinessObject):
         self._aktivitaeten = list()
         self._auftraggeber = ""
         self.__team = {}
-        self._projektleiter = ""
+        self._projektleiter = None
 
 
     def set_projektleiter(self,projektleiter):

@@ -78,7 +78,7 @@ export default function ProjektListe() {
   
   
     return (
-      <div className="dropdown" style={{minWidth:"300px", minHeight: "300px", overflowY: "scroll" }} ref={dropdownRef}>
+      <div className="dropdown" style={{maxWidth:"350px", minHeight: "300px", overflowY: "scroll" }} ref={dropdownRef}>
         {console.log(activeMenu)}
   
         <CSSTransition
