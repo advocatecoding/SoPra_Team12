@@ -48,7 +48,7 @@ class Administration(object):
         """ if not (person is None):
                 for person_id in person:
                     self.delete(person_id)
-            """
+        """
 
     def create_person(self, vorname, nachname, mail_adresse, benutzername):
         """Eine Person anlegen."""
@@ -95,21 +95,64 @@ class Administration(object):
             print(projekt1.get_aktivitäten())
         """
 
-mitarbeiter1 = Person()
-mitarbeiter1.set_vorname("Mikasa")
+if __name__ == '__main__':
+    mitarbeiter1 = Person()
+    mitarbeiter1.set_vorname("Mikasa")
 
-arbeitszeitkonto_von_mikasa = Arbeitszeitkonto()
-""" Das Arbeitszeitkonto von Mikasa  """
-arbeitszeitkonto_von_mikasa.set_owner(mitarbeiter1)
+    arbeitszeitkonto_von_mikasa = Arbeitszeitkonto()
+    """ Das Arbeitszeitkonto von Mikasa  """
+    arbeitszeitkonto_von_mikasa.set_owner(mitarbeiter1)
 
-aktivitaet1 = Aktivitaet()
-aktivitaet1.set_name("Kriegshammertitan aufhalten")
+    aktivitaet1 = Aktivitaet()
+    aktivitaet1.set_name("Kriegshammertitan aufhalten")
 
-projekt1 = Projekt()
-projekt1.set_name("Marley erobern")
+    zeitintervall_projekt = Zeitintervall()
+    zeitintervall_projekt.set_projektlaufzeit(100)
+
+    projekt1 = Projekt()
+    projekt1.set_name("Marley erobern")
+    projekt1.set_projektlaufzeit(100)
+
+    #aktivität1.get_id()
+    kommen = datetime.datetime(2022, 1,1,12,00)
+    gehen = datetime.datetime(2022, 1,1, 14, 00)
+
+    kommen1 = Kommen(kommen, aktivitaet1,mitarbeiter1)
+    #kommen1.set_aktivitaet(aktivitaet1)
+    #kommen1.set_person(mitarbeiter1)
+
+    gehen1 = Gehen(gehen, aktivitaet1, mitarbeiter1)
+    #gehen1.set_aktivitaet()
+
+    ereignisbuchung1 = Ereignisbuchung(kommen1, gehen1)
+
+    projektarbeit1 = Projektarbeit(ereignisbuchung1)
+    pause1 = Pause(ereignisbuchung1)
+
+    zeitintervall1 = Zeitintervall(ereignisbuchung1)
+    zeitintervall1.set_id(1)
+
+    #zeitintervall1.get_type(ereignisbuchung1)
+
+    #pause1 = Pause()
+    #pause1.set_zeitintervall(ereignisbuchung1)
+    #zeitintervall1.set_zeitintervall(ereignisbuchung1)
+    #projektarbeit1.set_zeitintervall(ereignisbuchung1)
+    #zu_buchende_zeit = zeitintervall1.get_zeit()
+    #zu_buchende_zeit = pause1.get_zeitintervall()
+    zeitinervallbuchung1 = Zeitinverallbuchung(projektarbeit1)
+    #zeitinervallbuchung1.set_zeitintervallbuchung(zu_buchende_zeit)
+    zeitintervallbuchung2 = Zeitinverallbuchung(pause1)
+    print(zeitintervallbuchung2.get_buchungsart())
+
+    print(zeitinervallbuchung1.get_person().get_vorname())
+    print(zeitinervallbuchung1.get_zeitintervall())
+    print(zeitinervallbuchung1.get_aktivitaet().get_name())
+    print(zeitinervallbuchung1.get_buchungsart())
 
 
-""" Szenario 1: Mitarbeiter bucht ein Zeitintervall """
+"""
+Szenario 1: Mitarbeiter bucht ein Zeitintervall 
 arbeitsdauer = "2"
 
 projektarbeit1 = Projektarbeit()
@@ -120,24 +163,30 @@ projektarbeit1.set_zeit(arbeitsdauer)
 zeitintervallbuchung1 = Zeitinverallbuchung(projektarbeit1)
 arbeitszeitkonto_von_mikasa.add_buchung(zeitintervallbuchung1)
 
-""" Szenario 2: Mitarbeiter bucht ein Ereignis """
+Szenario 2: Mitarbeiter bucht ein Ereignis 
 # 12 Uhr -> Timestamp
 arbeits_start1 = datetime.datetime(2022,1,1,12,00)
 arbeits_ende1 = datetime.datetime(2022,1,1,14,00)
 
 kommen1 = Kommen(arbeits_start1)
+kommen1.set_aktivitaet(aktivitaet1)
 gehen1 = Gehen(arbeits_ende1)
+gehen1.set_aktivitaet(aktivitaet1)
 
 ereignisbuchung1 = Ereignisbuchung(kommen1)
-ereignisbuchung2 = Ereignisbuchung(gehen1)
-print(ereignisbuchung1.get_ereignis_type())
-print(ereignisbuchung2.get_ereignis_type())
+ereignisbuchung1 = Ereignisbuchung(gehen1)
+#ereignisbuchung1.add_buchung(kommen1)
+#ereignisbuchung1.add_buchung(gehen1)
+#print(ereignisbuchung1.get_ereignis_type())
+print(ereignisbuchung1.get_startereignis())
+#print(ereignisbuchung2.get_ereignis_type())
 
-""" Szenario 3: Mitarbeiter bucht ein 2 Ereignisse, welche als Zeitintervallbuchung gespeichert werden """
+
+ Szenario 3: Mitarbeiter bucht ein 2 Ereignisse, welche als Zeitintervallbuchung gespeichert werden 
 projektarbeit3 = Zeitintervall(kommen1, gehen1)
 print(projektarbeit3.get_zeit())
 
-""" Szenario 4: Projektdauer wird durch Zeitintervall festgelegt """
+Szenario 4: Projektdauer wird durch Zeitintervall festgelegt 
 projektdauer = "430"
 zeitintervall_projekt = Zeitintervall()
 zeitintervall_projekt.set_projekt(projekt1)
@@ -145,8 +194,7 @@ zeitintervall_projekt.set_zeit(projektdauer)
 projekt1.set_projektlaufzeit(zeitintervall_projekt)
 print(projekt1.get_projektlaufzeit().get_zeit())
 
-
-
+"""
 
 
 

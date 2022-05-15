@@ -3,11 +3,11 @@ from bo import BusinessObject as bo
 
 class Ereignis(bo.BusinessObject):
 
-    def __init__(self, ereignis):
+    def __init__(self, zeitpunkt, aktivitaet, person):
         super().__init__()
-        self.__zeitpunkt = ""
-        self.__person = None
-        self.__aktivitaet = None
+        self.__zeitpunkt = zeitpunkt
+        self.__person = person
+        self.__aktivitaet = aktivitaet
 
     def get_zeitpunkt(self):
         return self.__zeitpunkt

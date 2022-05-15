@@ -6,6 +6,7 @@ class Projekt(bo.BusinessObject):
         self._projektname = ""
         self._aktivitaeten = list()
         self._auftraggeber = ""
+        """ Wir durch ein Zeitintervall Objekt festgelegt """
         self.__projektlaufzeit = None
         self.__team = {}
         self._projektleiter = None

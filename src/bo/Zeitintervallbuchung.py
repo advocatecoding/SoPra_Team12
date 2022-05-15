@@ -2,18 +2,30 @@ from bo.BusinessObject import BusinessObject as bo
 
 class Zeitinverallbuchung(bo):
 
-    def __init__(self, zeitintervall=None):
-        self._zeitintervall = zeitintervall
-        self._projekt = None
+    def __init__(self, zeitintervall):
+        #self._zeitintervall = zeitintervall
+        self.__zeitintervall = zeitintervall.get_zeitintervall()
+        self.__person = zeitintervall.get_person()
+        self.__aktivitaet = zeitintervall.get_aktivitaet()
+        self.__buchungsart = type(zeitintervall).__name__
+
+    def get_buchungsart(self):
+        return self.__buchungsart
 
     def get_zeitintervall(self):
-        return self._zeitintervall
+        return self.__zeitintervall
 
     def set_zeitintervall(self, value):
-        self._zeitintervall = value
+        self.__zeitintervall = value
 
     def get_projekt(self):
         return self._projekt
+
+    def get_person(self):
+        return self.__person
+
+    def get_aktivitaet(self):
+        return self.__aktivitaet
 
     def set_projekt(self, value):
         self._projekt = value
