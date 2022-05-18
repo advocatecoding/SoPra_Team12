@@ -176,6 +176,16 @@ INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, 
 VALUES('2', 'Aykut', 'Demir', 'kafabey@hotmail.de', 'Kafa Bey', 365, 0, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
 VALUES('3', 'Eray', 'Hergül', 'erayhergül@hotmail.de', 'Vintage', 365, 0, '2022-04-13 02:30:00');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
+VALUES('4', 'Dennis', 'Kühnberger', 'dennis.kuehnberger@gmx.de', 'StuttgarterTsunami', 365, 0, '2022-04-13 02:30:00');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
+VALUES('5', 'Nicola', 'Pany', 'nicola.pany@gmail.de', 'Khaleesi', 365, 0, '2022-04-13 02:30:00');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
+VALUES('6', 'Luke', 'Skywalker', 'lukeskywalker@hotmail.de', 'Jedi', 365, 0, '2022-04-13 02:30:00');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
+VALUES('7', 'Tyrion', 'Lennister', 'tyrion@hotmail.de', 'Mid', 365, 0, '2022-04-13 02:30:00');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
+VALUES('8', 'Mike', 'Tyson', 'ironfist@hotmail.de', 'IronFist', 365, 0, '2022-04-13 02:30:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Projekt Entitäten erstellen
@@ -184,6 +194,10 @@ INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_
 VALUES('1', '1',"Projekt X", 'Daimler','2022-04-19 02:33:00');
 INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
 VALUES('2', '2',"Projekt Y", 'Porsche','2022-04-19 12:33:00');
+INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
+VALUES('3', '3',"Projekt Z", 'Bosch','2022-04-19 12:33:00');
+INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
+VALUES('4', '4',"Projekt W", 'Wilhelma','2022-04-19 12:33:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Aktivität Entitäten erstellen
@@ -194,7 +208,6 @@ INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_
 VALUES('2', 'Datenbankentwurf erstellen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
 INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
 VALUES('3', 'Rechnung schreiben', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
-
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Aktivität_in_Projekt Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
