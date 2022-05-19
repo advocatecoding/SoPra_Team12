@@ -3,11 +3,14 @@ from bo.BusinessObject import BusinessObject as bo
 class Zeitinverallbuchung(bo):
 
     def __init__(self, zeitintervall):
-        #self._zeitintervall = zeitintervall
         self.__zeitintervall = zeitintervall.get_zeitintervall()
         self.__person = zeitintervall.get_person()
         self.__aktivitaet = zeitintervall.get_aktivitaet()
         self.__buchungsart = type(zeitintervall).__name__
+        if self.__buchungsart == "Projektarbeit":
+            print("Die Person {0} hat auf die Aktivität {1} eine Projektarbeit von {2}h gebucht".format(self.__person.get_vorname(), self.__aktivitaet.get_name(), self.__zeitintervall))
+        else:
+            print("Die Person {0} hat auf die Aktivität {1} eine Pause von {2}h gebucht".format(self.__person.get_vorname(), self.__aktivitaet.get_name(), self.__zeitintervall))
 
     def get_buchungsart(self):
         return self.__buchungsart
