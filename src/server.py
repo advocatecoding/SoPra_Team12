@@ -11,6 +11,7 @@ from bo.Projekt import Projekt
 from Administration import Administration
 from bo.Aktivitaet import Aktivitaet
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
+from bo.Urlaub import Urlaub
 
 """ Wir erstellen ein "Flask-Objekt" """
 app = Flask(__name__)
@@ -58,8 +59,17 @@ aktivitaet = api.inherit('Aktivitaet', bo, {
 mitarbeiter_in_projekt = api.inherit('Mitarbeiterinprojekt', bo, {
     "mitarbeiter": fields.String(attribute="_person", description="Mitarbeiter"),
     "projekt": fields.String(attribute="_projekt", description="Projekt"),
-    "verkaufte_stunden": fields.String(attribute="_verkaufte_stunden", description="verkaufte Stunden"),
+    "verkaufte_stunden": fields.String(attribute="_verkaufte_stunden", description="verkaufte Stunden")
 })
+
+urlaub = api.inherit('Urlaub', bo, {
+    "projekt_id": fields.String(attribute="_projekt_id", description="Projekt"),
+    "person_id": fields.String(attribute="_person_id", description="Mitarbeiter"),
+    "start_datum": fields.String(attribute="_start_date", description="Urlaubsbeginn"),
+    "end_datum": fields.String(attribute="_end_date", description="Urlaubsende")
+})
+
+
 
 
 
