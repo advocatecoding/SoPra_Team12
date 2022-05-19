@@ -17,14 +17,9 @@ from bo.Projekt import Projekt
 from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
 from db.AktivitaetMapper import AktivitaetMapper
-<<<<<<< Updated upstream
-
-
-=======
 from bo.Projekt import Projekt
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
->>>>>>> Stashed changes
 import datetime
 
 
@@ -158,41 +153,12 @@ class Administration(object):
                 return mapper.insert(mitarbeiter_in_projekt)
 
 
-"""
-        if __name__ == '__main__':
-            mitarbeiter1 = Person("Aykut")
-            mitarbeiter1.set_id(1)
-            mitarbeiter2 = Person("Talha")
-            mitarbeiter2.set_id(2)
-
-            projekt1 = Projekt("Autonomes fahren", "Mercedes")
-            print(projekt1.get_name())
-            projekt1.set_id(1)
-
-            projekt1.set_team(mitarbeiter2, 30, mitarbeiter1, 15)
-            print("Team:", projekt1.get_team())
-
-            Aktivität1 = Aktivität("Pfeilen", 200, 14)
-            Aktivität2 = Aktivität("Dressurreiten", 200, 14)
-
-            projekt1.set_aktivitäten(Aktivität1, Aktivität2)
-<<<<<<< Updated upstream
-            print(projekt1.get_aktivitäten())
-=======
-            print(projekt1.get_aktivitäten())"""
-
-
->>>>>>> Stashed changes
-"""
-
 
 
 if __name__ == '__main__':
+
     mitarbeiter1 = Person()
     mitarbeiter1.set_vorname("Mikasa")
-
-
-
 
     aktivitaet1 = Aktivitaet()
     aktivitaet1.set_name("Kriegshammertitan aufhalten")
@@ -243,9 +209,8 @@ if __name__ == '__main__':
     
     zeitintervallbuchung4 = Zeitinverallbuchung(projektarbeit2)
 
-    arbeitszeitkonto_von_mikasa = Arbeitszeitkonto()
+    arbeitszeitkonto_von_mikasa = Arbeitszeitkonto(mitarbeiter1)
     """ Das Arbeitszeitkonto von Mikasa  """
-    arbeitszeitkonto_von_mikasa.set_owner(mitarbeiter1)
     arbeitszeitkonto_von_mikasa.add_buchung(zeitinervallbuchung1)
     arbeitszeitkonto_von_mikasa.add_buchung(zeitintervallbuchung3)
     arbeitszeitkonto_von_mikasa.add_buchung(zeitintervallbuchung4)
