@@ -8,7 +8,25 @@ class AktivitaetMapper(Mapper):
         super().__init__()
 
     def find_all(self):
-        pass
+        result = []
+        cursor = self._cnx.cursor()
+        cursor.execute("SELECT * FROM aktivitaet")
+        aktivitaet_daten = cursor.fetchall()
+
+        for (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) in aktivitaet_daten:
+            aktivitaet = Aktivitaet()
+            aktivitaet.set_name(bezeichnung)
+            aktivitaet.set_dauer(dauer)
+            aktivitaet.set_kapazität(kapazitaet)
+            aktivitaet.set_id(aktivitaet_id)
+            aktivitaet.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
+            result.append(aktivitaet)
+            print(result)
+
+        self._cnx.commit()
+        cursor.close()
+
+        return result
 
     def find_aktivitaeten_by_projekt_id(self, projekt_id):
         #result = []
@@ -34,6 +52,80 @@ class AktivitaetMapper(Mapper):
         cursor.close()
         """ AktivitaetenObjekte werden zurückgegeben """
         return aktivitaten
+
+
+
+
+    def delete(self, aktivitaet):
+        """Löschen der Daten eines Aktivitäten-Objekts aus der Datenbank.
+
+        :param Aktivität das aus der DB zu löschende "Objekt"
+        """
+        cursor = self._cnx.cursor()
+
+        command = "DELETE FROM aktivitaet WHERE aktivitaet_id={}".format(aktivitaet)
+        cursor.execute(command)
+
+        self._cnx.commit()
+        cursor.close()
+        return aktivitaet
+
+
+
+
+    def update(self, aktivitaet):
+        cursor = self._cnx.cursor()
+
+        command = "UPDATE aktivitaet " + "SET bezeichnung=%s, dauer=%s, kapazitaet=%s, letzte_aenderung=%s WHERE aktivitaet_id=%s"
+        data = (aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazität(), aktivitaet.get_letzte_aenderung(),
+                aktivitaet.get_id())
+        cursor.execute(command, data)
+
+        self._cnx.commit()
+        cursor.close()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    def insert(self, aktivitaet):
+        """ Einfügen eines neuen Aktivitätetens-Objekts in die Datenbank.
+        parameter: Aktivität Instanz die in der Datenbank gespeichert werden soll
+        return: Die Akitivtät Instanz mit korrigierter bzw. inkrementierte ID
+        """
+
+        cursor = self._cnx.cursor()
+        cursor.execute("SELECT MAX(aktivitaet_id) AS maxid FROM aktivitaet ")
+        tuples = cursor.fetchall()
+
+        for (maxid) in tuples:
+            aktivitaet.set_id(maxid[0] + 1)
+
+
+        """ Hier wird die Aktivitäts Instanz in die Datenbank mit dem Insert Befehl gespeichert """
+        command = "INSERT INTO aktivitaet (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
+        data = (aktivitaet.get_id(), aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazität(), aktivitaet.get_letzte_aenderung())
+        cursor.execute(command, data)
+
+        self._cnx.commit()
+        cursor.close()
+
+        return aktivitaet
+
+
 
 
 if __name__ == '__main__':

@@ -6,8 +6,8 @@ class Aktivitaet(bo.BusinessObject):
     def __init__(self):
         super().__init__()
         self._name = ""
-        self.__kapazität = 0
-        self.__dauer = 0
+        self._kapazität = 0
+        self._dauer = 0
         self.__arbeitszeit = {}
 
     def get_name(self):
@@ -17,6 +17,45 @@ class Aktivitaet(bo.BusinessObject):
     def set_name(self, value):
         """Setzen der Aktivitätsnamen."""
         self._name = value
+
+    def get_kapazität(self):
+        """Auslesen der Kapazität."""
+        return self._kapazität
+
+    def set_kapazität(self, value):
+        """Setzen der Kapazität."""
+        self._kapazität = value
+
+    def get_dauer(self):
+        """Auslesen der Dauer."""
+        return self._dauer
+
+    def set_dauer(self, value):
+        """Setzen der Dauer."""
+        self._dauer = value
+
+    def from_dict(dictionary=dict()):
+        """Umwandeln eines Python dict() in eine Aktivität()."""
+        obj = Aktivitaet()
+        obj.set_id(dictionary["id"])
+        obj.set_name(dictionary["aktivitaetname"])
+        obj.set_dauer(dictionary["dauer"])
+        obj.set_kapazität(dictionary["kapazität"])
+        obj.set_letzte_aenderung()
+
+        return obj
+
+
+
+
+
+
+
+
+
+
+
+
 
     def set_arbeitszeit(self, arbeiter, zeit):
         self.__arbeitszeit[arbeiter] = zeit

@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- Tabelle erstellen 'Aktivitaet'
 -- -----------------------------------------------------------------------
   CREATE TABLE IF NOT EXISTS `Aktivitaet` (
-  `aktivitaet_id` VARCHAR(45) NOT NULL ,
+  `aktivitaet_id` INT NOT NULL,
   `bezeichnung` VARCHAR(45) NOT NULL ,
   `dauer` DATETIME NULL,
   `kapazitaet` INT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- Tabelle erstellen 'Projekt'
 -- -----------------------------------------------------------------------  
   CREATE TABLE IF NOT EXISTS `Projekt` (
-  `projekt_id` VARCHAR(45) NOT NULL ,
+  `projekt_id` INT NOT NULL,
   `person_id` INT NOT NULL,
   `projektname` VARCHAR(150) NULL,
   `auftraggeber` VARCHAR(150) NULL,
@@ -45,8 +45,8 @@ CREATE TABLE IF NOT EXISTS `Person` (
   PRIMARY KEY (`projekt_id`),
   FOREIGN KEY (`person_id`)
 	REFERENCES `Person` (`person_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
   
   
 -- -----------------------------------------------------------------------
@@ -54,7 +54,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Urlaub` (
   `urlaub_id` VARCHAR(45) NOT NULL ,
-  `projekt_id` VARCHAR(45) NOT NULL ,
+  `projekt_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
   `start_datum` DATETIME NULL,
   `end_datum` DATETIME NULL,
@@ -62,19 +62,19 @@ CREATE TABLE IF NOT EXISTS `Person` (
   PRIMARY KEY (`urlaub_id`),
 	FOREIGN KEY (`projekt_id`)
 	REFERENCES `Projekt` (`projekt_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`person_id`)
     REFERENCES `Person` (`person_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
     
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Pause'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Pause` (
   `pause_id` VARCHAR(45) NOT NULL ,
-  `projekt_id` VARCHAR(45) NOT NULL ,
+  `projekt_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
   `pause_start` DATETIME NULL,
   `pause_ende` DATETIME NULL,
@@ -82,37 +82,37 @@ CREATE TABLE IF NOT EXISTS `Person` (
   PRIMARY KEY (`pause_id`),
 	FOREIGN KEY (`projekt_id`)
 	REFERENCES `Projekt` (`projekt_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`person_id`)
     REFERENCES `Person` (`person_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
   
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Zeitintervallbuchung'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Zeitintervallbuchung` (
   `zeit_id` VARCHAR(45) NOT NULL ,
-  `projekt_id` VARCHAR(45) NOT NULL ,
+  `projekt_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
-  `aktivitaet_id` VARCHAR(45) NOT NULL ,
+  `aktivitaet_id` INT NOT NULL,
   `zeit_start` DATETIME NULL,
   `zeit_ende` DATETIME NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`zeit_id`),
 	FOREIGN KEY (`projekt_id`)
 	REFERENCES `Projekt` (`projekt_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`person_id`)
     REFERENCES `Person` (`person_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`aktivitaet_id`)
     REFERENCES `Aktivitaet` (`aktivitaet_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);  
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);  
     
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Arbeitszeitkonto'
@@ -125,45 +125,47 @@ CREATE TABLE IF NOT EXISTS `Person` (
   PRIMARY KEY (`person_id`,`zeit_id`),
 	FOREIGN KEY (`person_id`)
 	REFERENCES `Person` (`person_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`zeit_id`)
     REFERENCES `Zeitintervallbuchung` (`zeit_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);  
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);  
     
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Aktivitaet_in_Projekt'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Aktivitaet_in_Projekt` (
-  `aktivitaet_idd` VARCHAR(45) NOT NULL ,
-  `projekt_id` VARCHAR(45) NOT NULL ,
+  `aktivitaet_idd` INT NOT NULL,
+  `projekt_id` INT NOT NULL,
+  UNIQUE (aktivitaet_idd),
   PRIMARY KEY (`aktivitaet_idd`,`projekt_id`),
 	FOREIGN KEY (`aktivitaet_idd`)
 	REFERENCES `Aktivitaet` (`aktivitaet_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`projekt_id`)
     REFERENCES `Projekt` (`projekt_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);  
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);  
     
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Mitarbeiter_in_Projekt'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Mitarbeiter_in_Projekt` (
   `person_idd` INT NOT NULL ,
-  `projekt_id` VARCHAR(45) NOT NULL ,
+  `projekt_id` INT NOT NULL,
   `verkaufte_stunden` INT NULL,
+  `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`person_idd`,`projekt_id`),
 	FOREIGN KEY (`person_idd`)
 	REFERENCES `Person` (`person_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
     FOREIGN KEY (`projekt_id`)
     REFERENCES `Projekt` (`projekt_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION);  
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);  
   
   
   
@@ -187,7 +189,7 @@ VALUES('7', 'Tyrion', 'Lennister', 'tyrion@hotmail.de', 'Mid', 365, 0, '2022-04-
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
 VALUES('8', 'Mike', 'Tyson', 'ironfist@hotmail.de', 'IronFist', 365, 0, '2022-04-13 02:30:00');
 
--- ---------------------------------------------------------------------------------------------------------------------------
+-- ------------------------------------------------------------------------------------------------------------pauseperson---------------
 -- Projekt Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
 INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
@@ -223,11 +225,10 @@ VALUES('3', '2');
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Mitarbeiter_in_Projekt Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
-INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden)  
-VALUES('1', '1','150');
-INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden)  
-VALUES('2', '1','180');
-
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('1', '1','150', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('2', '1','180', '2022-04-19 02:33:00');
 
 
 
@@ -244,9 +245,5 @@ VALUES('2', '1','180');
 -- --------------------------------------------------------------------------------------------------------------------------
  SELECT  vorname, nachname, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt
  WHERE person_idd = person_id;
+ #
  
- 
- select * from Person
- 
-
-

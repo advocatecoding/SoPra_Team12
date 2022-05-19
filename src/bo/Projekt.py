@@ -53,6 +53,7 @@ class Projekt(bo.BusinessObject):
 
     """
 
+
     def set_team(self,*args):
         """Setzen des Projektteams inklusive der verkauften Zeiten."""
         z = 2
@@ -63,6 +64,12 @@ class Projekt(bo.BusinessObject):
             else:
                 mitarbeiter = i
             z+=1
+
+
+    def set_team1(self, mitarbeiter, verkaufte_stunden):
+         self.__team[mitarbeiter] = verkaufte_stunden
+
+
 
     def get_team(self):
         """Auslesen des Projektteams inklusive der verkauften Zeiten."""
@@ -76,4 +83,17 @@ class Projekt(bo.BusinessObject):
     def get_aktivitaeten(self):
         """Auslesen der Aktivitäten."""
         return self._aktivitaeten
+
+
+    def from_dict(dictionary=dict()):
+        """Umwandeln eines Python dict() in ein Projekt()."""
+        obj = Projekt()
+        obj.set_id(dictionary["id"])
+        obj.set_projektleiter(dictionary["projektleiter"])
+        obj.set_name(dictionary["projektname"])
+        obj.set_auftraggeber(dictionary["auftraggeber"])
+        obj.set_letzte_aenderung()
+
+        return obj
+
 

@@ -17,8 +17,14 @@ from bo.Projekt import Projekt
 from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
 from db.AktivitaetMapper import AktivitaetMapper
+<<<<<<< Updated upstream
 
 
+=======
+from bo.Projekt import Projekt
+from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
+from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
+>>>>>>> Stashed changes
 import datetime
 
 
@@ -36,7 +42,14 @@ class Administration(object):
         """ Wir geben alle Personen aus """
         with ProjektMapper() as mapper:
             return mapper.find_all()
-        
+
+    def get_all_aktivitaeten(self):
+        """ Wir geben alle Aktivitäten aus """
+        with AktivitaetMapper() as mapper:
+            return mapper.find_all()
+
+
+
     def get_aktivitaeten_by_projekt_id(self, projekt_id):
         with AktivitaetMapper() as mapper:
             return mapper.find_aktivitaeten_by_projekt_id(projekt_id)
@@ -74,9 +87,78 @@ class Administration(object):
             return mapper.update(person)
 
 
+    def create_aktivitaet(self, bezeichnung, dauer, kapazität):
+        """Eine Aktivität anlegen."""
+
+        aktivitaet = Aktivitaet()
+        aktivitaet.set_id(1211)
+        aktivitaet.set_name(bezeichnung)
+        aktivitaet.set_dauer(dauer)
+        aktivitaet.set_kapazität(kapazität)
+        """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
+        aktivitaet.set_letzte_aenderung()
+
+        with AktivitaetMapper() as mapper:
+            return mapper.insert(aktivitaet)
 
 
-""" Projekt test 
+    def create_projekt(self, projektleiter, projektname, auftraggeber):
+            """Eine Person anlegen."""
+            projekt = Projekt()
+            projekt.set_id(1211)
+            projekt.set_projektleiter(projektleiter)
+            projekt.set_name(projektname)
+            projekt.set_auftraggeber(auftraggeber)
+            """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
+            projekt.set_letzte_aenderung()
+
+            with ProjektMapper() as mapper:
+                return mapper.insert(projekt)
+
+
+    def get_aktivitaet_by_aktivitaet_id(self, aktivitaet_id):
+        with AktivitaetMapper() as mapper:
+            return mapper.delete(aktivitaet_id)
+
+
+    def get_projekt_by_projekt_id(self, projekt_id):
+        with ProjektMapper() as mapper:
+            return mapper.delete(projekt_id)
+
+
+    def update_aktivitaet(self, aktivitaet):
+        aktivitaet.set_letzte_aenderung()
+
+        with AktivitaetMapper() as mapper:
+            return mapper.update(aktivitaet)
+
+
+    def update_projekt(self, projekt):
+        projekt.set_letzte_aenderung()
+
+        with ProjektMapper() as mapper:
+            return mapper.update(projekt)
+
+
+    def get_all_mitarbeiter_in_projekt(self):
+        """ Wir geben alle Aktivitäten aus """
+        with MitarbeiterInProjektMapper() as mapper:
+            return mapper.find_all()
+
+
+    def create_mitarbeiter_in_projekt(self, mitarbeiter, projekt, verkaufte_stunden):
+            """Mitarbeiter in Projekt anlegen."""
+            mitarbeiter_in_projekt = MitarbeiterInProjekt()
+            mitarbeiter_in_projekt.set_person(mitarbeiter)
+            mitarbeiter_in_projekt.set_projekt(projekt)
+            mitarbeiter_in_projekt.set_verkaufte_stunden(verkaufte_stunden)
+            mitarbeiter_in_projekt.set_letzte_aenderung()
+
+            with MitarbeiterInProjektMapper() as mapper:
+                return mapper.insert(mitarbeiter_in_projekt)
+
+
+"""
         if __name__ == '__main__':
             mitarbeiter1 = Person("Aykut")
             mitarbeiter1.set_id(1)
@@ -94,7 +176,13 @@ class Administration(object):
             Aktivität2 = Aktivität("Dressurreiten", 200, 14)
 
             projekt1.set_aktivitäten(Aktivität1, Aktivität2)
+<<<<<<< Updated upstream
             print(projekt1.get_aktivitäten())
+=======
+            print(projekt1.get_aktivitäten())"""
+
+
+>>>>>>> Stashed changes
 """
 
 

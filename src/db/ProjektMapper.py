@@ -31,6 +31,67 @@ class ProjektMapper(Mapper):
         return result
 
 
+    def insert(self, projekt):
+        """ Einfügen eines neuen Projekt-Objekts in die Datenbank.
+        parameter: Projekt Instanz die in der Datenbank gespeichert werden soll
+        return: Die Projekt Instanz mit korrigierter bzw. inkrementierte ID
+        """
+
+        cursor = self._cnx.cursor()
+        cursor.execute("SELECT MAX(projekt_id) AS maxid FROM projekt ")
+        tuples = cursor.fetchall()
+
+        for (maxid) in tuples:
+            projekt.set_id(maxid[0] + 1)
+
+
+        """ Hier wird die Projekt Instanz in die Datenbank mit dem Insert Befehl gespeichert """
+        command = "INSERT INTO projekt (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
+        data = (projekt.get_id(), projekt.get_projektleiter(), projekt.get_name(), projekt.get_auftraggeber(), projekt.get_letzte_aenderung())
+        cursor.execute(command, data)
+
+        self._cnx.commit()
+        cursor.close()
+
+        return projekt
+
+
+
+    def delete(self, projekt):
+        """Löschen der Daten eines Projekt-Objekts aus der Datenbank.
+
+        :param projekt das aus der DB zu löschende "Objekt"
+        """
+        cursor = self._cnx.cursor()
+
+        command = "DELETE FROM projekt WHERE projekt_id={}".format(projekt)
+        cursor.execute(command)
+
+        self._cnx.commit()
+        cursor.close()
+        return projekt
+
+
+
+    def update(self, projekt):
+        cursor = self._cnx.cursor()
+
+        command = "UPDATE projekt " + "SET person_id=%s, projektname=%s, auftraggeber=%s, letzte_aenderung=%s WHERE projekt_id=%s"
+        data = (projekt.get_projektleiter(), projekt.get_name(), projekt.get_auftraggeber(), projekt.get_letzte_aenderung(), projekt.get_id())
+        cursor.execute(command, data)
+
+        self._cnx.commit()
+        cursor.close()
+
+
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     with ProjektMapper() as mapper:
         result = mapper.find_all()
