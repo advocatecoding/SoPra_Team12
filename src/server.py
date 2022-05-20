@@ -70,53 +70,7 @@ urlaub = api.inherit('Urlaub', bo, {
 })
 
 
-
-
-
-@zeiterfassung.route("/mitarbeiter_in_projekt")
-class PersonenListOperations(Resource):
-    @zeiterfassung.marshal_with(mitarbeiter_in_projekt)
-    def get(self):
-        """ Auslesen der Mitarbeiter_in_Projekt -Objekte """
-        adm = Administration()
-        mitarbeiter_in_projekt = adm.get_all_mitarbeiter_in_projekt()
-        return mitarbeiter_in_projekt
-
-    @zeiterfassung.marshal_with(mitarbeiter_in_projekt, code=201)
-    @zeiterfassung.expect(mitarbeiter_in_projekt)
-    def post(self):
-        """ Mitarbeiter_in_Projekt Instanz erstellen """
-        adm = Administration()
-        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
-        Attribute aus den Werten von api.payload setzen. """
-        mitarbeiter_in_projekt_object = MitarbeiterInProjekt.from_dict(api.payload)
-
-        if mitarbeiter_in_projekt_object is not None:
-            """ Wir erstellen in Administration eine Mitarbeiter in Projekt Instanz mithilfe der Daten vom api.payload """
-            c = adm.create_mitarbeiter_in_projekt(mitarbeiter_in_projekt_object.get_person(), mitarbeiter_in_projekt_object.get_projekt(),
-                                  mitarbeiter_in_projekt_object.get_verkaufte_stunden())
-            return c, 200
-        else:
-            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
-            return '', 500
-
-
-""" Mitarbeiter in Projekt Objekt wird gelöscht """
-@zeiterfassung.route("/mitarbeiter_in_projekt/<int:person_idd>")
-@zeiterfassung.param("person_idd", "Die erste Id der gewünschten Instanz ")
-class PersonOberationsById(Resource):
-    @zeiterfassung.marshal_with(mitarbeiter_in_projekt)
-    def delete(self, person_idd):
-        """Löschen eines Mitarbeiter in Projekt Instanz.
-        Das zu löschende Objekt wird anhand der zwei übergebenen id's bestimmt.
-        """
-        adm = Administration()
-        projekt = adm.get_projekt_by_projekt_id(person_idd)
-        print(projekt)
-        return projekt
-
-
-
+""" Person Objekt(e) wird gelesen und erstellt  """
 @zeiterfassung.route("/personen")
 class PersonenListOperations(Resource):
     @zeiterfassung.marshal_with(person)
@@ -144,10 +98,11 @@ class PersonenListOperations(Resource):
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
             return '', 500
 
-""" Person Objekt wird gelöscht """
+
+""" Person Objekt wird gelöscht und erstellt - ein bestimmtes Person Objekt wird gelesen   """
 @zeiterfassung.route("/personen/<int:person_id>")
 @zeiterfassung.param("person_id", "Die Id der gewünschten Person")
-class PersonOberationsById(Resource):
+class PersonByIdOperations(Resource):
     @zeiterfassung.marshal_with(person)
     def delete(self, person_id):
         """Löschen einer Person Instanz.
@@ -157,6 +112,10 @@ class PersonOberationsById(Resource):
         person = adm.get_person_by_person_id(person_id)
         print(person)
         return person
+
+    """Manuel Bräuninger """
+    def get(self, person_id):
+        pass
 
     @zeiterfassung.marshal_with(person)
     @zeiterfassung.expect(person, validate=True)
@@ -175,6 +134,8 @@ class PersonOberationsById(Resource):
             return '', 500
 
 
+
+""" Projekt Objekt(e) wird gelesen und erstellt  """
 @zeiterfassung.route("/projekte")
 class ProjekteListOperations(Resource):
     @zeiterfassung.marshal_with(projekt)
@@ -183,7 +144,6 @@ class ProjekteListOperations(Resource):
         adm = Administration()
         projekte = adm.get_all_projekte()
         return projekte
-
 
     @zeiterfassung.marshal_with(projekt, code=201)
     @zeiterfassung.expect(projekt)
@@ -204,36 +164,95 @@ class ProjekteListOperations(Resource):
             return '', 500
 
 
-
-
-""" Aktivitäten werden zur zugeordneten Projekt_ID ausgegeben """
-@zeiterfassung.route("/aktivitaten/<int:projekt_id>")
-@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projekts")
-class AktivitaetenByProjektId(Resource):
-    @zeiterfassung.marshal_with(aktivitaet)
-    def get(self, projekt_id):
-        """ Auslesen der Aktivitäten innerhalb eines Projektes"""
+""" Projekt Objekt wird gelöscht und erstellt - ein bestimmtes Projekt Objekt wird gelesen """
+@zeiterfassung.route("/projekt/<int:projekt_id>")
+@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
+class ProjektByIdOperations(Resource):
+    @zeiterfassung.marshal_with(projekt)
+    def delete(self, projekt_id):
+        """Löschen einer Projekt Instanz.
+        Das zu löschende Objekt wird anhand der id bestimmt.
+        """
         adm = Administration()
-        aktivitaeten = adm.get_aktivitaeten_by_projekt_id(projekt_id)
-        print(aktivitaeten)
-        return aktivitaeten
+        projekt = adm.get_projekt_by_projekt_id(projekt_id)
+        print(projekt)
+        return projekt
+
+    """Manuel Bräuninger """
+    def get(self,projekt_id):
+        pass
+
+    @zeiterfassung.marshal_with(projekt)
+    @zeiterfassung.expect(projekt, validate=True)
+    def put(self, projekt_id):
+        """ Projekt Instanz updaten """
+        adm = Administration()
+        projekt_object = Projekt.from_dict(api.payload)
+
+        if projekt_object is not None:
+            """Hierdurch wird die id des zu überschreibenden Projekt-Objekts gesetzt.
+            """
+            projekt_object.set_id(projekt_id)
+            adm.update_projekt(projekt_object)
+            return '', 200
+        else:
+            return '', 500
 
 
 
+""" Mitarbeiter_in_Projekt Objekt(e) wird gelesen und erstellt  """
+@zeiterfassung.route("/mitarbeiter_in_projekt")
+class MitarbeiterInProjektListOperations(Resource):
+    @zeiterfassung.marshal_with(mitarbeiter_in_projekt)
+    def get(self):
+        """ Auslesen der Mitarbeiter_in_Projekt -Objekte """
+        adm = Administration()
+        mitarbeiter_in_projekt = adm.get_all_mitarbeiter_in_projekt()
+        return mitarbeiter_in_projekt
+
+    @zeiterfassung.marshal_with(mitarbeiter_in_projekt, code=201)
+    @zeiterfassung.expect(mitarbeiter_in_projekt)
+    def post(self):
+        """ Mitarbeiter_in_Projekt Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
+        Attribute aus den Werten von api.payload setzen. """
+        mitarbeiter_in_projekt_object = MitarbeiterInProjekt.from_dict(api.payload)
+
+        if mitarbeiter_in_projekt_object is not None:
+            """ Wir erstellen in Administration eine Mitarbeiter in Projekt Instanz mithilfe der Daten vom api.payload """
+            c = adm.create_mitarbeiter_in_projekt(mitarbeiter_in_projekt_object.get_person(), mitarbeiter_in_projekt_object.get_projekt(),
+                                  mitarbeiter_in_projekt_object.get_verkaufte_stunden())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
+
+""" Mitarbeiter_in_Projekt wird gelöscht und erstellt """
+@zeiterfassung.route("/mitarbeiter_in_projekt/<int:person_idd>/<int:projekt_id>")
+@zeiterfassung.doc(params={"projekt_id": {"description:" : "Die Id des gewünschten Projekts"},
+                           "person_idd" :{"description:" : "Die Id der gewünschten Person"}})
+class MitarbeiterInProjektByIdOperations(Resource):
+    @zeiterfassung.marshal_with(mitarbeiter_in_projekt)
+    def delete(self, person_idd, projekt_id):
+        """Löschen einer Mitarbeiter_in_Projekt Instanz.
+        Das zu löschende Objekt wird anhand  zwei id's bestimmt.
+        """
+        adm = Administration()
+        mip = adm.get_person_by_person_id_and_projekt_by_projekt_id(person_idd, projekt_id)
+        print(mip)
+        return mip
+
+    """Dennis Kühnberger """
+    def put(self, projekt_id):
+        pass
 
 
 
-
-
-
-
-
-
-
-
-
+""" Aktivität Objekt(e) wird gelesen und erstellt  """
 @zeiterfassung.route("/aktivitaten")
-class ProjekteListOperations(Resource):
+class AktivitaetenListOperations(Resource):
     @zeiterfassung.marshal_with(aktivitaet)
     def get(self):
         """ Auslesen der Aktivität-Objekte """
@@ -260,15 +279,10 @@ class ProjekteListOperations(Resource):
             return '', 500
 
 
-
-
-
-
-
-""" Aktivität Objekt wird gelöscht """
+""" Aktivität Objekt wird gelöscht und erstellt - ein bestimmtes Mitarbeiter Objekt wird gelesen """
 @zeiterfassung.route("/aktivität/<int:aktivitaet_id>")
 @zeiterfassung.param("aktivitaet_id", "Die Id der gewünschten Aktivität")
-class PersonOberationsById(Resource):
+class AktivitaetenByIdOperations(Resource):
     @zeiterfassung.marshal_with(aktivitaet)
     def delete(self, aktivitaet_id):
         """Löschen einer Aktivität Instanz.
@@ -278,6 +292,10 @@ class PersonOberationsById(Resource):
         aktivitaet = adm.get_aktivitaet_by_aktivitaet_id(aktivitaet_id)
         print(aktivitaet)
         return aktivitaet
+
+    """Dennis Kühnberger """
+    def get(self, projekt_id):
+        pass
 
 
     @zeiterfassung.marshal_with(aktivitaet)
@@ -304,98 +322,21 @@ class PersonOberationsById(Resource):
 
 
 
+"""rudimentär, neue Mapper erstellen und die von der alten dorthin übertragen"""
+"""Aktivitäten_in_Projekt"""
+"""Dennis Kühnberger Post, Delete, Weiteres Get, PUT  """
 
-
-
-""" Projekt Objekt wird gelöscht """
-@zeiterfassung.route("/projekt/<int:projekt_id>")
-@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
-class PersonOberationsById(Resource):
-    @zeiterfassung.marshal_with(projekt)
-    def delete(self, projekt_id):
-        """Löschen einer Projekt Instanz.
-        Das zu löschende Objekt wird anhand der id bestimmt.
-        """
+""" Aktivitäten werden zur zugeordneten Projekt_ID ausgegeben """
+@zeiterfassung.route("/aktivitaten/<int:projekt_id>")
+@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projekts")
+class AktivitaetenByProjektId(Resource):
+    @zeiterfassung.marshal_with(aktivitaet)
+    def get(self, projekt_id):
+        """ Auslesen der Aktivitäten innerhalb eines Projektes"""
         adm = Administration()
-        projekt = adm.get_projekt_by_projekt_id(projekt_id)
-        print(projekt)
-        return projekt
-
-
-    @zeiterfassung.marshal_with(projekt)
-    @zeiterfassung.expect(projekt, validate=True)
-    def put(self, projekt_id):
-        """ Projekt Instanz updaten """
-        adm = Administration()
-        projekt_object = Projekt.from_dict(api.payload)
-
-        if projekt_object is not None:
-            """Hierdurch wird die id des zu überschreibenden Projekt-Objekts gesetzt.
-            """
-            projekt_object.set_id(projekt_id)
-            adm.update_projekt(projekt_object)
-            return '', 200
-        else:
-            return '', 500
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        aktivitaeten = adm.get_aktivitaeten_by_projekt_id(projekt_id)
+        print(aktivitaeten)
+        return aktivitaeten
 
 
 """ Server läuft auf localhost:5500 bzw. 127.0.0.1:5500 """

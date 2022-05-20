@@ -54,16 +54,11 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Urlaub` (
   `urlaub_id` VARCHAR(45) NOT NULL ,
-  `projekt_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
   `start_datum` DATETIME NULL,
   `end_datum` DATETIME NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`urlaub_id`),
-	FOREIGN KEY (`projekt_id`)
-	REFERENCES `Projekt` (`projekt_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
     FOREIGN KEY (`person_id`)
     REFERENCES `Person` (`person_id`)
     ON DELETE CASCADE
@@ -245,5 +240,8 @@ VALUES('2', '1','180', '2022-04-19 02:33:00');
 -- --------------------------------------------------------------------------------------------------------------------------
  SELECT  vorname, nachname, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt
  WHERE person_idd = person_id;
- #
+ 
+ 
+ -- SELECT SUM(verkaufte_stunden) AS TEST from Mitarbeiter_in_Projekt;
+ 
  
