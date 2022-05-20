@@ -17,6 +17,7 @@ from bo.Projekt import Projekt
 from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
 from db.AktivitaetMapper import AktivitaetMapper
+from db.UrlaubMapper import UrlaubMapper
 from bo.Projekt import Projekt
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
@@ -43,6 +44,10 @@ class Administration(object):
         with AktivitaetMapper() as mapper:
             return mapper.find_all()
 
+    def get_all_urlaub(self):
+        """Wir geben Urlaub von allen aus"""
+        with UrlaubMapper() as mapper:
+            return mapper.find_all()
 
 
     def get_aktivitaeten_by_projekt_id(self, projekt_id):
@@ -110,6 +115,20 @@ class Administration(object):
             with ProjektMapper() as mapper:
                 return mapper.insert(projekt)
 
+    def create_urlaub(self, person_id, start_datum, end_datum):
+        """Urlaub anlegen."""
+
+        urlaub = Urlaub()
+        urlaub.set_id(1211)
+        urlaub.set_person_id(person_id)
+        urlaub.set_start_date(start_datum)
+        urlaub.set_end_date(end_datum)
+        urlaub.set_letzte_aenderung()
+        """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
+
+        with UrlaubMapper() as mapper:
+            return mapper.insert(urlaub)
+
 
     def get_aktivitaet_by_aktivitaet_id(self, aktivitaet_id):
         with AktivitaetMapper() as mapper:
@@ -134,6 +153,12 @@ class Administration(object):
         with ProjektMapper() as mapper:
             return mapper.update(projekt)
 
+    def update_urlaub(self, urlaub):
+        urlaub.set_letzte_aenderung()
+
+        with UrlaubMapper() as mapper:
+            return mapper.update(urlaub)
+
 
     def get_all_mitarbeiter_in_projekt(self):
         """ Wir geben alle Aktivitäten aus """
@@ -151,6 +176,7 @@ class Administration(object):
 
             with MitarbeiterInProjektMapper() as mapper:
                 return mapper.insert(mitarbeiter_in_projekt)
+
 
 
 

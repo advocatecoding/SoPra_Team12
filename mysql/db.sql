@@ -53,17 +53,12 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- Tabelle erstellen 'Urlaub'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Urlaub` (
-  `urlaub_id` VARCHAR(45) NOT NULL ,
-  `projekt_id` INT NOT NULL,
+  `urlaub_id` INT NOT NULL ,
   `person_id` INT NOT NULL ,
   `start_datum` DATETIME NULL,
   `end_datum` DATETIME NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`urlaub_id`),
-	FOREIGN KEY (`projekt_id`)
-	REFERENCES `Projekt` (`projekt_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
     FOREIGN KEY (`person_id`)
     REFERENCES `Person` (`person_id`)
     ON DELETE CASCADE
@@ -219,7 +214,17 @@ INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)
 VALUES('2', '1');
 INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
 VALUES('3', '2');
-
+-- ---------------------------------------------------------------------------------------------------------------------------
+-- Urlaub Entitäten erstellen
+-- ---------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
+VALUES('1', '1', '2022-04-19', '2022-04-25', '2022-04-19 02:33:00');
+INSERT INTO `urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
+VALUES('2', '2', '2022-05-19', '2022-06-25', '2022-04-19 02:33:00');
+INSERT INTO `urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
+VALUES('3', '2', '2022-06-19', '2022-07-25', '2022-04-19 02:33:00');
+INSERT INTO `urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
+VALUES('4', '1', '2022-07-19', '2022-08-25', '2022-04-19 02:33:00');
 
 
 -- ---------------------------------------------------------------------------------------------------------------------------

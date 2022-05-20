@@ -63,7 +63,6 @@ mitarbeiter_in_projekt = api.inherit('Mitarbeiterinprojekt', bo, {
 })
 
 urlaub = api.inherit('Urlaub', bo, {
-    "projekt_id": fields.String(attribute="_projekt_id", description="Projekt"),
     "person_id": fields.String(attribute="_person_id", description="Mitarbeiter"),
     "start_datum": fields.String(attribute="_start_date", description="Urlaubsbeginn"),
     "end_datum": fields.String(attribute="_end_date", description="Urlaubsende")
@@ -334,6 +333,52 @@ class PersonOberationsById(Resource):
             """
             projekt_object.set_id(projekt_id)
             adm.update_projekt(projekt_object)
+            return '', 200
+        else:
+            return '', 500
+
+
+
+
+
+@zeiterfassung.route("/urlaub")
+class UrlaubListOperations(Resource):
+    @zeiterfassung.marshal_with(urlaub)
+    def get(self):
+        """ Auslesen der Urlaub-Objekte """
+        adm = Administration()
+        urlaub = adm.get_all_urlaub()
+        return urlaub
+
+    @zeiterfassung.marshal_with(urlaub, code=201)
+    @zeiterfassung.expect(urlaub)
+    def post(self):
+        """ Urlaubs Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit Urlaub, indem wir die 
+        Attribute aus den Werten von api.payload setzen. urlaub_object = Urlaub-Objekt """
+        urlaub_object = Urlaub.from_dict(api.payload)
+
+        if urlaub_object is not None:
+            """ Wir erstellen in Administration Urlaub mithilfe der Daten vom api.payload """
+            c = adm.create_urlaub(urlaub_object.get_person_id(), urlaub_object.get_end_date(), urlaub_object.get_start_date())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
+    @zeiterfassung.marshal_with(urlaub)
+    @zeiterfassung.expect(urlaub, validate=True)
+    def put(self, urlaub_id):
+        """ Urlaubsinstanz updaten """
+        adm = Administration()
+        urlaub_object = Urlaub.from_dict(api.payload)
+
+        if urlaub_object is not None:
+            """Hierdurch wird die id des zu überschreibenden Urlaub-Objekts gesetzt.
+            """
+            urlaub_object.set_id(urlaub_id)
+            adm.update_urlaub(urlaub_object)
             return '', 200
         else:
             return '', 500

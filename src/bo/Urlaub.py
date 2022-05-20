@@ -4,17 +4,9 @@ class Urlaub (bo.BusinessObject):
 
     def __init__(self):
         super().__init__()
-        self._projekt_id = None
         self._person_id = None
         self._start_date = None
         self._end_date = None
-
-
-    def set_projekt_id(self, projekt_id):
-        self._projekt_id = projekt_id
-
-    def get_projekt_id(self):
-        return self._projekt_id
 
     def set_person_id(self, person_id):
         self._person_id = person_id
@@ -39,7 +31,6 @@ class Urlaub (bo.BusinessObject):
         """Umwandeln eines Python dict() in ein Urlaub()."""
         obj = Urlaub()
         obj.set_id(dictionary["id"])
-        obj.set_projekt_id(dictionary["projekt_id"])
         obj.set_person_id(dictionary["person_id"])
         obj.set_start_date(dictionary["start_datum"])
         obj.set_end_date(dictionary["end_datum"])
