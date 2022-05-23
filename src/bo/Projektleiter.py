@@ -1,7 +1,7 @@
 from bo import Person
 
 
-class Mitarbeiter(Person):
+class Projektleiter(Person):
 
     def __init__(self):
         super().__init__()

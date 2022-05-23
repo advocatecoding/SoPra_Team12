@@ -178,6 +178,11 @@ class Administration(object):
                 return mapper.insert(mitarbeiter_in_projekt)
 
 
+    def get_person_by_person_id_and_projekt_by_projekt_id(self, person_idd, projekt_id):
+        with MitarbeiterInProjektMapper() as mapper:
+            return mapper.delete(person_idd, projekt_id)
+
+
 
 
 

@@ -54,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Urlaub` (
   `urlaub_id` INT NOT NULL ,
+  `urlaub_id` VARCHAR(45) NOT NULL ,
   `person_id` INT NOT NULL ,
   `start_datum` DATETIME NULL,
   `end_datum` DATETIME NULL,
@@ -250,5 +251,8 @@ VALUES('2', '1','180', '2022-04-19 02:33:00');
 -- --------------------------------------------------------------------------------------------------------------------------
  SELECT  vorname, nachname, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt
  WHERE person_idd = person_id;
- #
+ 
+ 
+ -- SELECT SUM(verkaufte_stunden) AS TEST from Mitarbeiter_in_Projekt;
+ 
  
