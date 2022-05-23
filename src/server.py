@@ -340,6 +340,14 @@ class AktivitaetenByProjektId(Resource):
 
     @zeiterfassung.marshal_with(projekt)
     @zeiterfassung.expect(projekt, validate=True)
+    def delete(self, aktivitaet_id):
+        """Löschen einer Aktivität Instanz.
+        Das zu löschende Objekt wird anhand der id bestimmt.
+        """
+        adm = Administration()
+        aktivitaet = adm.get_aktivitaet_by_aktivitaet_id(aktivitaet_id)
+        print(aktivitaet)
+        return aktivitaet
     def put(self, projekt_id):
         """ Projekt Instanz updaten """
         adm = Administration()
@@ -384,8 +392,20 @@ class UrlaubListOperations(Resource):
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
             return '', 500
 
+
+@zeiterfassung.route("/urlaub/<int:urlaub_id>")
+@zeiterfassung.expect(urlaub, validate=True)
+class UrlaubByIdOperations(Resource):
     @zeiterfassung.marshal_with(urlaub)
-    @zeiterfassung.expect(urlaub, validate=True)
+    def delete(self, urlaub_id):
+        """Löschen einer Urlaubsinstanz.
+        Das zu löschende Objekt wird anhand der id bestimmt.
+        """
+        adm = Administration()
+        urlaub = adm.get_urlaub_by_urlaub_id(urlaub_id)
+        print(urlaub)
+        return urlaub
+
     def put(self, urlaub_id):
         """ Urlaubsinstanz updaten """
         adm = Administration()

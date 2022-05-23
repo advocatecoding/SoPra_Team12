@@ -54,7 +54,6 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Urlaub` (
   `urlaub_id` INT NOT NULL ,
-  `urlaub_id` VARCHAR(45) NOT NULL ,
   `person_id` INT NOT NULL ,
   `start_datum` DATETIME NULL,
   `end_datum` DATETIME NULL,

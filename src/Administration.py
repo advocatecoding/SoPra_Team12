@@ -62,6 +62,9 @@ class Administration(object):
                 for person_id in person:
                     self.delete(person_id)
         """
+    def get_urlaub_by_urlaub_id(self, urlaub_id):
+        with UrlaubMapper() as mapper:
+            return mapper.delete(urlaub_id)
 
     def create_person(self, vorname, nachname, mail_adresse, benutzername):
         """Eine Person anlegen."""
