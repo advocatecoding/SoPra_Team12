@@ -112,9 +112,14 @@ class PersonByIdOperations(Resource):
         print(person)
         return person
 
-    """Manuel Bräuninger """
     def get(self, person_id):
-        pass
+        """ Auslesen der Person Instanz.
+        Das zu auslesende Objekt wird anhand der id bestimmt
+        """
+        adm = Administration()
+        person = adm.get_person_by_person_id(person_id)
+        print(person)
+        return person
 
     @zeiterfassung.marshal_with(person)
     @zeiterfassung.expect(person, validate=True)
@@ -177,9 +182,14 @@ class ProjektByIdOperations(Resource):
         print(projekt)
         return projekt
 
-    """Manuel Bräuninger """
     def get(self,projekt_id):
-        pass
+        """ Auslesen der Projekt Instanz.
+        Das zu auslesende Objekt wird anhand der id bestimmt
+        """
+        adm = Administration()
+        projekt = adm.get_projekt_by_projekt_id(projekt_id)
+        print(projekt)
+        return projekt
 
     @zeiterfassung.marshal_with(projekt)
     @zeiterfassung.expect(projekt, validate=True)
