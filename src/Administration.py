@@ -2,7 +2,6 @@ from bo.Gehen import Gehen
 from bo.Kommen import Kommen
 from bo.Arbeitszeitkonto import Arbeitszeitkonto
 from bo.Ereignisbuchung import Ereignisbuchung
-from bo.Ereignis import Ereignis
 from bo.Urlaub import Urlaub
 from bo.Person import Person
 from bo.Zeitintervallbuchung import Zeitinverallbuchung
@@ -10,9 +9,6 @@ from bo.Zeitintervall import Zeitintervall
 from bo.Projektarbeit import Projektarbeit
 from bo.Aktivitaet import Aktivitaet
 from bo.Pause import Pause
-from bo import BusinessObject as bo
-from bo.Projekt import Projekt
-
 
 from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
@@ -28,7 +24,6 @@ class Administration(object):
 
     def __init__(self):
         pass
-
 
     """Person"""
     def create_person(self, vorname, nachname, mail_adresse, benutzername):
@@ -52,6 +47,11 @@ class Administration(object):
         """ Wir geben alle Personen aus """
         with PersonMapper() as mapper:
             return mapper.find_all()
+
+    def get_person_by_id(self, person_id):
+        """ Wir geben die Person mit der angegebenen ID zurück """
+        with PersonMapper() as mapper:
+            return mapper.find_by_id(person_id)
 
     def delete_person_by_person_id(self, person_id):
         with PersonMapper() as mapper:

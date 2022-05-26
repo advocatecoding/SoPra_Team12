@@ -103,21 +103,20 @@ class PersonenListOperations(Resource):
 @zeiterfassung.param("person_id", "Die Id der gewünschten Person")
 class PersonByIdOperations(Resource):
     @zeiterfassung.marshal_with(person)
+    def get(self, person_id):
+        """ Auslesen der Person Instanz.
+        Das zu auslesende Objekt wird anhand der id bestimmt
+        """
+        adm = Administration()
+        person = adm.get_person_by_id(person_id)
+        return person
+
     def delete(self, person_id):
         """Löschen einer Person Instanz.
         Das zu löschende Objekt wird anhand der id bestimmt.
         """
         adm = Administration()
         person = adm.delete_person_by_person_id(person_id)
-        print(person)
-        return person
-
-    def get(self, person_id):
-        """ Auslesen der Person Instanz.
-        Das zu auslesende Objekt wird anhand der id bestimmt
-        """
-        adm = Administration()
-        person = adm.get_person_by_person_id(person_id)
         print(person)
         return person
 
@@ -136,7 +135,6 @@ class PersonByIdOperations(Resource):
             return '', 200
         else:
             return '', 500
-
 
 
 """ Projekt Objekt(e) wird gelesen und erstellt  """

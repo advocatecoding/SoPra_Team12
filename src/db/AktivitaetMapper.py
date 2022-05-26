@@ -54,8 +54,6 @@ class AktivitaetMapper(Mapper):
         return aktivitaten
 
 
-
-
     def delete(self, aktivitaet):
         """Löschen der Daten eines Aktivitäten-Objekts aus der Datenbank.
 
@@ -69,8 +67,6 @@ class AktivitaetMapper(Mapper):
         self._cnx.commit()
         cursor.close()
         return aktivitaet
-
-
 
 
     def update(self, aktivitaet):
