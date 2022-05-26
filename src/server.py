@@ -108,7 +108,7 @@ class PersonByIdOperations(Resource):
         Das zu löschende Objekt wird anhand der id bestimmt.
         """
         adm = Administration()
-        person = adm.get_person_by_person_id(person_id)
+        person = adm.delete_person_by_person_id(person_id)
         print(person)
         return person
 
@@ -178,7 +178,7 @@ class ProjektByIdOperations(Resource):
         Das zu löschende Objekt wird anhand der id bestimmt.
         """
         adm = Administration()
-        projekt = adm.get_projekt_by_projekt_id(projekt_id)
+        projekt = adm.delete_projekt_by_projekt_id(projekt_id)
         print(projekt)
         return projekt
 
@@ -298,7 +298,7 @@ class AktivitaetenByIdOperations(Resource):
         Das zu löschende Objekt wird anhand der id bestimmt.
         """
         adm = Administration()
-        aktivitaet = adm.get_aktivitaet_by_aktivitaet_id(aktivitaet_id)
+        aktivitaet = adm.delete_aktivitaet_by_aktivitaet_id(aktivitaet_id)
         print(aktivitaet)
         return aktivitaet
 
@@ -355,7 +355,7 @@ class AktivitaetenByProjektId(Resource):
         Das zu löschende Objekt wird anhand der id bestimmt.
         """
         adm = Administration()
-        aktivitaet = adm.get_aktivitaet_by_aktivitaet_id(aktivitaet_id)
+        aktivitaet = adm.delete_aktivitaet_by_aktivitaet_id(aktivitaet_id)
         print(aktivitaet)
         return aktivitaet
     def put(self, projekt_id):
@@ -412,7 +412,7 @@ class UrlaubByIdOperations(Resource):
         Das zu löschende Objekt wird anhand der id bestimmt.
         """
         adm = Administration()
-        urlaub = adm.get_urlaub_by_urlaub_id(urlaub_id)
+        urlaub = adm.delete_urlaub_by_urlaub_id(urlaub_id)
         print(urlaub)
         return urlaub
 

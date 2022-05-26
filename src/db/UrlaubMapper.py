@@ -57,7 +57,7 @@ class UrlaubMapper(Mapper):
 
 
     def delete(self, urlaub):
-        """Löschen der Daten eines Projekt-Objekts aus der Datenbank.
+        """Löschen der Daten eines Urlaub-Objekts aus der Datenbank.
 
         :param Urlaub das aus der DB zu löschende "Objekt"
         """

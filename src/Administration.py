@@ -29,43 +29,8 @@ class Administration(object):
     def __init__(self):
         pass
 
-    def get_all_personen(self):
-        """ Wir geben alle Personen aus """
-        with PersonMapper() as mapper:
-            return mapper.find_all()
 
-    def get_all_projekte(self):
-        """ Wir geben alle Personen aus """
-        with ProjektMapper() as mapper:
-            return mapper.find_all()
-
-    def get_all_aktivitaeten(self):
-        """ Wir geben alle Aktivitäten aus """
-        with AktivitaetMapper() as mapper:
-            return mapper.find_all()
-
-    def get_all_urlaub(self):
-        """Wir geben Urlaub von allen aus"""
-        with UrlaubMapper() as mapper:
-            return mapper.find_all()
-
-
-    def get_aktivitaeten_by_projekt_id(self, projekt_id):
-        with AktivitaetMapper() as mapper:
-            return mapper.find_aktivitaeten_by_projekt_id(projekt_id)
-
-    def get_person_by_person_id(self, person_id):
-        with PersonMapper() as mapper:
-            #person = self.get_all_personen()
-            return mapper.delete(person_id)
-        """ if not (person is None):
-                for person_id in person:
-                    self.delete(person_id)
-        """
-    def get_urlaub_by_urlaub_id(self, urlaub_id):
-        with UrlaubMapper() as mapper:
-            return mapper.delete(urlaub_id)
-
+    """Person"""
     def create_person(self, vorname, nachname, mail_adresse, benutzername):
         """Eine Person anlegen."""
 
@@ -83,6 +48,20 @@ class Administration(object):
         with PersonMapper() as mapper:
             return mapper.insert(person)
 
+    def get_all_personen(self):
+        """ Wir geben alle Personen aus """
+        with PersonMapper() as mapper:
+            return mapper.find_all()
+
+    def delete_person_by_person_id(self, person_id):
+        with PersonMapper() as mapper:
+            #person = self.get_all_personen()
+            return mapper.delete(person_id)
+        """ if not (person is None):
+                for person_id in person:
+                    self.delete(person_id)
+        """
+
     def update_person(self, person):
         person.set_letzte_aenderung()
 
@@ -90,6 +69,37 @@ class Administration(object):
             return mapper.update(person)
 
 
+    """Projekt"""
+    def create_projekt(self, projektleiter, projektname, auftraggeber):
+            """Ein Projekt anlegen."""
+            projekt = Projekt()
+            projekt.set_id(1211)
+            projekt.set_projektleiter(projektleiter)
+            projekt.set_name(projektname)
+            projekt.set_auftraggeber(auftraggeber)
+            """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
+            projekt.set_letzte_aenderung()
+
+            with ProjektMapper() as mapper:
+                return mapper.insert(projekt)
+
+    def get_all_projekte(self):
+        """ Wir geben alle Projekte aus """
+        with ProjektMapper() as mapper:
+            return mapper.find_all()
+
+    def delete_projekt_by_projekt_id(self, projekt_id):
+        with ProjektMapper() as mapper:
+            return mapper.delete(projekt_id)
+
+    def update_projekt(self, projekt):
+        projekt.set_letzte_aenderung()
+
+        with ProjektMapper() as mapper:
+            return mapper.update(projekt)
+
+
+    """Aktivität"""
     def create_aktivitaet(self, bezeichnung, dauer, kapazität):
         """Eine Aktivität anlegen."""
 
@@ -104,20 +114,26 @@ class Administration(object):
         with AktivitaetMapper() as mapper:
             return mapper.insert(aktivitaet)
 
+    def get_all_aktivitaeten(self):
+        """ Wir geben alle Aktivitäten aus """
+        with AktivitaetMapper() as mapper:
+            return mapper.find_all()
 
-    def create_projekt(self, projektleiter, projektname, auftraggeber):
-            """Eine Person anlegen."""
-            projekt = Projekt()
-            projekt.set_id(1211)
-            projekt.set_projektleiter(projektleiter)
-            projekt.set_name(projektname)
-            projekt.set_auftraggeber(auftraggeber)
-            """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
-            projekt.set_letzte_aenderung()
+    def get_aktivitaeten_by_projekt_id(self, projekt_id):
+        with AktivitaetMapper() as mapper:
+            return mapper.find_aktivitaeten_by_projekt_id(projekt_id)
 
-            with ProjektMapper() as mapper:
-                return mapper.insert(projekt)
+    def delete_aktivitaet_by_aktivitaet_id(self, aktivitaet_id):
+        with AktivitaetMapper() as mapper:
+            return mapper.delete(aktivitaet_id)
 
+    def update_aktivitaet(self, aktivitaet):
+        aktivitaet.set_letzte_aenderung()
+
+        with AktivitaetMapper() as mapper:
+            return mapper.update(aktivitaet)
+
+    """Urlaub"""
     def create_urlaub(self, person_id, start_datum, end_datum):
         """Urlaub anlegen."""
 
@@ -132,29 +148,14 @@ class Administration(object):
         with UrlaubMapper() as mapper:
             return mapper.insert(urlaub)
 
+    def get_all_urlaub(self):
+        """Wir geben Urlaub von allen aus"""
+        with UrlaubMapper() as mapper:
+            return mapper.find_all()
 
-    def get_aktivitaet_by_aktivitaet_id(self, aktivitaet_id):
-        with AktivitaetMapper() as mapper:
-            return mapper.delete(aktivitaet_id)
-
-
-    def get_projekt_by_projekt_id(self, projekt_id):
-        with ProjektMapper() as mapper:
-            return mapper.delete(projekt_id)
-
-
-    def update_aktivitaet(self, aktivitaet):
-        aktivitaet.set_letzte_aenderung()
-
-        with AktivitaetMapper() as mapper:
-            return mapper.update(aktivitaet)
-
-
-    def update_projekt(self, projekt):
-        projekt.set_letzte_aenderung()
-
-        with ProjektMapper() as mapper:
-            return mapper.update(projekt)
+    def delete_urlaub_by_urlaub_id(self, urlaub_id):
+        with UrlaubMapper() as mapper:
+            return mapper.delete(urlaub_id)
 
     def update_urlaub(self, urlaub):
         urlaub.set_letzte_aenderung()
@@ -162,13 +163,7 @@ class Administration(object):
         with UrlaubMapper() as mapper:
             return mapper.update(urlaub)
 
-
-    def get_all_mitarbeiter_in_projekt(self):
-        """ Wir geben alle Aktivitäten aus """
-        with MitarbeiterInProjektMapper() as mapper:
-            return mapper.find_all()
-
-
+    """Mitarbeiter"""
     def create_mitarbeiter_in_projekt(self, mitarbeiter, projekt, verkaufte_stunden):
             """Mitarbeiter in Projekt anlegen."""
             mitarbeiter_in_projekt = MitarbeiterInProjekt()
@@ -180,13 +175,17 @@ class Administration(object):
             with MitarbeiterInProjektMapper() as mapper:
                 return mapper.insert(mitarbeiter_in_projekt)
 
+    def get_all_mitarbeiter_in_projekt(self):
+        """Wir geben alle Mitarbeiter in einem Projekt aus"""
+        with MitarbeiterInProjektMapper() as mapper:
+            return mapper.find_all()
 
     def get_person_by_person_id_and_projekt_by_projekt_id(self, person_idd, projekt_id):
         with MitarbeiterInProjektMapper() as mapper:
             return mapper.delete(person_idd, projekt_id)
 
-
-
+    def get_projekt_by_projekt_id(self, projekt_id):
+        pass
 
 
 if __name__ == '__main__':
