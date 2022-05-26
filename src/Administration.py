@@ -88,7 +88,7 @@ class Administration(object):
         with ProjektMapper() as mapper:
             return mapper.find_all()
 
-    def delete_projekt_by_projekt_id(self, projekt_id):
+    def delete_projekt_by_id(self, projekt_id):
         with ProjektMapper() as mapper:
             return mapper.delete(projekt_id)
 
@@ -153,6 +153,11 @@ class Administration(object):
         with UrlaubMapper() as mapper:
             return mapper.find_all()
 
+    def get_urlaub_by_id(self, urlaub_id):
+        """ Wir geben den Urlaub mit der angegebenen ID zurück """
+        with UrlaubMapper() as mapper:
+            return mapper.find_by_id(urlaub_id)
+
     def delete_urlaub_by_urlaub_id(self, urlaub_id):
         with UrlaubMapper() as mapper:
             return mapper.delete(urlaub_id)
@@ -184,8 +189,10 @@ class Administration(object):
         with MitarbeiterInProjektMapper() as mapper:
             return mapper.delete(person_idd, projekt_id)
 
-    def get_projekt_by_projekt_id(self, projekt_id):
-        pass
+    def get_projekt_by_id(self, projekt_id):
+        """ Wir geben die Projekte mit der angegebenen ID zurück """
+        with ProjektMapper() as mapper:
+            return mapper.find_by_id(projekt_id)
 
 
 if __name__ == '__main__':

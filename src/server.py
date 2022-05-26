@@ -171,23 +171,25 @@ class ProjekteListOperations(Resource):
 @zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
 class ProjektByIdOperations(Resource):
     @zeiterfassung.marshal_with(projekt)
-    def delete(self, projekt_id):
-        """Löschen einer Projekt Instanz.
-        Das zu löschende Objekt wird anhand der id bestimmt.
-        """
-        adm = Administration()
-        projekt = adm.delete_projekt_by_projekt_id(projekt_id)
-        print(projekt)
-        return projekt
-
     def get(self,projekt_id):
         """ Auslesen der Projekt Instanz.
         Das zu auslesende Objekt wird anhand der id bestimmt
         """
         adm = Administration()
-        projekt = adm.get_projekt_by_projekt_id(projekt_id)
+        projekt = adm.get_projekt_by_id(projekt_id)
         print(projekt)
         return projekt
+
+    def delete(self, projekt_id):
+        """Löschen einer Projekt Instanz.
+        Das zu löschende Objekt wird anhand der id bestimmt.
+        """
+        adm = Administration()
+        projekt = adm.delete_projekt_by_id(projekt_id)
+        print(projekt)
+        return projekt
+
+
 
     @zeiterfassung.marshal_with(projekt)
     @zeiterfassung.expect(projekt, validate=True)
@@ -341,7 +343,7 @@ class AktivitaetenByProjektId(Resource):
     def get(self, projekt_id):
         """ Auslesen der Aktivitäten innerhalb eines Projektes"""
         adm = Administration()
-        projekt = adm.get_projekt_by_projekt_id(projekt_id)
+        projekt = adm.get_projekt_by_id(projekt_id)
         print(projekt)
         return projekt
 

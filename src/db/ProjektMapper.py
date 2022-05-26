@@ -31,6 +31,35 @@ class ProjektMapper(Mapper):
         return result
 
 
+    def find_by_id(self, id):
+        """ Wir suchen das Projekt mit der jeweiligen ID """
+        result = None
+
+        cursor = self._cnx.cursor()
+        command = "SELECT * FROM Projekt WHERE projekt_id={0}".format(id)
+        cursor.execute(command)
+        projekt_daten = cursor.fetchall()
+
+        try:
+            (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung) = projekt_daten[0]
+            print(projekt_daten)
+            projekt = Projekt()
+            projekt.set_name(projektname)
+            projekt.set_auftraggeber(auftraggeber)
+            projekt.set_id(projekt_id)
+            projekt.set_projektleiter(person_id)
+            projekt.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
+            result = projekt
+        except IndexError:
+            """ Tritt auf, wenn es beim SELECT-Aufruf kein Ergebnis liefert, sondern projekt_daten leer ist """
+            result = None
+
+        self._cnx.commit()
+        cursor.close()
+        print(result)
+        return result
+
+
     def insert(self, projekt):
         """ Einfügen eines neuen Projekt-Objekts in die Datenbank.
         parameter: Projekt Instanz die in der Datenbank gespeichert werden soll
