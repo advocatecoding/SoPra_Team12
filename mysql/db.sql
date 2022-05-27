@@ -168,35 +168,35 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- Person Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('1', 'Talha', 'Yildirim', 'talha.windows@gmail.com', 'Karen', 365, 0, '2022-04-13 02:30:00');
+VALUES('1', 'Levi', 'Ackermann', 'levi.ackermann@gmail.com', 'beyblade', 30, 75, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('2', 'Aykut', 'Demir', 'kafabey@hotmail.de', 'Kafa Bey', 365, 0, '2022-04-13 02:30:00');
+VALUES('2', 'Eren', 'Jäger', 'eren.jäger@hotmail.de', 'idealist', 30, 3, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('3', 'Eray', 'Hergül', 'erayhergül@hotmail.de', 'Vintage', 365, 0, '2022-04-13 02:30:00');
+VALUES('3', 'Mikasa', 'Ackermann', 'mikasa123@hotmail.de', 'redScarf', 30, 99, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('4', 'Dennis', 'Kühnberger', 'dennis.kuehnberger@gmx.de', 'StuttgarterTsunami', 365, 0, '2022-04-13 02:30:00');
+VALUES('4', 'Annie', 'Leonhart', 'annie.leonhart@gmx.de', 'hiiamannie', 30, 0, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('5', 'Nicola', 'Pany', 'nicola.pany@gmail.de', 'Khaleesi', 365, 0, '2022-04-13 02:30:00');
+VALUES('5', 'Armin', 'Arlert', 'armin.arlert@gmail.de', 'armin_the_strategist', 30, 10, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('6', 'Luke', 'Skywalker', 'lukeskywalker@hotmail.de', 'Jedi', 365, 0, '2022-04-13 02:30:00');
+VALUES('6', 'Jean', 'Kirstein', 'jean@hotmail.de', 'jean_the_leader', 30, 55, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('7', 'Tyrion', 'Lennister', 'tyrion@hotmail.de', 'Mid', 365, 0, '2022-04-13 02:30:00');
+VALUES('7', 'Erwin', 'Smith', 'erwin.smith@hotmail.de', 'erwin_the_real_leader', 30, 70, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('8', 'Mike', 'Tyson', 'ironfist@hotmail.de', 'IronFist', 365, 0, '2022-04-13 02:30:00');
+VALUES('8', 'Connie', 'Springer', 'connie@hotmail.de', 'loyal_connie', 0, 25, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('9', 'Ivar', 'Jacobson', 'ivar.jacobson@gmail.com', 'IvarJ', 365, 0, '2022-04-13 02:30:00');
+VALUES('9', 'Sasha', 'Braus', 'braus.sasha@gmail.com', 'sasha_loves_meat', 0, 3, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('10', 'Frederick', 'Brooks', 'frederick.brooks@yahoo.com', 'Brooks', 365, 0, '2022-04-13 02:30:00');
+VALUES('10', 'Frederick', 'Brooks', 'frederick.brooks@yahoo.com', 'Brooks', 30, 0, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('11', 'Martin', 'Schindler', 'martin.schindler@gmail.com', 'TheWall', 365, 0, '2022-04-13 02:30:00');
+VALUES('11', 'Martin', 'Schindler', 'martin.schindler@gmail.com', 'TheWall', 30, 0, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('12', 'Peter', 'Wright', 'peter.wright@gmail.com', 'Snakebite', 365, 0, '2022-04-13 02:30:00');
+VALUES('12', 'Peter', 'Wright', 'peter.wright@gmail.com', 'Snakebite', 30, 0, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('13', 'Rob', 'Cross', 'rob.cross@gmail.com', 'Voltage', 365, 0, '2022-04-13 02:30:00');
+VALUES('13', 'Rob', 'Cross', 'rob.cross@gmail.com', 'Voltage', 30, 0, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('14', 'Jonny', 'Clayton', 'jonny.clayton@gmail.com', 'TheFerret', 365, 0, '2022-04-13 02:30:00');
+VALUES('14', 'Jonny', 'Clayton', 'jonny.clayton@gmail.com', 'TheFerret', 30, 0, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('15', 'Mensur', 'Suljovic', 'mensur.suljovic@gmail.com', 'TheGentle', 365, 0, '2022-04-13 02:30:00');
+VALUES('15', 'Mensur', 'Suljovic', 'mensur.suljovic@gmail.com', 'TheGentle', 30, 0, '2022-04-13 02:30:00');
 
 -- ------------------------------------------------------------------------------------------------------------pauseperson---------------
 -- Projekt Entitäten erstellen
@@ -237,11 +237,11 @@ VALUES('15', '15',"Projekt L", 'Windows','2022-04-19 12:33:00');
 -- Aktivität Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
 INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
-VALUES('1', 'Klassendiagram erstellen', '2022-04-30 14:00:00','120', '2022-04-19 02:33:00');
+VALUES('1', 'Kriegshammertitan aufhalten', '2022-04-30 14:00:00','120', '2022-04-19 02:33:00');
 INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
-VALUES('2', 'Datenbankentwurf erstellen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
+VALUES('2', '3D-Manöver-Apparat aufladen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
 INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
-VALUES('3', 'Rechnung schreiben', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
+VALUES('3', 'Auf Expedition gehen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Aktivität_in_Projekt Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
