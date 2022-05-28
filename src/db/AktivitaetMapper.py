@@ -28,6 +28,33 @@ class AktivitaetMapper(Mapper):
 
         return result
 
+    def find_by_id(self, id):
+        """ Wir suchen die Aktivität mit der jeweiligen ID """
+        result = None
+
+        cursor = self._cnx.cursor()
+        command = "SELECT * FROM Aktivitaet WHERE projekt_id={0}".format(id)
+        cursor.execute(command)
+        aktivitaet_daten = cursor.fetchall()
+
+        try:
+            (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) = aktivitaet_daten[0]
+            aktivitaet = Aktivitaet()
+            aktivitaet.set_name(bezeichnung)
+            aktivitaet.set_dauer(dauer)
+            aktivitaet.set_kapazität(kapazitaet)
+            aktivitaet.set_id(aktivitaet_id)
+            aktivitaet.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
+            result = aktivitaet
+        except IndexError:
+            """ Tritt auf, wenn es beim SELECT-Aufruf kein Ergebnis liefert, sondern aktivitaet_daten leer ist """
+            result = None
+
+        self._cnx.commit()
+        cursor.close()
+        print(result)
+        return result
+
     def find_aktivitaeten_by_projekt_id(self, projekt_id):
         #result = []
         aktivitaten = []

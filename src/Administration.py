@@ -100,7 +100,7 @@ class Administration(object):
 
 
     """Aktivität"""
-    def create_aktivitaet(self, bezeichnung, dauer, kapazität):
+    def create_aktivitaet(self, bezeichnung, dauer, kapazitaet):
         """Eine Aktivität anlegen."""
 
         aktivitaet = Aktivitaet()
@@ -118,6 +118,11 @@ class Administration(object):
         """ Wir geben alle Aktivitäten aus """
         with AktivitaetMapper() as mapper:
             return mapper.find_all()
+
+    def get_aktivitaet_by_id(self, aktivitaet_id):
+        """ Wir geben die Aktivität mit der angegebenen ID zurück """
+        with AktivitaetMapper() as mapper:
+            return mapper.find_by_id(aktivitaet_id)
 
     def get_aktivitaeten_by_projekt_id(self, projekt_id):
         with AktivitaetMapper() as mapper:
