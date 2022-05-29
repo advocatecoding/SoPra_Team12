@@ -18,11 +18,11 @@ class Aktivitaet(bo.BusinessObject):
         """Setzen der Aktivitätsnamen."""
         self._name = value
 
-    def get_kapazität(self):
+    def get_kapazitaet(self):
         """Auslesen der Kapazität."""
         return self._kapazität
 
-    def set_kapazität(self, value):
+    def set_kapazitaet(self, value):
         """Setzen der Kapazität."""
         self._kapazität = value
 

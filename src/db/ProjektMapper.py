@@ -13,7 +13,6 @@ class ProjektMapper(Mapper):
         projekt_daten = cursor.fetchall()
 
         for (projektname, auftraggeber, projekt_id,  person_id, letzte_aenderung) in projekt_daten:
-            print(projekt_daten)
             projekt = Projekt()
             projekt.set_name(projektname)
             projekt.set_auftraggeber(auftraggeber)
@@ -42,7 +41,6 @@ class ProjektMapper(Mapper):
 
         try:
             (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung) = projekt_daten[0]
-            print(projekt_daten)
             projekt = Projekt()
             projekt.set_name(projektname)
             projekt.set_auftraggeber(auftraggeber)
@@ -56,7 +54,6 @@ class ProjektMapper(Mapper):
 
         self._cnx.commit()
         cursor.close()
-        print(result)
         return result
 
 

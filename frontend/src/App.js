@@ -4,9 +4,8 @@ import { Container } from '@material-ui/core';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import SignIn from './SignIn';
-import Start from './Start';
-import Start2 from './Start2';
 import Header from './components/header/Header'
+import Login from './Login'
 
 
 class App extends React.Component {
@@ -114,7 +113,7 @@ class App extends React.Component {
 							// Ist der Benutzer schon eingeloggt -> Dann soll <Start> geladen werden
 							currentUser ?
 								<>
-									<Start></Start>
+									<Login></Login>
 								</>
 								:
 								// Wenn der Benutzer nicht eingeloggt ist -> Dann soll <SignIn> geladen werden

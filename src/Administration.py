@@ -9,6 +9,8 @@ from bo.Zeitintervall import Zeitintervall
 from bo.Projektarbeit import Projektarbeit
 from bo.Aktivitaet import Aktivitaet
 from bo.Pause import Pause
+from bo.Startbuchung import Startbuchung
+from bo.Endbuchung import Endbuchung
 
 from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
@@ -107,7 +109,7 @@ class Administration(object):
         aktivitaet.set_id(1211)
         aktivitaet.set_name(bezeichnung)
         aktivitaet.set_dauer(dauer)
-        aktivitaet.set_kapazität(kapazität)
+        aktivitaet.set_kapazität(kapazitaet)
         """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
         aktivitaet.set_letzte_aenderung()
 
@@ -200,6 +202,23 @@ class Administration(object):
             return mapper.find_by_id(projekt_id)
 
 
+    """ Buchungen """
+    def create_startbuchung(self, zeitpunkt, person):
+        """ Startbuchung für Aktivitäten oder Pausen anlegen """
+        startbuchung = Startbuchung()
+        startbuchung.set_id(1211)
+        startbuchung.set_zeitpunkt(zeitpunkt)
+        startbuchung.set_person(person)
+
+    def create_ereignisbuchung(self, startereignis, endereignis):
+        ereignisbuchung = Ereignisbuchung(startereignis, endereignis)
+        ereignisbuchung.set_id(1211)
+
+    def create_zeitintervall(self, ereignisbuchung):
+
+        zeitintervall = Zeitintervall()
+
+
 if __name__ == '__main__':
 
     mitarbeiter1 = Person()
@@ -209,24 +228,29 @@ if __name__ == '__main__':
     aktivitaet1.set_name("Kriegshammertitan aufhalten")
 
     zeitintervall_projekt = Zeitintervall()
-    zeitintervall_projekt.set_projektlaufzeit(100)
 
     projekt1 = Projekt()
     projekt1.set_name("Marley erobern")
-    projekt1.set_projektlaufzeit(zeitintervall_projekt.get_zeitintervall())
-    projekt1.set_projektlaufzeit(100)
+    #projekt1.set_projektlaufzeit(zeitintervall_projekt.get_zeitintervall())
+    #projekt1.set_projektlaufzeit(100)
 
     #aktivität1.get_id()
-    kommen = datetime.datetime(2022, 1,1,12,00)
-    gehen = datetime.datetime(2022, 1,1, 14, 00)
+    startzeit = datetime.datetime(2022,1,1,12,00)
+    endzeit = datetime.datetime(2022,1,1,20,00)
 
-    kommen1 = Kommen(kommen, aktivitaet1,mitarbeiter1)
-    gehen1 = Gehen(gehen, aktivitaet1, mitarbeiter1)
+    buchungstart = datetime.datetime(2022,1,1,12,00)
+    buchungende = datetime.datetime(2022,1,1,15,00)
+
+    kommen1 = Kommen(startzeit,mitarbeiter1)
+    gehen1 = Gehen(endzeit, mitarbeiter1)
+
+    startbuchung1 = Startbuchung(buchungstart, mitarbeiter1)
+    endbuchung1 = Endbuchung(buchungende, mitarbeiter1)
+
 
     """ Ereignisbuchung extrahiert die Daten von Kommen und Gehen (Objekte werden nicht mitgeschleppt) """
     ereignisbuchung1 = Ereignisbuchung(kommen1, gehen1)
 
-    """ Fall 1: Projektarbeit durch 2 Ereignisse buchen """
     projektarbeit1 = Projektarbeit(ereignisbuchung1)
     projektarbeit1.set_id(1)
 
@@ -234,8 +258,8 @@ if __name__ == '__main__':
     pause1 = Pause(ereignisbuchung1)
     pause1.set_id(1)
 
-    zeitinervallbuchung1 = Zeitinverallbuchung(projektarbeit1)
-    zeitintervallbuchung2 = Zeitinverallbuchung(pause1)
+    zeitinervallbuchung1 = Zeitinverallbuchung(projektarbeit1, aktivitaet1)
+    zeitintervallbuchung2 = Zeitinverallbuchung(pause1, aktivitaet1)
 
     """ Fall 3: Pause direkt durch Zeitintervall buchen (ohne Ereignisse) """
     pause2 = Pause()
@@ -243,7 +267,7 @@ if __name__ == '__main__':
     pause2.set_person(mitarbeiter1)
     pause2.set_aktivitaet(aktivitaet1)
     
-    zeitintervallbuchung3 = Zeitinverallbuchung(pause2)
+    zeitintervallbuchung3 = Zeitinverallbuchung(pause2, aktivitaet1)
     
     """ Projektarbeit von 7h """
     projektarbeit2 = Projektarbeit()
@@ -252,7 +276,7 @@ if __name__ == '__main__':
     projektarbeit2.set_aktivitaet(aktivitaet1)
     
     
-    zeitintervallbuchung4 = Zeitinverallbuchung(projektarbeit2)
+    zeitintervallbuchung4 = Zeitinverallbuchung(projektarbeit2, aktivitaet1)
 
     arbeitszeitkonto_von_mikasa = Arbeitszeitkonto(mitarbeiter1)
     """ Das Arbeitszeitkonto von Mikasa  """

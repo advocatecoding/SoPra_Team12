@@ -4,7 +4,6 @@ class Pause(Zeitintervall):
     def __init__(self, ereignisbuchung=None):
         super().__init__(ereignisbuchung)
         if ereignisbuchung is not None:
-            self.__aktivitaet = ereignisbuchung.get_aktivitaet()
             # self.__ereignisbuchung = ereignisbuchung
             self.__person = ereignisbuchung.get_person()
             """ Zeitintervall wird ausgerechnet durch Ende und Start """

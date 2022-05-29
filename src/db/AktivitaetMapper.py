@@ -21,7 +21,6 @@ class AktivitaetMapper(Mapper):
             aktivitaet.set_id(aktivitaet_id)
             aktivitaet.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
             result.append(aktivitaet)
-            print(result)
 
         self._cnx.commit()
         cursor.close()

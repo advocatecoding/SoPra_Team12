@@ -117,7 +117,6 @@ class PersonByIdOperations(Resource):
         """
         adm = Administration()
         person = adm.delete_person_by_person_id(person_id)
-        print(person)
         return person
 
     @zeiterfassung.marshal_with(person)
@@ -177,7 +176,6 @@ class ProjektByIdOperations(Resource):
         """
         adm = Administration()
         projekt = adm.get_projekt_by_id(projekt_id)
-        print(projekt)
         return projekt
 
     def delete(self, projekt_id):
@@ -186,7 +184,6 @@ class ProjektByIdOperations(Resource):
         """
         adm = Administration()
         projekt = adm.delete_projekt_by_id(projekt_id)
-        print(projekt)
         return projekt
 
 
@@ -299,7 +296,6 @@ class AktivitaetenByIdOperations(Resource):
         """
         adm = Administration()
         aktivitaet = adm.delete_aktivitaet_by_aktivitaet_id(aktivitaet_id)
-        print(aktivitaet)
         return aktivitaet
 
     """Dennis Kühnberger """

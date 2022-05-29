@@ -1,8 +1,8 @@
 from bo.Ereignis import Ereignis
 
-class Kommen(Ereignis):
+class Startbuchung(Ereignis):
 
-    def __init__(self, zeitpunkt, person):
+    def __init__(self, zeitpunkt,  person):
         super().__init__(zeitpunkt, person)
         self.__zeitpunkt = zeitpunkt
         self.__person = person

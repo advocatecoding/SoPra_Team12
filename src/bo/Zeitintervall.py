@@ -6,7 +6,6 @@ class Zeitintervall(bo.BusinessObject):
         super().__init__()
         """ Wir prüfen ob überhaut eine ereignisbuchung gepassed wurde oder ob direkt ein Zeitintervall geucht wird ohen Ereignisse """
         if ereignisbuchung is not None:
-            self.__aktivitaet = ereignisbuchung.get_aktivitaet()
             self.__person = ereignisbuchung.get_person()
 
             """ Zeitintervall wird ausgerechnet durch Ende und Start """
@@ -34,8 +33,6 @@ class Zeitintervall(bo.BusinessObject):
     def set_person(self, value):
         self.__person = value
 
-    def get_aktivitaet(self):
-        return self.__aktivitaet
 
     def set_aktivitaet(self, value):
         self.__aktivitaet = value
