@@ -17,7 +17,7 @@ class AktivitaetMapper(Mapper):
             aktivitaet = Aktivitaet()
             aktivitaet.set_name(bezeichnung)
             aktivitaet.set_dauer(dauer)
-            aktivitaet.set_kapazität(kapazitaet)
+            aktivitaet.set_kapazitaet(kapazitaet)
             aktivitaet.set_id(aktivitaet_id)
             aktivitaet.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
             result.append(aktivitaet)
@@ -41,7 +41,7 @@ class AktivitaetMapper(Mapper):
             aktivitaet = Aktivitaet()
             aktivitaet.set_name(bezeichnung)
             aktivitaet.set_dauer(dauer)
-            aktivitaet.set_kapazität(kapazitaet)
+            aktivitaet.set_kapazitaet(kapazitaet)
             aktivitaet.set_id(aktivitaet_id)
             aktivitaet.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
             result = aktivitaet
@@ -99,28 +99,12 @@ class AktivitaetMapper(Mapper):
         cursor = self._cnx.cursor()
 
         command = "UPDATE aktivitaet " + "SET bezeichnung=%s, dauer=%s, kapazitaet=%s, letzte_aenderung=%s WHERE aktivitaet_id=%s"
-        data = (aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazität(), aktivitaet.get_letzte_aenderung(),
+        data = (aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazitaet(), aktivitaet.get_letzte_aenderung(),
                 aktivitaet.get_id())
         cursor.execute(command, data)
 
         self._cnx.commit()
         cursor.close()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     def insert(self, aktivitaet):
@@ -139,7 +123,7 @@ class AktivitaetMapper(Mapper):
 
         """ Hier wird die Aktivitäts Instanz in die Datenbank mit dem Insert Befehl gespeichert """
         command = "INSERT INTO aktivitaet (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
-        data = (aktivitaet.get_id(), aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazität(), aktivitaet.get_letzte_aenderung())
+        data = (aktivitaet.get_id(), aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazitaet(), aktivitaet.get_letzte_aenderung())
         cursor.execute(command, data)
 
         self._cnx.commit()

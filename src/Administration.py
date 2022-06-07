@@ -109,7 +109,7 @@ class Administration(object):
         aktivitaet.set_id(1211)
         aktivitaet.set_name(bezeichnung)
         aktivitaet.set_dauer(dauer)
-        aktivitaet.set_kapazität(kapazitaet)
+        aktivitaet.set_kapazitaet(kapazitaet)
         """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
         aktivitaet.set_letzte_aenderung()
 

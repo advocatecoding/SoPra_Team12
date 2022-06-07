@@ -40,7 +40,7 @@ class Aktivitaet(bo.BusinessObject):
         obj.set_id(dictionary["id"])
         obj.set_name(dictionary["aktivitaetname"])
         obj.set_dauer(dictionary["dauer"])
-        obj.set_kapazität(dictionary["kapazität"])
+        obj.set_kapazitaet(dictionary["kapazität"])
         obj.set_letzte_aenderung()
 
         return obj
