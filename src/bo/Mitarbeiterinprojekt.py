@@ -18,11 +18,11 @@ class MitarbeiterInProjekt(bo.BusinessObject):
         self._person = value
 
     def get_projekt(self):
-        """Auslesen des Nachnamens."""
+        """Auslesen des Projektnamens."""
         return self._projekt
 
     def set_projekt(self, value):
-        """Setzen des Nachnamens."""
+        """Setzen des Projektnamens."""
         self._projekt = value
 
     def get_verkaufte_stunden(self):

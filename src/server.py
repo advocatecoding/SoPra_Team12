@@ -6,6 +6,7 @@ from flask_restx import Api, Resource, fields
 from flask_cors import CORS
 
 # Zugriff auf Administration & BO-Klassen
+from bo.AktivitaetenInProjekt import AktivitaetInProjekt
 from bo.Person import Person
 from bo.Projekt import Projekt
 from Administration import Administration
@@ -60,6 +61,11 @@ mitarbeiter_in_projekt = api.inherit('Mitarbeiterinprojekt', bo, {
     "mitarbeiter": fields.String(attribute="_person", description="Mitarbeiter"),
     "projekt": fields.String(attribute="_projekt", description="Projekt"),
     "verkaufte_stunden": fields.String(attribute="_verkaufte_stunden", description="verkaufte Stunden")
+})
+
+aktivitaet_in_projekt = api.inherit('Aktivitaetinprojekt', bo, {
+    "aktivitaet": fields.String(attribute="_aktivitaet", description="Aktivität"),
+    "projekt": fields.String(attribute="_projekt", description="Projekt"),
 })
 
 urlaub = api.inherit('Urlaub', bo, {
@@ -320,16 +326,21 @@ class AktivitaetenByIdOperations(Resource):
             return '', 500
 
 
-
-
-
-
-
-
-
 """rudimentär, neue Mapper erstellen und die von der alten dorthin übertragen"""
 """Aktivitäten_in_Projekt"""
 """Dennis Kühnberger Post, Delete, Weiteres Get, PUT  """
+
+""" Aktivitäten_in_Projekt Objekt(e) wird gelesen und erstellt  """
+@zeiterfassung.route("/aktivitaet_in_projekt")
+class MitarbeiterInProjektListOperations(Resource):
+    @zeiterfassung.marshal_with(aktivitaet_in_projekt)
+    def get(self):
+        """ Auslesen der Aktivität_in_Projekt -Objekte """
+        adm = Administration()
+        aktivitaet_in_projekt = adm.get_all_aktivitaet_in_projekt
+        return aktivitaet_in_projekt
+
+
 
 """ Aktivitäten werden zur zugeordneten Projekt_ID ausgegeben """
 @zeiterfassung.route("/aktivitaten/<int:projekt_id>")

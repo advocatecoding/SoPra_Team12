@@ -11,6 +11,7 @@ from bo.Aktivitaet import Aktivitaet
 from bo.Pause import Pause
 from bo.Startbuchung import Startbuchung
 from bo.Endbuchung import Endbuchung
+from bo.AktivitaetenInProjekt import AktivitaetInProjekt
 
 from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
@@ -19,6 +20,7 @@ from db.UrlaubMapper import UrlaubMapper
 from bo.Projekt import Projekt
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
+from db.AktivitaetInProjektMapper import AktivitaetInProjektMapper
 import datetime
 
 
@@ -139,6 +141,21 @@ class Administration(object):
 
         with AktivitaetMapper() as mapper:
             return mapper.update(aktivitaet)
+
+    def create_aktivitaet_in_projekt(self, aktivitaet, projekt):
+            """Aktivität in Projekt anlegen."""
+            aktivitaet_in_projekt = AktivitaetInProjekt()
+            aktivitaet_in_projekt.set_aktivitaet(aktivitaet)
+            aktivitaet_in_projekt.set_projekt(projekt)
+
+            with AktivitaetInProjektMapper() as mapper:
+                return mapper.insert(aktivitaet_in_projekt)
+
+    @property
+    def get_all_aktivitaet_in_projekt(self):
+        """Wir geben alle Aktivitäten in einem Projekt aus"""
+        with AktivitaetInProjektMapper() as mapper:
+            return mapper.find_all()
 
     """Urlaub"""
     def create_urlaub(self, person_id, start_datum, end_datum):
