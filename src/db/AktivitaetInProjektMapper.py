@@ -1,5 +1,7 @@
 from db.Mapper import Mapper
 from bo.AktivitaetenInProjekt import AktivitaetInProjekt
+from bo.Projekt import Projekt
+from bo.Aktivitaet import Aktivitaet
 
 
 class AktivitaetInProjektMapper(Mapper):
@@ -25,7 +27,30 @@ class AktivitaetInProjektMapper(Mapper):
 
         return result
 
+    def find_aktivitaeten_by_projekt_id(self, projekt_id):
+        # result = []
+        aktivitaten = []
+        cursor = self._cnx.cursor()
+        cursor.execute(
+            "SELECT aktivitaet_idd, projekt_id FROM Aktivitaet INNER JOIN Aktivitaet_in_Projekt "
+            "WHERE aktivitaet_idd = aktivitaet_id AND projekt_id={}".format(projekt_id))
+        aktivitaten_daten = cursor.fetchall()
 
+        for (aktivitaet_idd, projekt_id) in aktivitaten_daten:
+            aktivitaet = AktivitaetInProjekt()
+            aktivitaet.set_aktivitaet(aktivitaet_idd)
+            aktivitaet.set_projekt(projekt_id)
+            """ In "aktivitaeten" werden die Aktivitaeten-Objekte gespeichert """
+            aktivitaten.append(aktivitaet)
+            projekt = Projekt()
+            projekt.set_id(projekt_id)
+            projekt.set_aktivitaeten(aktivitaten)
+            # result.append(projekt)
+        print(projekt.get_aktivitaeten())
+        self._cnx.commit()
+        cursor.close()
+        """ AktivitaetenObjekte werden zurückgegeben """
+        return aktivitaten
 
     def insert(self, aktivitaet_in_projekt):
 

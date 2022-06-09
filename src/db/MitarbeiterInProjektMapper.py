@@ -1,5 +1,7 @@
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.Mapper import Mapper
+from bo.Projekt import Projekt
+
 
 class MitarbeiterInProjektMapper(Mapper):
 
@@ -27,6 +29,32 @@ class MitarbeiterInProjektMapper(Mapper):
 
         return result
 
+    def find_by_id(self, person_idd):
+        # result = []
+        personl = []
+        cursor = self._cnx.cursor()
+        cursor.execute(
+            "SELECT person_idd, projekt_id, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt "
+            "WHERE person_idd = person_id AND person_idd={}".format(person_idd))
+        person_daten = cursor.fetchall()
+
+        for (person_idd, projekt_id, verkaufte_stunden) in person_daten:
+            person = MitarbeiterInProjekt()
+            person.set_person(person_idd)
+            person.set_projekt(projekt_id)
+            person.set_verkaufte_stunden(verkaufte_stunden)
+            """ In "person" werden die MitarbeiterInProjekt-Objekte gespeichert """
+            personl.append(person)
+            projekt = Projekt()
+            projekt.set_id(projekt_id)
+            # result.append(projekt)
+        print(projekt.get_aktivitaeten())
+        self._cnx.commit()
+        cursor.close()
+        """ AktivitaetenObjekte werden zurückgegeben """
+        return personl
+
+    """ letzte Änderung noch hinzufügen, in der Datenbank. Gleiches Problem wie bei person_id und person_idd"""
 
 
     def insert(self, mitarbeiter_in_projekt):

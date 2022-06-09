@@ -346,17 +346,16 @@ class MitarbeiterInProjektListOperations(Resource):
 
 
 """ Aktivitäten werden zur zugeordneten Projekt_ID ausgegeben """
-@zeiterfassung.route("/aktivitaten/<int:projekt_id>")
+@zeiterfassung.route("/aktivitaet_in_projekt/<int:projekt_id>")
 @zeiterfassung.param("projekt_id", "Die Id des gewünschten Projekts")
 class AktivitaetenByProjektId(Resource):
-    @zeiterfassung.marshal_with(aktivitaet)
+    @zeiterfassung.marshal_with(aktivitaet_in_projekt)
     def get(self, projekt_id):
         """ Auslesen der Aktivitäten innerhalb eines Projektes"""
         adm = Administration()
         projekt = adm.get_aktivitaeten_by_projekt_id(projekt_id)
         print(projekt)
         return projekt
-
 
 
 
@@ -417,6 +416,22 @@ class UrlaubByIdOperations(Resource):
 
 
 
+
+
+
+
+
+""" Mitarbeiter werden zur zugeordneten Projekt_ID ausgegeben """
+@zeiterfassung.route("/mitarbeiter_in_projekt/<int:person_idd>")
+@zeiterfassung.param("person_idd", "Die Id der gewünschten Person")
+class MitarbeiterInProjektById(Resource):
+    @zeiterfassung.marshal_with(mitarbeiter_in_projekt)
+    def get(self, person_idd):
+        """ Auslesen der Mitarbeiter innerhalb eines Projektes"""
+        adm = Administration()
+        person = adm.get_mitarbeiter_in_projekt_by_idd(person_idd)
+        print(person)
+        return person
 
 
 

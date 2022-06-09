@@ -248,9 +248,9 @@ VALUES('3', 'Auf Expedition gehen', '2022-05-01 14:00:00','100', '2022-04-19 02:
 INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
 VALUES('1', '1');
 INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
-VALUES('2', '1');
+VALUES('2', '2');
 INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
-VALUES('3', '2');
+VALUES('3', '1');
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Urlaub Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
