@@ -34,15 +34,16 @@ class MitarbeiterInProjektMapper(Mapper):
         personl = []
         cursor = self._cnx.cursor()
         cursor.execute(
-            "SELECT person_idd, projekt_id, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt "
+            "SELECT person_idd, projekt_id, verkaufte_stunden, mitarbeiter_in_projekt.letzte_aenderung FROM Person INNER JOIN Mitarbeiter_in_Projekt "
             "WHERE person_idd = person_id AND person_idd={}".format(person_idd))
         person_daten = cursor.fetchall()
 
-        for (person_idd, projekt_id, verkaufte_stunden) in person_daten:
+        for (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung) in person_daten:
             person = MitarbeiterInProjekt()
             person.set_person(person_idd)
             person.set_projekt(projekt_id)
             person.set_verkaufte_stunden(verkaufte_stunden)
+            person.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
             """ In "person" werden die MitarbeiterInProjekt-Objekte gespeichert """
             personl.append(person)
             projekt = Projekt()
