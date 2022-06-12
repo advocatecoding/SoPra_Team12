@@ -133,6 +133,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
    CREATE TABLE IF NOT EXISTS `Aktivitaet_in_Projekt` (
   `aktivitaet_idd` INT NOT NULL,
   `projekt_id` INT NOT NULL,
+  `letzte_aenderung` DATETIME NULL,
   UNIQUE (aktivitaet_idd),
   PRIMARY KEY (`aktivitaet_idd`,`projekt_id`),
 	FOREIGN KEY (`aktivitaet_idd`)
@@ -242,15 +243,17 @@ INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_
 VALUES('2', '3D-Manöver-Apparat aufladen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
 INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
 VALUES('3', 'Auf Expedition gehen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
+
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Aktivität_in_Projekt Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
-INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
-VALUES('1', '1');
-INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
-VALUES('2', '2');
-INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id)  
-VALUES('3', '1');
+INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id, letzte_aenderung)  
+VALUES('1', '1', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id, letzte_aenderung)  
+VALUES('2', '2', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id, letzte_aenderung)  
+VALUES('3', '1', '2022-04-19 02:33:00');
+
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Urlaub Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
@@ -271,7 +274,8 @@ INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden,
 VALUES('1', '1','150', '2022-04-19 02:33:00');
 INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
 VALUES('2', '1','180', '2022-04-19 02:33:00');
-
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('1', '3','180', '2022-04-19 02:33:00');
 
 
 -- --------------------------------------------------------------------------------------------------------------------------
