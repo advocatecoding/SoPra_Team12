@@ -15,10 +15,11 @@ class AktivitaetInProjektMapper(Mapper):
         cursor.execute("SELECT * FROM Aktivitaet_in_Projekt")
         daten = cursor.fetchall()
 
-        for (aktivitaet_idd, projekt_id) in daten:
+        for (aktivitaet_idd, projekt_id, letzte_aenderung) in daten:
             aktivitaet1 = AktivitaetInProjekt()
             aktivitaet1.set_aktivitaet(aktivitaet_idd)
             aktivitaet1.set_projekt(projekt_id)
+            aktivitaet1.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
             result.append(aktivitaet1)
             print(result)
 
