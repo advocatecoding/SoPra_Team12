@@ -147,6 +147,7 @@ class Administration(object):
             aktivitaet_in_projekt = AktivitaetInProjekt()
             aktivitaet_in_projekt.set_aktivitaet(aktivitaet)
             aktivitaet_in_projekt.set_projekt(projekt)
+            aktivitaet_in_projekt.set_letzte_aenderung()
 
             with AktivitaetInProjektMapper() as mapper:
                 return mapper.insert(aktivitaet_in_projekt)

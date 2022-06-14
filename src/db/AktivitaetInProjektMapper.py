@@ -59,8 +59,8 @@ class AktivitaetInProjektMapper(Mapper):
         cursor = self._cnx.cursor()
 
         """ Hier wird die Aktivität in der Projekt Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO Aktivitaet_in_Projekt (aktivitaet_idd, projekt_id) VALUES (%s,%s)"
-        data = (aktivitaet_in_projekt.get_aktivitaet(), aktivitaet_in_projekt.get_projekt())
+        command = "INSERT INTO Aktivitaet_in_Projekt (aktivitaet_idd, projekt_id, letzte_aenderung) VALUES (%s,%s,%s)"
+        data = (aktivitaet_in_projekt.get_aktivitaet(), aktivitaet_in_projekt.get_projekt(), aktivitaet_in_projekt.get_letzte_aenderung())
         cursor.execute(command, data)
 
         self._cnx.commit()

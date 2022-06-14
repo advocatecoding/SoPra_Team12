@@ -343,6 +343,26 @@ class MitarbeiterInProjektListOperations(Resource):
         aktivitaet_in_projekt = adm.get_all_aktivitaet_in_projekt
         return aktivitaet_in_projekt
 
+    @zeiterfassung.marshal_with(aktivitaet_in_projekt, code=201)
+    @zeiterfassung.expect(aktivitaet_in_projekt)
+    def post(self):
+        """ Aktivitaet_in_Projekt Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
+        Attribute aus den Werten von api.payload setzen. """
+        aktivitaet_in_projekt_object = AktivitaetInProjekt.from_dict(api.payload)
+
+        if aktivitaet_in_projekt_object is not None:
+            """ Wir erstellen in Administration eine Aktivitaet in Projekt Instanz mithilfe der Daten vom api.payload """
+            c = adm.create_aktivitaet_in_projekt(aktivitaet_in_projekt_object.get_aktivitaet(),
+                                                  aktivitaet_in_projekt_object.get_projekt())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
+
+
 
 
 """ Aktivitäten werden zur zugeordneten Projekt_ID ausgegeben """
