@@ -27,7 +27,7 @@ class PersonenList extends Component {
     }
 
     /**
-     * Wir fetchen alle PersonenBOs von der REST-API, der durch die server.py bereitgestellt wird
+     * Wir fetchen alle PersonenBOs von der REST-API, der durch die main.py bereitgestellt wird
     */
     getPersonenList = () => {
         console.log("SJNADFKS")
