@@ -163,6 +163,11 @@ class Administration(object):
         with AktivitaetInProjektMapper() as mapper:
             return mapper.find_by_id(projekt_id)
 
+    def delete_aktivitaet_in_projekt_by_id(self, aktivitaet_idd, projekt_id):
+        """Löschen einer Aktivitaet-Instanz mit der Projekt Id"""
+        with AktivitaetInProjektMapper() as mapper:
+            return mapper.delete(aktivitaet_idd, projekt_id)
+
 
     """Urlaub"""
     def create_urlaub(self, person_id, start_datum, end_datum):

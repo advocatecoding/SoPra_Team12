@@ -73,16 +73,16 @@ class AktivitaetInProjektMapper(Mapper):
     def delete(self, aktivitaet_idd, projekt_id):
         """Löschen der Daten einer Aktivität in Projekt Objekts aus der Datenbank.
 
-        :param aktivitaet_idd und die projekt_id notwendig  das aus der DB zu löschende "Objekt"
+        :param aktivitaet_idd und die projekt_id notwendig das aus der DB zu löschende "Objekt"
         """
         cursor = self._cnx.cursor()
 
-        command = "DELETE FROM Aktivität_in_Projekt WHERE aktivitaet_idd={0} AND projekt_id={1}".format(aktivitaet_idd, projekt_id)
+        command = "DELETE FROM Aktivitaet_in_Projekt WHERE aktivitaet_idd={0} AND projekt_id={1}".format(aktivitaet_idd, projekt_id)
         cursor.execute(command)
 
         self._cnx.commit()
         cursor.close()
-        return projekt_id
+        return aktivitaet_idd
 
 
 

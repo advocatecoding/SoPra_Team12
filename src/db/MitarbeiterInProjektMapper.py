@@ -81,7 +81,7 @@ class MitarbeiterInProjektMapper(Mapper):
         """
         cursor = self._cnx.cursor()
 
-        command = "DELETE FROM mitarbeiter_in_projekt WHERE person_idd={0} AND projekt_id={1}".format(person_idd,projekt_id)
+        command = "DELETE FROM mitarbeiter_in_projekt WHERE person_idd={0} AND projekt_id={1}".format(person_idd, projekt_id)
         cursor.execute(command)
 
         self._cnx.commit()
