@@ -94,6 +94,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
   `aktivitaet_id` INT NOT NULL,
   `zeit_start` DATETIME NULL,
   `zeit_ende` DATETIME NULL,
+  `gearbeitete_zeit` INT NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`zeit_id`),
 	FOREIGN KEY (`projekt_id`)
@@ -162,6 +163,28 @@ CREATE TABLE IF NOT EXISTS `Person` (
     REFERENCES `Projekt` (`projekt_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);  
+  
+  
+  
+  
+-- -----------------------------------------------------------------------
+-- Tabelle erstellen 'verkaufte_stunden_in_aktivitaet'
+-- -----------------------------------------------------------------------
+   CREATE TABLE IF NOT EXISTS `verkaufte_stunden_in_aktivitaet` (
+  `aktivitaet_id` INT NOT NULL,
+  `person_id` INT NOT NULL,
+  `gebuchte_stunden` INT NOT NULL,
+  `letzte_aenderung` DATETIME NULL,
+  PRIMARY KEY (`aktivitaet_id`,`person_id`),
+	FOREIGN KEY (`aktivitaet_id`)
+	REFERENCES `Aktivitaet` (`aktivitaet_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY (`person_id`)
+    REFERENCES `Person` (`person_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);  
+  
   
   
   
@@ -278,6 +301,45 @@ INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden,
 VALUES('1', '3','180', '2022-04-19 02:33:00');
 
 
+-- ---------------------------------------------------------------------------------------------------------------------------
+-- Zeitintervallbuchung Entitäten erstellen
+-- ---------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, zeit_start, zeit_ende, gearbeitete_zeit, letzte_aenderung)  
+VALUES('1', '1', '1', '1', '2022-04-13 02:30:00', '2022-04-13 03:30:00', 1, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, zeit_start, zeit_ende, gearbeitete_zeit, letzte_aenderung)  
+VALUES('2', '1', '1', '3', '2022-04-13 02:30:00', '2022-04-13 03:30:00', 10, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, zeit_start, zeit_ende, gearbeitete_zeit, letzte_aenderung)  
+VALUES('3', '1', '1', '1', '2022-04-13 02:30:00', '2022-04-13 03:30:00', 100, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, zeit_start, zeit_ende, gearbeitete_zeit, letzte_aenderung)  
+VALUES('4', '1', '1', '1', '2022-04-13 02:30:00', '2022-04-13 03:30:00', 100, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, zeit_start, zeit_ende, gearbeitete_zeit, letzte_aenderung)  
+VALUES('5', '2', '1', '2', '2022-04-13 02:30:00', '2022-04-13 03:30:00', 100, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, zeit_start, zeit_ende, gearbeitete_zeit, letzte_aenderung)  
+
+
+
+-- Eren jäger  PROJEKT 1 UND 2
+VALUES('6', '2', '2', '2', '2022-04-13 02:30:00', '2022-04-13 03:30:00', 100, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, zeit_start, zeit_ende, gearbeitete_zeit, letzte_aenderung)  
+VALUES('7', '2', '2', '2', '2022-04-13 02:30:00', '2022-04-13 03:30:00', 100, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, zeit_start, zeit_ende, gearbeitete_zeit, letzte_aenderung)  
+VALUES('8', '1', '2', '3', '2022-04-13 02:30:00', '2022-04-13 03:30:00', 500, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, zeit_start, zeit_ende, gearbeitete_zeit, letzte_aenderung)  
+VALUES('9', '1', '2', '3', '2022-04-13 02:30:00', '2022-04-13 03:30:00', 300, '2022-04-13 05:30:00');
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------
+-- verkaufte_stunden_in_aktivitaet Entitäten erstellen
+-- --------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden,letzte_aenderung)  
+VALUES('1', '1','15', '2022-04-19 02:33:00');
+INSERT INTO `verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
+VALUES('3', '1','10', '2022-04-19 02:33:00');
+INSERT INTO `verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
+VALUES('3', '2','2500', '2022-04-19 02:33:00');
+
+
 -- --------------------------------------------------------------------------------------------------------------------------
 -- Auslesen von Projekten und den zugehörigen Ativitäten, durch den INNER JOIN Befehl 
 -- --------------------------------------------------------------------------------------------------------------------------
@@ -289,10 +351,71 @@ VALUES('1', '3','180', '2022-04-19 02:33:00');
 -- --------------------------------------------------------------------------------------------------------------------------
 -- Auslesen von Personen und deren verkauften Stunden in einem Projekt, durch den INNER JOIN Befehl 
 -- --------------------------------------------------------------------------------------------------------------------------
- SELECT  vorname, nachname, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt
- WHERE person_idd = person_id;
+ -- SELECT  vorname, nachname, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt
+ -- WHERE person_idd = person_id;
  
  
  -- SELECT SUM(verkaufte_stunden) AS TEST from Mitarbeiter_in_Projekt;
  
  
+ 
+-- --------------------------------------------------------------------------------------------------------------------------
+-- TESTING 
+-- --------------------------------------------------------------------------------------------------------------------------
+ 
+ 
+-- Alle Datensätze
+  select vorname, bezeichnung, gearbeitete_zeit
+  FROM zeitintervallbuchung
+  Inner Join Person on zeitintervallbuchung.person_id = person.person_id
+  Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id;
+  
+-- Alle Datensätze in einem bestimmten Projekt für einen bestimmten Mitarbeiter -> Mitarbeiteransicht einzelne Werte der gearbeiteten Zeit
+  select vorname, bezeichnung, gearbeitete_zeit
+  FROM zeitintervallbuchung
+  Inner Join Person on zeitintervallbuchung.person_id = person.person_id
+  Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id
+  where zeitintervallbuchung.person_id = 1 and zeitintervallbuchung.projekt_id = 1;
+  
+
+ 
+ 
+ 
+ 
+ 
+ -- SZENARIO 4  FINAL
+ 
+ -- AUSGANGSSITUATION IST ZEIT FÜR MITARBEITERANSICHT
+ select vorname, bezeichnung, SUM(gearbeitete_zeit) AS IST_Zeit
+ FROM zeitintervallbuchung
+ Inner Join Person on zeitintervallbuchung.person_id = person.person_id
+ Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id
+ where zeitintervallbuchung.projekt_id = 1
+ group by bezeichnung, vorname
+ order by vorname ASC;
+ 
+  -- AUSGANGSSITUATION SOLL ZEIT FÜR MITARBEITERANSICHT
+  select gebuchte_stunden AS Soll_Zeit FROM verkaufte_stunden_in_aktivitaet
+  Inner Join Person on verkaufte_stunden_in_aktivitaet.person_id = person.person_id
+  Inner Join Zeitintervallbuchung on verkaufte_stunden_in_aktivitaet.aktivitaet_id = Zeitintervallbuchung.aktivitaet_id
+  where zeitintervallbuchung.projekt_id = 1
+  group by zeitintervallbuchung.aktivitaet_id, vorname
+  order by vorname ASC;
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+  -- Szenario 3: Alle Datensätze in einem bestimmten Projekt für einen bestimmten Mitarbeiter -> Mitarbeiteransicht Summe der gearbeiteten Zeit
+select vorname, projektname, bezeichnung AS Aktivität, SUM(gearbeitete_zeit) AS huhu
+ FROM zeitintervallbuchung
+ Inner Join Person on zeitintervallbuchung.person_id = person.person_id
+ Inner Join Projekt on zeitintervallbuchung.projekt_id = projekt.projekt_id
+ Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id
+ where zeitintervallbuchung.person_id = 2
+ group by bezeichnung
+ order by projektname ASC;
+
