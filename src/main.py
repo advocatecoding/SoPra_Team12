@@ -369,6 +369,21 @@ class MitarbeiterInProjektListOperations(Resource):
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
             return '', 500
 
+""" Aktivitaet_in_Projekt wird gelöscht und erstellt """
+@zeiterfassung.route("/aktivitaet_in_projekt/<int:aktivitaet_idd>/<int:projekt_id>")
+@zeiterfassung.doc(params={"aktivitaet_idd": {"description" : "Die Id der gewünschten Aktivitaet"},
+                           "projekt_id": {"description:" : "Die Id des gewünschten Projekts"}})
+class AktivitaetInProjektByIdOperations(Resource):
+    @zeiterfassung.marshal_with(aktivitaet_in_projekt)
+    def delete(self, aktivitaet_idd, projekt_id):
+        """Löschen einer Aktivitaet_in_Projekt Instanz.
+        Das zu löschende Objekt wird anhand von zwei id's bestimmt.
+        """
+        adm = Administration()
+        aip = adm.delete_aktivitaet_in_projekt_by_id(aktivitaet_idd, projekt_id)
+        print(aip)
+        return aip
+
 
 
 
