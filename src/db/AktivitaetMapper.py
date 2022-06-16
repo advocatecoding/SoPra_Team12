@@ -32,7 +32,7 @@ class AktivitaetMapper(Mapper):
         result = None
 
         cursor = self._cnx.cursor()
-        command = "SELECT * FROM Aktivitaet WHERE projekt_id={0}".format(id)
+        command = "SELECT * FROM Aktivitaet WHERE aktivitaet_id={0}".format(id)
         cursor.execute(command)
         aktivitaet_daten = cursor.fetchall()
 

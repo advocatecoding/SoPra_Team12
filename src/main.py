@@ -305,10 +305,18 @@ class AktivitaetenByIdOperations(Resource):
         aktivitaet = adm.delete_aktivitaet_by_aktivitaet_id(aktivitaet_id)
         return aktivitaet
 
-    """Dennis Kühnberger """
-    def get(self, value):
-        """Dennis Kühnberger """
-        pass
+
+    """ Aktivitäten Objekt(e) werden gelesen und erstellt, eine bestimmte Aktivität wird herausgelesen  """
+
+    @zeiterfassung.route("/aktivitaet/<int:aktivitaet_id>")
+    @zeiterfassung.param("aktivitaet_id", "Die Id der gewünschten Aktivitaet")
+    class AktivitaetenByIdOperations(Resource):
+        @zeiterfassung.marshal_with(aktivitaet)
+        def get(self, aktivitaet_id):
+            """ Auslesen der Aktivität-Objekte, das ausgelesene Objekt wird anhand der Id bestimmt """
+            adm = Administration()
+            aktivitaet = adm.get_aktivitaet_by_id(aktivitaet_id)
+            return aktivitaet
 
 
     @zeiterfassung.marshal_with(aktivitaet)
