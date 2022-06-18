@@ -13,6 +13,8 @@ from Administration import Administration
 from bo.Aktivitaet import Aktivitaet
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from bo.Urlaub import Urlaub
+from bo.VerkaufteStundenInAktivitaet import VerkaufteStundenInAktivitaet
+from bo.SollZeit import Sollzeit
 
 """ Wir erstellen ein "Flask-Objekt" """
 app = Flask(__name__)
@@ -73,6 +75,34 @@ urlaub = api.inherit('Urlaub', bo, {
     "start_datum": fields.String(attribute="_start_date", description="Urlaubsbeginn"),
     "end_datum": fields.String(attribute="_end_date", description="Urlaubsende")
 })
+
+verkaufte_stunden_in_aktivitaet = api.inherit('VerkaufteStundenInAktivitaet', bo, {
+    "mitarbeiter": fields.String(attribute="_person", description="Mitarbeiter"),
+    "aktivitaet": fields.String(attribute="_aktivitaet", description="Aktivität"),
+    "gebuchte_stunden": fields.String(attribute="_gebuchte_stunden", description="gebuchte Stunden")
+})
+
+sollzeit = api.inherit('SollZeit', bo, {
+    "mitarbeiter": fields.String(attribute="_person", description="Mitarbeiter"),
+    "aktivitaet": fields.String(attribute="_aktivitaet", description="Aktivität"),
+    "projekt": fields.String(attribute="_projekt", description="Projekt"),
+    "gebuchte_stunden": fields.String(attribute="_gebuchte_stunden", description="gebuchte Stunden")
+})
+
+mitarbeiteransicht = api.inherit('MitarbeiterAnsicht', bo, {
+    "vorname": fields.String(attribute="_person", description="Mitarbeiter"),
+    "bezeichnung": fields.String(attribute="_aktivitaet", description="Aktivität"),
+    "projekt": fields.String(attribute="_projekt", description="Projekt"),
+    "gearbeitete_zeit": fields.String(attribute="_gearbeitete_zeit", description="gebuchte Stunden")
+})
+
+personeliche_mitarbeiteransicht = api.inherit('MitarbeiterAnsicht', bo, {
+    "vorname": fields.String(attribute="_person", description="Mitarbeiter"),
+    "bezeichnung": fields.String(attribute="_aktivitaet", description="Aktivität"),
+    "projekt": fields.String(attribute="_projekt", description="Projekt"),
+    "gearbeitete_zeit": fields.String(attribute="_gearbeitete_zeit", description="gebuchte Stunden")
+})
+
 
 
 """ Person Objekt(e) wird gelesen und erstellt  """
@@ -475,6 +505,85 @@ class MitarbeiterInProjektById(Resource):
         person = adm.get_mitarbeiter_in_projekt_by_idd(person_idd)
         print(person)
         return person
+
+
+
+
+
+
+""" Verkaufte_Stunden_in_Aktivität(e) wird gelesen und erstellt  """
+@zeiterfassung.route("/verkaufte_stunden_in_aktivitaet")
+class VerkaufteStundenInAktivitaetOperations(Resource):
+    @zeiterfassung.marshal_with(verkaufte_stunden_in_aktivitaet)
+    def get(self):
+        """ Auslesen der Verkaufte_Stunden_in_Aktivität """
+        adm = Administration()
+        verkaufte_stunden = adm.get_all_verkaufte_stunden_in_aktivitaet()
+        return verkaufte_stunden
+
+
+
+    @zeiterfassung.marshal_with(verkaufte_stunden_in_aktivitaet, code=201)
+    @zeiterfassung.expect(verkaufte_stunden_in_aktivitaet)
+    def post(self):
+        """ Verkaufte_Stunden_in_Aktivität erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
+        Attribute aus den Werten von api.payload setzen. person_object = Person-Objekt """
+        person_object = VerkaufteStundenInAktivitaet.from_dict(api.payload)
+
+        if person_object is not None:
+            """ Wir erstellen in Administration eine verkaufte_stunden_in_aktivitaet mithilfe der Daten vom api.payload """
+            c = adm.create_verkaufte_stunden_in_aktivitaet(person_object.get_aktivitaet(), person_object.get_person(),
+                                  person_object.get_gebuchte_stunden())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
+
+
+
+""" Sollzeit  """
+@zeiterfassung.route("/sollzeit/<int:projekt_id>")
+@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
+class SollzeitOperations(Resource):
+    @zeiterfassung.marshal_with(sollzeit)
+    def get(self,projekt_id):
+        """ Auslesen der Sollzeit szenario 3.
+        Das zu auslesende Objekt wird anhand der id bestimmt
+        """
+        adm = Administration()
+        projekt = adm.get_sollzeit_by_id(projekt_id)
+        return projekt
+
+
+
+@zeiterfassung.route("/mitarbeiteransicht/<int:projekt_id>")
+@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
+class MitarbeiteransichtOperations(Resource):
+    @zeiterfassung.marshal_with(mitarbeiteransicht)
+    def get(self,projekt_id):
+        """ Auslesen der IstStunden szenario 3.
+        Das zu auslesende Objekt wird anhand der id bestimmt
+        """
+        adm = Administration()
+        projekt = adm.get_mitarbeiteransicht_by_id(projekt_id)
+        return projekt
+
+
+
+@zeiterfassung.route("/persoenliche_mitarbeiteransicht/<int:person_id>")
+@zeiterfassung.param("person_id", "Die Id der gewünschten Person")
+class PersoenlicheOperations(Resource):
+    @zeiterfassung.marshal_with(mitarbeiteransicht)
+    def get(self,person_id):
+        """ Auslesen der IstStunden auf allen Projekten szenario 4.
+        Das zu auslesende Objekt wird anhand der id bestimmt
+        """
+        adm = Administration()
+        projekt = adm.get_persoenliche_mitarbeiteransicht_by_id(person_id)
+        return projekt
 
 
 

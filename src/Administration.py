@@ -12,6 +12,7 @@ from bo.Pause import Pause
 from bo.Startbuchung import Startbuchung
 from bo.Endbuchung import Endbuchung
 from bo.AktivitaetenInProjekt import AktivitaetInProjekt
+from bo.VerkaufteStundenInAktivitaet import VerkaufteStundenInAktivitaet
 
 from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
@@ -21,6 +22,7 @@ from bo.Projekt import Projekt
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
 from db.AktivitaetInProjektMapper import AktivitaetInProjektMapper
+from db.VerkaufteStundenInAktivitaetMapper import VerkaufteStundenInAktivitaetMapper
 import datetime
 
 
@@ -234,6 +236,42 @@ class Administration(object):
         """ Wir geben die Projekte mit der angegebenen ID zurück """
         with ProjektMapper() as mapper:
             return mapper.find_by_id(projekt_id)
+
+
+
+
+    def get_all_verkaufte_stunden_in_aktivitaet(self):
+        """ Wir geben alle verkaufte_stunden_in_aktivitaet aus """
+        with VerkaufteStundenInAktivitaetMapper() as mapper:
+            return mapper.find_all()
+
+
+    def create_verkaufte_stunden_in_aktivitaet(self, mitarbeiter, aktivitaet, gebuchte_stunden):
+            """verkaufte_stunden_in_aktivitaet anlegen."""
+            averkaufte_stunden = VerkaufteStundenInAktivitaet()
+            averkaufte_stunden.set_person(mitarbeiter)
+            averkaufte_stunden.set_aktivitaet(aktivitaet)
+            averkaufte_stunden.set_gebuchte_stunden(gebuchte_stunden)
+            averkaufte_stunden.set_letzte_aenderung()
+
+            with VerkaufteStundenInAktivitaetMapper() as mapper:
+                return mapper.insert(averkaufte_stunden)
+
+
+    def get_sollzeit_by_id(self, projekt_id):
+        with VerkaufteStundenInAktivitaetMapper() as mapper:
+            return mapper.find_by_id(projekt_id)
+
+
+    def get_mitarbeiteransicht_by_id(self, projekt_id):
+        with VerkaufteStundenInAktivitaetMapper() as mapper:
+            return mapper.mitarbeiteransicht_find_by_id(projekt_id)
+
+
+    def get_persoenliche_mitarbeiteransicht_by_id(self, person_id):
+        with VerkaufteStundenInAktivitaetMapper() as mapper:
+            return mapper.persoenliche_mitarbeiteransicht_find_by_id(person_id)
+
 
 
     """ Buchungen """
