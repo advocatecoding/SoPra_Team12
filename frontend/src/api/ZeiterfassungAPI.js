@@ -3,7 +3,7 @@ import PersonBO from './PersonBO';
 export default class ZeiterfassungAPI {
 
     static #api = null
-    #serverUrl = "http://localhost:5500/zeit"
+    #serverUrl = "/zeit"
     #getPersonsURL = () => `${this.#serverUrl}/personen`;
 
     /**

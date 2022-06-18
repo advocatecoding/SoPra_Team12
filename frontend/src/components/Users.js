@@ -20,7 +20,7 @@ export default function Users(props) {
     }, [])
 
     async function fetchAllPersonen() {
-        const url = "http://localhost:5500/zeit/personen";
+        const url = "https://learned-surge-353408.ey.r.appspot.com/zeit/personen";
         try {
             //console.log(personen)
             const response = await fetch(url);

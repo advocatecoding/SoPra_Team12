@@ -41,7 +41,7 @@ class PersonenList extends Component {
     }
 
     async componentDidMount() {
-        const url = "http://localhost:5500/zeit/personen";
+        const url = "/zeit/personen";
         const response = await fetch(url);
         //console.log(response.data)
         const data = await response.json();

@@ -30,7 +30,7 @@ export default function ProjektListe() {
   
     async function fetchAllProjekte() {
       console.log("sfmgddlgdl")
-      const url = "http://localhost:5500/zeit/projekte";
+      const url = "/zeit/projekte";
       try {
         //console.log(projekte)
         const response = await fetch(url);
@@ -50,7 +50,7 @@ export default function ProjektListe() {
     async function fetchAktivatenByProjektId(id, idx) {
       console.log("fetched!")
       try {
-        const response = await fetch(`http://localhost:5500/zeit/aktivitaten/${id}`);
+        const response = await fetch(`/zeit/aktivitaten/${id}`);
         const data = await response.json();
         setAktivitaeten(data)
       } catch (e) {

@@ -508,6 +508,7 @@ class MitarbeiterInProjektById(Resource):
 
 
 
+<<<<<<< Updated upstream
 
 
 
@@ -588,6 +589,9 @@ class PersoenlicheOperations(Resource):
 
 
 """ Server läuft auf localhost:5500 bzw. 127.0.0.1:5500 """
+=======
+""" Server läuft auf localhost:5000 bzw. 127.0.0.1:5000 """
+>>>>>>> Stashed changes
 if __name__ == '__main__':
-    app.run(port= 5500, debug=True)
+    app.run(debug=True)
 

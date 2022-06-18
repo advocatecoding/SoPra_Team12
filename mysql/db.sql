@@ -280,13 +280,13 @@ VALUES('3', '1', '2022-04-19 02:33:00');
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Urlaub Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
-INSERT INTO `urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
+INSERT INTO `Urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
 VALUES('1', '1', '2022-04-19', '2022-04-25', '2022-04-19 02:33:00');
-INSERT INTO `urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
+INSERT INTO `Urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
 VALUES('2', '2', '2022-05-19', '2022-06-25', '2022-04-19 02:33:00');
-INSERT INTO `urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
+INSERT INTO `Urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
 VALUES('3', '2', '2022-06-19', '2022-07-25', '2022-04-19 02:33:00');
-INSERT INTO `urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
+INSERT INTO `Urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
 VALUES('4', '1', '2022-07-19', '2022-08-25', '2022-04-19 02:33:00');
 
 
@@ -340,82 +340,6 @@ INSERT INTO `verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebucht
 VALUES('3', '2','2500', '2022-04-19 02:33:00');
 
 
--- --------------------------------------------------------------------------------------------------------------------------
--- Auslesen von Projekten und den zugehörigen Ativitäten, durch den INNER JOIN Befehl 
--- --------------------------------------------------------------------------------------------------------------------------
-
- -- SELECT bezeichnung, projekt_id FROM Aktivitaet INNER JOIN Aktivitaet_in_Projekt
- -- WHERE aktivitaet_idd = aktivitaet_id AND projekt_id = 1;
- 
-
--- --------------------------------------------------------------------------------------------------------------------------
--- Auslesen von Personen und deren verkauften Stunden in einem Projekt, durch den INNER JOIN Befehl 
--- --------------------------------------------------------------------------------------------------------------------------
- -- SELECT  vorname, nachname, verkaufte_stunden FROM Person INNER JOIN Mitarbeiter_in_Projekt
- -- WHERE person_idd = person_id;
- 
- 
- -- SELECT SUM(verkaufte_stunden) AS TEST from Mitarbeiter_in_Projekt;
- 
- 
- 
--- --------------------------------------------------------------------------------------------------------------------------
--- TESTING 
--- --------------------------------------------------------------------------------------------------------------------------
- 
- 
--- Alle Datensätze
-  select vorname, bezeichnung, gearbeitete_zeit
-  FROM zeitintervallbuchung
-  Inner Join Person on zeitintervallbuchung.person_id = person.person_id
-  Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id;
-  
--- Alle Datensätze in einem bestimmten Projekt für einen bestimmten Mitarbeiter -> Mitarbeiteransicht einzelne Werte der gearbeiteten Zeit
-  select vorname, bezeichnung, gearbeitete_zeit
-  FROM zeitintervallbuchung
-  Inner Join Person on zeitintervallbuchung.person_id = person.person_id
-  Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id
-  where zeitintervallbuchung.person_id = 1 and zeitintervallbuchung.projekt_id = 1;
-  
 
  
  
- 
- 
- 
- -- SZENARIO 4  FINAL
- 
- -- AUSGANGSSITUATION IST ZEIT FÜR MITARBEITERANSICHT
- select vorname, bezeichnung, SUM(gearbeitete_zeit) AS IST_Zeit
- FROM zeitintervallbuchung
- Inner Join Person on zeitintervallbuchung.person_id = person.person_id
- Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id
- where zeitintervallbuchung.projekt_id = 1
- group by bezeichnung, vorname
- order by vorname ASC;
- 
-  -- AUSGANGSSITUATION SOLL ZEIT FÜR MITARBEITERANSICHT
-  select gebuchte_stunden AS Soll_Zeit FROM verkaufte_stunden_in_aktivitaet
-  Inner Join Person on verkaufte_stunden_in_aktivitaet.person_id = person.person_id
-  Inner Join Zeitintervallbuchung on verkaufte_stunden_in_aktivitaet.aktivitaet_id = Zeitintervallbuchung.aktivitaet_id
-  where zeitintervallbuchung.projekt_id = 1
-  group by zeitintervallbuchung.aktivitaet_id, vorname
-  order by vorname ASC;
- 
- 
- 
- 
- 
- 
- 
- 
-  -- Szenario 3: Alle Datensätze in einem bestimmten Projekt für einen bestimmten Mitarbeiter -> Mitarbeiteransicht Summe der gearbeiteten Zeit
-select vorname, projektname, bezeichnung AS Aktivität, SUM(gearbeitete_zeit) AS huhu
- FROM zeitintervallbuchung
- Inner Join Person on zeitintervallbuchung.person_id = person.person_id
- Inner Join Projekt on zeitintervallbuchung.projekt_id = projekt.projekt_id
- Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id
- where zeitintervallbuchung.person_id = 2
- group by bezeichnung
- order by projektname ASC;
-
