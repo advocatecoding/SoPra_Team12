@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- Tabelle erstellen 'Zeitintervallbuchung'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Zeitintervallbuchung` (
-  `zeit_id` VARCHAR(45) NOT NULL ,
+  `zeit_id` INT NOT NULL,
   `projekt_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
   `aktivitaet_id` INT NOT NULL,
@@ -112,7 +112,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- Tabelle erstellen 'Arbeitszeitkonto'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Arbeitszeitkonto` (
-  `zeit_id` VARCHAR(45) NOT NULL ,
+  `zeit_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
   `zeit_gesamt` INT NULL,
   `letzte_aenderung` DATETIME NULL,
