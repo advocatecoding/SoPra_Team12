@@ -39,3 +39,29 @@ class ZeitintervallbuchungMapper(Mapper):
         cursor.close()
         print(result)
         return result
+
+    def insert(self, zeitintervallbuchung):
+        """ Einfügen eines neuen Zeitintervallbuchungs-Objekts in die Datenbank.
+        parameter: Zeitintervallbuchung Instanz die in der Datenbank gespeichert werden soll
+        return: Die Zeitintervallbuchung Instanz mit korrigierter bzw. inkrementierte ID
+        """
+
+        cursor = self._cnx.cursor()
+        cursor.execute("SELECT MAX(zeit_id) AS maxid FROM Zeitintervallbuchung ")
+        tuples = cursor.fetchall()
+
+        for (maxid) in tuples:
+            zeitintervallbuchung.set_id(maxid[0] + 1)
+
+        """ Hier wird die Person Instanz in die Datenbank mit dem Insert Befehl gespeichert """
+        command = "INSERT INTO person (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung) VALUES (%s,%s,%s,%s,%s,%s)"
+        data = (zeitintervallbuchung.get_id(), zeitintervallbuchung.get_projekt_id(),zeitintervallbuchung.get_person_id(),
+                zeitintervallbuchung.get_zeitintervall(), zeitintervallbuchung.get_letzte_aenderung())
+        cursor.execute(command, data)
+
+        self._cnx.commit()
+        cursor.close()
+
+        return zeitintervallbuchung
+
+

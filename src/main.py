@@ -595,6 +595,27 @@ class PersoenlicheOperations(Resource):
 
 
 """ Buchungen  """
+@zeiterfassung.route("/zeitintervallbuchungen")
+class ZeitintervallbuchungenListOperations(Resource):
+    @zeiterfassung.marshal_with(zeitintervallbuchung, code=201)
+    @zeiterfassung.expect(zeitintervallbuchung)
+    def post(self):
+        """ Zeitintervallbuchung Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
+        Attribute aus den Werten von api.payload setzen. person_object = Person-Objekt """
+        zb_object = Zeitinverallbuchung.from_dict(api.payload)
+
+        if zb_object is not None:
+            """ Wir erstellen in Administration eine Person mithilfe der Daten vom api.payload """
+            c = adm.create_zeitintervallbuchung(zb_object.get_projekt_id(),zb_object.get_person_id(), zb_object.get_aktivitaet_id(),
+                zb_object.get_zeitintervall())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
+
 @zeiterfassung.route("/zeitintervallbuchungen/<int:projekt_id>")
 @zeiterfassung.param("projekt_id", "Die Id des gewünschten Projekts")
 class ZeitintervallbuchungenByProjektId(Resource):
@@ -605,6 +626,11 @@ class ZeitintervallbuchungenByProjektId(Resource):
         zeitintervallbuchung = adm.get_zeitintervallbuchung_by_id(projekt_id)
         print(projekt)
         return zeitintervallbuchung
+
+
+
+
+
 
 
 """ Server läuft auf localhost:5000 bzw. 127.0.0.1:5000 """

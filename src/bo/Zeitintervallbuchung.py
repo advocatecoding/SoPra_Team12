@@ -57,4 +57,15 @@ class Zeitinverallbuchung(bo):
     def set_aktivitaet_id(self, value):
         self._aktivitaet_id = value
 
+    def from_dict(dictionary=dict()):
+        """Umwandeln eines Python dict() in eine Person()."""
+        obj = Zeitinverallbuchung()
+        obj.set_id(dictionary["id"])
+        obj.set_projekt_id(dictionary["projekt_id"])
+        obj.set_person_id(dictionary["person_id"])
+        obj.set_aktivitaet_id(dictionary["aktivitaet_id"])
+        obj.set_zeitintervall(dictionary["gearbeitete_zeit"])
+        obj.set_letzte_aenderung()
+
+        return obj
 
