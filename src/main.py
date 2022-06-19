@@ -14,6 +14,7 @@ from bo.Aktivitaet import Aktivitaet
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from bo.Urlaub import Urlaub
 from bo.VerkaufteStundenInAktivitaet import VerkaufteStundenInAktivitaet
+from bo.Zeitintervallbuchung import Zeitinverallbuchung
 from bo.SollZeit import Sollzeit
 
 """ Wir erstellen ein "Flask-Objekt" """
@@ -102,6 +103,14 @@ personeliche_mitarbeiteransicht = api.inherit('MitarbeiterAnsicht', bo, {
     "projekt": fields.String(attribute="_projekt", description="Projekt"),
     "gearbeitete_zeit": fields.String(attribute="_gearbeitete_zeit", description="gebuchte Stunden")
 })
+
+zeitintervallbuchung = api.inherit('Zeitintervallbuchung', bo, {
+    "projekt_id": fields.String(attribute="_projekt_id", description="Projekt ID"),
+    "person_id": fields.String(attribute="_person_id", description="Person ID"),
+    "aktivitaet_id": fields.String(attribute="_aktivitaet_id", description="Aktivitaet ID"),
+    "gearbeitete_zeit": fields.String(attribute="_zeitintervall", description="Gearbeitete Zeit")
+})
+
 
 
 
@@ -584,6 +593,18 @@ class PersoenlicheOperations(Resource):
         projekt = adm.get_persoenliche_mitarbeiteransicht_by_id(person_id)
         return projekt
 
+
+""" Buchungen  """
+@zeiterfassung.route("/zeitintervallbuchungen/<int:projekt_id>")
+@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projekts")
+class ZeitintervallbuchungenByProjektId(Resource):
+    @zeiterfassung.marshal_with(zeitintervallbuchung)
+    def get(self, projekt_id):
+        """ Auslesen der Aktivitäten innerhalb eines Projektes"""
+        adm = Administration()
+        zeitintervallbuchung = adm.get_zeitintervallbuchung_by_id(projekt_id)
+        print(projekt)
+        return zeitintervallbuchung
 
 
 """ Server läuft auf localhost:5000 bzw. 127.0.0.1:5000 """

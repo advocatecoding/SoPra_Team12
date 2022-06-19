@@ -5,7 +5,7 @@ class Projektarbeit(Zeitintervall):
         super().__init__(ereignisbuchung)
         if ereignisbuchung is not None:
             # self.__ereignisbuchung = ereignisbuchung
-            self.__person = ereignisbuchung.get_person()
+            self.__person_id = ereignisbuchung.get_person().get_id()
             """ Zeitintervall wird ausgerechnet durch Ende und Start """
             start = ereignisbuchung.get_startereignis()
             ende = ereignisbuchung.get_endereignis()

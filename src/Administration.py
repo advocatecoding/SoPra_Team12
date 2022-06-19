@@ -23,6 +23,7 @@ from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
 from db.AktivitaetInProjektMapper import AktivitaetInProjektMapper
 from db.VerkaufteStundenInAktivitaetMapper import VerkaufteStundenInAktivitaetMapper
+from db.ZeitintervallbuchungMapper import ZeitintervallbuchungMapper
 import datetime
 
 
@@ -286,9 +287,11 @@ class Administration(object):
         ereignisbuchung = Ereignisbuchung(startereignis, endereignis)
         ereignisbuchung.set_id(1211)
 
-    def create_zeitintervall(self, ereignisbuchung):
+    def get_zeitintervallbuchung_by_id(self, projekt_id):
+        """ Wir geben die Projekte mit der angegebenen ID zurück """
+        with ZeitintervallbuchungMapper() as mapper:
+            return mapper.find_by_projekt_id(projekt_id)
 
-        zeitintervall = Zeitintervall()
 
 
 if __name__ == '__main__':
