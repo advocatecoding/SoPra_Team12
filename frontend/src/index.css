@@ -5,7 +5,7 @@ body{
 :root {
     --bg: #262A2E;
     --bg-accent: #484a4d;
-    --text-color: #00bcd4;
+    --text-color: white;
     --nav-size: 60px;
     --border-radius: 8px;
     --speed: 450ms;
@@ -55,12 +55,13 @@ a {
     transition: filter 300ms;
 }
 
+
 .icon-button:hover {
     filter: brightness(2.2);
 }
 
 .icon-button svg {
-    fill: var(--text-color);
+    fill: #00bcd4;
     width: 20px;
     height: 20px;
 }
@@ -94,6 +95,7 @@ a {
     display: flex;
     justify-content: flex-end;
     right: 0;
+    margin-left: 1rem;
 }
 
 
@@ -109,46 +111,4 @@ a {
 
 .menu-item .icon-button:hover {
     filter: none;
-}
-
-
-.icon-right {
-    margin-left: 50px;
-}
-
-/* CSSTransition classes  */
-.menu-primary-enter {
-    position: absolute;
-    transform: translateX(-10%);
-}
-
-.menu-primary-enter-active {
-    transform: translateX(0%);
-    transition: all var(--speed) ease-out;
-}
-
-.menu-primary-exit {
-    position: absolute;
-}
-
-.menu-primary-exit-active {
-    transform: translateX(-30%);
-    transition: all var(--speed) ease-out;
-}
-
-
-.menu-secondary-enter {
-    transform: translateX(110%);
-}
-
-.menu-secondary-enter-active {
-    transform: translateX(0%);
-    transition: all var(--speed) ease-out;
-}
-
-/*.menu-secondary-exit {}*/
-
-.menu-secondary-exit-active {
-    transform: translateX(110%);
-    transition: all var(--speed) ease-out;
 }

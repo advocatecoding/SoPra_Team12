@@ -6,13 +6,10 @@ function Header() {
 
     <div>
       <Box sx= {{mt: 2}}></Box>
+      <Typography style={textColor} align='center' variant='h4'>Zeiterfassung HdM WebApp</Typography>
       <Grid container>
-        <Grid>
-          
-        </Grid>
-        <Grid>
-        <Typography style={textColor} align='center' variant='h4'>Zeiterfassung HdM WebApp</Typography>
-        </Grid>
+        
+        
       
       </Grid>
       

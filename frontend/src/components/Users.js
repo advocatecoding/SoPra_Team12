@@ -13,7 +13,6 @@ export default function Users(props) {
 
     const handleChange = (event) => {
         props.setUsername(event.target.value)
-        
     };
 
     useEffect(() => {

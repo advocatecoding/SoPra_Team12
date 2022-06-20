@@ -6,7 +6,6 @@ import Button from '@mui/material/Button';
 import { createTheme } from '@mui/material/styles';
 import { ThemeProvider } from '@mui/material'
 import { red } from '@mui/material/colors';
-import createPalette from '@material-ui/core/styles/createPalette';
 import { withStyles } from '@material-ui/core/styles';
 import Start from './Start'
 
@@ -28,8 +27,6 @@ const theme = createTheme({
 function Login() {
     const [usernamePar, setUsernamePar] = useState('');
     const [userIsSelected, selectUser] = useState(false);
-    const username = ""
-    
 
 
     const pressButton = (event) =>  {
@@ -39,9 +36,7 @@ function Login() {
     };
 
 
-    function setSomething(x) {
-        console.log(x)
-    }
+
 
     return (
         
@@ -49,7 +44,7 @@ function Login() {
             {
                 userIsSelected ? 
                 <>
-                <Start></Start>
+                <Start username={usernamePar}></Start>
                 </>
                 :
                 <>

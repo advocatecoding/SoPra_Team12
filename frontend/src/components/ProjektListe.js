@@ -1,21 +1,16 @@
 import '../index.css';
-import { ReactComponent as ArrowIcon } from '../icons/arrow.svg';
-import { ReactComponent as BoltIcon } from '../icons/bolt.svg';
 import AccountTreeRoundedIcon from '@mui/icons-material/AccountTreeRounded';
 import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import LoadingProgress from '../components/Loading/LoadingProgress';
 import IconButton from "@material-ui/core/IconButton";
-import ZeiterfassungAPI from '../api/ZeiterfassungAPI';
 import { Button, Grid, Typography, withStyles, Box } from '@material-ui/core';
-
+import ArticleIcon from '@mui/icons-material/Article';
 
 export default function ProjektListe() {
 
   const [projekte, setProjekte] = useState([1, 2]);
-  const [aktivitaeten, setAktivitaeten] = useState([])
   const [activeMenu, setActiveMenu] = useState('main');
-  const [menuHeight, setMenuHeight] = useState(null);
   const dropdownRef = useRef(null);
   const [loadingInProgress, setLoading] = useState(true);
   const [loadingError, setLoadingError] = useState(null);
@@ -44,28 +39,23 @@ export default function ProjektListe() {
   }
 
 
-  async function fetchAktivatenByProjektId(id, idx) {
-    console.log("fetched!")
-    try {
-      const response = await fetch(`/zeit/aktivitaeten/${id}`);
-      const data = await response.json();
-      setAktivitaeten(data)
-    } catch (e) {
-      console.log(e.message)
-    }
-  }
 
-
-  function DropdownItem(props) {
+  function ListItem(props) {
     return (
       <a href="#" className="menu-item" >
-        <span className="icon-button" onClick={() => props.menu && setMenuMain(props.menu)}>{props.leftIcon}</span>
+        <span className="icon-button" >{props.leftIcon}</span>
         <div className="parent">
           {props.children}
         </div>
-
       </a>
     );
+  }
+
+
+  // Szenario 5 - Projektkontrolle
+  // Projektleiter sieht was die Mitarbeiter im jeweiligen Projekt gemacht haben
+  function checkProject() {
+    console.log("Projektinformationen werden angezeigt")
   }
 
   function setMenuMain(menu) {
@@ -85,62 +75,28 @@ export default function ProjektListe() {
       >
         <div className="menu" >
           <div style={{textAlign: "center", marginBottom: "1rem"}}>
-          <Typography  variant="h5" color="white" >Meine Projekte</Typography>  
+          <Typography  variant="h5" style={{color: "#00bcd4"}}>Meine Projekte</Typography>  
           </div>
+          
           
           {
             projekte.map((item, idx) =>
-              <DropdownItem
+              <ListItem
                 leftIcon={
                   <div >
-                    <IconButton onClick={() => fetchAktivatenByProjektId(idx + 1) && setActiveMenu(`projekt${idx}`)}>
-                      <AccountTreeRoundedIcon />
+                       <IconButton onClick={() => checkProject()}>
+                      <ArticleIcon />
                     </IconButton>
                   </div>
                 }
-                goToMenu={`projekt${idx}`}
-                projId={idx}
               >
                 <h3>{item.projektname} von {item.auftraggeber}</h3>
-              </DropdownItem>
+              </ListItem>
             )
           }
         </div>
       </CSSTransition>
       <LoadingProgress show={loadingInProgress}></LoadingProgress>
-
-      {
-        projekte.map((item, idx) =>
-
-          <CSSTransition
-            in={activeMenu === `projekt${idx}`}
-            timeout={500}
-            classNames="menu-secondary"
-            unmountOnExit
-          >
-            <div className="menu" style={{ maxWidth: "350px", minHeight: "300px", maxHeight: "500px", overflowY: "scroll" }}>
-
-              <DropdownItem leftIcon={
-                <IconButton onClick={() => setMenuMain("main")}>
-                  <ArrowIcon menu={"main"} style={{ color: "#00bcd4" }}></ArrowIcon>
-                </IconButton>
-              } >
-                <h3 >Aktivitäten</h3>
-              </DropdownItem>
-
-              {
-                aktivitaeten.map((item) =>
-                  <DropdownItem leftIcon={<BoltIcon />}>
-                    {console.log(aktivitaeten)}
-                    Aktivität: {item.aktivitaetname}
-                  </DropdownItem>)
-              }
-            </div>
-          </CSSTransition>
-        )
-      }
-
-
     </div>
   );
 }
