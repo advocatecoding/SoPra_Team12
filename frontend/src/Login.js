@@ -29,6 +29,7 @@ function Login() {
     const [usernamePar, setUsernamePar] = useState('');
     const [userIsSelected, selectUser] = useState(false);
     const username = ""
+    
 
 
     const pressButton = (event) =>  {
@@ -57,13 +58,13 @@ function Login() {
                 direction="column"
                 alignItems="center"
                 justifyContent="center">
-                <Typography style={{ marginTop: "50px", color: "white" }} fontSize={25}>Wählen Sie ihren Benutzer aus und drücken Sie auf weiter {usernamePar}</Typography>
+                <Typography style={{ marginTop: "50px", color: "white" }} fontSize={25}>Wählen Sie ihren Benutzer aus und drücken Sie auf <span style={{color: "#00bcd4"}}>Anmelden</span></Typography>
                 <Box mt={5} />
                 <Users setUsername={user => setUsernamePar(user)} style={{ minWidth: "100px" }}></Users>
                 {
                     usernamePar !== "" ?
                         <div align="center">
-                            <Typography style={{ marginTop: "50px", color: "white" }} fontSize={20}>Sind Sie sicher, dass Ihr Benutzername: {usernamePar} ist?</Typography>
+                            <Typography style={{ marginTop: "50px", color: "white" }} fontSize={20}>Sind Sie sicher, dass Ihr Benutzername<span style={{color: "#00bcd4"}}> {usernamePar}</span> ist?</Typography>
                             <Box mt={3} />
                             <Button variant="outlined" onClick={pressButton} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px" }} >
                                 Anmelden
@@ -72,12 +73,6 @@ function Login() {
                         :
                         null
                 }
-                <Box mt={10} />
-                <Typography fontSize={20} color="white" >Sie haben noch keinen Benutzer?</Typography>
-                <Box mt={3} />
-                <Button variant="outlined"  style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px" }} >
-                    Benutzer erstellen
-                </Button>
             </Grid>
             </>
             }

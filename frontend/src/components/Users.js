@@ -8,11 +8,12 @@ import Typography from '@mui/material/Typography';
 
 export default function Users(props) {
     const [personen, setPersonen] = useState([1, 2]);
-    const [userSelected, setUserSelected] = useState(false);
+    //const [userSelected, setUserSelected] = useState(false);
 
 
     const handleChange = (event) => {
         props.setUsername(event.target.value)
+        
     };
 
     useEffect(() => {
@@ -20,7 +21,7 @@ export default function Users(props) {
     }, [])
 
     async function fetchAllPersonen() {
-        const url = "https://learned-surge-353408.ey.r.appspot.com/zeit/personen";
+        const url = "/zeit/personen";
         try {
             //console.log(personen)
             const response = await fetch(url);
@@ -38,9 +39,9 @@ export default function Users(props) {
     //const list1 = ["chocolate", "vanilla", "ice"]
     return (
         <div>
-            <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "gray", borderRadius: "5px" }} sx={{ m: 1, minWidth: 200 }} >
+            <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" }} sx={{ m: 1, minWidth: 200 }} >
                 <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Username</InputLabel>
-                <Select
+                <Select style={{ color: "white"}}
                     onChange={handleChange}
                     label="Benutzer"
                     color="primary"

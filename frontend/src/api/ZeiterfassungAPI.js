@@ -4,7 +4,10 @@ export default class ZeiterfassungAPI {
 
     static #api = null
     #serverUrl = "/zeit"
+
     #getPersonsURL = () => `${this.#serverUrl}/personen`;
+    #getProjekteURL = () => `${this.#serverUrl}/projekte`;
+
 
     /**
      * Wir erstellen eine Sigelton Instanz
@@ -16,6 +19,8 @@ export default class ZeiterfassungAPI {
     }
     return this.#api;
     }
+
+
 
     #fetchAdvanced = (url, init) => fetch(url, init)
         .then(res => {
@@ -30,7 +35,7 @@ export default class ZeiterfassungAPI {
      * 
      * @public
      */
-    getPersonen() {
+    getPersonen = () => {
         return this.#fetchAdvanced(this.#getPersonsURL()).then((responseJSON) =>{
             let personenBOs = PersonBO.convertFromJSON(responseJSON);
             return new Promise(function (resolve) {
@@ -38,5 +43,14 @@ export default class ZeiterfassungAPI {
             })
         })
     }
+
+    getProjekte = async () => {
+        const response = await fetch(this.#fetchAdvanced(this.#getProjekteURL));
+        const data = await response.json();
+        console.log(data)
+        return data
+    }
+
+
 
 }

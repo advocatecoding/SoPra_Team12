@@ -6,7 +6,7 @@ import 'firebase/compat/auth';
 import SignIn from './SignIn';
 import Header from './components/header/Header'
 import Login from './Login'
-
+import Start from './Start';
 
 class App extends React.Component {
 
@@ -110,9 +110,10 @@ class App extends React.Component {
 					<Container maxWidth='xl'>
 					<Header></Header>
 						{
-							// Ist der Benutzer schon eingeloggt -> Dann soll <Start> geladen werden
+							// Ist der Benutzer schon eingeloggt -> Dann soll <Login> geladen werden
 							currentUser ?
 								<>
+								{/** zu Testzwecken wird Login übersprungen */}
 									<Login></Login>
 								</>
 								:

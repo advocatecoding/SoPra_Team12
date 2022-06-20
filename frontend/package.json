@@ -2,7 +2,7 @@
   "name": "sopra",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000/",
+  "proxy": "http://localhost:5000",
   "homepage": "/static/reactclient",
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -22,7 +22,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "^5.0.0"
+    "react-scripts": "^5.0.0",
+    "webpack": "^5.73.0"
   },
   "scripts": {
     "start": "react-scripts start --no-cache",
