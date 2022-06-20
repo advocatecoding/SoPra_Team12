@@ -171,6 +171,19 @@ class PersonByIdOperations(Resource):
         else:
             return '', 500
 
+""" Ein bestimmtes Person Objekt wird anhand des Benutzernamens ausgelesen   """
+@zeiterfassung.route("/personen/<string:benutzername>")
+@zeiterfassung.param("benutzername", "Der Benutzername der gewünschten Person")
+class BenutzerListOperations(Resource):
+    @zeiterfassung.marshal_with(person)
+    def get(self, benutzername):
+        """ Auslesen der Person Instanz.
+        Das zu auslesende Objekt wird anhand des Benutzernamens bestimmt
+        """
+        adm = Administration()
+        person = adm.get_person_by_benutzername(benutzername)
+        return person
+
 
 """ Projekt Objekt(e) wird gelesen und erstellt  """
 @zeiterfassung.route("/projekte")

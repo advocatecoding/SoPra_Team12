@@ -59,6 +59,11 @@ class Administration(object):
         with PersonMapper() as mapper:
             return mapper.find_by_id(person_id)
 
+    def get_person_by_benutzername(self, benutzername):
+        """ Wir geben die Person mit dem angegebenen Benutzernamen zurück """
+        with PersonMapper() as mapper:
+            return mapper.find_by_benutzername(benutzername)
+
     def delete_person_by_person_id(self, person_id):
         with PersonMapper() as mapper:
             #person = self.get_all_personen()

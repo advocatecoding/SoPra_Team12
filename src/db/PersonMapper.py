@@ -61,6 +61,36 @@ class PersonMapper(Mapper):
         print(result)
         return result
 
+    def find_by_benutzername(self, benutzer):
+        """ Wir suchen die Person mit dem jeweiligen Benutzername """
+        result = None
+
+        cursor = self._cnx.cursor()
+        command = "SELECT * FROM person WHERE benutzername='{}'".format(benutzer)
+        cursor.execute(command)
+        person_daten = cursor.fetchall()
+
+        try:
+            (person_id, vorname, nachname,  mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung) = person_daten[0]
+            person = Person()
+            person.set_vorname(vorname)
+            person.set_nachname(nachname)
+            person.set_benutzername(benutzername)
+            person.set_mail_adresse(mail_adresse)
+            person.set_urlaubstage(urlaubstage)
+            person.set_ueberstunden(ueberstunden)
+            person.set_id(person_id)
+            person.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
+            result = person
+        except IndexError:
+            """ Tritt auf, wenn es beim SELECT-Aufruf kein Ergebnis liefert, sondern person_daten leer ist """
+            result = None
+
+        self._cnx.commit()
+        cursor.close()
+        print(result)
+        return result
+
 
     def delete(self, person):
         """Löschen der Daten eines Person-Objekts aus der Datenbank.
