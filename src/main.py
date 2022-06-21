@@ -599,6 +599,21 @@ class PersoenlicheOperations(Resource):
 
 
 
+""" Projekt Objekte werden anhand dem projektleiter ausgegeben"""
+@zeiterfassung.route("/projekt/projektleiter/<int:projektleiter>")
+@zeiterfassung.param("projektleiter", "Die Id des gewünschten Projektleiters")
+class ProjByIdOperations(Resource):
+    @zeiterfassung.marshal_with(projekt)
+    def get(self,projektleiter):
+        """ Projekt Objekte werden anhand dem projektleiter ausgegeben
+        Das zu auslesende Objekt wird anhand der person_id bestimmt
+        """
+        adm = Administration()
+        projekt = adm.projekte_by_projektleiter(projektleiter)
+        return projekt
+
+
+
 """ Server läuft auf localhost:5000 bzw. 127.0.0.1:5000 """
 if __name__ == '__main__':
     app.run(debug=True)

@@ -109,9 +109,27 @@ class ProjektMapper(Mapper):
         self._cnx.commit()
         cursor.close()
 
+    def projektleiter(self, person_id):
+        """ Wir suchen das Projekt mit der jeweiligen ID """
+        result1 = []
 
+        cursor = self._cnx.cursor()
+        command = "SELECT * FROM Projekt WHERE person_id={0}".format(person_id)
+        cursor.execute(command)
+        projekt_daten = cursor.fetchall()
 
+        for (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung) in projekt_daten:
+            projekt1 = Projekt()
+            projekt1.set_id(projekt_id)
+            projekt1.set_projektleiter(person_id)
+            projekt1.set_name(projektname)
+            projekt1.set_auftraggeber(auftraggeber)
+            projekt1.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
+            result1.append(projekt1)
 
+        self._cnx.commit()
+        cursor.close()
+        return result1
 
 
 

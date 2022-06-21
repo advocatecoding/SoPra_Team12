@@ -242,7 +242,9 @@ class Administration(object):
         with ProjektMapper() as mapper:
             return mapper.find_by_id(projekt_id)
 
-
+    def projekte_by_projektleiter(self, projektleiter):
+        with ProjektMapper() as mapper:
+            return mapper.projektleiter(projektleiter)
 
 
     def get_all_verkaufte_stunden_in_aktivitaet(self):
