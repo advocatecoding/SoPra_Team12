@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box } from '@material-ui/core';
+import { Grid, Box, Fab } from '@material-ui/core';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PersonInformationen from './components/PersonInformationen';
 import ProjektListe from './components/ProjektListe';
 import CheckProjects from "./components/CheckProjects";
 import CheckProjectsModal from "./components/modals/CheckProjectsModal"
-
+import Stundenübersicht from "./components/Stundenübersicht";
 
 const theme = createTheme({
   palette: {
@@ -44,25 +44,34 @@ function Start(props) {
     }
   }
 
-  
+
 
   return (
     <div >
-      {checkProjects && <CheckProjectsModal setOpenModal={setCheckProjects}/>}
+      {console.log("user id bla bla   ", userId)}
+      {checkProjects ?
+        <>
+          <CheckProjectsModal setOpenModal={setCheckProjects} mitarbeiter_id={userId} />
+        </>
+        : null
+      }
       <ThemeProvider theme={theme}>
         {/* Abstand */}
         <Box sx={{ mt: 5 }}></Box>
 
 
-        <Grid container justify="space-between" gap={2} >
+        <Grid container justify="space-around"
+
+
+          gap={2} >
           {/* Sidebar -> Projektübersicht */}
           <Grid xs={4} style={{ minWidth: "300px" }}>
-            <div style={{display:"flex", flexDirection:"column", alignItems: "center"}}>
-            <ProjektListe></ProjektListe>
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+              <ProjektListe></ProjektListe>
 
-            <CheckProjects openCheckProjectsModal={open => setCheckProjects(open)}></CheckProjects>
+              <CheckProjects openCheckProjectsModal={open => setCheckProjects(open)}></CheckProjects>
             </div>
-           
+
 
           </Grid>
 
@@ -85,8 +94,10 @@ function Start(props) {
               </Grid>
 
               {/* Stundenübersicht erstellen Button*/}
-              <Grid xs={4} style={{ backgroundColor: "#834534", borderRadius: "8px" }}>
-
+              <Grid container
+                justifyContent="center"
+                alignItems="start" xs={4} style={{ backgroundColor: "#834534", borderRadius: "8px" }}>
+                <Stundenübersicht />
               </Grid>
 
 

@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import CheckProjectsModal from "./modals/CheckProjectsModal";
-
+import { Grid, Box, Fab } from '@material-ui/core';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 
 export default function CheckProjects(props) {
@@ -18,14 +19,11 @@ export default function CheckProjects(props) {
     return (
 
         <div style={{marginTop: "2rem"}}>
-            <Button variant="outlined" onClick={() => {handleChange()}} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px" }} >
+             <Fab variant="extended" onClick={() => {handleChange()}} style={{color: "white", backgroundColor:"#30343C"}}>
+                <DashboardIcon sx={{ mr: "1rem" }}  onClick={() => {handleChange()}} style={{color: "#00bcd4"}} />
                 Projektkontrolle durchführen
-            </Button>
-
-            
-
-
-
+            </Fab>
+         
         </div>
     )
 }

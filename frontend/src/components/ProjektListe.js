@@ -10,10 +10,13 @@ import ArticleIcon from '@mui/icons-material/Article';
 export default function ProjektListe() {
 
   const [projekte, setProjekte] = useState([1, 2]);
+  const [projektIds, setProjektIds] = useState([]);
+
   const [activeMenu, setActiveMenu] = useState('main');
   const dropdownRef = useRef(null);
   const [loadingInProgress, setLoading] = useState(true);
   const [loadingError, setLoadingError] = useState(null);
+  
 
 
 
@@ -37,6 +40,22 @@ export default function ProjektListe() {
     }
     ;
   }
+
+
+  // Es werden
+  async function fetchAssignedProjekte(person_id) {
+    const url = `/zeit/mitarbeiter_in_projekt/${person_id}`;
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      setProjekte(data)
+      setLoading(false)
+    } catch (e) {
+      setLoadingError(e)
+    }
+    ;
+  }
+
 
 
 
@@ -75,7 +94,7 @@ export default function ProjektListe() {
       >
         <div className="menu" >
           <div style={{textAlign: "center", marginBottom: "1rem"}}>
-          <Typography  variant="h5" style={{color: "#00bcd4"}}>Meine Projekte</Typography>  
+          <Typography  variant="h5" style={{color: "white"}}>Meine Projekte</Typography>  
           </div>
           
           
