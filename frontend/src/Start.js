@@ -6,6 +6,8 @@ import ProjektListe from './components/ProjektListe';
 import CheckProjects from "./components/CheckProjects";
 import CheckProjectsModal from "./components/modals/CheckProjectsModal"
 import Stundenübersicht from "./components/Stundenübersicht";
+import UrlaubBuchen from "./components/UrlaubBuchen";
+import UrlaubBuchenModal from "./components/modals/UrlaubBuchenModal";
 
 
 
@@ -26,6 +28,10 @@ function Start(props) {
   const [userId, setUserId] = useState("");
   const [userIdIsSet, setUserIdTrue] = useState(false);
   const [checkProjects, setCheckProjects] = useState(false);
+  const [urlaubModalOpen, setUrlaubModalOpen] = useState (false);
+
+  
+
 
 
   useEffect(() => {
@@ -57,6 +63,9 @@ function Start(props) {
         </>
         : null
       }
+
+      {urlaubModalOpen && <UrlaubBuchenModal setOpenModal={setUrlaubModalOpen}></UrlaubBuchenModal>}
+     
       <ThemeProvider theme={theme}>
         {/* Abstand */}
         <Box sx={{ mt: 5 }}></Box>
@@ -77,6 +86,8 @@ function Start(props) {
               {/* Sidebar -> Projektkontrolle durchführen Button*/}
               <div>
                 <CheckProjects openCheckProjectsModal={open => setCheckProjects(open)}></CheckProjects>
+
+              
               </div>
 
             </div>
@@ -117,6 +128,13 @@ function Start(props) {
 
               {/* Buchbereich*/}
               <Grid xs={12} style={{ backgroundColor: "#447F50", minHeight: "400px", borderRadius: "8px", marginTop: "2rem" }}>
+
+              <div>
+     
+              <UrlaubBuchen openUrlaubBuchenModal={open => setUrlaubModalOpen(open)}></UrlaubBuchen>
+
+              
+              </div>   
 
               </Grid>
             </Grid>

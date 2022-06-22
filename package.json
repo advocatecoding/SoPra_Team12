@@ -1,5 +1,22 @@
 {
   "dependencies": {
-    "http-proxy-middleware": "^2.0.6"
+    "@progress/kendo-date-math": "^1.5.7",
+    "@progress/kendo-drawing": "^1.16.3",
+    "@progress/kendo-licensing": "^1.2.2",
+    "@progress/kendo-react-animation": "^5.4.0",
+    "@progress/kendo-react-buttons": "^5.4.0",
+    "@progress/kendo-react-common": "^5.4.0",
+    "@progress/kendo-react-dateinputs": "^5.4.0",
+    "@progress/kendo-react-dialogs": "^5.4.0",
+    "@progress/kendo-react-dropdowns": "^5.4.0",
+    "@progress/kendo-react-form": "^5.4.0",
+    "@progress/kendo-react-inputs": "^5.4.0",
+    "@progress/kendo-react-intl": "^5.4.0",
+    "@progress/kendo-react-popup": "^5.4.0",
+    "@progress/kendo-react-scheduler": "^5.4.0",
+    "@progress/kendo-react-treeview": "^5.4.0",
+    "@progress/kendo-theme-default": "^5.5.0",
+    "http-proxy-middleware": "^2.0.6",
+    "react-calendar-timeline": "^0.28.0"
   }
 }
