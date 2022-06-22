@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Fab, Button, Typography } from '@material-ui/core';
+import { Grid, Fab, Button, Typography } from '@material-ui/core';
 import TimelapseIcon from '@mui/icons-material/Timelapse';
 import CloseIcon from '@mui/icons-material/Close';
 import Dialog from '@mui/material/Dialog';
@@ -60,30 +60,32 @@ export default function Stundenübersicht(props) {
 
             <Dialog open={openModal}
                 PaperProps={{
-                sx: {
-                  minHeight: 370,
+                style: {
+                  minHeight: 390,
                   minWidth: 600,
                   maxHeight: 280,
+                  borderRadius: '12px',
                 }
-                
-              }} >
-                
-                <DialogTitle sx={{ m: 0, p: 2 }}>Stundenübersicht
+              }}>              
+                <DialogTitle style={{ backgroundColor: "#ddd3d3"}}  sx={{ m: 0, p: 2 }}>Stundenübersicht
                     <Button startIcon={<CloseIcon />} onClick={handleClose}
-                         sx={{
-                            position: 'absolute',
-                            right: 8,
-                            top: 8,
-                            color: (theme) => theme.palette.grey[500],
-                          }} ></Button>
+                    sx={{
+                        position: 'absolute',
+                        right: 0,
+                        }} ></Button>
                 </DialogTitle>
-                <DialogContent>
+                <DialogContent style={{ backgroundColor: "#ddd3d3"}}>
                     {dataIsFetched ?
                         <>
                             <DialogContentText >
+                            <Grid xs={12}></Grid>
+                            <Typography variant="h8"  style={{paddingLeft: "1px"}}>
+                            Projekt Aktivität &nbsp; Gearbeitete_Zeit
+                            <hr></hr>                     
+                            </Typography>
                                 {
                                     stundenübersicht.map((item) =>
-                                        <Typography>{item.projekt} {item.bezeichnung} {item.gearbeitete_zeit}</Typography>
+                                        <Typography style={{paddingLeft: "1px"}}> {item.projekt }   {item.bezeichnung}  {item.gearbeitete_zeit}</Typography>
                                     )
                                 }
                             </DialogContentText>

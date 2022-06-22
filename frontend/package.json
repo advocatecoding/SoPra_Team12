@@ -2,8 +2,6 @@
   "name": "sopra",
   "version": "0.1.0",
   "private": true,
-
-
   "proxy": "http://127.0.0.1:5000",
   "homepage": "/static/reactclient",
   "dependencies": {
@@ -19,6 +17,7 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.1",
     "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.27.2",
     "firebase": "^9.6.10",
     "material-ui": "^0.20.2",
     "react": "^16.13.1",
