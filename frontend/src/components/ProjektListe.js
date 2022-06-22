@@ -6,7 +6,6 @@ import LoadingProgress from '../components/Loading/LoadingProgress';
 import IconButton from "@material-ui/core/IconButton";
 import { Button, Grid, Typography, withStyles, Box } from '@material-ui/core';
 import ArticleIcon from '@mui/icons-material/Article';
-import { unstable_getNormalizedScrollLeft } from '@mui/utils';
 
 export default function ProjektListe(props) {
 
@@ -95,7 +94,7 @@ export default function ProjektListe(props) {
           
           
           {
-            mitarbeiterProjekte.map((item, idx) =>
+            mitarbeiterProjekte.map((item) =>
               <ListItem
                 leftIcon={
                   <div >

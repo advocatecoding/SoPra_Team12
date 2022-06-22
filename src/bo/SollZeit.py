@@ -8,6 +8,16 @@ class Sollzeit(bo.BusinessObject):
         self._aktivitaet = ""
         self._projekt = ""
         self._gebuchte_stunden = 0
+        self._bezeichnung = ""
+
+
+    def get_bezeichnung(self):
+        """Auslesen der Person ID """
+        return self._bezeichnung
+
+    def set_bezeichnung(self, value):
+        """Setzen der Person ID."""
+        self._bezeichnung = value
 
 
     def get_person(self):

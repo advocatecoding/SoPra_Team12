@@ -55,13 +55,14 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
         result = []
 
         cursor = self._cnx.cursor()
-        command = "select gebuchte_stunden FROM verkaufte_stunden_in_aktivitaet Inner Join Person on verkaufte_stunden_in_aktivitaet.person_id = person.person_id Inner Join Zeitintervallbuchung on verkaufte_stunden_in_aktivitaet.aktivitaet_id = Zeitintervallbuchung.aktivitaet_id where zeitintervallbuchung.projekt_id={0} group by zeitintervallbuchung.aktivitaet_id, vorname order by vorname ASC;".format(projekt_id)
+        command = "select gebuchte_stunden, bezeichnung FROM verkaufte_stunden_in_aktivitaet Inner Join Person on verkaufte_stunden_in_aktivitaet.person_id = person.person_id Inner Join Zeitintervallbuchung on verkaufte_stunden_in_aktivitaet.aktivitaet_id = Zeitintervallbuchung.aktivitaet_id Inner Join aktivitaet on verkaufte_stunden_in_aktivitaet.aktivitaet_id = aktivitaet.aktivitaet_id where zeitintervallbuchung.projekt_id={0} group by zeitintervallbuchung.aktivitaet_id, vorname order by bezeichnung ASC;".format(projekt_id)
         cursor.execute(command)
         projekt_daten = cursor.fetchall()
 
-        for (gebuchte_stunden) in projekt_daten:
+        for (gebuchte_stunden,bezeichnung) in projekt_daten:
             projekt = Sollzeit()
             projekt.set_gebuchte_stunden(gebuchte_stunden)
+            projekt.set_bezeichnung(bezeichnung)
             result.append(projekt)
 
 
@@ -77,7 +78,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
         result = []
 
         cursor = self._cnx.cursor()
-        command = "select vorname, bezeichnung, SUM(gearbeitete_zeit) FROM zeitintervallbuchung Inner Join Person on zeitintervallbuchung.person_id = person.person_id Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id where zeitintervallbuchung.projekt_id={0} group by bezeichnung, vorname order by vorname ASC;".format(projekt_id)
+        command = "select vorname, bezeichnung, SUM(gearbeitete_zeit) FROM zeitintervallbuchung Inner Join Person on zeitintervallbuchung.person_id = person.person_id Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id where zeitintervallbuchung.projekt_id={0} group by bezeichnung, vorname order by bezeichnung ASC;".format(projekt_id)
         cursor.execute(command)
         projekt_daten = cursor.fetchall()
 

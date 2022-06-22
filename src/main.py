@@ -86,7 +86,9 @@ sollzeit = api.inherit('SollZeit', bo, {
     "mitarbeiter": fields.String(attribute="_person", description="Mitarbeiter"),
     "aktivitaet": fields.String(attribute="_aktivitaet", description="Aktivität"),
     "projekt": fields.String(attribute="_projekt", description="Projekt"),
-    "gebuchte_stunden": fields.String(attribute="_gebuchte_stunden", description="gebuchte Stunden")
+    "gebuchte_stunden": fields.String(attribute="_gebuchte_stunden", description="gebuchte Stunden"),
+    "bezeichnung": fields.String(attribute="_bezeichnung", description="Bezeichnung")
+
 })
 
 mitarbeiteransicht = api.inherit('MitarbeiterAnsicht', bo, {
