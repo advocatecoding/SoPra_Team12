@@ -116,10 +116,6 @@ export default function CheckProjectsModal(props) {
       }
 
     </div>
-
-
-
-
   )
 }
 
@@ -157,7 +153,7 @@ function ProjectTime(props) {
     <div>
       {console.log(kontrolldaten[0].vorname)}
       {kontrolldaten.map((item) => 
-        <p> {item.vorname} {item.gearbeitete_zeit}  </p> 
+        <p> {item.vorname} {item.gearbeitete_zeit}</p> 
       )}
       
       

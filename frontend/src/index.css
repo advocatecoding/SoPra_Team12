@@ -11,22 +11,8 @@ body{
     --speed: 450ms;
 }
 
-.button1 {
-    background-color: transparent;
-    background-repeat: no-repeat;
-    border: none;
-    cursor: pointer;
-    overflow: hidden;
-    outline: none;
-}
-
-.icon {
-    transform: scale(2);
-}
-
-code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-        monospace;
+h1, h2, h3, h4, h5, h6 {
+    font-weight: normal;
 }
 
 ul {
@@ -99,16 +85,5 @@ a {
 }
 
 
-.menu-children button {
-    min-width: 50px;
-    max-width: 50px;
-}
-
-.menu-item .icon-button {
-    margin-right: 0.5rem;
-}
 
 
-.menu-item .icon-button:hover {
-    filter: none;
-}

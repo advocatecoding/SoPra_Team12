@@ -7,6 +7,8 @@ import CheckProjects from "./components/CheckProjects";
 import CheckProjectsModal from "./components/modals/CheckProjectsModal"
 import Stundenübersicht from "./components/Stundenübersicht";
 
+
+
 const theme = createTheme({
   palette: {
     primary: {
@@ -60,29 +62,29 @@ function Start(props) {
         <Box sx={{ mt: 5 }}></Box>
 
 
-        <Grid container justify="space-around"
-
-
-          gap={2} >
+        <Grid container justify="space-between"
+        >
           {/* Sidebar -> Projektübersicht */}
-          <Grid xs={4} style={{ minWidth: "300px" }}>
-            <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
+          <Grid lg={3} xs={8} md={4} style={{ display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "auto", marginRight: "auto", padding: "1rem" }}>
+            <div >
               {
                 userId != "" ?
-                <>
-                  <ProjektListe id={userId}></ProjektListe>  
-                </>
-                : null
+                  <>
+                    <ProjektListe id={userId}></ProjektListe>
+                  </>
+                  : null
               }
-              <CheckProjects openCheckProjectsModal={open => setCheckProjects(open)}></CheckProjects>
+              {/* Sidebar -> Projektkontrolle durchführen Button*/}
+              <div>
+                <CheckProjects openCheckProjectsModal={open => setCheckProjects(open)}></CheckProjects>
+              </div>
+
             </div>
-
-
           </Grid>
 
 
           {/* Hauptbereich */}
-          <Grid xs={8} style={{ backgroundColor: "grey", borderRadius: "8px", maxWidth: "900px", height: "600px" }}>
+          <Grid container lg={10} xs={12} md={8} style={{ backgroundColor: "grey", borderRadius: "8px", maxWidth: "900px", height: "600px", margin: "auto", padding: "1rem" }}>
             <Grid container style={{ borderRadius: "8px" }} >
               {/* Benutzerinformation*/}
               <Grid xs={8} style={{ backgroundColor: "#842680", height: "200px", borderRadius: "8px" }}>

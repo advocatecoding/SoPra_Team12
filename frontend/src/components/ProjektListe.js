@@ -23,7 +23,7 @@ export default function ProjektListe(props) {
 
   useEffect(() => {
     // Update the document title using the browser API
-    
+
     FetchProjekte(props.id)
     /**
      * Leere Liste: [] muss übergeben werden um einen infinite Loop zu verhindern
@@ -66,33 +66,18 @@ export default function ProjektListe(props) {
   }
 
 
-  // Szenario 5 - Projektkontrolle
-  // Projektleiter sieht was die Mitarbeiter im jeweiligen Projekt gemacht haben
-  function checkProject() {
-    console.log("Projektinformationen werden angezeigt")
-  }
-
-  function setMenuMain(menu) {
-    setActiveMenu(menu)
-    //console.log(activeMenu)
-  }
-
 
   return (
-    <div className="dropdown" style={{ maxWidth: "350px", minHeight: "300px", maxHeight: "500px", overflowY: "scroll" }} ref={dropdownRef}>
+    <div className="dropdown" style={{ minHeight: "300px", maxHeight: "500px", overflowY: "scroll" }} ref={dropdownRef}>
       
       <CSSTransition
         in={activeMenu === 'main'}
         timeout={500}
-        classNames="menu-primary"
-        unmountOnExit
       >
         <div className="menu" >
           <div style={{textAlign: "center", marginBottom: "1rem"}}>
           <Typography  variant="h5" style={{color: "white"}}>Meine Projekte</Typography>  
           </div>
-          
-          
           {
             mitarbeiterProjekte.map((item) =>
               <ListItem
