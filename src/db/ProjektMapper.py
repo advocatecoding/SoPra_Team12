@@ -133,6 +133,27 @@ class ProjektMapper(Mapper):
 
 
 
+    def find_projektnamen(self, person_id):
+        """ Wir suchen das Projekt mit der jeweiligen ID """
+        result1 = []
+
+        cursor = self._cnx.cursor()
+        command = "SELECT projektname, auftraggeber FROM mitarbeiter_in_projekt JOIN projekt ON mitarbeiter_in_projekt.projekt_id = projekt.projekt_id JOIN person ON mitarbeiter_in_projekt.person_idd = person.person_id WHERE person.person_id={}".format(person_id)
+
+        cursor.execute(command)
+        projekt_daten = cursor.fetchall()
+
+        for (projektname,auftraggeber) in projekt_daten:
+            projekt1 = Projekt()
+            projekt1.set_name(projektname)
+            projekt1.set_auftraggeber(auftraggeber)
+            result1.append(projekt1)
+
+        self._cnx.commit()
+        cursor.close()
+        return result1
+
+
 
 
 

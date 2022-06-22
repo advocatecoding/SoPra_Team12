@@ -105,6 +105,8 @@ personeliche_mitarbeiteransicht = api.inherit('MitarbeiterAnsicht', bo, {
 
 
 
+
+
 """ Person Objekt(e) wird gelesen und erstellt  """
 @zeiterfassung.route("/personen")
 class PersonenListOperations(Resource):
@@ -610,6 +612,20 @@ class ProjByIdOperations(Resource):
         """
         adm = Administration()
         projekt = adm.projekte_by_projektleiter(projektleiter)
+        return projekt
+
+
+""" Es werden alle Projekte angezeigt in der eine Person arbeitet"""
+@zeiterfassung.route("/projekt/mitarbeiter/<int:person_id>")
+@zeiterfassung.param("person_id", "Die Id der gewünschten Person")
+class ProjektByIdMitarbeiterOperations(Resource):
+    @zeiterfassung.marshal_with(projekt)
+    def get(self,person_id):
+        """ Es werden alle Projekte angezeigt in der eine Person arbeitet
+        Das zu auslesende Objekt wird anhand der id bestimmt
+        """
+        adm = Administration()
+        projekt = adm.get_all_projekte_by_mitarbeiter_id(person_id)
         return projekt
 
 

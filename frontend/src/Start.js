@@ -67,7 +67,7 @@ function Start(props) {
           {/* Sidebar -> Projektübersicht */}
           <Grid xs={4} style={{ minWidth: "300px" }}>
             <div style={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-              <ProjektListe></ProjektListe>
+              <ProjektListe id={userId}></ProjektListe>
 
               <CheckProjects openCheckProjectsModal={open => setCheckProjects(open)}></CheckProjects>
             </div>

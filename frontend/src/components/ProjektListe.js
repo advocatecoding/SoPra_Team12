@@ -6,10 +6,12 @@ import LoadingProgress from '../components/Loading/LoadingProgress';
 import IconButton from "@material-ui/core/IconButton";
 import { Button, Grid, Typography, withStyles, Box } from '@material-ui/core';
 import ArticleIcon from '@mui/icons-material/Article';
+import { unstable_getNormalizedScrollLeft } from '@mui/utils';
 
-export default function ProjektListe() {
+export default function ProjektListe(props) {
 
-  const [projekte, setProjekte] = useState([1, 2]);
+  const [projekte, setProjekte] = useState([]);
+  const [mitarbeiterProjekte, setMitarbeiterProjekte] = useState([]);
   const [projektIds, setProjektIds] = useState([]);
 
   const [activeMenu, setActiveMenu] = useState('main');
@@ -22,39 +24,30 @@ export default function ProjektListe() {
 
   useEffect(() => {
     // Update the document title using the browser API
-    fetchAllProjekte()
+    FetchProjekte(props.id)
     /**
      * Leere Liste: [] muss übergeben werden um einen infinite Loop zu verhindern
      */
-  }, []);
+  }, [])
 
-  async function fetchAllProjekte() {
-    const url = "/zeit/projekte";
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setProjekte(data)
-      setLoading(false)
-    } catch (e) {
-      setLoadingError(e)
+
+
+  async function FetchProjekte(id) {
+      console.log("Perso GCKEN.")
+      console.log(id)
+      const url = `/zeit/projekt/mitarbeiter/${id}`;
+      try {
+        const response = await fetch(url);
+        const data = await response.json();
+        console.log("sdjhfknsndfdknskdfnfds", data)
+        setMitarbeiterProjekte(data)
+        setLoading(false)
+      } catch (e) {
+         console.log(e.message)
+      }
     }
-    ;
-  }
 
 
-  // Es werden
-  async function fetchAssignedProjekte(person_id) {
-    const url = `/zeit/mitarbeiter_in_projekt/${person_id}`;
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setProjekte(data)
-      setLoading(false)
-    } catch (e) {
-      setLoadingError(e)
-    }
-    ;
-  }
 
 
 
@@ -85,7 +78,7 @@ export default function ProjektListe() {
 
   return (
     <div className="dropdown" style={{ maxWidth: "350px", minHeight: "300px", maxHeight: "500px", overflowY: "scroll" }} ref={dropdownRef}>
-
+      
       <CSSTransition
         in={activeMenu === 'main'}
         timeout={500}
@@ -99,11 +92,11 @@ export default function ProjektListe() {
           
           
           {
-            projekte.map((item, idx) =>
+            mitarbeiterProjekte.map((item, idx) =>
               <ListItem
                 leftIcon={
                   <div >
-                       <IconButton onClick={() => checkProject()}>
+                       <IconButton>
                       <ArticleIcon />
                     </IconButton>
                   </div>

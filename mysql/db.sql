@@ -228,9 +228,9 @@ VALUES('15', 'Mensur', 'Suljovic', 'mensur.suljovic@gmail.com', 'TheGentle', 30,
 INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
 VALUES('1', '1',"Projekt X", 'Daimler','2022-04-19 02:33:00');
 INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
-VALUES('2', '2',"Projekt Y", 'Porsche','2022-04-19 12:33:00');
+VALUES('2', '1',"Projekt Y", 'Porsche','2022-04-19 12:33:00');
 INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
-VALUES('3', '3',"Projekt Z", 'Bosch','2022-04-19 12:33:00');
+VALUES('3', '1',"Projekt Z", 'Bosch','2022-04-19 12:33:00');
 INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
 VALUES('4', '4',"Projekt W", 'Wilhelma','2022-04-19 12:33:00');
 INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
@@ -296,10 +296,11 @@ VALUES('4', '1', '2022-07-19', '2022-08-25', '2022-04-19 02:33:00');
 INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
 VALUES('1', '1','150', '2022-04-19 02:33:00');
 INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
-VALUES('2', '1','180', '2022-04-19 02:33:00');
-INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
 VALUES('1', '3','180', '2022-04-19 02:33:00');
-
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('1', '2','180', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('2', '1','180', '2022-04-19 02:33:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Zeitintervallbuchung Entitäten erstellen
@@ -341,5 +342,10 @@ VALUES('3', '2','2500', '2022-04-19 02:33:00');
 
 
 
- 
- 
+
+
+ select vorname, projektname from mitarbeiter_in_projekt
+ JOIN projekt on mitarbeiter_in_projekt.projekt_id = projekt.projekt_id
+ JOIN person on mitarbeiter_in_projekt.person_idd = person.person_id
+where person.person_id = 1;
+
