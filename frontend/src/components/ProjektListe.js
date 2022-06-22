@@ -24,6 +24,7 @@ export default function ProjektListe(props) {
 
   useEffect(() => {
     // Update the document title using the browser API
+    
     FetchProjekte(props.id)
     /**
      * Leere Liste: [] muss übergeben werden um einen infinite Loop zu verhindern
@@ -34,8 +35,10 @@ export default function ProjektListe(props) {
 
   async function FetchProjekte(id) {
       console.log("Perso GCKEN.")
-      console.log(id)
+      console.log(id, "22")
       const url = `/zeit/projekt/mitarbeiter/${id}`;
+      
+      console.log(url)
       try {
         const response = await fetch(url);
         const data = await response.json();
