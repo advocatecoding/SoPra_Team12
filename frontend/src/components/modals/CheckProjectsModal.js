@@ -105,10 +105,9 @@ export default function CheckProjectsModal(props) {
             <h2>Stundenübersicht des Projekts {selectedProject}</h2>
           </div>
           <div className="body">
-          <div style={{ marginTop: "5rem" }}>
-              <ProjectTime projekt_id={selectedProject}/>
-
-          </div>
+            <div>
+              <ProjectTime projekt_id={selectedProject} />
+            </div>
 
           </div>
         </>
@@ -123,40 +122,104 @@ export default function CheckProjectsModal(props) {
 
 function ProjectTime(props) {
 
-  const[aktivitaet, setAktivitaet] = useState("");
-  const[names, setNames] = useState("");
-  const[istZeit, setIstZeit] = useState("");
-  const[sollZeit, setSollZeit] = useState("");
-  const[kontrolldaten, setKontrolldaten] = useState(null); 
+  const [dataIsOrdered, setDataIsOrdered] = useState(false);
+  const [sollZeitIsAdded, setSollZeitIsAdded] = useState(false);
+  const [orderedDataX, setOrderedDataX] = useState([])
+
+  var orderedData = []
+
 
   useEffect(() => {
     fetchIstZeit(props.projekt_id)
   }, [])
 
-  // person_id eines Projektleiters
   async function fetchIstZeit(projekt_id) {
     const url = `/zeit/mitarbeiteransicht/${projekt_id}`;
     try {
+      if (!dataIsOrdered) {
       const response = await fetch(url);
       const data = await response.json();
-      setKontrolldaten(data)
-
-      //setIstZeit(data.gearbeitete_zeit)
-      //setAktivitaet(data.bezeichnung)
+      orderData(data)
+      }
     } catch (e) {
       console.log(e.message)
     }
     ;
   }
 
+
+  /* Algorithmus der die Daten des Json-Objekts in 
+  die benötigte Reihenfolge bringt und in ein neues Array lädt **/
+  function orderData(data) {
+    // Wir speichern die aktuelle Aktivität
+    var cur_akt = ""
+    for (let i = 0; i < data.length; i++) {
+      if (cur_akt !== data[i].bezeichnung) {
+        cur_akt = data[i].bezeichnung;
+        setOrderedDataX(oldArray => [...oldArray, cur_akt])
+        orderedData.push(cur_akt)
+      }
+      setOrderedDataX(oldArray => [...oldArray, data[i].vorname])
+      setOrderedDataX(oldArray => [...oldArray, data[i].gearbeitete_zeit])
+      orderedData.push(data[i].vorname)
+      orderedData.push(data[i].gearbeitete_zeit)
+    }
+    // Bleibt
+    setDataIsOrdered(true)
+    fetchSollZeit(props.projekt_id)
+    //console.log("Nach orderData()", orderedData)
+  }
+
+  async function fetchSollZeit(projekt_id) {
+    const url = `/zeit/sollzeit/${projekt_id}`;
+    try {
+      if (!sollZeitIsAdded) {
+        console.log("fetchSollZeit")
+      const response = await fetch(url);
+      const data = await response.json();
+      addSollzeitToOrderedData(data)
+      }
+    } catch (e) {
+      console.log(e.message)
+    }
+    ;
+  }
+
+  // Regular Expression, um zu prüfen ob ein String eine Zahl ist
+  let numberReg = new RegExp('[0-9]')
+
+  function addSollzeitToOrderedData(data) {
+    var j = 0
+    console.log(orderedData)
+    for (let i = 0; i < 11; i++) {
+      console.log(i)
+      if ((orderedData[i]).match(numberReg)) {
+        console.log("number")
+        console.log("Gebuchte Stunde: ",  data[j].gebuchte_stunden)
+        orderedData.splice(i+1, 0, data[j].gebuchte_stunden);
+        console.log(orderedData)
+        i++;
+        j++;
+      }
+      
+    }
+    setOrderedDataX(orderedData)
+    setSollZeitIsAdded(true)
+    //console.log(orderedData)
+  }
+
+
+
   return (
     <div>
-      {console.log(kontrolldaten[0].vorname)}
-      {kontrolldaten.map((item) => 
-        <p> {item.vorname} {item.gearbeitete_zeit}</p> 
-      )}
-      
-      
+      {
+        sollZeitIsAdded ?
+        orderedDataX.map((item) =>
+          <p style={{ fontSize: "1rem" }}>{item}</p>
+        )
+          : null
+      }
     </div>
   )
 }
+

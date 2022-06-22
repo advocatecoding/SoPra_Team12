@@ -3,6 +3,7 @@ body{
 }
 
 .modalContainer {
+    z-index: 999;
     width: 50%;
     height: 50%;
     border-radius: 12px;
