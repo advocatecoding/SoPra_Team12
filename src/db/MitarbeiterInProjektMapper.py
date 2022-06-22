@@ -12,7 +12,7 @@ class MitarbeiterInProjektMapper(Mapper):
     def find_all(self):
         result = []
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT * FROM mitarbeiter_in_projekt")
+        cursor.execute("SELECT * FROM Mitarbeiter_in_Projekt")
         daten = cursor.fetchall()
 
         for (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung) in daten:
@@ -34,7 +34,7 @@ class MitarbeiterInProjektMapper(Mapper):
         personl = []
         cursor = self._cnx.cursor()
         cursor.execute(
-            "SELECT person_idd, projekt_id, verkaufte_stunden, mitarbeiter_in_projekt.letzte_aenderung FROM Person INNER JOIN Mitarbeiter_in_Projekt "
+            "SELECT person_idd, projekt_id, verkaufte_stunden, Mitarbeiter_in_Projekt.letzte_aenderung FROM Person INNER JOIN Mitarbeiter_in_Projekt "
             "WHERE person_idd = person_id AND person_idd={}".format(person_idd))
         person_daten = cursor.fetchall()
 
@@ -63,7 +63,7 @@ class MitarbeiterInProjektMapper(Mapper):
         cursor = self._cnx.cursor()
 
         """ Hier wird die Mitarbeiter in Projekt Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO mitarbeiter_in_projekt (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung) VALUES (%s,%s,%s,%s)"
+        command = "INSERT INTO Mitarbeiter_in_Projekt (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung) VALUES (%s,%s,%s,%s)"
         data = (mitarbeiter_in_projekt.get_person(), mitarbeiter_in_projekt.get_projekt(), mitarbeiter_in_projekt.get_verkaufte_stunden(), mitarbeiter_in_projekt.get_letzte_aenderung())
         cursor.execute(command, data)
 
@@ -81,7 +81,7 @@ class MitarbeiterInProjektMapper(Mapper):
         """
         cursor = self._cnx.cursor()
 
-        command = "DELETE FROM mitarbeiter_in_projekt WHERE person_idd={0} AND projekt_id={1}".format(person_idd, projekt_id)
+        command = "DELETE FROM Mitarbeiter_in_Projekt WHERE person_idd={0} AND projekt_id={1}".format(person_idd, projekt_id)
         cursor.execute(command)
 
         self._cnx.commit()

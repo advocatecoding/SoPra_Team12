@@ -64,7 +64,7 @@ class ProjektMapper(Mapper):
         """
 
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT MAX(projekt_id) AS maxid FROM projekt ")
+        cursor.execute("SELECT MAX(projekt_id) AS maxid FROM Projekt ")
         tuples = cursor.fetchall()
 
         for (maxid) in tuples:
@@ -72,7 +72,7 @@ class ProjektMapper(Mapper):
 
 
         """ Hier wird die Projekt Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO projekt (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
+        command = "INSERT INTO Projekt (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
         data = (projekt.get_id(), projekt.get_projektleiter(), projekt.get_name(), projekt.get_auftraggeber(), projekt.get_letzte_aenderung())
         cursor.execute(command, data)
 
@@ -90,7 +90,7 @@ class ProjektMapper(Mapper):
         """
         cursor = self._cnx.cursor()
 
-        command = "DELETE FROM projekt WHERE projekt_id={}".format(projekt)
+        command = "DELETE FROM Projekt WHERE projekt_id={}".format(projekt)
         cursor.execute(command)
 
         self._cnx.commit()
@@ -102,7 +102,7 @@ class ProjektMapper(Mapper):
     def update(self, projekt):
         cursor = self._cnx.cursor()
 
-        command = "UPDATE projekt " + "SET person_id=%s, projektname=%s, auftraggeber=%s, letzte_aenderung=%s WHERE projekt_id=%s"
+        command = "UPDATE Projekt " + "SET person_id=%s, projektname=%s, auftraggeber=%s, letzte_aenderung=%s WHERE projekt_id=%s"
         data = (projekt.get_projektleiter(), projekt.get_name(), projekt.get_auftraggeber(), projekt.get_letzte_aenderung(), projekt.get_id())
         cursor.execute(command, data)
 
@@ -138,7 +138,7 @@ class ProjektMapper(Mapper):
         result1 = []
 
         cursor = self._cnx.cursor()
-        command = "SELECT projektname, auftraggeber FROM mitarbeiter_in_projekt JOIN projekt ON mitarbeiter_in_projekt.projekt_id = projekt.projekt_id JOIN person ON mitarbeiter_in_projekt.person_idd = person.person_id WHERE person.person_id={}".format(person_id)
+        command = "SELECT projektname, auftraggeber FROM Mitarbeiter_in_Projekt JOIN Projekt ON Mitarbeiter_in_Projekt.projekt_id = Projekt.projekt_id JOIN Person ON Mitarbeiter_in_Projekt.person_idd = Person.person_id WHERE Person.person_id={}".format(person_id)
 
         cursor.execute(command)
         projekt_daten = cursor.fetchall()
