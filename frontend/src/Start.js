@@ -104,7 +104,14 @@ function Start(props) {
               <Grid container
                 justifyContent="center"
                 alignItems="start" xs={4} style={{ backgroundColor: "#834534", borderRadius: "8px" }}>
-                <Stundenübersicht />
+                {
+                  userIdIsSet ?
+                    <>
+                      <Stundenübersicht mitarbeiter_id={userId} />
+                    </>
+                    : null
+                }
+
               </Grid>
 
 

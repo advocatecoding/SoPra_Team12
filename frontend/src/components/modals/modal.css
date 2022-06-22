@@ -17,6 +17,11 @@ body{
     transform: translate(-50%, 0);
 }
 
+.dialogContainer {
+   background-color: beige;
+    
+}
+
 .modalContainer .title {
     display: inline-block;
     text-align: center;

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Button from '@mui/material/Button';
-import CheckProjectsModal from "./modals/CheckProjectsModal";
-import { Grid, Box, Fab } from '@material-ui/core';
+import { Fab } from '@material-ui/core';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 

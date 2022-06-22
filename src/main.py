@@ -566,7 +566,7 @@ class VerkaufteStundenInAktivitaetOperations(Resource):
 class SollzeitOperations(Resource):
     @zeiterfassung.marshal_with(sollzeit)
     def get(self,projekt_id):
-        """ Auslesen der Sollzeit szenario 3.
+        """ Auslesen der Sollzeit szenario 4.
         Das zu auslesende Objekt wird anhand der id bestimmt
         """
         adm = Administration()
@@ -580,7 +580,7 @@ class SollzeitOperations(Resource):
 class MitarbeiteransichtOperations(Resource):
     @zeiterfassung.marshal_with(mitarbeiteransicht)
     def get(self,projekt_id):
-        """ Auslesen der IstStunden szenario 3.
+        """ Auslesen der IstStunden szenario 4.
         Das zu auslesende Objekt wird anhand der id bestimmt
         """
         adm = Administration()
@@ -594,7 +594,7 @@ class MitarbeiteransichtOperations(Resource):
 class PersoenlicheOperations(Resource):
     @zeiterfassung.marshal_with(mitarbeiteransicht)
     def get(self,person_id):
-        """ Auslesen der IstStunden auf allen Projekten szenario 4.
+        """ Auslesen der IstStunden auf allen Projekten szenario 3.
         Das zu auslesende Objekt wird anhand der id bestimmt
         """
         adm = Administration()

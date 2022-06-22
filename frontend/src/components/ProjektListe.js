@@ -6,6 +6,8 @@ import LoadingProgress from '../components/Loading/LoadingProgress';
 import IconButton from "@material-ui/core/IconButton";
 import { Button, Grid, Typography, withStyles, Box } from '@material-ui/core';
 import ArticleIcon from '@mui/icons-material/Article';
+import AddIcon from '@mui/icons-material/Add';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 export default function ProjektListe(props) {
 
@@ -41,7 +43,6 @@ export default function ProjektListe(props) {
       try {
         const response = await fetch(url);
         const data = await response.json();
-        console.log("sdjhfknsndfdknskdfnfds", data)
         setMitarbeiterProjekte(data)
         setLoading(false)
       } catch (e) {
@@ -65,7 +66,9 @@ export default function ProjektListe(props) {
     );
   }
 
-
+  const addProject = () => {
+    console.log("Open Modal")
+  }
 
   return (
     <div className="dropdown" style={{ minHeight: "300px", maxHeight: "500px", overflowY: "scroll" }} ref={dropdownRef}>
@@ -76,7 +79,17 @@ export default function ProjektListe(props) {
       >
         <div className="menu" >
           <div style={{textAlign: "center", marginBottom: "1rem"}}>
-          <Typography  variant="h5" style={{color: "white"}}>Meine Projekte</Typography>  
+              <div style={{display: "inline-block"}}>
+              <Typography  variant="h5" style={{color: "white"}}>Meine Projekte</Typography> 
+              </div>
+              <div style={{display: "inline-block", marginLeft: "auto"}}>
+              <AddCircleOutlineIcon onClick={() => addProject}>
+                      <ArticleIcon />
+              </AddCircleOutlineIcon>
+              </div>
+            
+          
+
           </div>
           {
             mitarbeiterProjekte.map((item) =>
