@@ -10,7 +10,7 @@ class AktivitaetMapper(Mapper):
     def find_all(self):
         result = []
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT * FROM aktivitaet")
+        cursor.execute("SELECT * FROM Aktivitaet")
         aktivitaet_daten = cursor.fetchall()
 
         for (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) in aktivitaet_daten:
@@ -63,7 +63,7 @@ class AktivitaetMapper(Mapper):
         """
         cursor = self._cnx.cursor()
 
-        command = "DELETE FROM aktivitaet WHERE aktivitaet_id={}".format(aktivitaet)
+        command = "DELETE FROM Aktivitaet WHERE aktivitaet_id={}".format(aktivitaet)
         cursor.execute(command)
 
         self._cnx.commit()
@@ -74,7 +74,7 @@ class AktivitaetMapper(Mapper):
     def update(self, aktivitaet):
         cursor = self._cnx.cursor()
 
-        command = "UPDATE aktivitaet " + "SET bezeichnung=%s, dauer=%s, kapazitaet=%s, letzte_aenderung=%s WHERE aktivitaet_id=%s"
+        command = "UPDATE Aktivitaet " + "SET bezeichnung=%s, dauer=%s, kapazitaet=%s, letzte_aenderung=%s WHERE aktivitaet_id=%s"
         data = (aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazitaet(), aktivitaet.get_letzte_aenderung(),
                 aktivitaet.get_id())
         cursor.execute(command, data)
@@ -90,7 +90,7 @@ class AktivitaetMapper(Mapper):
         """
 
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT MAX(aktivitaet_id) AS maxid FROM aktivitaet ")
+        cursor.execute("SELECT MAX(aktivitaet_id) AS maxid FROM Aktivitaet ")
         tuples = cursor.fetchall()
 
         for (maxid) in tuples:
@@ -98,7 +98,7 @@ class AktivitaetMapper(Mapper):
 
 
         """ Hier wird die Aktivitäts Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO aktivitaet (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
+        command = "INSERT INTO Aktivitaet (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
         data = (aktivitaet.get_id(), aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazitaet(), aktivitaet.get_letzte_aenderung())
         cursor.execute(command, data)
 

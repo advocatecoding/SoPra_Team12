@@ -66,7 +66,7 @@ class PersonMapper(Mapper):
         result = None
 
         cursor = self._cnx.cursor()
-        command = "SELECT * FROM person WHERE benutzername='{}'".format(benutzer)
+        command = "SELECT * FROM Person WHERE benutzername='{}'".format(benutzer)
         cursor.execute(command)
         person_daten = cursor.fetchall()
 
@@ -99,7 +99,7 @@ class PersonMapper(Mapper):
         """
         cursor = self._cnx.cursor()
 
-        command = "DELETE FROM person WHERE person_id={}".format(person)
+        command = "DELETE FROM Person WHERE person_id={}".format(person)
         cursor.execute(command)
 
         self._cnx.commit()
@@ -113,7 +113,7 @@ class PersonMapper(Mapper):
         """
 
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT MAX(person_id) AS maxid FROM person ")
+        cursor.execute("SELECT MAX(person_id) AS maxid FROM Person ")
         tuples = cursor.fetchall()
 
         for (maxid) in tuples:
@@ -121,7 +121,7 @@ class PersonMapper(Mapper):
 
 
         """ Hier wird die Person Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO person (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+        command = "INSERT INTO Person (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
         data = (person.get_id(), person.get_vorname(), person.get_nachname(), person.get_mail_adresse(), person.get_benutzername(), person.get_urlaubstage(), person.get_ueberstunden(), person.get_letzte_aenderung())
         cursor.execute(command, data)
 
@@ -133,7 +133,7 @@ class PersonMapper(Mapper):
     def update(self, person):
         cursor = self._cnx.cursor()
 
-        command = "UPDATE person " + "SET vorname=%s, nachname=%s, mail_adresse=%s, urlaubstage=%s, letzte_aenderung=%s WHERE person_id=%s"
+        command = "UPDATE Person " + "SET vorname=%s, nachname=%s, mail_adresse=%s, urlaubstage=%s, letzte_aenderung=%s WHERE person_id=%s"
         data = (person.get_vorname(), person.get_nachname(), person.get_mail_adresse(), person.get_urlaubstage(), person.get_letzte_aenderung(),
                 person.get_id())
         cursor.execute(command, data)

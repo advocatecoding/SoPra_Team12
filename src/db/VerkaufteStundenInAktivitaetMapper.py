@@ -55,7 +55,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
         result = []
 
         cursor = self._cnx.cursor()
-        command = "select gebuchte_stunden, bezeichnung FROM verkaufte_stunden_in_aktivitaet Inner Join Person on verkaufte_stunden_in_aktivitaet.person_id = person.person_id Inner Join Zeitintervallbuchung on verkaufte_stunden_in_aktivitaet.aktivitaet_id = Zeitintervallbuchung.aktivitaet_id Inner Join aktivitaet on verkaufte_stunden_in_aktivitaet.aktivitaet_id = aktivitaet.aktivitaet_id where zeitintervallbuchung.projekt_id={0} group by zeitintervallbuchung.aktivitaet_id, vorname order by bezeichnung, vorname ASC;".format(projekt_id)
+        command = "SELECT gebuchte_stunden, bezeichnung FROM verkaufte_stunden_in_aktivitaet INNER JOIN Person ON verkaufte_stunden_in_aktivitaet.person_id = Person.person_id INNER JOIN Zeitintervallbuchung ON verkaufte_stunden_in_aktivitaet.aktivitaet_id = Zeitintervallbuchung.aktivitaet_id INNER JOIN Aktivitaet ON verkaufte_stunden_in_aktivitaet.aktivitaet_id = Aktivitaet.aktivitaet_id WHERE Zeitintervallbuchung.projekt_id={0} GROUP BY Zeitintervallbuchung.aktivitaet_id, vorname ORDER BY bezeichnung, vorname ASC;".format(projekt_id)
         cursor.execute(command)
         projekt_daten = cursor.fetchall()
 
@@ -78,7 +78,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
         result = []
 
         cursor = self._cnx.cursor()
-        command = "select vorname, bezeichnung, SUM(gearbeitete_zeit) FROM zeitintervallbuchung Inner Join Person on zeitintervallbuchung.person_id = person.person_id Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id where zeitintervallbuchung.projekt_id={0} group by bezeichnung, vorname order by bezeichnung, vorname ASC;".format(projekt_id)
+        command = "SELECT vorname, bezeichnung, SUM(gearbeitete_zeit) FROM Zeitintervallbuchung INNER JOIN Person ON Zeitintervallbuchung.person_id = Person.person_id INNER JOIN Aktivitaet ON Zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id WHERE Zeitintervallbuchung.projekt_id={0} GROUP BY bezeichnung, vorname ORDER BY bezeichnung, vorname ASC;".format(projekt_id)
         cursor.execute(command)
         projekt_daten = cursor.fetchall()
 
@@ -102,7 +102,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
         result = []
 
         cursor = self._cnx.cursor()
-        command = " select vorname, projektname, bezeichnung, SUM(gearbeitete_zeit) FROM zeitintervallbuchung Inner Join Person on zeitintervallbuchung.person_id = person.person_id Inner Join Projekt on zeitintervallbuchung.projekt_id = projekt.projekt_id Inner Join Aktivitaet on zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id where zeitintervallbuchung.person_id={0} group by bezeichnung order by projektname ASC;".format(person_id)
+        command = "SELECT vorname, projektname, bezeichnung, SUM(gearbeitete_zeit) FROM Zeitintervallbuchung INNER JOIN Person ON Zeitintervallbuchung.person_id = Person.person_id INNER JOIN Projekt ON Zeitintervallbuchung.projekt_id = Projekt.projekt_id INNER JOIN Aktivitaet ON Zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id WHERE Zeitintervallbuchung.person_id={0} GROUP BY bezeichnung ORDER BY projektname ASC;".format(person_id)
         cursor.execute(command)
         projekt_daten = cursor.fetchall()
 

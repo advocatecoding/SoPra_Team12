@@ -9,7 +9,7 @@ class UrlaubMapper(Mapper):
     def find_all(self):
         result = []
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT * from Urlaub")
+        cursor.execute("SELECT * FROM Urlaub")
         urlaub_daten = cursor.fetchall()
 
         for (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung) in urlaub_daten:
@@ -37,7 +37,7 @@ class UrlaubMapper(Mapper):
         """
 
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT MAX(urlaub_id) AS maxid FROM urlaub")
+        cursor.execute("SELECT MAX(urlaub_id) AS maxid FROM Urlaub")
         tuples = cursor.fetchall()
 
         for (maxid) in tuples:
@@ -45,7 +45,7 @@ class UrlaubMapper(Mapper):
 
 
         """ Hier wird die Urlaub Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO urlaub (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
+        command = "INSERT INTO Urlaub (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
         data = (urlaub.get_id(), urlaub.get_person_id(), urlaub.get_start_date(), urlaub.get_end_date(),urlaub.get_letzte_aenderung())
         cursor.execute(command, data)
 
@@ -89,7 +89,7 @@ class UrlaubMapper(Mapper):
         """
         cursor = self._cnx.cursor()
 
-        command = "DELETE FROM urlaub WHERE urlaub_id={}".format(urlaub)
+        command = "DELETE FROM Urlaub WHERE urlaub_id={}".format(urlaub)
         cursor.execute(command)
 
         self._cnx.commit()
@@ -101,7 +101,7 @@ class UrlaubMapper(Mapper):
     def update(self, urlaub):
         cursor = self._cnx.cursor()
 
-        command = "UPDATE urlaub " + "SET person_id=%s, start_datum=%s, end_datum=%s, letzte_aenderung=%s WHERE urlaub_id=%s"
+        command = "UPDATE Urlaub " + "SET person_id=%s, start_datum=%s, end_datum=%s, letzte_aenderung=%s WHERE urlaub_id=%s"
         data = (urlaub.get_person_id(), urlaub.get_start_date(), urlaub.get_end_date(), urlaub.get_letzte_aenderung(), urlaub.get_id())
         cursor.execute(command, data)
 
