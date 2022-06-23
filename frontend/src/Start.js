@@ -64,7 +64,7 @@ function Start(props) {
         : null
       }
 
-      {urlaubModalOpen && <UrlaubBuchenModal setOpenModal={setUrlaubModalOpen}></UrlaubBuchenModal>}
+      {urlaubModalOpen && <UrlaubBuchenModal setOpenModal={setUrlaubModalOpen} id={userId}></UrlaubBuchenModal>}
      
       <ThemeProvider theme={theme}>
         {/* Abstand */}

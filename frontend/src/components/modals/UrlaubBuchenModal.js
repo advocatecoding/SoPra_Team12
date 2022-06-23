@@ -16,6 +16,8 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { TextField } from "@mui/material";
+import axios from 'axios';
 
 export default function UrlaubBuchenModal(props) {
 
@@ -24,9 +26,14 @@ export default function UrlaubBuchenModal(props) {
 
   const [createListIsClicked, setCreateListIsClicked] = useState(false);
 
+  const [start_datum, setStartDatum] = useState(null);
+  const [end_datum, setEndDatum] = useState(null);
+  const [person_id, setPersonID] = useState(null);
+
 
   useEffect(() => {
     fetchUrlaubBuchen(props.urlaub_id)
+    iDerhalten(props.id)
   }, [])
 
   // urlaub_id eines Mitarbeiters
@@ -43,6 +50,38 @@ export default function UrlaubBuchenModal(props) {
       console.log(e.message)
     }
     ;
+  }
+
+
+
+
+  function postUrlaub (id){
+    const url = `/zeit/urlaub`;
+      axios.post(url, {
+          id,
+          person_id,
+          start_datum,
+          end_datum
+      }).then(data => console.log("Urlaub wure gepostet", data).catch(err => console.log(err)))
+  };  
+
+  const changeStartDatum = (event) => {
+    setStartDatum(event.target.value)
+}
+
+const changeEndDatum = (event) => {
+  setEndDatum(event.target.value)
+}
+
+const iDerhalten = (id) => {
+  setPersonID(id)
+}
+
+  
+  const HandleClose = (e) => {
+    e.preventDefault();
+  props.setOpenModal(false);
+  postUrlaub(1211);
   }
 
   const handleChange = (event) => {
@@ -70,27 +109,29 @@ export default function UrlaubBuchenModal(props) {
           <div className="body">
             <div style={{ marginTop: "5rem" }}>
 
-              <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" }} sx={{ m: 1, minWidth: 200 }} >
-                <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Urlaub</InputLabel>
-                <Select style={{ color: "white" }}
-                  onChange={handleChange}
-                  label="Urlaub"
-                  color="primary"
-                >
-                  {UrlaubBuchen.map((item) =>
-                    <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.projektname}</MenuItem>
-                  )
-                  }
-                </Select>
-              </FormControl>
-
-              <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie einen aus.</Typography>
-
+              <TextField autoFocus
+                        required
+                        margin="dense"
+                        label="Startdatum"
+                        type="text"
+                        variant="standard" placeholder="Format: JJJJ-MM-TT" style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" }} sx={{ m: 1, minWidth: 240 }}
+                        onChange={changeStartDatum}>
+              </TextField>
+              <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Startdatum</Typography>
+              <TextField autoFocus
+                        required
+                        margin="dense"
+                        label="Enddatum"
+                        type="text"
+                        variant="standard" placeholder="Format: JJJJ-MM-TT" style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" }} sx={{ m: 1, minWidth: 240 }}
+                        onChange={changeEndDatum}>
+              </TextField>
+              <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Enddatum</Typography>
             </div>
 
             <div style={{ marginTop: "5rem" }}>
-              <Button variant="outlined" onClick={() => { openUrlaubszeiten() }} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", textAlign: "center", display: "inline", marginBottom: "0" }} >
-                Urlaubszeiten anzeigen
+              <Button variant="outlined" onClick={HandleClose} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", textAlign: "center", display: "inline", marginBottom: "0" }} >
+                Urlaub buchen
               </Button>
             </div>
           </div>
