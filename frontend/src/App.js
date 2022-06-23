@@ -108,13 +108,13 @@ class App extends React.Component {
 		return (
           <Router basename={process.env.PUBLIC_URL}>
 					<Container maxWidth='xl'>
-					<Header></Header>
+					<Header user={currentUser}></Header>
 						{
 							// Ist der Benutzer schon eingeloggt -> Dann soll <Login> geladen werden
 							currentUser ?
 								<>
 								{/** zu Testzwecken wird Login übersprungen */}
-									<Start></Start>
+									<Login></Login>
 								</>
 								:
 								// Wenn der Benutzer nicht eingeloggt ist -> Dann soll <SignIn> geladen werden
