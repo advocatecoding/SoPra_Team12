@@ -4,6 +4,7 @@ import { CSSTransition } from 'react-transition-group';
 import LoadingProgress from '../components/Loading/LoadingProgress';
 import IconButton from "@material-ui/core/IconButton";
 import { Button, Typography, TextField } from '@material-ui/core';
+import Box from '@mui/material/Box';
 import ArticleIcon from '@mui/icons-material/Article';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import axios from 'axios';
@@ -13,6 +14,15 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import SaveAsIcon from '@mui/icons-material/SaveAs';
 import DialogActions from '@mui/material/DialogActions';
+import FormControl from '@mui/material/FormControl';
+import InputAdornment from '@mui/material/InputAdornment';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
+import { v4 as uuidv4 } from 'uuid';
+
+import CreateProjectModal from './modals/CreateProjectModal';
+
+
 
 export default function ProjektListe(props) {
 
@@ -25,8 +35,7 @@ export default function ProjektListe(props) {
   const [projektname, setProjektname] = useState("");
   const [auftraggeber, setAuftraggeber] = useState("");
   const [projektleiter, setProjekleiter] = useState("");
-  const [ProjektErstellen, SetProjekteErstellen] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
 
 
 
@@ -34,8 +43,13 @@ export default function ProjektListe(props) {
   useEffect(() => {
     // Update the document title using the browser API
 
-    FetchProjekte(props.id)
-    iDerhalten(props.id)
+    //FetchProjekte(props.id)
+    //iDerhalten(props.id)
+
+    // Testzwecke
+    FetchProjekte(1)
+    iDerhalten(1)
+
     /**
      * Leere Liste: [] muss übergeben werden um einen infinite Loop zu verhindern
      */
@@ -44,11 +58,7 @@ export default function ProjektListe(props) {
 
 
   async function FetchProjekte(id) {
-    console.log("Perso GCKEN.")
-    console.log(id, "22")
     const url = `/zeit/projekt/mitarbeiter/${id}`;
-
-    console.log(url)
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -87,37 +97,22 @@ export default function ProjektListe(props) {
     );
   }
 
-  const addProject = () => {
-    SetProjekteErstellen(true);
-  }
-
-  const changeProjektname = (event) => {
-    setProjektname(event.target.value)
+  const addProject = (e) => {
+    e.preventDefault();
+    setShowModal(true);
   }
 
   const iDerhalten = (id) => {
     setProjekleiter(id)
   }
 
-  const changeAuftraggeber = (event) => {
-    setAuftraggeber(event.target.value)
-  }
+ 
 
-  const handleCloseEmpty = (e) => {
-    e.preventDefault();
-    SetProjekteErstellen(false);
-  };
-
-  const handleClose = (e) => {
-    e.preventDefault();
-    SetProjekteErstellen(false);
-    postProjekt(1211);
-  };
+ 
 
 
   return (
     <div className="dropdown" style={{ minHeight: "300px", maxHeight: "500px", overflowY: "scroll" }} ref={dropdownRef}>
-
       <CSSTransition
         timeout={500}
       >
@@ -126,8 +121,8 @@ export default function ProjektListe(props) {
             <div style={{ display: "inline-block" }}>
               <Typography variant="h5" style={{ color: "white", paddingLeft: "1rem" }}>Meine Projekte</Typography>
             </div>
-            <div style={{ display: "inline-block", marginLeft: "auto", paddingRight:"1rem" }}>
-              <AddCircleOutlineIcon id="add-project-icon" style={{color:"#00bcd4", transform: "scale(1.3)", cursor:"pointer"}} onClick={addProject}>
+            <div style={{ display: "inline-block", marginLeft: "auto", paddingRight: "1rem" }}>
+              <AddCircleOutlineIcon id="add-project-icon" style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer" }} onClick={addProject}>
               </AddCircleOutlineIcon>
             </div>
 
@@ -151,49 +146,7 @@ export default function ProjektListe(props) {
       </CSSTransition>
       <LoadingProgress show={loadingInProgress}></LoadingProgress>
 
-      <Dialog open={ProjektErstellen}
-        PaperProps={{
-          sx: {
-            minHeight: 270,
-            minWidth: 400,
-            maxHeight: 280
-          }
-        }}>
-        <DialogTitle sx={{ m: 0, p: 2 }}>Ein neues Projekt erstellen <Button startIcon={<CloseIcon />} onClick={handleCloseEmpty}
-          sx={{
-            position: 'absolute',
-            right: 0,
-            color: (theme) => theme.palette.grey[500],
-          }} ></Button>
-        </DialogTitle>
-        <DialogContent dividers>
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="projektname"
-            label="Projektname"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={changeProjektname}
-          />
-          <TextField
-            autoFocus
-            required
-            margin="dense"
-            id="auftraggeber"
-            label="Auftraggeber"
-            type="text"
-            fullWidth
-            variant="standard"
-            onChange={changeAuftraggeber}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button startIcon={<SaveAsIcon />} onClick={handleClose}>Erstellen</Button>
-        </DialogActions>
-      </Dialog>
+      <CreateProjectModal  setOpenModal={setShowModal} showModal={showModal}></CreateProjectModal>
     </div>
   );
 }

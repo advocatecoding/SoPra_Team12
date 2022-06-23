@@ -6,14 +6,10 @@ import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 
 
-export default function Users(props) {
+export default function Users({onChange}) {
     const [personen, setPersonen] = useState([1, 2]);
     //const [userSelected, setUserSelected] = useState(false);
 
-
-    const handleChange = (event) => {
-        props.setUsername(event.target.value)
-    };
 
     useEffect(() => {
         fetchAllPersonen()
@@ -26,26 +22,34 @@ export default function Users(props) {
             const response = await fetch(url);
             //console.log(response.data)
             const data = await response.json();
-            console.log("fetched Personen!")
             setPersonen(data)
         } catch (e) {
             console.log(e.message)
         }
         ;
     }
+    
+    const handleChange =({target})=>{    
+        if(typeof onChange === 'function'){
+           // call the callback passing in whatever parameters you decide
+           // in this simple case just sending numeric value
+            //console.log("Users", target.value)
+           onChange(target.value)
+        }    
+        
+    }
 
 
     return (
         <div>
-            <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" }} sx={{ m: 1, minWidth: 200 }} >
-                <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Username</InputLabel>
-                <Select style={{ color: "white"}}
+            <FormControl style={{ borderColor: "#252827", color: "#252827", backgroundColor: "transparent", borderRadius: "5px" }} sx={{ m: 1, minWidth: 200 }} >
+            <InputLabel id="demo-simple-select-helper-label">Name d. Mitarbeiters</InputLabel>
+                <Select style={{ color: "#252827"}}
                     onChange={handleChange}
-                    label="Benutzer"
                     color="primary"
                 >
                     {personen.map((item) =>
-                        <MenuItem value={item.benutzername} style={{ color: "#00bcd4" }}>{item.benutzername}</MenuItem>
+                        <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.vorname} {item.nachname}</MenuItem>
                     )
                     }
                 </Select>
