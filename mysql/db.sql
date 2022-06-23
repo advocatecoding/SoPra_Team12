@@ -254,6 +254,12 @@ INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazit
 VALUES('2', '1', '3D-Manöver-Apparat aufladen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
 INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
 VALUES('3', '1', 'Auf Expedition gehen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('4', '2', 'Teile bestellen', '2022-05-01 14:00:00','50', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('5', '2', 'Teile prüfen', '2022-05-01 14:00:00','150', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('6', '2', 'beschädigte Teile reklamieren', '2022-05-01 14:00:00','70', '2022-04-19 02:33:00');
 
 
 -- ---------------------------------------------------------------------------------------------------------------------------
