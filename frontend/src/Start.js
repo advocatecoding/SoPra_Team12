@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box, Fab } from '@material-ui/core';
+import { Grid, Box } from '@material-ui/core';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PersonInformationen from './components/PersonInformationen';
 import ProjektListe from './components/ProjektListe';
@@ -36,7 +36,7 @@ function Start(props) {
 
   useEffect(() => {
     fetchPersonByUsername(props.username)
-  }, [])
+  }, [props.username])
 
 
   async function fetchPersonByUsername(username) {
@@ -77,7 +77,7 @@ function Start(props) {
           <Grid lg={3} xs={8} md={4} style={{ display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "auto", marginRight: "auto", padding: "1rem" }}>
             <div >
               {
-                userId != "" ?
+                userId !== "" ?
                   <>
                     <ProjektListe id={userId}></ProjektListe>
                   </>
@@ -127,14 +127,18 @@ function Start(props) {
 
 
               {/* Buchbereich*/}
-              <Grid xs={12} style={{ backgroundColor: "#447F50", minHeight: "400px", borderRadius: "8px", marginTop: "2rem" }}>
+              <Grid container xs={12} style={{ backgroundColor: "#447F50", minHeight: "400px", borderRadius: "8px", marginTop: "2rem" }}>
+              <div style={{marginLeft: "auto", height:"20%"}}>
+                <UrlaubBuchen openUrlaubBuchenModal={open => setUrlaubModalOpen(open)}></UrlaubBuchen>
+              </div>
+              
+              <Grid style={{ backgroundColor: "yellow", height:"100%", width:"100%"}}>
 
-              <div>
-     
-              <UrlaubBuchen openUrlaubBuchenModal={open => setUrlaubModalOpen(open)}></UrlaubBuchen>
+              </Grid>
 
               
-              </div>   
+
+              
 
               </Grid>
             </Grid>

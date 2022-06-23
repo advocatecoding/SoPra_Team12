@@ -85,5 +85,10 @@ a {
 }
 
 
+#add-project-icon:hover {
+    transform: scale(1.5) rotate(9deg) !important;
+}
+
+
 
 

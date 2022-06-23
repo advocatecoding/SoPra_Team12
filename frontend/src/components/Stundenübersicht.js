@@ -19,7 +19,7 @@ export default function Stundenübersicht(props) {
 
     useEffect(() => {
         fetchStundenübersicht(props.mitarbeiter_id)
-    }, [])
+    }, [props.mitarbeiter_id])
 
     const handleClickOpen = () => {
         setOpenModal(true);

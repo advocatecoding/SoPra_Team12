@@ -2,13 +2,12 @@ import React, { useState, useEffect } from "react";
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import "./modal.css";
-import Users from '../Users';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-// Tabelle 
+/* Tabelle 
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -16,6 +15,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+*/
 
 export default function CheckProjectsModal(props) {
 
@@ -27,7 +27,7 @@ export default function CheckProjectsModal(props) {
 
   useEffect(() => {
     fetchProjekteToCheck(props.mitarbeiter_id)
-  }, [])
+  }, [props.mitarbeiter_id])
 
   // person_id eines Projektleiters
   async function fetchProjekteToCheck(person_id) {
@@ -36,8 +36,6 @@ export default function CheckProjectsModal(props) {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log("fetched Projekte!")
-      console.log(data)
       setProjectsToCheck(data)
     } catch (e) {
       console.log(e.message)
@@ -65,7 +63,7 @@ export default function CheckProjectsModal(props) {
         </button>
       </div>
 
-      {createListIsClicked == false ?
+      {createListIsClicked === false ?
         <>
           <div className="title">
             <h2>Checken Sie die Projekte!</h2>
@@ -131,7 +129,7 @@ function ProjectTime(props) {
 
   useEffect(() => {
     fetchIstZeit(props.projekt_id)
-  }, [])
+  }, [props.projekt_id])
 
   async function fetchIstZeit(projekt_id) {
     const url = `/zeit/mitarbeiteransicht/${projekt_id}`;
@@ -148,11 +146,11 @@ function ProjectTime(props) {
   }
 
 
-  /* Algorithmus der die Daten des Json-Objekts in 
+  /* Algorithmus, der die Daten des Json-Objekts in 
   die benötigte Reihenfolge bringt und in ein neues Array lädt **/
   function orderData(data) {
     // Wir speichern die aktuelle Aktivität
-    var cur_akt = ""
+    var cur_akt = "";
     for (let i = 0; i < data.length; i++) {
       if (cur_akt !== data[i].bezeichnung) {
         cur_akt = data[i].bezeichnung;
@@ -164,10 +162,8 @@ function ProjectTime(props) {
       orderedData.push(data[i].vorname)
       orderedData.push(data[i].gearbeitete_zeit)
     }
-    // Bleibt
     setDataIsOrdered(true)
     fetchSollZeit(props.projekt_id)
-    //console.log("Nach orderData()", orderedData)
   }
 
   async function fetchSollZeit(projekt_id) {
@@ -188,11 +184,14 @@ function ProjectTime(props) {
   // Regular Expression, um zu prüfen ob ein String eine Zahl ist
   let numberReg = new RegExp('[0-9]')
 
+   /* Algorithmus, der die gefetchten Daten der Sollstunden in das georderte Array integriert  **/
   function addSollzeitToOrderedData(data) {
     var j = 0
     console.log(orderedData)
-    for (let i = 0; i < 11; i++) {
+    const loopLength = (data.length + orderedData.length)
+    for (let i = 0; i < loopLength; i++) {
       console.log(i)
+      // Es wird nach jedem Element, welches eine Zahl ist die dazugehörige Sollzeit hinzugefügt 
       if ((orderedData[i]).match(numberReg)) {
         console.log("number")
         console.log("Gebuchte Stunde: ",  data[j].gebuchte_stunden)
@@ -205,7 +204,6 @@ function ProjectTime(props) {
     }
     setOrderedDataX(orderedData)
     setSollZeitIsAdded(true)
-    //console.log(orderedData)
   }
 
 
