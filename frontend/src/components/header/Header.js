@@ -1,10 +1,14 @@
 import React from 'react'
 import {Typography, Box, Grid} from '@material-ui/core';
+import ProfileDropDown from '../Dialogs/ProfileDropdown';
+
 
 function Header() {
+  
   return (
 
     <div>
+      
       <Box sx= {{mt: 2}}></Box>
       <Typography style={textColor} align='center' variant='h4'>Zeiterfassung HdM WebApp</Typography>
       <Grid container>
@@ -12,6 +16,7 @@ function Header() {
         
       
       </Grid>
+      <ProfileDropDown></ProfileDropDown>
       
     </div>
   )
@@ -20,6 +25,7 @@ function Header() {
 const textColor = {
 	color: "white"
 }
+
 
 
 export default Header;
