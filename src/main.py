@@ -326,7 +326,7 @@ class AktivitaetenListOperations(Resource):
 
         if aktivitaet_object is not None:
             """ Wir erstellen in Administration eine Person mithilfe der Daten vom api.payload """
-            c = adm.create_aktivitaet(aktivitaet_object.get_name(), aktivitaet_object.get_dauer(),
+            c = adm.create_aktivitaet(aktivitaet_object.get_projektname(), aktivitaet_object.get_name(), aktivitaet_object.get_dauer(),
                                       aktivitaet_object.get_kapazitaet())
             return c, 200
         else:

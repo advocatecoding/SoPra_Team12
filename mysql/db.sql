@@ -22,17 +22,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
   UNIQUE (benutzername),
   PRIMARY KEY (`person_id`));
   
--- -----------------------------------------------------------------------
--- Tabelle erstellen 'Aktivitaet'
--- -----------------------------------------------------------------------
-  CREATE TABLE IF NOT EXISTS `Aktivitaet` (
-  `aktivitaet_id` INT NOT NULL,
-  `projekt_id` INT NOT NULL,
-  `bezeichnung` VARCHAR(45) NOT NULL ,
-  `dauer` DATETIME NULL,
-  `kapazitaet` INT NULL,
-  `letzte_aenderung` DATETIME NULL,
-  PRIMARY KEY (`aktivitaet_id`));
+
   
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Projekt'
@@ -49,6 +39,21 @@ CREATE TABLE IF NOT EXISTS `Person` (
     ON DELETE CASCADE
     ON UPDATE CASCADE);
   
+  -- -----------------------------------------------------------------------
+-- Tabelle erstellen 'Aktivitaet'
+-- -----------------------------------------------------------------------
+  CREATE TABLE IF NOT EXISTS `Aktivitaet` (
+  `aktivitaet_id` INT NOT NULL,
+  `projekt_id` INT NOT NULL,
+  `bezeichnung` VARCHAR(45) NOT NULL ,
+  `dauer` DATETIME NULL,
+  `kapazitaet` INT NULL,
+  `letzte_aenderung` DATETIME NULL,
+  PRIMARY KEY (`aktivitaet_id`),
+  FOREIGN KEY (`projekt_id`)
+	REFERENCES `Projekt` (`projekt_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
   
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Urlaub'
