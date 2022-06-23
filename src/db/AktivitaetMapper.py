@@ -100,7 +100,7 @@ class AktivitaetMapper(Mapper):
 
 
         """ Hier wird die Aktivitäts Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO Aktivitaet (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
+        command = "INSERT INTO Aktivitaet (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
         data = (aktivitaet.get_id(), aktivitaet.get_projektname(), aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazitaet(), aktivitaet.get_letzte_aenderung())
         cursor.execute(command, data)
 
