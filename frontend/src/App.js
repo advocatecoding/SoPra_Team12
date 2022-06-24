@@ -114,7 +114,7 @@ class App extends React.Component {
 							currentUser ?
 								<>
 								{/** zu Testzwecken wird Login übersprungen */}
-									<Start></Start>
+									<Login></Login>
 								</>
 								:
 								// Wenn der Benutzer nicht eingeloggt ist -> Dann soll <SignIn> geladen werden

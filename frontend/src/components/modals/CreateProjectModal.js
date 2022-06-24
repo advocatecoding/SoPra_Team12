@@ -19,12 +19,14 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { v4 as uuidv4 } from 'uuid';
 import UsersProject from '../UsersProject'
+import Header from '../header/Header';
 
 
 export default function CreateProjectModal(props) {
 
     useEffect(() => {
         setModalOpen(true)
+        iDerhalten(props.id)
     }, [])
 
 
@@ -43,6 +45,7 @@ export default function CreateProjectModal(props) {
 
 
     function postProjekt(id) {
+        console.log({projektleiter}, "ayk projektleiter wird gesetzt")
         const url = `/zeit/projekte`;
         axios.post(url, {
             id,
@@ -51,7 +54,6 @@ export default function CreateProjectModal(props) {
             projektleiter
         }).then(data => console.log("Projekt wurde gepostet", data).catch(err => console.log(err)))
     };
-
 
     const changeProjektname = (event) => {
         setProjektname(event.target.value)
@@ -80,7 +82,8 @@ export default function CreateProjectModal(props) {
         setModalOpen(false);
         setAktivitaetenErstellen(false);
         setTeamErstellen(false)
-        //postProjekt(1211);
+        props.setOpenModal(false)
+        postProjekt(1211);
     };
 
     const showAktivitaetenErstellen = (e) => {
@@ -102,6 +105,12 @@ export default function CreateProjectModal(props) {
         e.preventDefault();
         setTeamErstellen(false);
     }
+
+    const iDerhalten = (id) => {
+        setProjekleiter(id)
+        console.log({projektleiter}, "ayk projektleiter wird gesetzt")
+      }
+
 
     {/** Für dynamische Felder des Modals */ }
 

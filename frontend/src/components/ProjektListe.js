@@ -31,6 +31,8 @@ export default function ProjektListe(props) {
   const [loadingInProgress, setLoading] = useState(true);
 
 
+  const [userIdIsSet, setUserIdTrue] = useState(false);
+
   // Usestates für Post Projekt
   const [projektname, setProjektname] = useState("");
   const [auftraggeber, setAuftraggeber] = useState("");
@@ -43,18 +45,17 @@ export default function ProjektListe(props) {
   useEffect(() => {
     // Update the document title using the browser API
 
-    //FetchProjekte(props.id)
-    //iDerhalten(props.id)
+    FetchProjekte(props.id)
+    iDerhalten(props.id)
 
     // Testzwecke
-    FetchProjekte(1)
-    iDerhalten(1)
+    //FetchProjekte(1)
+    // iDerhalten(1)
 
     /**
      * Leere Liste: [] muss übergeben werden um einen infinite Loop zu verhindern
      */
   }, [props.id])
-
 
 
   async function FetchProjekte(id) {
@@ -104,9 +105,9 @@ export default function ProjektListe(props) {
 
   const iDerhalten = (id) => {
     setProjekleiter(id)
+    setUserIdTrue(true)
   }
 
- 
 
  
 
@@ -146,7 +147,15 @@ export default function ProjektListe(props) {
       </CSSTransition>
       <LoadingProgress show={loadingInProgress}></LoadingProgress>
 
-      <CreateProjectModal  setOpenModal={setShowModal} showModal={showModal}></CreateProjectModal>
+      {
+                  userIdIsSet ?
+                    <>
+                      <CreateProjectModal id={projektleiter}  setOpenModal={setShowModal} showModal={showModal}></CreateProjectModal>
+                    </>
+                    : null
+                }
+
+      
     </div>
   );
 }
