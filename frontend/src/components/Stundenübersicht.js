@@ -58,7 +58,7 @@ export default function Stundenübersicht(props) {
             </Fab>
             
 
-            <Dialog open={openModal}
+            <Dialog open={openModal} style={{ backgroundColor: "rgba(33,37,31, 0.7)" }}
                 PaperProps={{
                 style: {
                   minHeight: 390,

@@ -53,7 +53,7 @@ export default function UrlaubBuchenModal(props) {
   }
 
   return (
-    <div className="modalContainer">
+    <div className="modalContainer" >
       <div className="titleCloseBtn">
         <button
           onClick={() => {

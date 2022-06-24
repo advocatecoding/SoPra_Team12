@@ -84,7 +84,7 @@ function Start(props) {
                   : null
               }
               {/* Sidebar -> Projektkontrolle durchführen Button*/}
-              <div>
+              <div style={{display:"flex", justifyContent:"center"}}>
                 <CheckProjects openCheckProjectsModal={open => setCheckProjects(open)}></CheckProjects>
 
               

@@ -1,10 +1,9 @@
 import '../../index.css';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import { CSSTransition } from 'react-transition-group';
+import PropTypes from "prop-types";
 import IconButton from "@material-ui/core/IconButton";
 import { Button, Typography, TextField } from '@material-ui/core';
 import Box from '@mui/material/Box';
-import ArticleIcon from '@mui/icons-material/Article';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import axios from 'axios';
 import Dialog from '@mui/material/Dialog';
@@ -19,7 +18,6 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { v4 as uuidv4 } from 'uuid';
 import UsersProject from '../UsersProject'
-import Header from '../header/Header';
 
 
 export default function CreateProjectModal(props) {
@@ -59,7 +57,7 @@ export default function CreateProjectModal(props) {
             return prevData;
         });
     }, []);
-   
+
 
     function postProjekt(id) {
         getSettedProjektId()
@@ -74,7 +72,7 @@ export default function CreateProjectModal(props) {
             console.log(response)
             const data = response.data;
             console.log(data)
-            console.log("Die ProjektId soll ab hier gespeichert werden:",  data.id)
+            console.log("Die ProjektId soll ab hier gespeichert werden:", data.id)
             setProjektId(data.id)
             console.log("Projekt wurde gepostet", projekt)
         }).catch(err => { console.log(err) })
@@ -87,14 +85,14 @@ export default function CreateProjectModal(props) {
         const url = `/zeit/aktivitaten`;
         axios.post(url, {
             id,
-            aktivitaetname, 
-            projektname, 
-            dauer, 
+            aktivitaetname,
+            projektname,
+            dauer,
             kapazität
         }).then((response) => {
             console.log(response)
             const data = response.data;
-            console.log("Die ProjektId soll ab hier AUCH gespeichert werden:",  data.id)
+            console.log("Die ProjektId soll ab hier AUCH gespeichert werden:", data.id)
         }).catch(err => { console.log(err) })
     }
 
@@ -156,6 +154,7 @@ export default function CreateProjectModal(props) {
     const showAktivitaetenErstellen = (e) => {
         e.preventDefault();
         setAktivitaetenErstellen(true)
+
     };
 
     const showTeamErstellen = (e) => {
@@ -251,8 +250,8 @@ export default function CreateProjectModal(props) {
 
 
     return (
-        <div>
-            <Dialog open={props.showModal}
+        <div style={{ backgroundColor: "red" }}>
+            <Dialog open={props.showModal} style={{ backgroundColor: "rgba(33,37,31, 0.7)"}}
                 PaperProps={{
                     sx: {
                         minHeight: 300,
@@ -300,7 +299,8 @@ export default function CreateProjectModal(props) {
 
             </Dialog>
 
-            <Dialog open={aktivitaetenErstellen}
+            <Dialog open={aktivitaetenErstellen} 
+                BackdropProps={{ style: { backgroundColor: "transparent" } }}
                 PaperProps={{
                     sx: {
                         minHeight: 300,
@@ -315,7 +315,7 @@ export default function CreateProjectModal(props) {
                     }} ></Button>
                 </DialogTitle>
 
-                <DialogContent dividers>
+                <DialogContent dividers >
                     <Typography>Fügen Sie die Aktivitäten, deren Dauer und Kapazität hinzu.</Typography>
 
                     {/** Es werden dynamisch pro Slot 3 Felder erzeugt */}
@@ -323,7 +323,7 @@ export default function CreateProjectModal(props) {
                     {
                         aktivitätenFields.map(inputField => (
 
-                            <Box sx={{ display: 'flex', flexWrap: 'wrap' }} key={inputField.id}>
+                            <Box  sx={{ display: 'flex', flexWrap: 'wrap' }} key={inputField.id}>
 
 
                                 <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
@@ -381,6 +381,7 @@ export default function CreateProjectModal(props) {
             </Dialog>
 
             <Dialog open={teamErstellen}
+                BackdropProps={{ style: { backgroundColor: "transparent" } }}
                 PaperProps={{
                     sx: {
                         minHeight: 300,
@@ -449,3 +450,9 @@ export default function CreateProjectModal(props) {
         </div>
     )
 }
+
+CreateProjectModal.propTypes = {
+    onClose: PropTypes.func.isRequired,
+    open: PropTypes.bool.isRequired,
+    selectedValue: PropTypes.string.isRequired
+};
