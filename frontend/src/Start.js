@@ -8,7 +8,7 @@ import CheckProjectsModal from "./components/modals/CheckProjectsModal"
 import Stundenübersicht from "./components/Stundenübersicht";
 import UrlaubBuchen from "./components/UrlaubBuchen";
 import UrlaubBuchenModal from "./components/modals/UrlaubBuchenModal";
-
+import KommenBuchen from "./components/KommenBuchen";
 
 
 const theme = createTheme({
@@ -130,6 +130,10 @@ function Start(props) {
               <Grid container xs={12} style={{ backgroundColor: "#447F50", minHeight: "400px", borderRadius: "8px", marginTop: "2rem" }}>
               <div style={{marginLeft: "auto", height:"20%"}}>
                 <UrlaubBuchen openUrlaubBuchenModal={open => setUrlaubModalOpen(open)}></UrlaubBuchen>
+              </div>
+              <div style={{marginLeft: "auto", height:"20%"}}>
+                <KommenBuchen>
+                </KommenBuchen>
               </div>
               
               <Grid style={{ backgroundColor: "yellow", height:"100%", width:"100%"}}>
