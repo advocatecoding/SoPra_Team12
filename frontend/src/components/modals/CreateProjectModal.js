@@ -1,5 +1,5 @@
 import '../../index.css';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import IconButton from "@material-ui/core/IconButton";
 import { Button, Typography, TextField } from '@material-ui/core';
@@ -44,15 +44,89 @@ export default function CreateProjectModal(props) {
     const [teamErstellen, setTeamErstellen] = useState(false);
 
 
+
+
+    // UseStates für Mitarbeiter in Projekt
+    const [mitarbeiter, setMitarbeiter] = useState("");
+    // projekt entspricht hier projektId
+    const [projekt, setProjektId] = useState("");
+
+    const getSettedProjektId = useCallback((projId) => {
+        setProjektId((prevData) => {
+            if (prevData.includes(projId)) {
+                return prevData.filter(image => image !== projId);
+            }
+            return prevData;
+        });
+    }, []);
+   
+
     function postProjekt(id) {
-        console.log({projektleiter}, "ayk projektleiter wird gesetzt")
+        getSettedProjektId()
+        console.log({ projektleiter }, "ayk projektleiter wird gesetzt")
         const url = `/zeit/projekte`;
         axios.post(url, {
             id,
             projektname,
             auftraggeber,
             projektleiter
-        }).then(data => console.log("Projekt wurde gepostet", data).catch(err => console.log(err)))
+        }).then((response) => {
+            console.log(response)
+            const data = response.data;
+            console.log(data)
+            console.log("Die ProjektId soll ab hier gespeichert werden:",  data.id)
+            setProjektId(data.id)
+            console.log("Projekt wurde gepostet", projekt)
+        }).catch(err => { console.log(err) })
+    };
+
+
+    function postAktivitäten(aktivitaetname, dauer, kapazität, id) {
+        getSettedProjektId()
+        const projektname = projekt
+        const url = `/zeit/aktivitaten`;
+        axios.post(url, {
+            id,
+            aktivitaetname, 
+            projektname, 
+            dauer, 
+            kapazität
+        }).then((response) => {
+            console.log(response)
+            const data = response.data;
+            console.log("Die ProjektId soll ab hier AUCH gespeichert werden:",  data.id)
+        }).catch(err => { console.log(err) })
+    }
+
+    function postTeam(mitarbeiter, verkaufte_stunden) {
+        getSettedProjektId();
+        console.log("ProjektId in postTeam:", projekt)
+        const url = `/zeit/mitarbeiter_in_projekt`;
+        axios.post(url, {
+            mitarbeiter,
+            projekt,
+            verkaufte_stunden
+        }).then((response) => {
+            const data = response.data
+        }).catch(err => console.log(err))
+    };
+
+    const handleClose = (e) => {
+        e.preventDefault();
+        setModalOpen(false);
+        setAktivitaetenErstellen(false);
+        setTeamErstellen(false)
+
+        {/** Post-Requests */ }
+        postProjekt(1211);
+        getSettedProjektId()
+        teamFields.map((data) => {
+            postTeam(data.mitarbeiter_id, data.verkaufte_stunden);
+        }
+        )
+        aktivitätenFields.map((data) => {
+            postAktivitäten(data.aktivitätsname, data.dauer, data.kapazität, 1211);
+        })
     };
 
     const changeProjektname = (event) => {
@@ -77,14 +151,7 @@ export default function CreateProjectModal(props) {
         props.setOpenModal(false)
     };
 
-    const handleClose = (e) => {
-        e.preventDefault();
-        setModalOpen(false);
-        setAktivitaetenErstellen(false);
-        setTeamErstellen(false)
-        props.setOpenModal(false)
-        postProjekt(1211);
-    };
+
 
     const showAktivitaetenErstellen = (e) => {
         e.preventDefault();
@@ -108,8 +175,9 @@ export default function CreateProjectModal(props) {
 
     const iDerhalten = (id) => {
         setProjekleiter(id)
-        console.log({projektleiter}, "ayk projektleiter wird gesetzt")
-      }
+        setMitarbeiter(id)
+        console.log({ projektleiter }, "ayk projektleiter wird gesetzt")
+    }
 
 
     {/** Für dynamische Felder des Modals */ }
@@ -137,10 +205,10 @@ export default function CreateProjectModal(props) {
     ]);
 
     const addTeamFields = () => {
-        setTeamFields([...teamFields, { id: uuidv4(), mitarbeiter_id: '', verkaufte_stunden: ''}])
+        setTeamFields([...teamFields, { id: uuidv4(), mitarbeiter_id: '', verkaufte_stunden: '' }])
         console.log(teamFields)
     }
-    
+
     const removeTeamFields = id => {
         console.log(id)
         if (id !== 1) {
@@ -149,8 +217,8 @@ export default function CreateProjectModal(props) {
             setTeamFields(values);
         }
     }
-    
-    {/** Funktionen, die dafür sorgen, dass die Werte der Inputs sich aktualisieren */}
+
+    {/** Funktionen, die dafür sorgen, dass die Werte der Inputs sich aktualisieren */ }
 
     const setAktivitätInput = (id, event) => {
         const newaktivitätenFields = aktivitätenFields.map(i => {
@@ -162,7 +230,7 @@ export default function CreateProjectModal(props) {
         setaktivitätenFields(newaktivitätenFields);
     }
 
-    
+
     const setTeamInput = (id, event) => {
         //console.log(event.value)
         const newTeamFields = teamFields.map(i => {
@@ -173,13 +241,12 @@ export default function CreateProjectModal(props) {
                 } catch (TypeError) {
                     i["mitarbeiter_id"] = event
                 }
-                
+
             }
             return i;
         })
         setTeamFields(newTeamFields)
         console.log(teamFields)
-        
     }
 
 
@@ -189,7 +256,7 @@ export default function CreateProjectModal(props) {
                 PaperProps={{
                     sx: {
                         minHeight: 300,
-                        minWidth: 710,
+                        minWidth: 740,
                         maxHeight: 700
                     }
                 }}>
@@ -237,7 +304,7 @@ export default function CreateProjectModal(props) {
                 PaperProps={{
                     sx: {
                         minHeight: 300,
-                        minWidth: 710,
+                        minWidth: 740,
                         maxHeight: 700
                     }
                 }}>
@@ -265,16 +332,19 @@ export default function CreateProjectModal(props) {
                                         name={"aktivitätsname"}
                                         value={inputField.aktivitätsname}
                                         onChange={event => setAktivitätInput(inputField.id, event)}
+                                        required
                                     />
                                 </FormControl>
 
-                                <FormControl sx={{ m: 1, width: '15ch' }} variant="outlined">
-                                    <Typography style={{ marginBottom: "0.5rem" }}>Dauer</Typography>
+                                <FormControl sx={{ m: 1, width: '21ch' }} variant="outlined">
+                                    <Typography style={{ marginBottom: "0.5rem" }}>Dauer (Enddatum)</Typography>
                                     <OutlinedInput
                                         name={"dauer"}
                                         value={inputField.dauer}
                                         onChange={event => setAktivitätInput(inputField.id, event)}
-                                        endAdornment={<InputAdornment position="end">Tage</InputAdornment>}
+                                        type="text"
+                                        required
+                                        placeholder="Format: JJJJ-MM-TT"
                                     />
                                 </FormControl>
 
@@ -283,17 +353,18 @@ export default function CreateProjectModal(props) {
                                     <OutlinedInput
                                         name={"kapazität"}
                                         value={inputField.kapazität}
+                                        required
                                         onChange={event => setAktivitätInput(inputField.id, event)}
                                         endAdornment={<InputAdornment position="end">h</InputAdornment>}
                                     />
                                 </FormControl>
 
                                 {/** Add & Remove Buttons für neue Slots */}
-                                <IconButton style={{ display: "inline-block", padding: "1rem" }} onClick={addAktivitätenFields}>
+                                <IconButton style={{ display: "inline-block", padding: "0.5rem" }} onClick={addAktivitätenFields}>
                                     <AddCircleOutlineIcon id="add-project-icon" style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer" }} />
                                 </IconButton>
 
-                                <IconButton style={{ display: "inline-block", padding: "1rem" }} disabled={aktivitätenFields.length === 1} onClick={() => removeAktivitätenFields(inputField.id)}>
+                                <IconButton style={{ display: "inline-block", padding: "0.5rem" }} disabled={aktivitätenFields.length === 1} onClick={() => removeAktivitätenFields(inputField.id)}>
                                     <RemoveCircleOutlineIcon id="add-project-icon" style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer" }} />
                                 </IconButton>
                             </Box>
@@ -313,7 +384,7 @@ export default function CreateProjectModal(props) {
                 PaperProps={{
                     sx: {
                         minHeight: 300,
-                        minWidth: 710,
+                        minWidth: 740,
                         maxHeight: 700
                     }
                 }}>
@@ -334,15 +405,15 @@ export default function CreateProjectModal(props) {
 
                             <Box sx={{ display: 'flex', flexWrap: 'wrap' }} key={inputField.id}>
 
-                                <Typography style={{  position: "absolute"}}>Mitarbeiter</Typography>
-                                <div style={{paddingTop: "2rem"}}>
-                                <UsersProject 
+                                <Typography style={{ position: "absolute" }}>Mitarbeiter</Typography>
+                                <div style={{ paddingTop: "2rem" }}>
+                                    <UsersProject
                                         name={"mitarbeiter_id"}
                                         value={inputField.mitarbeiter_id}
                                         onChange={event => setTeamInput(inputField.id, event)}
-                                        ></UsersProject>
+                                    ></UsersProject>
                                 </div>
-                                
+
 
 
                                 <FormControl sx={{ m: 1, width: '22ch' }} variant="outlined">

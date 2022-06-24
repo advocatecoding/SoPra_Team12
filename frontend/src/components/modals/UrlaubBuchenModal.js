@@ -27,7 +27,11 @@ export default function UrlaubBuchenModal(props) {
       person_id,
       start_datum,
       end_datum
-    }).then(data => console.log("Urlaub wure gepostet", data).catch(err => console.log(err)))
+    })
+    .then(data => {
+      console.log("Urlaub wure gepostet", data)
+    })
+    .catch(err => { console.log(err) })
   };
 
   const changeStartDatum = (event) => {
