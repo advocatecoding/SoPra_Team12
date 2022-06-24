@@ -4,7 +4,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import { createTheme } from '@mui/material/styles';
-import { ThemeProvider } from '@mui/material'
+import { ThemeProvider } from '@mui/material';
 import { red } from '@mui/material/colors';
 import { withStyles } from '@material-ui/core/styles';
 import Start from './Start'
