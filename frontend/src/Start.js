@@ -9,6 +9,9 @@ import Stundenübersicht from "./components/Stundenübersicht";
 import UrlaubBuchen from "./components/UrlaubBuchen";
 import UrlaubBuchenModal from "./components/modals/UrlaubBuchenModal";
 import KommenBuchen from "./components/KommenBuchen";
+import AktivitätBuchen from "./components/modals/AktivitätBuchen";
+import AktivitätBuchenModal from "./components/modals/AktivitätBuchenModal";
+
 
 
 const theme = createTheme({
@@ -29,6 +32,7 @@ function Start(props) {
   const [userIdIsSet, setUserIdTrue] = useState(false);
   const [checkProjects, setCheckProjects] = useState(false);
   const [urlaubModalOpen, setUrlaubModalOpen] = useState (false);
+  const [AktivitätModalOpen, setAktivitätModalOpen] = useState (false);
 
   
 
@@ -65,6 +69,8 @@ function Start(props) {
       }
 
       {urlaubModalOpen && <UrlaubBuchenModal setOpenModal={setUrlaubModalOpen} id={userId}></UrlaubBuchenModal>}
+
+      {AktivitätModalOpen && <AktivitätBuchenModal setOpenModal={setAktivitätModalOpen} id={userId}></AktivitätBuchenModal>}
      
       <ThemeProvider theme={theme}>
         {/* Abstand */}
@@ -134,6 +140,8 @@ function Start(props) {
               <div style={{marginLeft: "auto", height:"20%"}}>
                 <KommenBuchen>
                 </KommenBuchen>
+                <AktivitätBuchen openAktivitätModal={open => setAktivitätModalOpen(open)}></AktivitätBuchen>
+
               </div>
               
               <Grid style={{ backgroundColor: "yellow", height:"100%", width:"100%"}}>

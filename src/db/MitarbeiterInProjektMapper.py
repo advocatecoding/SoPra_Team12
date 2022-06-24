@@ -35,7 +35,7 @@ class MitarbeiterInProjektMapper(Mapper):
         cursor = self._cnx.cursor()
         cursor.execute(
             "SELECT person_idd, projekt_id, verkaufte_stunden, Mitarbeiter_in_Projekt.letzte_aenderung FROM Person INNER JOIN Mitarbeiter_in_Projekt "
-            "WHERE person_idd = person_id AND person_idd={}".format(person_idd))
+            "ON person_idd = person_id AND person_idd={}".format(person_idd))
         person_daten = cursor.fetchall()
 
         for (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung) in person_daten:

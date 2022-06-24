@@ -48,7 +48,7 @@ person = api.inherit('Person', bo, {
 projekt = api.inherit('Projekt', bo, {
     "projektname": fields.String(attribute="_projektname", description="Projektname"),
     "auftraggeber": fields.String(attribute="_auftraggeber", description="Auftraggeber des Projekts"),
-    "projektleiter": fields.String(attribute="_projektleiter", description="Projektleiter")
+    "projekt_id": fields.String(attribute="_projektleiter", description="Projektleiter")
 })
 
 

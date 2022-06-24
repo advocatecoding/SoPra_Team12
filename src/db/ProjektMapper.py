@@ -138,15 +138,16 @@ class ProjektMapper(Mapper):
         result1 = []
 
         cursor = self._cnx.cursor()
-        command = "SELECT projektname, auftraggeber FROM Mitarbeiter_in_Projekt JOIN Projekt ON Mitarbeiter_in_Projekt.projekt_id = Projekt.projekt_id JOIN Person ON Mitarbeiter_in_Projekt.person_idd = Person.person_id WHERE Person.person_id={}".format(person_id)
+        command = "SELECT projektname, auftraggeber, Projekt.projekt_id FROM Mitarbeiter_in_Projekt JOIN Projekt ON Mitarbeiter_in_Projekt.projekt_id = Projekt.projekt_id JOIN Person ON Mitarbeiter_in_Projekt.person_idd = Person.person_id WHERE Person.person_id={}".format(person_id)
 
         cursor.execute(command)
         projekt_daten = cursor.fetchall()
 
-        for (projektname,auftraggeber) in projekt_daten:
+        for (projektname,auftraggeber,projekt_id) in projekt_daten:
             projekt1 = Projekt()
             projekt1.set_name(projektname)
             projekt1.set_auftraggeber(auftraggeber)
+            projekt1.set_id(projekt_id)
             result1.append(projekt1)
 
         self._cnx.commit()

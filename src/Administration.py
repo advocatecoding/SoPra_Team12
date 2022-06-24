@@ -233,11 +233,11 @@ class Administration(object):
             return mapper.find_all()
 
 
-    def create_verkaufte_stunden_in_aktivitaet(self, mitarbeiter, aktivitaet, gebuchte_stunden):
+    def create_verkaufte_stunden_in_aktivitaet(self, aktivitaet, mitarbeiter, gebuchte_stunden):
             """verkaufte_stunden_in_aktivitaet anlegen."""
             averkaufte_stunden = VerkaufteStundenInAktivitaet()
-            averkaufte_stunden.set_person(mitarbeiter)
             averkaufte_stunden.set_aktivitaet(aktivitaet)
+            averkaufte_stunden.set_person(mitarbeiter)
             averkaufte_stunden.set_gebuchte_stunden(gebuchte_stunden)
             averkaufte_stunden.set_letzte_aenderung()
 
