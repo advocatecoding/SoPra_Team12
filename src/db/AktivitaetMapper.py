@@ -108,3 +108,25 @@ class AktivitaetMapper(Mapper):
         cursor.close()
 
         return aktivitaet
+
+    def find_all_aktivitaeten_by_projekt_id(self, projekt_id):
+        result = []
+        cursor = self._cnx.cursor()
+        cursor.execute("SELECT * FROM Aktivitaet WHERE projekt_id={0}".format(projekt_id))
+        projekt_daten = cursor.fetchall()
+
+        for (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) in projekt_daten:
+            projekt = Aktivitaet()
+            projekt.set_projektname(projekt_id)
+            projekt.set_name(bezeichnung)
+            projekt.set_dauer(dauer)
+            projekt.set_kapazitaet(kapazitaet)
+            projekt.set_id(aktivitaet_id)
+            projekt.set_letzte_aenderung_fuer_get_methode(letzte_aenderung)
+            result.append(projekt)
+            print(result)
+
+        self._cnx.commit()
+        cursor.close()
+        print(result)
+        return result

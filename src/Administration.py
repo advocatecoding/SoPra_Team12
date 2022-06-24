@@ -217,10 +217,10 @@ class Administration(object):
         with ProjektMapper() as mapper:
             return mapper.find_projektnamen(person_id)
 
-
-
-
-
+    def get_all_aktivitaeten_by_projekt_id(self, projekt_id):
+        """Alle Aktivitäten in einem Projekt ausgeben"""
+        with AktivitaetMapper() as mapper:
+            return mapper.find_all_aktivitaeten_by_projekt_id(projekt_id)
 
     def projekte_by_projektleiter(self, projektleiter):
         with ProjektMapper() as mapper:

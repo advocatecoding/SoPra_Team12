@@ -378,6 +378,20 @@ class AktivitaetenByIdOperations(Resource):
             return '', 500
 
 
+""" Alle Aktivitäten in einem Projekt ausgeben """
+@zeiterfassung.route("/aktivitaet/projekt/<int:projekt_id>")
+@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
+class AktivitaetenInProjektByIdOperations(Resource):
+    @zeiterfassung.marshal_with(aktivitaet)
+    def get(self, projekt_id):
+        """ Auslesen aller Aktivitaeten in einer Projekt Instanz.
+        Das zu auslesende Objekt wird anhand der id bestimmt
+        """
+        adm = Administration()
+        aktivitaeten = adm.get_all_aktivitaeten_by_projekt_id(projekt_id)
+        return aktivitaeten
+
+
 
 @zeiterfassung.route("/urlaub")
 class UrlaubListOperations(Resource):
