@@ -13,8 +13,9 @@ class AktivitaetMapper(Mapper):
         cursor.execute("SELECT * FROM Aktivitaet")
         aktivitaet_daten = cursor.fetchall()
 
-        for (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) in aktivitaet_daten:
+        for (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) in aktivitaet_daten:
             aktivitaet = Aktivitaet()
+            aktivitaet.set_projektname(projekt_id)
             aktivitaet.set_name(bezeichnung)
             aktivitaet.set_dauer(dauer)
             aktivitaet.set_kapazitaet(kapazitaet)
@@ -37,8 +38,9 @@ class AktivitaetMapper(Mapper):
         aktivitaet_daten = cursor.fetchall()
 
         try:
-            (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) = aktivitaet_daten[0]
+            (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) = aktivitaet_daten[0]
             aktivitaet = Aktivitaet()
+            aktivitaet.set_projektname(projekt_id)
             aktivitaet.set_name(bezeichnung)
             aktivitaet.set_dauer(dauer)
             aktivitaet.set_kapazitaet(kapazitaet)
@@ -74,8 +76,8 @@ class AktivitaetMapper(Mapper):
     def update(self, aktivitaet):
         cursor = self._cnx.cursor()
 
-        command = "UPDATE Aktivitaet " + "SET bezeichnung=%s, dauer=%s, kapazitaet=%s, letzte_aenderung=%s WHERE aktivitaet_id=%s"
-        data = (aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazitaet(), aktivitaet.get_letzte_aenderung(),
+        command = "UPDATE Aktivitaet " + "SET projekt_id=%s, bezeichnung=%s, dauer=%s, kapazitaet=%s, letzte_aenderung=%s WHERE aktivitaet_id=%s"
+        data = (aktivitaet.get_projektname(), aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazitaet(), aktivitaet.get_letzte_aenderung(),
                 aktivitaet.get_id())
         cursor.execute(command, data)
 
@@ -98,19 +100,11 @@ class AktivitaetMapper(Mapper):
 
 
         """ Hier wird die Aktivitäts Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO Aktivitaet (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) VALUES (%s,%s,%s,%s,%s)"
-        data = (aktivitaet.get_id(), aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazitaet(), aktivitaet.get_letzte_aenderung())
+        command = "INSERT INTO Aktivitaet (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung) VALUES (%s,%s,%s,%s,%s,%s)"
+        data = (aktivitaet.get_id(), aktivitaet.get_projektname(), aktivitaet.get_name(), aktivitaet.get_dauer(), aktivitaet.get_kapazitaet(), aktivitaet.get_letzte_aenderung())
         cursor.execute(command, data)
 
         self._cnx.commit()
         cursor.close()
 
         return aktivitaet
-
-
-
-
-if __name__ == '__main__':
-    with AktivitaetMapper() as mapper:
-        result = mapper.find_aktivitaeten_by_projekt_id(1)
-        print(result)

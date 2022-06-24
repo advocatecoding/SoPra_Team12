@@ -22,16 +22,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
   UNIQUE (benutzername),
   PRIMARY KEY (`person_id`));
   
--- -----------------------------------------------------------------------
--- Tabelle erstellen 'Aktivitaet'
--- -----------------------------------------------------------------------
-  CREATE TABLE IF NOT EXISTS `Aktivitaet` (
-  `aktivitaet_id` INT NOT NULL,
-  `bezeichnung` VARCHAR(45) NOT NULL ,
-  `dauer` DATETIME NULL,
-  `kapazitaet` INT NULL,
-  `letzte_aenderung` DATETIME NULL,
-  PRIMARY KEY (`aktivitaet_id`));
+
   
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Projekt'
@@ -48,6 +39,21 @@ CREATE TABLE IF NOT EXISTS `Person` (
     ON DELETE CASCADE
     ON UPDATE CASCADE);
   
+  -- -----------------------------------------------------------------------
+-- Tabelle erstellen 'Aktivitaet'
+-- -----------------------------------------------------------------------
+  CREATE TABLE IF NOT EXISTS `Aktivitaet` (
+  `aktivitaet_id` INT NOT NULL,
+  `projekt_id` INT NOT NULL,
+  `bezeichnung` VARCHAR(45) NOT NULL ,
+  `dauer` DATETIME NULL,
+  `kapazitaet` INT NULL,
+  `letzte_aenderung` DATETIME NULL,
+  PRIMARY KEY (`aktivitaet_id`),
+  FOREIGN KEY (`projekt_id`)
+	REFERENCES `Projekt` (`projekt_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
   
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Urlaub'
@@ -128,23 +134,6 @@ CREATE TABLE IF NOT EXISTS `Person` (
     ON DELETE CASCADE
     ON UPDATE CASCADE);  
     
--- -----------------------------------------------------------------------
--- Tabelle erstellen 'Aktivitaet_in_Projekt'
--- -----------------------------------------------------------------------
-   CREATE TABLE IF NOT EXISTS `Aktivitaet_in_Projekt` (
-  `aktivitaet_idd` INT NOT NULL,
-  `projekt_id` INT NOT NULL,
-  `letzte_aenderung` DATETIME NULL,
-  UNIQUE (aktivitaet_idd),
-  PRIMARY KEY (`aktivitaet_idd`,`projekt_id`),
-	FOREIGN KEY (`aktivitaet_idd`)
-	REFERENCES `Aktivitaet` (`aktivitaet_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-    FOREIGN KEY (`projekt_id`)
-    REFERENCES `Projekt` (`projekt_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE);  
     
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Mitarbeiter_in_Projekt'
@@ -264,22 +253,19 @@ VALUES('15', '4',"Projekt L", 'Windows','2022-04-19 12:33:00');
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Aktivität Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
-INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
-VALUES('1', 'Kriegshammertitan aufhalten', '2022-04-30 14:00:00','120', '2022-04-19 02:33:00');
-INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
-VALUES('2', '3D-Manöver-Apparat aufladen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
-INSERT INTO `Aktivitaet` (aktivitaet_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
-VALUES('3', 'Auf Expedition gehen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('1', '1', 'Kriegshammertitan aufhalten', '2022-04-30 14:00:00','120', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('2', '1', '3D-Manöver-Apparat aufladen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('3', '1', 'Auf Expedition gehen', '2022-05-01 14:00:00','100', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('4', '2', 'Teile bestellen', '2022-05-01 14:00:00','50', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('5', '2', 'Teile prüfen', '2022-05-01 14:00:00','150', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('6', '2', 'beschädigte Teile reklamieren', '2022-05-01 14:00:00','70', '2022-04-19 02:33:00');
 
--- ---------------------------------------------------------------------------------------------------------------------------
--- Aktivität_in_Projekt Entitäten erstellen
--- ---------------------------------------------------------------------------------------------------------------------------
-INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id, letzte_aenderung)  
-VALUES('1', '1', '2022-04-19 02:33:00');
-INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id, letzte_aenderung)  
-VALUES('2', '2', '2022-04-19 02:33:00');
-INSERT INTO `Aktivitaet_in_Projekt` (aktivitaet_idd, projekt_id, letzte_aenderung)  
-VALUES('3', '1', '2022-04-19 02:33:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Urlaub Entitäten erstellen

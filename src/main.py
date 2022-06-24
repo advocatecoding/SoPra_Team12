@@ -6,7 +6,6 @@ from flask_restx import Api, Resource, fields
 from flask_cors import CORS
 
 # Zugriff auf Administration & BO-Klassen
-from bo.AktivitaetenInProjekt import AktivitaetInProjekt
 from bo.Person import Person
 from bo.Projekt import Projekt
 from Administration import Administration
@@ -55,6 +54,7 @@ projekt = api.inherit('Projekt', bo, {
 
 aktivitaet = api.inherit('Aktivitaet', bo, {
     "aktivitaetname": fields.String(attribute="_name", description="Aktivitätenname"),
+    "projektname": fields.String(attribute="_projektname", description="Projektname"),
     "dauer": fields.String(attribute="_dauer", description="Dauer"),
     "kapazität": fields.String(attribute="_kapazität", description="Kapazität")
 })
@@ -63,11 +63,6 @@ mitarbeiter_in_projekt = api.inherit('Mitarbeiterinprojekt', bo, {
     "mitarbeiter": fields.String(attribute="_person", description="Mitarbeiter"),
     "projekt": fields.String(attribute="_projekt", description="Projekt"),
     "verkaufte_stunden": fields.String(attribute="_verkaufte_stunden", description="verkaufte Stunden")
-})
-
-aktivitaet_in_projekt = api.inherit('Aktivitaetinprojekt', bo, {
-    "aktivitaet": fields.String(attribute="_aktivitaet", description="Aktivität"),
-    "projekt": fields.String(attribute="_projekt", description="Projekt"),
 })
 
 urlaub = api.inherit('Urlaub', bo, {
@@ -331,7 +326,7 @@ class AktivitaetenListOperations(Resource):
 
         if aktivitaet_object is not None:
             """ Wir erstellen in Administration eine Person mithilfe der Daten vom api.payload """
-            c = adm.create_aktivitaet(aktivitaet_object.get_name(), aktivitaet_object.get_dauer(),
+            c = adm.create_aktivitaet(aktivitaet_object.get_projektname(), aktivitaet_object.get_name(), aktivitaet_object.get_dauer(),
                                       aktivitaet_object.get_kapazitaet())
             return c, 200
         else:
@@ -381,72 +376,6 @@ class AktivitaetenByIdOperations(Resource):
             return '', 200
         else:
             return '', 500
-
-
-"""rudimentär, neue Mapper erstellen und die von der alten dorthin übertragen"""
-"""Aktivitäten_in_Projekt"""
-"""Dennis Kühnberger Post, Delete, Weiteres Get, PUT  """
-
-
-""" Aktivitäten_in_Projekt Objekt(e) wird gelesen und erstellt  """
-@zeiterfassung.route("/aktivitaet_in_projekt")
-class MitarbeiterInProjektListOperations(Resource):
-    @zeiterfassung.marshal_with(aktivitaet_in_projekt)
-    def get(self):
-        """ Auslesen der Aktivität_in_Projekt -Objekte """
-        adm = Administration()
-        aktivitaet_in_projekt = adm.get_all_aktivitaet_in_projekt
-        return aktivitaet_in_projekt
-
-    @zeiterfassung.marshal_with(aktivitaet_in_projekt, code=201)
-    @zeiterfassung.expect(aktivitaet_in_projekt)
-    def post(self):
-        """ Aktivitaet_in_Projekt Instanz erstellen """
-        adm = Administration()
-        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
-        Attribute aus den Werten von api.payload setzen. """
-        aktivitaet_in_projekt_object = AktivitaetInProjekt.from_dict(api.payload)
-
-        if aktivitaet_in_projekt_object is not None:
-            """ Wir erstellen in Administration eine Aktivitaet in Projekt Instanz mithilfe der Daten vom api.payload """
-            c = adm.create_aktivitaet_in_projekt(aktivitaet_in_projekt_object.get_aktivitaet(),
-                                                  aktivitaet_in_projekt_object.get_projekt())
-            return c, 200
-        else:
-            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
-            return '', 500
-
-""" Aktivitaet_in_Projekt wird gelöscht und erstellt """
-@zeiterfassung.route("/aktivitaet_in_projekt/<int:aktivitaet_idd>/<int:projekt_id>")
-@zeiterfassung.doc(params={"aktivitaet_idd": {"description" : "Die Id der gewünschten Aktivitaet"},
-                           "projekt_id": {"description:" : "Die Id des gewünschten Projekts"}})
-class AktivitaetInProjektByIdOperations(Resource):
-    @zeiterfassung.marshal_with(aktivitaet_in_projekt)
-    def delete(self, aktivitaet_idd, projekt_id):
-        """Löschen einer Aktivitaet_in_Projekt Instanz.
-        Das zu löschende Objekt wird anhand von zwei id's bestimmt.
-        """
-        adm = Administration()
-        aip = adm.delete_aktivitaet_in_projekt_by_id(aktivitaet_idd, projekt_id)
-        print(aip)
-        return aip
-
-
-
-
-
-""" Aktivitäten werden zur zugeordneten Projekt_ID ausgegeben """
-@zeiterfassung.route("/aktivitaet_in_projekt/<int:projekt_id>")
-@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projekts")
-class AktivitaetenByProjektId(Resource):
-    @zeiterfassung.marshal_with(aktivitaet_in_projekt)
-    def get(self, projekt_id):
-        """ Auslesen der Aktivitäten innerhalb eines Projektes"""
-        adm = Administration()
-        projekt = adm.get_aktivitaeten_by_projekt_id(projekt_id)
-        print(projekt)
-        return projekt
-
 
 
 

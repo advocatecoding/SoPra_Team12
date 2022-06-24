@@ -11,7 +11,6 @@ from bo.Aktivitaet import Aktivitaet
 from bo.Pause import Pause
 from bo.Startbuchung import Startbuchung
 from bo.Endbuchung import Endbuchung
-from bo.AktivitaetenInProjekt import AktivitaetInProjekt
 from bo.VerkaufteStundenInAktivitaet import VerkaufteStundenInAktivitaet
 
 from db.ProjektMapper import ProjektMapper
@@ -21,7 +20,6 @@ from db.UrlaubMapper import UrlaubMapper
 from bo.Projekt import Projekt
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
-from db.AktivitaetInProjektMapper import AktivitaetInProjektMapper
 from db.VerkaufteStundenInAktivitaetMapper import VerkaufteStundenInAktivitaetMapper
 import datetime
 
@@ -111,11 +109,12 @@ class Administration(object):
 
 
     """Aktivität"""
-    def create_aktivitaet(self, bezeichnung, dauer, kapazitaet):
+    def create_aktivitaet(self, projekt_id, bezeichnung, dauer, kapazitaet):
         """Eine Aktivität anlegen."""
 
         aktivitaet = Aktivitaet()
         aktivitaet.set_id(1211)
+        aktivitaet.set_projektname(projekt_id)
         aktivitaet.set_name(bezeichnung)
         aktivitaet.set_dauer(dauer)
         aktivitaet.set_kapazitaet(kapazitaet)
@@ -135,10 +134,6 @@ class Administration(object):
         with AktivitaetMapper() as mapper:
             return mapper.find_by_id(aktivitaet_id)
 
-    def get_aktivitaeten_by_projekt_id(self, projekt_id):
-        with AktivitaetInProjektMapper() as mapper:
-            return mapper.find_aktivitaeten_by_projekt_id(projekt_id)
-
     def delete_aktivitaet_by_aktivitaet_id(self, aktivitaet_id):
         with AktivitaetMapper() as mapper:
             return mapper.delete(aktivitaet_id)
@@ -149,31 +144,6 @@ class Administration(object):
         with AktivitaetMapper() as mapper:
             return mapper.update(aktivitaet)
 
-    def create_aktivitaet_in_projekt(self, aktivitaet, projekt):
-            """Aktivität in Projekt anlegen."""
-            aktivitaet_in_projekt = AktivitaetInProjekt()
-            aktivitaet_in_projekt.set_aktivitaet(aktivitaet)
-            aktivitaet_in_projekt.set_projekt(projekt)
-            aktivitaet_in_projekt.set_letzte_aenderung()
-
-            with AktivitaetInProjektMapper() as mapper:
-                return mapper.insert(aktivitaet_in_projekt)
-
-    @property
-    def get_all_aktivitaet_in_projekt(self):
-        """Wir geben alle Aktivitäten in einem Projekt aus"""
-        with AktivitaetInProjektMapper() as mapper:
-            return mapper.find_all()
-
-    def get_aktivitaet_in_projekt_by_id(self, projekt_id):
-        """ Wir geben die Aktivitäten der Projekte mit der angegebenen ID zurück """
-        with AktivitaetInProjektMapper() as mapper:
-            return mapper.find_by_id(projekt_id)
-
-    def delete_aktivitaet_in_projekt_by_id(self, aktivitaet_idd, projekt_id):
-        """Löschen einer Aktivitaet-Instanz mit der Projekt Id"""
-        with AktivitaetInProjektMapper() as mapper:
-            return mapper.delete(aktivitaet_idd, projekt_id)
 
 
     """Urlaub"""
