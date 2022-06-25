@@ -80,9 +80,27 @@ export default function Stundenübersicht(props) {
                             <DialogContentText >
                             <Grid xs={12}></Grid>
                             <Typography variant="h8"  style={{paddingLeft: "1px"}}>
-                            Projekt Aktivität &nbsp; Gearbeitete_Zeit
+                            <b>Projekt</b> &nbsp; <b>Aktivität</b> &nbsp; <b>Gearbeitete_Zeit</b>
                             <hr></hr>                     
                             </Typography>
+                            <div class="modal-body">
+                                    <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th><b>Projekt</b></th>
+                                    <th><b>Aktivität</b></th>
+                                    <th><b>Gearbeitete_Zeit</b></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td align="center">Projekt X</td>
+                                    <td align="center">Kriegshammertitan aufhalten</td>
+                                    <td align="center">201</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                            </div>
                                 {
                                     stundenübersicht.map((item) =>
                                         <Typography style={{paddingLeft: "1px"}}> {item.projekt }   {item.bezeichnung}  {item.gearbeitete_zeit}</Typography>
