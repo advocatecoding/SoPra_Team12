@@ -2,6 +2,35 @@ body{
     font-family: roboto;
 }
 
+.MuiOutlinedInput-notchedOutline {
+    border-color: white !important;
+}
+
+.MuiInputLabel-root {
+    color: white !important;
+}
+
+.MuiInputBase-input {
+    color: white !important;
+    border-color: white !important;
+}
+
+.MuiInput-underline:before {
+    border-bottom: 1px solid white !important;
+}
+
+.MuiInput-underline:after {
+    border-bottom: 1px solid #00bcd4!important;
+}
+
+.MuiSelect-icon{
+    color: white !important;
+} 
+
+.MuiTypography-root {
+    color: white !important;
+}
+
 :root {
     --bg: #262A2E;
     --bg-accent: #484a4d;
