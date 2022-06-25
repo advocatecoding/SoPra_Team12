@@ -330,12 +330,3 @@ VALUES('3', '1','10', '2022-04-19 02:33:00');
 INSERT INTO `verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
 VALUES('3', '2','2500', '2022-04-19 02:33:00');
 
-
-
-
-
- select vorname, projektname from mitarbeiter_in_projekt
- JOIN projekt on mitarbeiter_in_projekt.projekt_id = projekt.projekt_id
- JOIN person on mitarbeiter_in_projekt.person_idd = person.person_id
-where person.person_id = 1;
-

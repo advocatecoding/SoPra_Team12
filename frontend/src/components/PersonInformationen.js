@@ -3,12 +3,16 @@ import Typography from '@mui/material/Typography';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 
+
 export default function PersonInformationen(props) {
 
     const [personData, setPersonData] = useState("")
+    const current = new Date();
+    const date = `${current.getHours()}:${current.getMinutes()}`;
 
     useEffect(() => {
         fetchPersonById(props.id)
+        fetchBuchen(props.GehenBuchens)
     }, [props.id])
 
 
@@ -24,6 +28,11 @@ export default function PersonInformationen(props) {
     }
 
 
+    const fetchBuchen = (event) => {
+        
+      }
+
+
     return (
         <div>
             <AccountCircleIcon style={{ color: "#00bcd4", fontSize: "40px" }}></AccountCircleIcon>
@@ -32,7 +41,9 @@ export default function PersonInformationen(props) {
                 <br/>
                 Benutzername: {personData.benutzername}
                 <br/>
-                Kommen:
+                Kommen: {date}
+                <br/>
+                Gehen: {date}
             </Typography>
            
         </div>

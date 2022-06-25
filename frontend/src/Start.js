@@ -8,7 +8,7 @@ import CheckProjectsModal from "./components/modals/CheckProjectsModal"
 import Stundenübersicht from "./components/Stundenübersicht";
 import UrlaubBuchen from "./components/UrlaubBuchen";
 import UrlaubBuchenModal from "./components/modals/UrlaubBuchenModal";
-import KommenBuchen from "./components/KommenBuchen";
+import GehenBuchen from "./components/GehenBuchen";
 import AktivitätBuchen from "./components/modals/AktivitätBuchen";
 import AktivitätBuchenModal from "./components/modals/AktivitätBuchenModal";
 
@@ -33,7 +33,7 @@ function Start(props) {
   const [checkProjects, setCheckProjects] = useState(false);
   const [urlaubModalOpen, setUrlaubModalOpen] = useState (false);
   const [AktivitätModalOpen, setAktivitätModalOpen] = useState (false);
-
+  const [gehen, setGehen] = useState (false);
   
 
 
@@ -109,7 +109,7 @@ function Start(props) {
                   {
                     userIdIsSet ?
                       <>
-                        <PersonInformationen id={userId}></PersonInformationen>
+                        <PersonInformationen GehenBuchens={gehen} id={userId}></PersonInformationen>
                       </>
                       : null
                   }
@@ -134,12 +134,10 @@ function Start(props) {
 
               {/* Buchbereich*/}
               <Grid container xs={12} style={{ backgroundColor: "#447F50", minHeight: "400px", borderRadius: "8px", marginTop: "2rem" }}>
-              <div style={{marginLeft: "auto", height:"20%"}}>
+              <div style={{marginLeft: "679px", height:"20%"}}>
+                <GehenBuchen> openGehen={open => setGehen(open)} </GehenBuchen>
                 <UrlaubBuchen openUrlaubBuchenModal={open => setUrlaubModalOpen(open)}></UrlaubBuchen>
-              </div>
-              <div style={{marginLeft: "auto", height:"20%"}}>
-                <KommenBuchen>
-                </KommenBuchen>
+
                 <AktivitätBuchen openAktivitätModal={open => setAktivitätModalOpen(open)}></AktivitätBuchen>
 
               </div>
