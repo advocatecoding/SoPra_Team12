@@ -4,11 +4,13 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
-
+import LoadingProgress from "./Loading/LoadingProgress";
+import "../index.css"
 
 export default function Users(props) {
     const [personen, setPersonen] = useState([1, 2]);
-    //const [userSelected, setUserSelected] = useState(false);
+    const [loadingInProgress, setLoadingInProgress] = useState(true);
+
 
 
     const handleChange = (event) => {
@@ -17,7 +19,7 @@ export default function Users(props) {
 
     useEffect(() => {
         fetchAllPersonen()
-    }, [])
+    }, [loadingInProgress])
 
     async function fetchAllPersonen() {
         const url = "/zeit/personen";
@@ -28,6 +30,7 @@ export default function Users(props) {
             const data = await response.json();
             console.log("fetched Personen!")
             setPersonen(data)
+            setLoadingInProgress(false)
         } catch (e) {
             console.log(e.message)
         }
@@ -37,20 +40,33 @@ export default function Users(props) {
 
     return (
         <div>
-            <FormControl style={{ borderColor: "white", color: "white", borderRadius: "5px" }} sx={{ m: 1, minWidth: 200 }} >
-                <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Username</InputLabel>
-                <Select style={{ color: "white"}}
-                    onChange={handleChange}
-                    label="Benutzer"
-                    color="primary"
-                >
-                    {personen.map((item) =>
-                        <MenuItem value={item.benutzername} style={{ color: "#00bcd4" }}>{item.benutzername}</MenuItem>
-                    )
-                    }
-                </Select>
-            </FormControl>
-            <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie Ihren Benutzernamen aus.</Typography>
+            {
+                loadingInProgress ?
+                    <>
+                        <LoadingProgress show={loadingInProgress}></LoadingProgress>
+                    </>
+                    :
+                    <>
+                        <FormControl style={{ borderColor: "white", color: "white", borderRadius: "5px" }} sx={{ m: 1, minWidth: 200 }} >
+                            <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Username</InputLabel>
+
+                            <Select style={{ color: "white" }}
+                                onChange={handleChange}
+                                label="Benutzer"
+                                color="primary"
+                            >
+                                {personen.map((item) =>
+                                    <MenuItem value={item.benutzername} style={{ color: "#00bcd4" }}>{item.benutzername}</MenuItem>
+                                )
+                                }
+                            </Select>
+                        </FormControl>
+                        <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie Ihren Benutzernamen aus.</Typography>
+                    </>
+            }
+
+
+
         </div>
     )
 }

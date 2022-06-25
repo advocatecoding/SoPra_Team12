@@ -12,7 +12,7 @@ import "../../index.css"
 
 export default function AktivitätBuchenModal(props) {
 
-// mit setSelectedProject den nächsten fetch ausführen
+  // mit setSelectedProject den nächsten fetch ausführen
 
   const [start_datum, setStartDatum] = useState(null);
   const [gebuchte_stunden, setStunden] = useState(null);
@@ -68,7 +68,7 @@ export default function AktivitätBuchenModal(props) {
 
   function postAktivität() {
     const url = `/zeit/verkaufte_stunden_in_aktivitaet`;
-    console.log(mitarbeiter, aktivitaet, gebuchte_stunden,"ZEIG AN")
+    console.log(mitarbeiter, aktivitaet, gebuchte_stunden, "ZEIG AN")
     axios.post(url, {
       mitarbeiter,
       aktivitaet,
@@ -98,7 +98,7 @@ export default function AktivitätBuchenModal(props) {
 
   const handleChangee = (event) => {
     setSelectedProject(event.target.value)
-    console.log({selectedProject}, "huhu")
+    console.log({ selectedProject }, "huhu")
     FetchAktivität(event.target.value)
   }
 
@@ -117,55 +117,54 @@ export default function AktivitätBuchenModal(props) {
         <h2>Aktivität buchen</h2>
       </div>
       <div className="body">
-        <div style={{ marginTop: "5rem" }}>
+        <div style={{ marginTop: "2rem" }}>
+          <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" ,  minWidth:"270px" }} sx={{ m: 1, minWidth: 200 }} >
+            <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Projekt</InputLabel>
+            <Select style={{ color: "white" }}
+              onChange={handleChangee}
+              label="Projekttest"
+              color="primary"
+            >
+              {mitarbeiterProjekte.map((item) =>
+                <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.projektname}</MenuItem>
+              )
+              }
+            </Select>
+          </FormControl>
+          <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Projekt aus.</Typography>
 
+          <div style={{paddingTop:"1.5rem"}}>
+            <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px",  minWidth:"270px" }} sx={{ m: 1, minWidth: 200 }} >
+              <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Aktivität</InputLabel>
+              <Select style={{ color: "white" }}
+                onChange={handleChange1}
+                label="Aktivität"
+                color="primary"
+              >
+                {aktivitätListe.map((item) =>
+                  <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.aktivitaetname}</MenuItem>
+                )
+                }
+              </Select>
+            </FormControl>
+            <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Aktivität aus.</Typography>
+          </div>
 
-
-<FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" }} sx={{ m: 1, minWidth: 200 }} >
-  <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Projekte</InputLabel>
-  <Select style={{ color: "white" }}
-    onChange={handleChangee}
-    label="Projekttest"
-    color="primary"
-  >
-    {mitarbeiterProjekte.map((item) =>
-      <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.projektname}</MenuItem>
-    )
-    }
-  </Select>
-</FormControl>
-<Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Projekt aus.</Typography>
-
-<div>
-<FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" }} sx={{ m: 1, minWidth: 200 }} >
-  <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Aktivität</InputLabel>
-  <Select style={{ color: "white" }}
-    onChange={handleChange1}
-    label="Aktivität"
-    color="primary"
-  >
-    {aktivitätListe.map((item) =>
-      <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.aktivitaetname}</MenuItem>
-    )
-    }
-  </Select>
-</FormControl>
-<Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Aktivität aus.</Typography>
-</div>
-
-
-          <TextField autoFocus
+            <div style={{paddingTop:"1.5rem"}}>
+            <TextField autoFocus
             required
             margin="dense"
             label="Stunden buchen"
             type="text"
-            variant="standard" placeholder="Stunden" style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" }} sx={{ m: 1, minWidth: 240 }}
+            variant="standard" placeholder="Stunden" style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px", minWidth:"270px" }} sx={{ m: 1, minWidth: 240 }}
             onChange={changeStunden}>
           </TextField>
           <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Stunden buchen</Typography>
+            </div>
+         
         </div>
 
-        <div style={{ marginTop: "0rem" }}>
+        <div style={{ paddingTop:"2.5rem" }}>
           <Button variant="outlined" onClick={HandleClose} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", textAlign: "center", display: "inline", marginBottom: "0" }} >
             Akitvität Buchen
           </Button>

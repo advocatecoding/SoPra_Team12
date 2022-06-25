@@ -3,12 +3,8 @@ import { Typography, Box, Grid } from '@material-ui/core';
 import PropTypes from 'prop-types';
 import ProfileDropDown from '../Dialogs/ProfileDropdown';
 import Avatar from '@mui/material/Avatar';
-import logo from '../../assets/logo512.png'; 
+import logo from '../../assets/logo_transparent512.png'; 
 import Divider from '@mui/material/Divider';
-
-
-
-
 
 
 function Header(props) {

@@ -50,6 +50,15 @@ tr:nth-child(even) {
   }
 
 
+.MuiLinearProgress-bar {
+    background-color: #00bcd4 !important;
+}
+
+.MuiList-root{
+    background-color: #484a4d !important
+    
+} 
+
 :root {
     --bg: #262A2E;
     --bg-accent: #484a4d;
