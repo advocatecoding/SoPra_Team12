@@ -1,17 +1,17 @@
 import React from "react";
 import Button from '@mui/material/Button';
 import { Fab } from '@material-ui/core';
-import MoreTimeIcon from '@mui/icons-material/MoreTime';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 
 
-export default function KommenBuchen(props) {
+export default function AktivitätBuchen(props) {
 
 
-/** Falls Modal noch genutz werden muss?  */
+
     const handleChange = () => {
-        console.log("Modal is shown.")
-        props.openKommenBuchenModal(true)
+        console.log("Kommen Test.")
+        props.openAktivitätModal(true)
     };
 
 
@@ -19,8 +19,8 @@ export default function KommenBuchen(props) {
 
         <div style={{marginTop: "2rem"}}>
             <Fab variant="extended" onClick={() => { handleChange() }} style={{ color: "white", backgroundColor: "#30343C" }}>
-                <MoreTimeIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />
-                Kommen buchen
+                <CalendarMonthIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />
+                Aktivitäten zuweisen
             </Fab>
         </div>
     )

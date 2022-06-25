@@ -8,6 +8,7 @@ import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
+import "../../index.css"
 
 export default function AktivitätBuchenModal(props) {
 

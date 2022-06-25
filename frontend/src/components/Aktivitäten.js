@@ -4,15 +4,16 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
+import "../index.css"
 
 
-export default function Users(props) {
-    const [personen, setPersonen] = useState([1, 2]);
-    //const [userSelected, setUserSelected] = useState(false);
-
+export default function Aktivitäten(props) {
+    const [aktivität, setAktivität] = useState('');
+    const [aktivitäten, setAktivitäten] = useState([1, 2]);
+    const [aktivitätSelected, setAktivitätSelected] = useState(false);
 
     const handleChange = (event) => {
-        props.setUsername(event.target.value)
+        props.setAktivität(event.target.value)
     };
 
     useEffect(() => {
@@ -20,14 +21,13 @@ export default function Users(props) {
     }, [])
 
     async function fetchAllPersonen() {
-        const url = "/zeit/personen";
+        const url = "/zeit/aktivitaten";
         try {
             //console.log(personen)
             const response = await fetch(url);
             //console.log(response.data)
             const data = await response.json();
-            console.log("fetched Personen!")
-            setPersonen(data)
+            setAktivitäten(data)
         } catch (e) {
             console.log(e.message)
         }
@@ -35,22 +35,22 @@ export default function Users(props) {
     }
 
 
+    //const list1 = ["chocolate", "vanilla", "ice"]
     return (
         <div>
-            <FormControl style={{ borderColor: "white", color: "white", borderRadius: "5px" }} sx={{ m: 1, minWidth: 200 }} >
-                <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Username</InputLabel>
-                <Select style={{ color: "white"}}
+            <FormControl sx={{ m: 1, minWidth: 200 }} >
+                <InputLabel id="demo-simple-select-autowidth-label">Aktivität</InputLabel>
+                <Select
                     onChange={handleChange}
                     label="Benutzer"
                     color="primary"
                 >
-                    {personen.map((item) =>
-                        <MenuItem value={item.benutzername} style={{ color: "#00bcd4" }}>{item.benutzername}</MenuItem>
+                    {aktivitäten.map((item) =>
+                        <MenuItem value={item.aktivitaetname} style={{ color: "#00bcd4" }}>{item.aktivitaetname}</MenuItem>
                     )
                     }
                 </Select>
             </FormControl>
-            <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie Ihren Benutzernamen aus.</Typography>
         </div>
     )
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Box } from '@material-ui/core';
+import { Grid, Box, Typography } from '@material-ui/core';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import PersonInformationen from './components/PersonInformationen';
 import ProjektListe from './components/ProjektListe';
@@ -8,10 +8,10 @@ import CheckProjectsModal from "./components/modals/CheckProjectsModal"
 import Stundenübersicht from "./components/Stundenübersicht";
 import UrlaubBuchen from "./components/UrlaubBuchen";
 import UrlaubBuchenModal from "./components/modals/UrlaubBuchenModal";
-import KommenBuchen from "./components/KommenBuchen";
-import AktivitätBuchen from "./components/modals/AktivitätBuchen";
+import AktivitätBuchen from "./components/AktivitätBuchen";
 import AktivitätBuchenModal from "./components/modals/AktivitätBuchenModal";
-
+import Buchen from "./components/Buchen";
+import Anwesenheit from "./components/Anwesenheit";
 
 
 const theme = createTheme({
@@ -31,10 +31,10 @@ function Start(props) {
   const [userId, setUserId] = useState("");
   const [userIdIsSet, setUserIdTrue] = useState(false);
   const [checkProjects, setCheckProjects] = useState(false);
-  const [urlaubModalOpen, setUrlaubModalOpen] = useState (false);
-  const [AktivitätModalOpen, setAktivitätModalOpen] = useState (false);
+  const [urlaubModalOpen, setUrlaubModalOpen] = useState(false);
+  const [AktivitätModalOpen, setAktivitätModalOpen] = useState(false);
 
-  
+
 
 
 
@@ -44,7 +44,7 @@ function Start(props) {
 
 
   async function fetchPersonByUsername(username) {
-    console.log("Person wird gefetcht. in Start")
+    //console.log("Person wird gefetcht. in Start")
     try {
       const response = await fetch(`/zeit/personen/${username}`);
       const data = await response.json();
@@ -60,7 +60,6 @@ function Start(props) {
 
   return (
     <div >
-      {console.log("user id bla bla   ", userId)}
       {checkProjects ?
         <>
           <CheckProjectsModal setOpenModal={setCheckProjects} mitarbeiter_id={userId} />
@@ -71,7 +70,7 @@ function Start(props) {
       {urlaubModalOpen && <UrlaubBuchenModal setOpenModal={setUrlaubModalOpen} id={userId}></UrlaubBuchenModal>}
 
       {AktivitätModalOpen && <AktivitätBuchenModal setOpenModal={setAktivitätModalOpen} id={userId}></AktivitätBuchenModal>}
-     
+
       <ThemeProvider theme={theme}>
         {/* Abstand */}
         <Box sx={{ mt: 5 }}></Box>
@@ -90,10 +89,15 @@ function Start(props) {
                   : null
               }
               {/* Sidebar -> Projektkontrolle durchführen Button*/}
-              <div style={{display:"flex", justifyContent:"center"}}>
-                <CheckProjects openCheckProjectsModal={open => setCheckProjects(open)}></CheckProjects>
+              <div style={{ display: "flex", justifyContent: "center", alignContent: "center", flexDirection: "column" }}>
+                <div>
+                  <CheckProjects openCheckProjectsModal={open => setCheckProjects(open)}></CheckProjects>
+                </div>
+                <div>
+                  <AktivitätBuchen openAktivitätModal={open => setAktivitätModalOpen(open)}></AktivitätBuchen>
+                </div>
 
-              
+
               </div>
 
             </div>
@@ -101,10 +105,10 @@ function Start(props) {
 
 
           {/* Hauptbereich */}
-          <Grid container lg={10} xs={12} md={8} style={{ backgroundColor: "grey", borderRadius: "8px", maxWidth: "900px", height: "600px", margin: "auto", padding: "1rem" }}>
-            <Grid container style={{ borderRadius: "8px" }} >
+          <Grid container direction="row" justifyContent="space-between" alignItems="start" lg={10} xs={12} md={8} style={{ border: "1px solid gray", borderRadius: "8px", maxWidth: "900px", height:"700px", margin: "auto", padding: "1rem" }}>
+            <Grid container item style={{ borderRadius: "8px", height:"40%", justifyContent:"center", display:"flex",  }} >
               {/* Benutzerinformation*/}
-              <Grid xs={8} style={{ backgroundColor: "#842680", height: "200px", borderRadius: "8px" }}>
+              <Grid xs={8} item container  style={{ backgroundColor: "#262A2E", borderRadius: "17px", display:"flex", justifyContent: "flex-start"}}>
                 <div style={{ padding: "0.5rem" }}>
                   {
                     userIdIsSet ?
@@ -117,48 +121,48 @@ function Start(props) {
 
               </Grid>
 
-              {/* Stundenübersicht erstellen Button*/}
-              <Grid container
-                justifyContent="center"
-                alignItems="start" xs={4} style={{ backgroundColor: "#834534", borderRadius: "8px" }}>
+              {/* Stundenübersicht erstellen + Urlaub buchen Button*/}
+              <Grid xs={4} item container direction="row" justifyContent="flex-end" alignItems="flex-end"  >
+                <Grid item container>
                 {
-                  userIdIsSet ?
-                    <>
-                      <Stundenübersicht mitarbeiter_id={userId} />
-                    </>
-                    : null
-                }
-
-              </Grid>
-
-
-              {/* Buchbereich*/}
-              <Grid container xs={12} style={{ backgroundColor: "#447F50", minHeight: "400px", borderRadius: "8px", marginTop: "2rem" }}>
-              <div style={{marginLeft: "auto", height:"20%"}}>
+                    userIdIsSet ?
+                      <>
+                        <Stundenübersicht mitarbeiter_id={userId} />
+                      </>
+                      : null
+                  }
+                </Grid>
+                <Grid item container>
                 <UrlaubBuchen openUrlaubBuchenModal={open => setUrlaubModalOpen(open)}></UrlaubBuchen>
-              </div>
-              <div style={{marginLeft: "auto", height:"20%"}}>
-                <KommenBuchen>
-                </KommenBuchen>
-                <AktivitätBuchen openAktivitätModal={open => setAktivitätModalOpen(open)}></AktivitätBuchen>
+                </Grid>
 
-              </div>
-              
-              <Grid style={{ backgroundColor: "yellow", height:"100%", width:"100%"}}>
 
-              </Grid>
+                </Grid>
 
-              
-
-              
-
-              </Grid>
             </Grid>
+            {/* Buchbereich*/}
+            <Grid container  item xs={12} style={{ backgroundColor: "#262A2E", borderRadius: "17px", borderRadius: "17px", marginTop:"2rem", height:"60%" }}>
+                
+            <Grid style={{ height: "30%", width: "100%", padding:"2rem" }}>
+                <Anwesenheit></Anwesenheit>
+
+              </Grid>
+              <Grid style={{ height: "70%", width: "100%", padding:"2rem" }}>
+                <Buchen />
+
+              </Grid>
+
+
+
+
+
+            </Grid>
+
           </Grid>
 
         </Grid>
       </ThemeProvider>
-    </div>
+    </div >
   )
 }
 
