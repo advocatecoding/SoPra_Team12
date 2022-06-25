@@ -34,7 +34,7 @@ class Mapper(AbstractContextManager, ABC):
         self._cnx.close()
 
     """ @abstractmethod -> Wir möchten die erbenden Klassen zwingen, die folgenden Methoden zu besitzen!"""
-    @abstractmethod
+    """ @abstractmethod """
     def find_all(self):
         pass
 
