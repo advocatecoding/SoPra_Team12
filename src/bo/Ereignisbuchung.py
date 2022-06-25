@@ -6,7 +6,7 @@ class Ereignisbuchung(bo.BusinessObject):
         self.__startereignis = start.get_start()
         self.__endereignis = ende.get_ende()
         #self.__ereignis_type = type(self.__ereignis).__name__
-        self.__person_id = start.get_person_id()
+        self.__person = start.get_person()
         """ Da in der Init-Methode alle Attribute gesetzt werden, benötigen wir keine setter-Methoden mehr"""
 
     def get_startereignis(self):
@@ -16,5 +16,5 @@ class Ereignisbuchung(bo.BusinessObject):
         return self.__endereignis
 
     def get_person(self):
-        return self.__person_id
+        return self.__person
 

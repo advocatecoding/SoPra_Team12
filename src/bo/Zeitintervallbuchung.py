@@ -2,70 +2,80 @@ from bo.BusinessObject import BusinessObject as bo
 
 class Zeitinverallbuchung(bo):
 
-    def __init__(self, zeitintervall=None, aktivitaet=None):
-        """ Das übergebene Zeitintervallobjekt beinhaltet ein Zeitintervall & eine Person """
-        if zeitintervall and aktivitaet is not None:
-            self._zeitintervall = zeitintervall.get_zeitintervall()
-            self._person_id = zeitintervall.get_person().get_id()
-            self._aktivitaet_id = aktivitaet.get_id()
-            self.__buchungsart = type(zeitintervall).__name__
-            """ Im nächsten Schritt: self.__projekt_id = aktivitaet.get_projekt_id();"""
-            if self.__buchungsart == "Projektarbeit":
-                print("Die Person {0} hat auf die Aktivität {1} eine Projektarbeit von {2}h gebucht".format(
-                    self.__person.get_vorname(), self.__aktivitaet.get_name(), self._zeitintervall))
-            else:
-                print("Die Person {0} hat auf die Aktivität {1} eine Pause von {2}h gebucht".format(
-                    self.__person.get_vorname(), self.__aktivitaet.get_name(), self._zeitintervall))
-
-        self._projekt_id = ""
-
+    def __init__(self, zeitintervall, aktivitaet):
+        self.__zeitintervall = zeitintervall.get_zeitintervall()
+        self.__person = zeitintervall.get_person()
+        self.__aktivitaet = aktivitaet
+        self.__buchungsart = type(zeitintervall).__name__
+        if self.__buchungsart == "Projektarbeit":
+            print("Die Person {0} hat auf die Aktivität {1} eine Projektarbeit von {2}h gebucht".format(self.__person.get_vorname(), self.__aktivitaet.get_name(), self.__zeitintervall))
+        else:
+            print("Die Person {0} hat auf die Aktivität {1} eine Pause von {2}h gebucht".format(self.__person.get_vorname(), self.__aktivitaet.get_name(), self.__zeitintervall))
 
     def get_buchungsart(self):
         return self.__buchungsart
 
     def get_zeitintervall(self):
-        return self._zeitintervall
+        return self.__zeitintervall
 
     def set_zeitintervall(self, value):
-        self._zeitintervall = value
-
+        self.__zeitintervall = value
 
     def get_projekt(self):
-        return self._projekt_id
+        return self._projekt
 
-    def get_person_id(self):
-        return self._person_id
-
-
-    def set_person_id(self, value):
-        self._person_id = value
+    def get_person(self):
+        return self.__person
 
     def get_aktivitaet(self):
-        return self._aktivitaet_id
+        return self.__aktivitaet
+
+    def set_aktivitaet(self, value):
+        self.__aktivitaet = value
+
+    def set_projekt(self, value):
+        self._projekt = value
+
+"""
+    def __init__(self):
+        self.__person = None
+        self.__aktivitaet = None
+        self.__buchungsart = None
+        self.__zeit = 0
 
 
-    def get_projekt_id(self):
-        return self._projekt_id
+    def set_zeitintervallbuchung(self, zeit, person, aktivitaet, buchungsart):
+        self.set_person(person)
+        self.set_aktivitaet(aktivitaet)
+        self.set_buchungsart(buchungsart)
+        self.set_zeit(zeit)
 
-    def set_projekt_id(self, value):
-        self._projekt_id = value
+    def get_zeit(self):
+        return self.__zeit
 
+    def set_zeit(self, value):
+        self.__zeit = value
 
-    def get_aktivitaet_id(self):
-        return self._aktivitaet_id
+    def set_person(self, value):
+        self.__person = value
 
-    def set_aktivitaet_id(self, value):
-        self._aktivitaet_id = value
+    def get_person(self):
+        return self.__person
 
-    def from_dict(dictionary=dict()):
-        """Umwandeln eines Python dict() in eine Person()."""
-        obj = Zeitinverallbuchung()
-        obj.set_id(dictionary["id"])
-        obj.set_projekt_id(dictionary["projekt_id"])
-        obj.set_person_id(dictionary["person_id"])
-        obj.set_aktivitaet_id(dictionary["aktivitaet_id"])
-        obj.set_zeitintervall(dictionary["gearbeitete_zeit"])
-        obj.set_letzte_aenderung()
+    def set_aktivitaet(self, value):
+        self.__aktivitaet = value
 
-        return obj
+    def get_aktivitaet(self):
+        return self.__aktivitaet
 
+    def get_buchungsart(self):
+        return self.__buchungsart
+
+    def set_buchungsart(self, value):
+        self.__buchungsart = value
+"""
+"""
+if type(buchungsart) == Projektarbeit:
+Wenn Zeitintervall eine Projektarbeit ist -> Keine Pause
+aktivität.set_gearbeitet(zeit)
+"""
