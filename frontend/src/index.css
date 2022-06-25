@@ -1,6 +1,23 @@
-body{
+body {
     font-family: roboto;
 }
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+  }
 
 :root {
     --bg: #262A2E;
@@ -11,7 +28,12 @@ body{
     --speed: 450ms;
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: normal;
 }
 
@@ -88,7 +110,3 @@ a {
 #add-project-icon:hover {
     transform: scale(1.5) rotate(9deg) !important;
 }
-
-
-
-

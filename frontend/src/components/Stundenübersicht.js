@@ -7,6 +7,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
 import './modals/modal.css'
+import '../index.css'
 
 
 export default function Stundenübersicht(props) {
@@ -56,56 +57,50 @@ export default function Stundenübersicht(props) {
                 <TimelapseIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />
                 Stundenübersicht erzeugen
             </Fab>
-            
+
 
             <Dialog open={openModal}
                 PaperProps={{
-                style: {
-                  minHeight: 390,
-                  minWidth: 600,
-                  maxHeight: 280,
-                  borderRadius: '12px',
-                }
-              }}>              
-                <DialogTitle style={{ backgroundColor: "#ddd3d3"}}  sx={{ m: 0, p: 2 }}>Stundenübersicht
+                    style: {
+                        minHeight: 390,
+                        minWidth: 600,
+                        maxHeight: 280,
+                        borderRadius: '12px',
+                    }
+                }}>
+                <DialogTitle style={{ backgroundColor: "#ddd3d3" }} sx={{ m: 0, p: 2 }}>Stundenübersicht
                     <Button startIcon={<CloseIcon />} onClick={handleClose}
-                    sx={{
-                        position: 'absolute',
-                        right: 0,
+                        sx={{
+                            position: 'absolute',
+                            right: 0,
                         }} ></Button>
                 </DialogTitle>
-                <DialogContent style={{ backgroundColor: "#ddd3d3"}}>
+                <DialogContent style={{ backgroundColor: "#ddd3d3" }}>
                     {dataIsFetched ?
                         <>
                             <DialogContentText >
-                            <Grid xs={12}></Grid>
-                            <Typography variant="h8"  style={{paddingLeft: "1px"}}>
-                            <b>Projekt</b> &nbsp; <b>Aktivität</b> &nbsp; <b>Gearbeitete_Zeit</b>
-                            <hr></hr>                     
-                            </Typography>
-                            <div class="modal-body">
+                                <div class="modal-body" style={{ paddingTop:"2rem"}}>
                                     <table class="table table-striped">
-                                <thead>
-                                <tr>
-                                    <th><b>Projekt</b></th>
-                                    <th><b>Aktivität</b></th>
-                                    <th><b>Gearbeitete_Zeit</b></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td align="center">Projekt X</td>
-                                    <td align="center">Kriegshammertitan aufhalten</td>
-                                    <td align="center">201</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                            </div>
-                                {
-                                    stundenübersicht.map((item) =>
-                                        <Typography style={{paddingLeft: "1px"}}> {item.projekt }   {item.bezeichnung}  {item.gearbeitete_zeit}</Typography>
-                                    )
-                                }
+                                        <thead>
+                                            <tr>
+                                                <th><b>Projekt</b></th>
+                                                <th><b>Aktivität</b></th>
+                                                <th><b>Gearbeitete_Zeit</b></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {stundenübersicht.map((item) =>
+                                                <tr>
+                                                    <td align="start">{item.projekt}</td>
+                                                    <td align="star">{item.bezeichnung}</td>
+                                                    <td align="start">{item.gearbeitete_zeit}</td>
+                                                </tr>
+                                            )
+                                            }
+                                        </tbody>
+
+                                    </table>
+                                </div>
                             </DialogContentText>
                         </>
                         : null
