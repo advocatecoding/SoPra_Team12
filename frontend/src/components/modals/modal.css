@@ -19,9 +19,12 @@ body{
     transform: translate(-50%, 0);
 }
 
-.dialogContainer {
-   background-color: beige;
-    
+.dialog-bg {
+    background-color: #2A3140;
+}
+
+.MuiButtonBase-root {
+    color: white !important;
 }
 
 .modalContainer .title {

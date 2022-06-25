@@ -106,7 +106,7 @@ function Start(props) {
 
           {/* Hauptbereich */}
           <Grid container direction="row" justifyContent="space-between" alignItems="start" lg={10} xs={12} md={8} style={{ border: "1px solid gray", borderRadius: "8px", maxWidth: "900px", height:"700px", margin: "auto", padding: "1rem" }}>
-            <Grid container item style={{ borderRadius: "8px", height:"40%", justifyContent:"center", display:"flex",  }} >
+            <Grid container item style={{ borderRadius: "8px", height:"25%", justifyContent:"center", display:"flex",  }} >
               {/* Benutzerinformation*/}
               <Grid xs={8} item container  style={{ backgroundColor: "#262A2E", borderRadius: "17px", display:"flex", justifyContent: "flex-start"}}>
                 <div style={{ padding: "0.5rem" }}>
@@ -122,8 +122,8 @@ function Start(props) {
               </Grid>
 
               {/* Stundenübersicht erstellen + Urlaub buchen Button*/}
-              <Grid xs={4} item container direction="row" justifyContent="flex-end" alignItems="flex-end"  >
-                <Grid item container>
+              <Grid xs={4} item container direction="column" justifyContent="start" alignItems="flex-start"  >
+                <Grid item container >
                 {
                     userIdIsSet ?
                       <>
@@ -137,11 +137,11 @@ function Start(props) {
                 </Grid>
 
 
-                </Grid>
+              </Grid>
 
             </Grid>
             {/* Buchbereich*/}
-            <Grid container  item xs={12} style={{ backgroundColor: "#262A2E", borderRadius: "17px", borderRadius: "17px", marginTop:"2rem", height:"60%" }}>
+            <Grid container  item xs={12} style={{ backgroundColor: "#262A2E", borderRadius: "17px", borderRadius: "17px", marginTop:"2rem", height:"65%" }}>
                 
             <Grid style={{ height: "30%", width: "100%", padding:"2rem" }}>
                 <Anwesenheit></Anwesenheit>

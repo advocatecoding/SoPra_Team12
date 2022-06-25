@@ -68,14 +68,14 @@ export default function Stundenübersicht(props) {
                         borderRadius: '12px',
                     }
                 }}>
-                <DialogTitle style={{ backgroundColor: "#ddd3d3" }} sx={{ m: 0, p: 2 }}>Stundenübersicht
+                <DialogTitle className="dialog-bg" sx={{ m: 0, p: 2 }}>Stundenübersicht
                     <Button startIcon={<CloseIcon />} onClick={handleClose}
                         sx={{
                             position: 'absolute',
                             right: 0,
                         }} ></Button>
                 </DialogTitle>
-                <DialogContent style={{ backgroundColor: "#ddd3d3" }}>
+                <DialogContent className="dialog-bg">
                     {dataIsFetched ?
                         <>
                             <DialogContentText >

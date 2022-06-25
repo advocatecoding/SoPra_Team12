@@ -18,6 +18,7 @@ import OutlinedInput from '@mui/material/OutlinedInput';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import { v4 as uuidv4 } from 'uuid';
 import UsersProject from '../UsersProject'
+import "./modal.css"
 
 
 export default function CreateProjectModal(props) {
@@ -259,7 +260,7 @@ export default function CreateProjectModal(props) {
                         maxHeight: 700
                     }
                 }}>
-                <DialogTitle sx={{ m: 0, p: 2 }}>Projekt anlegen <Button startIcon={<CloseIcon />} onClick={() => {
+                <DialogTitle className="dialog-bg" sx={{ m: 0, p: 2 }}>Projekt anlegen <Button startIcon={<CloseIcon />} onClick={() => {
                     props.setOpenModal(false);
                 }}
                     sx={{
@@ -267,7 +268,7 @@ export default function CreateProjectModal(props) {
                         marginLeft: "auto",
                     }} ></Button>
                 </DialogTitle>
-                <DialogContent dividers>
+                <DialogContent className="dialog-bg" dividers>
                     <Typography>Geben Sie den Namen und Auftraggeber des Projektes an.</Typography>
                     <TextField
                         autoFocus
@@ -292,7 +293,7 @@ export default function CreateProjectModal(props) {
                         onChange={changeAuftraggeber}
                     />
                 </DialogContent>
-                <DialogActions>
+                <DialogActions className="dialog-bg">
                     <Button onClick={showAktivitaetenErstellen}>Weiter</Button>
 
                 </DialogActions>
@@ -308,14 +309,14 @@ export default function CreateProjectModal(props) {
                         maxHeight: 700
                     }
                 }}>
-                <DialogTitle sx={{ m: 0, p: 2 }}>Projekt anlegen <Button startIcon={<CloseIcon />} onClick={handleCloseEmpty}
+                <DialogTitle className="dialog-bg" sx={{ m: 0, p: 2 }}>Projekt anlegen <Button startIcon={<CloseIcon />} onClick={handleCloseEmpty}
                     sx={{
                         right: 0,
                         marginLeft: "auto",
                     }} ></Button>
                 </DialogTitle>
 
-                <DialogContent dividers >
+                <DialogContent className="dialog-bg" dividers >
                     <Typography>Fügen Sie die Aktivitäten, deren Dauer und Kapazität hinzu.</Typography>
 
                     {/** Es werden dynamisch pro Slot 3 Felder erzeugt */}
@@ -374,7 +375,7 @@ export default function CreateProjectModal(props) {
 
 
                 </DialogContent>
-                <DialogActions>
+                <DialogActions className="dialog-bg">
                     <Button onClick={zurück1} style={{ marginRight: "auto", paddingLeft: "1rem" }}>Zurück</Button>
                     <Button onClick={showTeamErstellen} style={{ paddingRight: "1rem" }}>Weiter</Button>
                 </DialogActions>
@@ -389,14 +390,14 @@ export default function CreateProjectModal(props) {
                         maxHeight: 700
                     }
                 }}>
-                <DialogTitle sx={{ m: 0, p: 2 }}>Projekt anlegen <Button startIcon={<CloseIcon />} onClick={handleCloseEmpty}
+                <DialogTitle className="dialog-bg" sx={{ m: 0, p: 2 }}>Projekt anlegen <Button startIcon={<CloseIcon />} onClick={handleCloseEmpty}
                     sx={{
                         right: 0,
                         marginLeft: "auto",
                     }} ></Button>
                 </DialogTitle>
 
-                <DialogContent dividers>
+                <DialogContent className="dialog-bg" dividers>
                     <Typography>Weisen Sie dem zu erstellenden Projekt ein Team und deren verkaufte Stunden zu.</Typography>
 
                     {/** Es werden dynamisch pro Slot 3 Felder erzeugt */}
@@ -442,7 +443,7 @@ export default function CreateProjectModal(props) {
                     }
 
                 </DialogContent>
-                <DialogActions>
+                <DialogActions className="dialog-bg">
                     <Button onClick={zurück2} style={{ marginRight: "auto", paddingLeft: "1rem" }}>Zurück</Button>
                     <Button onClick={handleClose} style={{ paddingRight: "1rem" }}>Speichern</Button>
                 </DialogActions>
