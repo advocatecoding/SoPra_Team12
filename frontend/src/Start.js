@@ -122,8 +122,8 @@ function Start(props) {
               </Grid>
 
               {/* Stundenübersicht erstellen + Urlaub buchen Button*/}
-              <Grid xs={4} item container direction="column" justifyContent="start" alignItems="flex-start"  >
-                <Grid item container >
+              <Grid xs={4} item container direction="row" justifyContent="flex-end" alignItems="flex-end"  >
+                <Grid item container>
                 {
                     userIdIsSet ?
                       <>
