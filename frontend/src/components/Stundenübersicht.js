@@ -53,6 +53,7 @@ export default function Stundenübersicht(props) {
 
 
         <div style={{marginLeft:"auto"}}>
+
             <Fab variant="extended" onClick={() => { handleClickOpen() }} style={{ color: "white", backgroundColor: "#30343C" }} >
                 <TimelapseIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />
                 Stundenübersicht
@@ -68,8 +69,10 @@ export default function Stundenübersicht(props) {
                         borderRadius: '12px',
                     }
                 }}>
-                <DialogTitle className="dialog-bg" sx={{ m: 0, p: 2 }}>Stundenübersicht
-                    <Button startIcon={<CloseIcon />} onClick={handleClose}
+                <DialogTitle className="dialog-bg" sx={{ m: 0, p: 2 }}>
+                    <TimelapseIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }}/>Stundenübersicht
+                
+                    <Button startIcon={<CloseIcon/>} onClick={handleClose}
                         sx={{
                             position: 'absolute',
                             right: 0,
@@ -91,9 +94,9 @@ export default function Stundenübersicht(props) {
                                         <tbody>
                                             {stundenübersicht.map((item) =>
                                                 <tr>
-                                                    <td align="start">{item.projekt}</td>
-                                                    <td align="star">{item.bezeichnung}</td>
-                                                    <td align="start">{item.gearbeitete_zeit}</td>
+                                                    <td align="start" style={{ color: "#00bcd4" }}>{item.projekt}</td>
+                                                    <td align="start" style={{ color: "#00bcd4" }}>{item.bezeichnung}</td>
+                                                    <td align="start" style={{ color: "#00bcd4" }}>{item.gearbeitete_zeit}</td>
                                                 </tr>
                                             )
                                             }

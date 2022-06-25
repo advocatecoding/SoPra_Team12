@@ -6,6 +6,7 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
+import DashboardIcon from '@mui/icons-material/Dashboard';
 
 /* Tabelle 
 import Table from '@mui/material/Table';
@@ -66,7 +67,7 @@ export default function CheckProjectsModal(props) {
       {createListIsClicked === false ?
         <>
           <div className="title">
-            <h2>Checken Sie die Projekte!</h2>
+            <h2> <DashboardIcon sx={{ mr: "1rem" }}  onClick={() => {handleChange()}} style={{color: "#00bcd4"}} />Checken Sie hier die Projekte!</h2>
           </div>
           <div className="body">
             <div style={{ marginTop: "5rem" }}>

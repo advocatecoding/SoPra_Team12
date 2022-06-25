@@ -4,6 +4,7 @@ import Typography from '@mui/material/Typography';
 import "./modal.css";
 import { TextField } from "@mui/material";
 import axios from 'axios';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
 export default function UrlaubBuchenModal(props) {
 
@@ -64,7 +65,7 @@ export default function UrlaubBuchenModal(props) {
         </button>
       </div>
       <div className="title">
-        <h2>Buchen Sie Urlaub!</h2>
+        <h2> <CalendarMonthIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />Buchen Sie hier Ihren Urlaub!</h2>
       </div>
       <div className="body">
         <div style={{ marginTop: "5rem" }}>
