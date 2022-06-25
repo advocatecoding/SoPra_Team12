@@ -10,14 +10,15 @@ import Start from './Start';
 
 class App extends React.Component {
 
-	#firebaseConfig = {
-		apiKey: "AIzaSyDYY1X2Mtxg5xeSHsuFWNK8vuw_qwAfgM4",
-		authDomain: "bankbeispiel-426c2.firebaseapp.com",
-		projectId: "bankbeispiel-426c2",
-		storageBucket: "bankbeispiel-426c2.appspot.com",
-		messagingSenderId: "54183409381",
-		appId: "1:54183409381:web:0a9e41063984f7d3fb860c"
-	  };
+    #firebaseConfig = {
+        apiKey: "AIzaSyCrUgCRiHcbrdWEhdm5_J1P570Ps3uaHpc",
+        authDomain: "zeiterfassung-e0590.firebaseapp.com",
+        projectId: "zeiterfassung-e0590",
+        storageBucket: "zeiterfassung-e0590.appspot.com",
+        messagingSenderId: "579508962479",
+        appId: "1:579508962479:web:5a8fa311cf54b53315005a"
+       };
+
 
 	/** Constructor of the app, which initializes firebase  */
 	constructor(props) {
