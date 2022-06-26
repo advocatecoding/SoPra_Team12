@@ -9,6 +9,7 @@ import { red } from '@mui/material/colors';
 import { withStyles } from '@material-ui/core/styles';
 import Start from './Start'
 import Users from './components/Users'
+import CreateNewUser from "./components/CreateNewUser";
 
 
 
@@ -67,6 +68,8 @@ function Login() {
                         :
                         null
                 }
+
+                <CreateNewUser></CreateNewUser>
             </Grid>
             </>
             }

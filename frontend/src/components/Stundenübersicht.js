@@ -86,17 +86,17 @@ export default function Stundenübersicht(props) {
                                     <table class="table table-striped">
                                         <thead>
                                             <tr>
-                                                <th><b>Projekt</b></th>
-                                                <th><b>Aktivität</b></th>
-                                                <th><b>Gearbeitete_Zeit</b></th>
+                                                <th style={{ color: "#00bcd4" }}><b>Projekt</b></th>
+                                                <th style={{ color: "#00bcd4" }}><b>Aktivität</b></th>
+                                                <th style={{ color: "#00bcd4" }}><b>Gearbeitete_Zeit</b></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {stundenübersicht.map((item) =>
                                                 <tr>
-                                                    <td align="start" style={{ color: "#00bcd4" }}>{item.projekt}</td>
-                                                    <td align="start" style={{ color: "#00bcd4" }}>{item.bezeichnung}</td>
-                                                    <td align="start" style={{ color: "#00bcd4" }}>{item.gearbeitete_zeit}</td>
+                                                    <td align="start">{item.projekt}</td>
+                                                    <td align="start">{item.bezeichnung}</td>
+                                                    <td align="start">{item.gearbeitete_zeit}</td>
                                                 </tr>
                                             )
                                             }

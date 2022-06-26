@@ -45,11 +45,6 @@ table {
     width: 100%;
 }
 
-tr:nth-child(even) {
-    background-color: #dddddd;
-  }
-
-
 .MuiLinearProgress-bar {
     background-color: #00bcd4 !important;
 }
