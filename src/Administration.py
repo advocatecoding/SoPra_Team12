@@ -259,6 +259,12 @@ class Administration(object):
         with VerkaufteStundenInAktivitaetMapper() as mapper:
             return mapper.persoenliche_mitarbeiteransicht_find_by_id(person_id)
 
+    def get_projekte_by_projekt_id_and_person_id_buchen(self, person_id, projekt_id):
+        with AktivitaetMapper() as mapper:
+            return mapper.buchen_ansicht_frontend(person_id, projekt_id)
+
+
+
 
 
     """ Buchungen """

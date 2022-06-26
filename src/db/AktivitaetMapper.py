@@ -130,3 +130,23 @@ class AktivitaetMapper(Mapper):
         cursor.close()
         print(result)
         return result
+
+
+    def buchen_ansicht_frontend(self, person_id, projekt_id):
+        result = []
+        cursor = self._cnx.cursor()
+        cursor.execute("SELECT Aktivitaet.aktivitaet_id, bezeichnung FROM Aktivitaet INNER JOIN Verkaufte_stunden_in_aktivitaet ON Aktivitaet.aktivitaet_id = Verkaufte_stunden_in_aktivitaet.aktivitaet_id  INNER JOIN Projekt ON Aktivitaet.projekt_id = Projekt.projekt_id WHERE Verkaufte_stunden_in_aktivitaet.person_id={0} AND Aktivitaet.projekt_id={1}".format(person_id,projekt_id))
+        projekt_daten = cursor.fetchall()
+
+        for (aktivitaet_id, bezeichnung) in projekt_daten:
+            projekt = Aktivitaet()
+            projekt.set_id(aktivitaet_id)
+            projekt.set_name(bezeichnung)
+            result.append(projekt)
+            print(result)
+
+        self._cnx.commit()
+        cursor.close()
+        print(result)
+        return result
+

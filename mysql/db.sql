@@ -121,18 +121,9 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Arbeitszeitkonto` (
   `zeit_id` VARCHAR(45) NOT NULL ,
-  `person_id` INT NOT NULL ,
-  `zeit_gesamt` INT NULL,
-  `letzte_aenderung` DATETIME NULL,
-  PRIMARY KEY (`person_id`,`zeit_id`),
-	FOREIGN KEY (`person_id`)
-	REFERENCES `Person` (`person_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-    FOREIGN KEY (`zeit_id`)
-    REFERENCES `Zeitintervallbuchung` (`zeit_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE);  
+   password VARBINARY(100) default null,
+   PRIMARY KEY (`zeit_id`));
+ 
     
     
 -- -----------------------------------------------------------------------
@@ -159,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'verkaufte_stunden_in_aktivitaet'
 -- -----------------------------------------------------------------------
-   CREATE TABLE IF NOT EXISTS `verkaufte_stunden_in_aktivitaet` (
+   CREATE TABLE IF NOT EXISTS `Verkaufte_stunden_in_aktivitaet` (
   `aktivitaet_id` INT NOT NULL,
   `person_id` INT NOT NULL,
   `gebuchte_stunden` INT NOT NULL,
@@ -323,19 +314,25 @@ VALUES('9', '1', '2', '3', '2022-04-13 02:30:00', '2022-04-13 03:30:00', 300, '2
 -- --------------------------------------------------------------------------------------------------------------------------
 -- verkaufte_stunden_in_aktivitaet Entitäten erstellen
 -- --------------------------------------------------------------------------------------------------------------------------
-INSERT INTO `verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden,letzte_aenderung)  
+INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden,letzte_aenderung)  
 VALUES('1', '1','15', '2022-04-19 02:33:00');
-INSERT INTO `verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
+INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
 VALUES('3', '1','10', '2022-04-19 02:33:00');
-INSERT INTO `verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
-VALUES('3', '2','2500', '2022-04-19 02:33:00');
+INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
+VALUES('4', '1','2500', '2022-04-19 02:33:00');
+INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
+VALUES('2', '1','2500', '2022-04-19 02:33:00');
 
 
 
+-- Verschlüsseln von strings test 
+INSERT INTO `Arbeitszeitkonto` (zeit_id, password)  
+VALUES('fdsfd', aes_encrypt('selam','TEST'));
 
 
- select vorname, projektname from mitarbeiter_in_projekt
- JOIN projekt on mitarbeiter_in_projekt.projekt_id = projekt.projekt_id
- JOIN person on mitarbeiter_in_projekt.person_idd = person.person_id
-where person.person_id = 1;
+
+SELECT Aktivitaet.aktivitaet_id, bezeichnung, projektname FROM Aktivitaet
+INNER JOIN Verkaufte_stunden_in_aktivitaet ON Aktivitaet.aktivitaet_id = Verkaufte_stunden_in_aktivitaet.aktivitaet_id 
+INNER JOIN Projekt ON Aktivitaet.projekt_id = Projekt.projekt_id
+WHERE Verkaufte_stunden_in_aktivitaet.person_id = 1 AND Aktivitaet.projekt_id = 1;
 

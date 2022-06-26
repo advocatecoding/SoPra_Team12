@@ -575,6 +575,25 @@ class ProjektByIdMitarbeiterOperations(Resource):
 
 
 
+
+
+""" Ausgeben der Aktivitäten, die ein Mitarbeiter in einem bestimmten Projekt gebucht hat """
+@zeiterfassung.route("/aktivitaet/buchen/<int:person_id>/<int:projekt_id>")
+@zeiterfassung.doc(params={"person_id": {"description:" : "Die Id der gewünschten Person"},
+                           "projekt_id" :{"description:" : "Die Id des gewünschten Projekts"}})
+class AktivitaetBuchenOperations(Resource):
+    @zeiterfassung.marshal_with(aktivitaet)
+    def get(self, person_id, projekt_id):
+        """Ausgeben der Aktivitäten, die ein Mitarbeiter in einem bestimmten Projekt gebucht hat .
+        Das zu löschende Objekt wird anhand  zwei id's bestimmt.
+        """
+        adm = Administration()
+        mip = adm.get_projekte_by_projekt_id_and_person_id_buchen(person_id, projekt_id)
+        print(mip)
+        return mip
+
+
+
 """ Server läuft auf localhost:5000 bzw. 127.0.0.1:5000 """
 if __name__ == '__main__':
     app.run(debug=True)
