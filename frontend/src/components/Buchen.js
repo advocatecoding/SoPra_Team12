@@ -2,10 +2,14 @@ import React, { useState, useEffect } from "react";
 import * as Max from "@mui/material";
 import { Grid, Typography, Button } from '@mui/material';
 import TextField from "@material-ui/core/TextField";
-import Aktivitäten from "./Aktivitäten";
+import axios from 'axios';
+import FormControl from '@mui/material/FormControl';
+import MenuItem from '@mui/material/MenuItem';
+import Select from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
 
 
-export default function Buchen() {
+export default function Buchen(props) {
 
     const [aktivitPar, setAktivitätPar] = useState(" ");
     const [intervall, setIntervall] = useState("0h 0min");
@@ -19,7 +23,61 @@ export default function Buchen() {
     const [startTime, setStartTime] = useState(defaultTime);
     const [intervallTime, setIntervallTime] = useState("");
 
+
+
+    const [mitarbeiterProjekte, setMitarbeiterProjekte] = useState([]);
+    const [selectedProject, setSelectedProject] = useState(null);
+    const [mitarbeiter, setPersonID] = useState(null);
+    const [aktivitaet, setAktivitaetID] = useState(null);
+    const [aktivitätListe, setAktivitätListe] = useState([]);
+
+
+
+    async function FetchProjekte(id) {
+        console.log("Perso GCKEN.")
+        console.log(id, "22")
+        const url = `/zeit/projekt/mitarbeiter/${id}`;
+    
+        console.log(url)
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          setMitarbeiterProjekte(data)
+        } catch (e) {
+          console.log(e.message)
+        }
+      }
+
+
+      async function FetchAktivität(mitarbeiter, id ) {
+        console.log("Kommt ws an.", selectedProject)
+        const url = `/zeit/aktivitaet/buchen/${mitarbeiter}/${id}`;
+    
+        console.log(url)
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          setAktivitätListe(data)
+        } catch (e) {
+          console.log(e.message)
+        }
+      }
+
+    
+      function postZeintervall() {
+        const url = `/zeit/verkaufte_stunden_in_aktivitaet`;
+        console.log(mitarbeiter, aktivitaet, "ZEIG AN")
+        axios.post(url, {
+          mitarbeiter,
+          aktivitaet,
+        }).then(data => console.log("Gebuchte Stunden wurde gepostet", data).catch(err => console.log(err)))
+      };
+
+
+
     useEffect(() => {
+        iDerhalten(props.id)
+        FetchProjekte(props.id)
         let defaultTime = new Date()
         defaultTime.setHours(0)
         defaultTime.setMinutes(0)
@@ -84,16 +142,62 @@ export default function Buchen() {
         let newIntervallString = hh + "h " + mm + "min"
         console.log("Intervall in Stunde u Minuten:", newIntervallString)
         setIntervall(newIntervallString)
-    };
+    }
+
+
+    const handleChangee = (event) => {
+        setSelectedProject(event.target.value)
+        console.log({ selectedProject }, "huhu")
+        FetchAktivität(mitarbeiter, event.target.value)
+      }
+
+      const iDerhalten = (id) => {
+        setPersonID(id)
+      }
+
+      const handleChange1 = (event) => {
+        setAktivitaetID(event.target.value)
+      }
 
 
 
     return (
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
 
-                <Grid item xs={4}>
-                    <Aktivitäten setUsername={aktivität => setAktivitätPar(aktivität)} style={{ minWidth: "300px" }}></Aktivitäten>
-                </Grid>
+        <div style={{ marginTop: "2rem" }}>
+          <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" ,  minWidth:"270px" }} sx={{ m: 1, minWidth: 200 }} >
+            <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Projekt</InputLabel>
+            <Select style={{ color: "white" }}
+              onChange={handleChangee}
+              label="Projekttest"
+              color="primary"
+            >
+              {mitarbeiterProjekte.map((item) =>
+                <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.projektname}</MenuItem>
+              )
+              }
+            </Select>
+          </FormControl>
+          <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Projekt aus.</Typography>
+
+          </div>
+
+          <div style={{paddingTop:"1.5rem"}}>
+            <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px",  minWidth:"270px" }} sx={{ m: 1, minWidth: 200 }} >
+              <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Aktivität</InputLabel>
+              <Select style={{ color: "white" }}
+                onChange={handleChange1}
+                label="Aktivität"
+                color="primary"
+              >
+                {aktivitätListe.map((item) =>
+                  <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.aktivitaetname}</MenuItem>
+                )
+                }
+              </Select>
+            </FormControl>
+            <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Aktivität aus.</Typography>
+          </div>
                 <Grid item xs={2}>
                     <form noValidate>
                         <TextField
@@ -125,7 +229,7 @@ export default function Buchen() {
                     </form>
                 </Grid>
                 <Grid item xs={4}>
-                    <Button variant="outlined" onClick={setTime} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", color: "#00bcd4" }} >
+                    <Button variant="outlined" onClick={postZeintervall} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", color: "#00bcd4" }} >
                         Buchen
                     </Button>
                 </Grid>
