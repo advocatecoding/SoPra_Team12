@@ -57,7 +57,7 @@ class ProfileDropDown extends Component {
               horizontal: 'right',
             }}>
             <ClickAwayListener onClickAway={this.handleClose}>
-              <Paper sx={{ padding: 1, bgcolor: 'background.default' }}>
+              <Paper sx={{ padding: 1, bgcolor: '#2A3140' }}>
                 <Typography align='center'>Willkommen</Typography>
                 <Divider sx={{ margin: 1 }} />
                 <Typography align='center' variant='body2'>{user.displayName}</Typography>

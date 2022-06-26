@@ -32,6 +32,10 @@ body {
     color: white !important;
 }
 
+.MuiInputBase-input::-webkit-calendar-picker-indicator {
+    filter: invert(55%) sepia(98%) saturate(1688%) hue-rotate(144deg) brightness(94%) contrast(101%);
+}
+
 td,
 th {
     border: 1px solid #dddddd;

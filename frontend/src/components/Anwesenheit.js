@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Grid, Box, Typography } from '@material-ui/core';
+import { Grid, Button, Typography } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
 import Aktivitäten from "./Aktivitäten";
+import theme from "../Login";
+import { ThemeProvider } from '@mui/material';
 
 export default function Anwesenheit() {
     const [intervall, setIntervall] = useState("0h 0min");
@@ -116,15 +118,20 @@ export default function Anwesenheit() {
                     </form>
                 </Grid>
                 <Grid item xs={3} style={{ alignSelf: "end" }}>
-                    <Typography variant="h6" >Dauer {intervall}</Typography>
-                </Grid> 
-                
+                    <Grid item >
+                        <Button variant="outlined" onClick={setTime} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", color: "#00bcd4" }} >
+                            Buchen
+                        </Button>
+
+                    </Grid>
+                </Grid>
+
 
             </div>
 
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between',  marginTop:"1rem" }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: "1rem" }}>
 
-            <Grid item xs={3} style={{ alignSelf: "end" }}>
+                <Grid item xs={3} style={{ alignSelf: "end" }}>
                     <Typography variant="h5" >Pause</Typography>
                 </Grid>
                 <Grid item xs={3}>
@@ -156,8 +163,11 @@ export default function Anwesenheit() {
                     </form>
                 </Grid>
                 <Grid item xs={3} style={{ alignSelf: "end" }}>
-                    <Typography variant="h6" >Dauer {intervall}</Typography>
-                </Grid> 
+                        <Button variant="outlined" onClick={setTime} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", color: "#00bcd4 !important" }} >
+                            Buchen
+                        </Button>
+
+                </Grid>
 
             </div>
         </div>
