@@ -13,6 +13,7 @@ from bo.Aktivitaet import Aktivitaet
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from bo.Urlaub import Urlaub
 from bo.VerkaufteStundenInAktivitaet import VerkaufteStundenInAktivitaet
+from bo.Zeitintervallbuchung import Zeitinverallbuchung
 from bo.SollZeit import Sollzeit
 
 """ Wir erstellen ein "Flask-Objekt" """
@@ -98,6 +99,13 @@ personeliche_mitarbeiteransicht = api.inherit('MitarbeiterAnsicht', bo, {
     "bezeichnung": fields.String(attribute="_aktivitaet", description="Aktivität"),
     "projekt": fields.String(attribute="_projekt", description="Projekt"),
     "gearbeitete_zeit": fields.String(attribute="_gearbeitete_zeit", description="gebuchte Stunden")
+})
+
+zeitintervallbuchung = api.inherit('Zeitintervallbuchung', bo, {
+    "projekt_id": fields.String(attribute="_projekt_id", description="Projekt ID"),
+    "person_id": fields.String(attribute="_person_id", description="Person ID"),
+    "aktivitaet_id": fields.String(attribute="_aktivitaet_id", description="Aktivitaet ID"),
+    "gearbeitete_zeit": fields.String(attribute="_zeitintervall", description="Gearbeitete Zeit")
 })
 
 
@@ -591,6 +599,40 @@ class AktivitaetBuchenOperations(Resource):
         mip = adm.get_projekte_by_projekt_id_and_person_id_buchen(person_id, projekt_id)
         print(mip)
         return mip
+
+
+""" Buchungen  """
+@zeiterfassung.route("/zeitintervallbuchungen")
+class ZeitintervallbuchungenListOperations(Resource):
+    @zeiterfassung.marshal_with(zeitintervallbuchung, code=201)
+    @zeiterfassung.expect(zeitintervallbuchung)
+    def post(self):
+        """ Zeitintervallbuchung Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
+        Attribute aus den Werten von api.payload setzen. person_object = Person-Objekt """
+        zb_object = Zeitinverallbuchung.from_dict(api.payload)
+
+        if zb_object is not None:
+            """ Wir erstellen in Administration eine Person mithilfe der Daten vom api.payload """
+            c = adm.create_zeitintervallbuchung(zb_object.get_projekt_id(),zb_object.get_person_id(), zb_object.get_aktivitaet_id(),
+                zb_object.get_zeitintervall())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
+
+@zeiterfassung.route("/zeitintervallbuchungen/<int:projekt_id>")
+@zeiterfassung.param("projekt_id", "Die Id des gewünschten Projekts")
+class ZeitintervallbuchungenByProjektId(Resource):
+    @zeiterfassung.marshal_with(zeitintervallbuchung)
+    def get(self, projekt_id):
+        """ Auslesen der Aktivitäten innerhalb eines Projektes"""
+        adm = Administration()
+        zeitintervallbuchung = adm.get_zeitintervallbuchung_by_id(projekt_id)
+        print(projekt)
+        return zeitintervallbuchung
 
 
 

@@ -21,6 +21,7 @@ from bo.Projekt import Projekt
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
 from db.VerkaufteStundenInAktivitaetMapper import VerkaufteStundenInAktivitaetMapper
+from db.ZeitintervallbuchungMapper import ZeitintervallbuchungMapper
 import datetime
 
 
@@ -262,6 +263,25 @@ class Administration(object):
     def get_projekte_by_projekt_id_and_person_id_buchen(self, person_id, projekt_id):
         with AktivitaetMapper() as mapper:
             return mapper.buchen_ansicht_frontend(person_id, projekt_id)
+
+    def get_zeitintervallbuchung_by_id(self, projekt_id):
+        """ Wir geben die Projekte mit der angegebenen ID zurück """
+        with ZeitintervallbuchungMapper() as mapper:
+            return mapper.find_by_projekt_id(projekt_id)
+
+    def create_zeitintervallbuchung(self, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit):
+        """Eine Person anlegen."""
+
+        buchung = Zeitinverallbuchung()
+        buchung.set_id(1211)
+        buchung.set_projekt_id(projekt_id)
+        buchung.set_person_id(person_id)
+        buchung.set_aktivitaet_id(aktivitaet_id)
+        buchung.set_zeitintervall(gearbeitete_zeit)
+        buchung.set_letzte_aenderung()
+
+        with ZeitintervallbuchungMapper() as mapper:
+            return mapper.insert(buchung)
 
 
 
