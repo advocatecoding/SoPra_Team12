@@ -17,6 +17,7 @@ export default function Buchen(props) {
   const [intervall, setIntervall] = useState("0h 0min");
   const [start, setStart] = useState(null);
   const [ende, setEnde] = useState(null);
+  const[endeIsSet, setEndeIsSet] = useState(false);
   let defaultTime = new Date()
   defaultTime.setHours(0)
   defaultTime.setMinutes(0)
@@ -102,7 +103,7 @@ export default function Buchen(props) {
     ende1.setMinutes(timeInInt[1])
     console.log("Ende als Date nach Änderung:", ende1)
     setEndeTime(ende1)
-
+    setEndeIsSet(true)
   }
 
   function setTime() {
@@ -167,11 +168,12 @@ export default function Buchen(props) {
 
   return (
     <div>
+      <Typography variant="h5" align="center" sx={{pb:5}}>Projektarbeit buchen</Typography>
       <Grid container
         direction="row"
-        justifyContent="start"
+        justifyContent="center"
         alignItems="center"
-        spacing={7}>
+        spacing={10}>
         <Grid item xs={4}>
           <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px", minWidth: "270px" }} sx={{ m: 1, minWidth: 200 }} >
             <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Projekt</InputLabel>
@@ -249,8 +251,10 @@ export default function Buchen(props) {
           </Grid>
         </Grid>
       </Grid>
-
-      <Grid item container justifyContent="center" xs={12} style={{ paddingTop: "2rem" }}>
+      {
+        endeIsSet === true   ?
+        <>
+         <Grid item container justifyContent="center" xs={12} style={{ paddingTop: "2rem" }}>
         <Grid item >
           <Button variant="outlined" onClick={setTime} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", color: "red" }} >
             Buchen
@@ -259,6 +263,10 @@ export default function Buchen(props) {
         </Grid>
 
       </Grid>
+        </>
+        : null
+      }
+     
 
 
     </div>
