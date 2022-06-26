@@ -31,8 +31,6 @@ export default function PersonInformationen(props) {
                 Name: {personData.vorname} {personData.nachname}
                 <br/>
                 Benutzername: {personData.benutzername}
-                <br/>
-                Kommen:
             </Typography>
            
         </div>
