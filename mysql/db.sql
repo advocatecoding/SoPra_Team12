@@ -1,4 +1,4 @@
--- ------------------------------------------------------------------------
+-- ----------------------------------------------------------------------
 -- Datenbank Zeiterfassung
 -- ------------------------------------------------------------------------
 DROP DATABASE IF EXISTS Zeiterfassung;
@@ -127,8 +127,8 @@ CREATE TABLE IF NOT EXISTS `Person` (
    CREATE TABLE IF NOT EXISTS `Pause` (
   `pause_id` INT NOT NULL,
   `person_id` INT NOT NULL,
-  `start` DATETIME NULL,
-  `ende` DATETIME NULL,
+  `start_pause` DATETIME NULL,
+  `ende_pause` DATETIME NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`pause_id`),
     FOREIGN KEY (`person_id`)
@@ -268,10 +268,7 @@ VALUES('14', 'Jonny', 'Clayton', 'jonny.clayton@gmail.com', 'TheFerret', 30, 0, 
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
 VALUES('15', 'Mensur', 'Suljovic', 'mensur.suljovic@gmail.com', 'TheGentle', 30, 0, '2022-04-13 02:30:00');
 
--- ------------------------------------------------------------------------------------------------------------pauseperson---------------
--- Projekt Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
--- ------------------------------------------------------------------------------------------------------------pauseperson---------------
 -- Projekt Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
 INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
@@ -305,8 +302,6 @@ VALUES('14', '4',"Projekt M", 'Apple','2022-04-19 12:33:00');
 INSERT INTO `Projekt` (projekt_id, person_id, projektname, auftraggeber, letzte_aenderung)  
 VALUES('15', '4',"Projekt L", 'Windows','2022-04-19 12:33:00');
 
-
-
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Aktivität Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
@@ -323,7 +318,6 @@ VALUES('5', '2', 'Teile prüfen', '2022-05-01 14:00:00','150', '2022-04-19 02:33
 INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
 VALUES('6', '2', 'beschädigte Teile reklamieren', '2022-05-01 14:00:00','70', '2022-04-19 02:33:00');
 
-
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Urlaub Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
@@ -336,6 +330,17 @@ VALUES('3', '2', '2022-06-19', '2022-07-25', '2022-04-19 02:33:00');
 INSERT INTO `Urlaub` (urlaub_id, person_id, start_datum, end_datum, letzte_aenderung)
 VALUES('4', '1', '2022-07-19', '2022-08-25', '2022-04-19 02:33:00');
 
+-- ---------------------------------------------------------------------------------------------------------------------------
+-- Pause Entitäten erstellen
+-- ---------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `Pause` (pause_id, person_id, start_pause, ende_pause, letzte_aenderung)
+VALUES ('1', '1', '2022-04-19 02:33:00', '2022-04-19 02:34:00', '2022-04-19 02:35:00');
+INSERT INTO `Pause` (pause_id, person_id, start_pause, ende_pause, letzte_aenderung)
+VALUES ('2', '2', '2022-04-19 02:33:00', '2022-04-19 02:34:00', '2022-04-19 02:34:00');
+INSERT INTO `Pause` (pause_id, person_id, start_pause, ende_pause, letzte_aenderung)
+VALUES ('3', '3', '2022-04-19 02:33:00', '2022-04-19 02:34:00', '2022-04-19 02:34:00');
+INSERT INTO `Pause` (pause_id, person_id, start_pause, ende_pause, letzte_aenderung)
+VALUES ('4', '4', '2022-04-19 02:33:00', '2022-04-19 02:34:00', '2022-04-19 02:34:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Mitarbeiter_in_Projekt Entitäten erstellen
@@ -407,4 +412,3 @@ SELECT Aktivitaet.aktivitaet_id, bezeichnung, projektname FROM Aktivitaet
 INNER JOIN Verkaufte_stunden_in_aktivitaet ON Aktivitaet.aktivitaet_id = Verkaufte_stunden_in_aktivitaet.aktivitaet_id 
 INNER JOIN Projekt ON Aktivitaet.projekt_id = Projekt.projekt_id
 WHERE Verkaufte_stunden_in_aktivitaet.person_id = 1 AND Aktivitaet.projekt_id = 1;
-

@@ -22,7 +22,7 @@ class Zeitintervall(bo.BusinessObject):
     def get_projektarbeit_id(self):
         return self._projektarbeit_id
 
-    def get_pause_id(self, value):
+    def set_pause_id(self, value):
         self._pause_id = value
 
     def get_pause_id(self):

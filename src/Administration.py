@@ -15,6 +15,7 @@ from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
 from db.AktivitaetMapper import AktivitaetMapper
 from db.UrlaubMapper import UrlaubMapper
+from db.PauseMapper import PauseMapper
 from bo.Projekt import Projekt
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
@@ -143,6 +144,38 @@ class Administration(object):
         with AktivitaetMapper() as mapper:
             return mapper.update(aktivitaet)
 
+
+    def create_pause(self, person_id, start_pause, ende_pause):
+        """Pause anlegen"""
+
+        pause = Pause()
+        pause.set_id(1211)
+        pause.set_person_id(person_id)
+        pause.set_start_pause(start_pause)
+        pause.set_ende_pause(ende_pause)
+        pause.set_letzte_aenderung()
+
+        with PauseMapper() as mapper:
+            return mapper.insert(pause)
+
+
+    def get_all_pause(self):
+        with PauseMapper() as mapper:
+            return mapper.find_all()
+
+    def get_pause_by_id(self, pause_id):
+        with PauseMapper() as mapper:
+            return mapper.find_by_id(pause_id)
+
+    def delete_pause_by_pause_id(self, pause_id):
+        with PauseMapper() as mapper:
+            return mapper.delete(pause_id)
+
+    def update_pause(self, pause):
+        pause.set_letzte_aenderung()
+
+        with PauseMapper() as mapper:
+            return mapper.update(pause)
 
 
     """Urlaub"""
@@ -297,72 +330,3 @@ class Administration(object):
         ereignisbuchung = Ereignisbuchung(startereignis, endereignis)
         ereignisbuchung.set_id(1211)
 
-    def create_zeitintervall(self, ereignisbuchung):
-
-        zeitintervall = Zeitintervall()
-
-
-if __name__ == '__main__':
-
-    mitarbeiter1 = Person()
-    mitarbeiter1.set_vorname("Mikasa")
-
-    aktivitaet1 = Aktivitaet()
-    aktivitaet1.set_name("Kriegshammertitan aufhalten")
-
-    zeitintervall_projekt = Zeitintervall()
-
-    projekt1 = Projekt()
-    projekt1.set_name("Marley erobern")
-    #projekt1.set_projektlaufzeit(zeitintervall_projekt.get_zeitintervall())
-    #projekt1.set_projektlaufzeit(100)
-
-    #aktivität1.get_id()
-    startzeit = datetime.datetime(2022,1,1,12,00)
-    endzeit = datetime.datetime(2022,1,1,20,00)
-
-    buchungstart = datetime.datetime(2022,1,1,12,00)
-    buchungende = datetime.datetime(2022,1,1,15,00)
-
-    kommen1 = Kommen(startzeit,mitarbeiter1)
-    gehen1 = Gehen(endzeit, mitarbeiter1)
-
-    startbuchung1 = Startbuchung(buchungstart, mitarbeiter1)
-    endbuchung1 = Endbuchung(buchungende, mitarbeiter1)
-
-
-    """ Ereignisbuchung extrahiert die Daten von Kommen und Gehen (Objekte werden nicht mitgeschleppt) """
-    ereignisbuchung1 = Ereignisbuchung(kommen1, gehen1)
-
-    projektarbeit1 = Projektarbeit(ereignisbuchung1)
-    projektarbeit1.set_id(1)
-
-    """ Fall 2: Pause durch 2 Ereignisse buchen """
-    pause1 = Pause(ereignisbuchung1)
-    pause1.set_id(1)
-
-    zeitinervallbuchung1 = Zeitinverallbuchung(projektarbeit1, aktivitaet1)
-    zeitintervallbuchung2 = Zeitinverallbuchung(pause1, aktivitaet1)
-
-    """ Fall 3: Pause direkt durch Zeitintervall buchen (ohne Ereignisse) """
-    pause2 = Pause()
-    pause2.set_zeitintervall(0.2)
-    pause2.set_person(mitarbeiter1)
-    pause2.set_aktivitaet(aktivitaet1)
-    
-    zeitintervallbuchung3 = Zeitinverallbuchung(pause2, aktivitaet1)
-    
-    """ Projektarbeit von 7h """
-    projektarbeit2 = Projektarbeit()
-    projektarbeit2.set_zeitintervall(7)
-    projektarbeit2.set_person(mitarbeiter1)
-    projektarbeit2.set_aktivitaet(aktivitaet1)
-    
-    
-    zeitintervallbuchung4 = Zeitinverallbuchung(projektarbeit2, aktivitaet1)
-
-    arbeitszeitkonto_von_mikasa = Arbeitszeitkonto(mitarbeiter1)
-    """ Das Arbeitszeitkonto von Mikasa  """
-    arbeitszeitkonto_von_mikasa.add_buchung(zeitinervallbuchung1)
-    arbeitszeitkonto_von_mikasa.add_buchung(zeitintervallbuchung3)
-    arbeitszeitkonto_von_mikasa.add_buchung(zeitintervallbuchung4)

@@ -12,6 +12,7 @@ from Administration import Administration
 from bo.Aktivitaet import Aktivitaet
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from bo.Urlaub import Urlaub
+from bo.Pause import Pause
 from bo.VerkaufteStundenInAktivitaet import VerkaufteStundenInAktivitaet
 from bo.Zeitintervallbuchung import Zeitinverallbuchung
 from bo.SollZeit import Sollzeit
@@ -70,6 +71,11 @@ urlaub = api.inherit('Urlaub', bo, {
     "person_id": fields.String(attribute="_person_id", description="Mitarbeiter"),
     "start_datum": fields.String(attribute="_start_date", description="Urlaubsbeginn"),
     "end_datum": fields.String(attribute="_end_date", description="Urlaubsende")
+})
+pause = api.inherit('Pause', bo, {
+    "person_id": fields.String(attribute="_person_id", description="Mitarbeiter"),
+    "start_pause": fields.String(attribute="start_pause", description="Pausenbeginn"),
+    "ende_pause": fields.String(attribute="ende_pause", description="Pausenende")
 })
 
 verkaufte_stunden_in_aktivitaet = api.inherit('VerkaufteStundenInAktivitaet', bo, {
@@ -454,6 +460,19 @@ class UrlaubByIdOperations(Resource):
             return '', 200
         else:
             return '', 500
+
+
+""" Pause"""
+@zeiterfassung.route("/pause")
+class PauseListOperations(Resource):
+    @zeiterfassung.marshal_with(pause)
+    def get(self):
+        """ Auslesen der Pause-Objekte """
+        adm = Administration()
+        pause = adm.get_all_pause()
+        return pause
+
+
 
 
 
