@@ -9,13 +9,13 @@ class Pause(Zeitintervall):
 
 
     def set_start_pause(self, value):
-        self.start_pause = value
+        self._start_pause = value
 
     def get_start_pause(self):
         return self._start_pause
 
     def set_ende_pause(self, value):
-        self.ende_pause = value
+        self._ende_pause = value
 
     def get_ende_pause(self):
         return self._ende_pause
