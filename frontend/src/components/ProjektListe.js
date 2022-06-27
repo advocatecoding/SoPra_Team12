@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import LoadingProgress from '../components/Loading/LoadingProgress';
 import IconButton from "@material-ui/core/IconButton";
-import {  Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import ArticleIcon from '@mui/icons-material/Article';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import axios from 'axios';
@@ -54,6 +54,7 @@ export default function ProjektListe(props) {
       const data = await response.json();
       setMitarbeiterProjekte(data)
       setLoading(false)
+      console.log("Projekte gefetcht!")
     } catch (e) {
       console.log(e.message)
     }
@@ -82,10 +83,6 @@ export default function ProjektListe(props) {
     setUserIdTrue(true)
   }
 
-
- 
-
-
   return (
     <div className="dropdown" style={{ minHeight: "300px", maxHeight: "500px", overflowY: "scroll" }} ref={dropdownRef}>
       <CSSTransition
@@ -96,10 +93,15 @@ export default function ProjektListe(props) {
             <div style={{ display: "inline-block" }}>
               <Typography variant="h5" style={{ color: "white", paddingLeft: "1rem" }}>Meine Projekte</Typography>
             </div>
-            <div style={{ display: "inline-block", marginLeft: "auto", paddingRight: "1rem" }}>
-              <ReplayIcon style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer", paddingLeft:"1rem" }} />
-              <AddCircleOutlineIcon id="add-project-icon" style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer", paddingLeft:"1rem" }} onClick={addProject}/>
-    
+            <div style={{  display:"flex", flexDirection:"row", marginLeft: "auto", paddingRight: "1rem" }}>
+              <div>
+              <ReplayIcon id="add-project-icon" style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer", paddingLeft: "1rem" }} onClick={() => FetchProjekte(props.id)} />
+              </div>
+              <div>
+              <AddCircleOutlineIcon id="add-project-icon" style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer", paddingLeft: "1rem" }} onClick={addProject} />
+              </div>
+              
+
             </div>
           </div>
           {
@@ -122,14 +124,12 @@ export default function ProjektListe(props) {
       <LoadingProgress show={loadingInProgress}></LoadingProgress>
 
       {
-                  userIdIsSet ?
-                    <>
-                      <CreateProjectModal id={projektleiter}  setOpenModal={setShowModal} showModal={showModal}></CreateProjectModal>
-                    </>
-                    : null
-                }
-
-      
+        userIdIsSet ?
+          <>
+            <CreateProjectModal id={projektleiter} setOpenModal={setShowModal} showModal={showModal}></CreateProjectModal>
+          </>
+          : null
+      }
     </div>
   );
 }

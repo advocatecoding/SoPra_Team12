@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Fab, Button, Typography } from '@material-ui/core';
+import { Grid, Fab, Button } from '@material-ui/core';
 import TimelapseIcon from '@mui/icons-material/Timelapse';
 import CloseIcon from '@mui/icons-material/Close';
 import Dialog from '@mui/material/Dialog';
@@ -101,7 +101,6 @@ export default function Stundenübersicht(props) {
                                             )
                                             }
                                         </tbody>
-
                                     </table>
                                 </div>
                             </DialogContentText>

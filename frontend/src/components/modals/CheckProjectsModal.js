@@ -7,16 +7,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DashboardIcon from '@mui/icons-material/Dashboard';
-
-/* Tabelle 
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-*/
+import "../../index.css"
 
 export default function CheckProjectsModal(props) {
 
@@ -67,7 +58,7 @@ export default function CheckProjectsModal(props) {
       {createListIsClicked === false ?
         <>
           <div className="title">
-            <h2> <DashboardIcon sx={{ mr: "1rem" }}  onClick={() => {handleChange()}} style={{color: "#00bcd4"}} />Checken Sie hier die Projekte!</h2>
+            <h2> <DashboardIcon sx={{ mr: "1rem" }} onClick={() => { handleChange() }} style={{ color: "#00bcd4" }} />Checken Sie hier die Projekte!</h2>
           </div>
           <div className="body">
             <div style={{ marginTop: "5rem" }}>
@@ -103,7 +94,7 @@ export default function CheckProjectsModal(props) {
           <div className="title">
             <h2>Stundenübersicht des Projekts {selectedProject}</h2>
           </div>
-          <div className="body">
+          <div className="body" style={{height:"100%"}}>
             <div>
               <ProjectTime projekt_id={selectedProject} />
             </div>
@@ -125,6 +116,13 @@ function ProjectTime(props) {
   const [sollZeitIsAdded, setSollZeitIsAdded] = useState(false);
   const [orderedDataX, setOrderedDataX] = useState([])
 
+  const [aktivitäten, setAktivitäten] = useState(null)
+  const [rows, setRows] = useState(0)
+
+  const [mainData, setMainData] = useState([
+    { aktivitätsname: '', name: '', istzeit: '', sollzeit: '' },
+]);
+
   var orderedData = []
 
 
@@ -136,9 +134,9 @@ function ProjectTime(props) {
     const url = `/zeit/mitarbeiteransicht/${projekt_id}`;
     try {
       if (!dataIsOrdered) {
-      const response = await fetch(url);
-      const data = await response.json();
-      orderData(data)
+        const response = await fetch(url);
+        const data = await response.json();
+        orderData(data)
       }
     } catch (e) {
       console.log(e.message)
@@ -146,7 +144,22 @@ function ProjectTime(props) {
     ;
   }
 
+  async function fetchSollZeit(projekt_id) {
+    const url = `/zeit/sollzeit/${projekt_id}`;
+    try {
+      if (!sollZeitIsAdded) {
+        console.log("fetchSollZeit")
+        const response = await fetch(url);
+        const data = await response.json();
+        addSollzeitToOrderedData(data)
+      }
+    } catch (e) {
+      console.log(e.message)
+    }
+    ;
+  }
 
+  const aktivitäten1 = []
   /* Algorithmus, der die Daten des Json-Objekts in 
   die benötigte Reihenfolge bringt und in ein neues Array lädt **/
   function orderData(data) {
@@ -155,6 +168,7 @@ function ProjectTime(props) {
     for (let i = 0; i < data.length; i++) {
       if (cur_akt !== data[i].bezeichnung) {
         cur_akt = data[i].bezeichnung;
+        aktivitäten1.push(cur_akt)
         setOrderedDataX(oldArray => [...oldArray, cur_akt])
         orderedData.push(cur_akt)
       }
@@ -162,69 +176,92 @@ function ProjectTime(props) {
       setOrderedDataX(oldArray => [...oldArray, data[i].gearbeitete_zeit])
       orderedData.push(data[i].vorname)
       orderedData.push(data[i].gearbeitete_zeit)
+      
+      //setaktivitätenFields([...aktivitätenFields,{ aktivitätsname: '', name: '', istzeit: '', sollzeit: '' }])
     }
     setDataIsOrdered(true)
     fetchSollZeit(props.projekt_id)
   }
 
-  async function fetchSollZeit(projekt_id) {
-    const url = `/zeit/sollzeit/${projekt_id}`;
-    try {
-      if (!sollZeitIsAdded) {
-        console.log("fetchSollZeit")
-      const response = await fetch(url);
-      const data = await response.json();
-      addSollzeitToOrderedData(data)
-      }
-    } catch (e) {
-      console.log(e.message)
-    }
-    ;
-  }
 
   // Regular Expression, um zu prüfen ob ein String eine Zahl ist
   let numberReg = new RegExp('[0-9]')
 
-   /* Algorithmus, der die gefetchten Daten der Sollstunden in das georderte Array integriert  **/
+  /* Algorithmus, der die gefetchten Daten der Sollstunden in das georderte Array integriert  **/
   function addSollzeitToOrderedData(data) {
     var j = 0
-
+    let countRows = 0
     console.log("-----", data)
     const loopLength = (data.length + orderedData.length)
     for (let i = 0; i < loopLength; i++) {
       console.log(i)
       // Es wird nach jedem Element, welches eine Zahl ist die dazugehörige Sollzeit hinzugefügt 
       if ((orderedData[i]).match(numberReg)) {
+        countRows ++;
         console.log("number:", j)
-        console.log("Gebuchte Stunde: ",  data[1].gebuchte_stunden)
-        orderedData.splice(i+1, 0, data[j].gebuchte_stunden);
+        console.log("Gebuchte Stunde: ", data[1].gebuchte_stunden)
+        orderedData.splice(i + 1, 0, data[j].gebuchte_stunden);
         console.log(orderedData)
         i++;
         console.log()
         if (j < data.length) {
           j++;
-        } 
+        }
       }
-      
     }
     setOrderedDataX(orderedData)
     setSollZeitIsAdded(true)
+    setAktivitäten(aktivitäten1)
+    setRows(countRows)
+    console.log("Zeilen:", countRows)
+    console.log("AktivitätenListw:", aktivitäten1)
   }
 
-
+  var x = 1
+  var cur_aktivität = ""
 
   return (
     <div>
-      {
-        orderedData !== [] ?
-        orderedData.map(item => {
-          <p style={{ fontSize: "1rem" }}>{item.name}</p>
-        }
-          
-        )
-          : null
-      }
+      {/*console.log("Ordered data beim Rendern:", orderedDataX)*/}
+      {/*console.log("AktivitätenListe", aktivitäten1)*/}
+            {
+              aktivitäten !== null && sollZeitIsAdded ?
+                aktivitäten.map((item) => 
+                  <div>
+                    {console.log(aktivitäten)}
+                    {console.log(orderedDataX)}
+                    {console.log(item)}
+                    
+                    <Typography align="left" variant="h6" style={{paddingBottom:"0.5rem"}}>{cur_aktivität = item}</Typography>
+
+                    <table class="table table-striped" style={{marginBottom:"1rem"}}>
+                      <thead>
+                        <tr>
+                          <th style={{ color: "#00bcd4", fontSize:"1rem" }}><b>Name</b></th>
+                          <th style={{ color: "#00bcd4", fontSize:"1rem" }}><b>Ist-Zeit</b></th>
+                          <th style={{ color: "#00bcd4", fontSize:"1rem" }}><b>Soll-Zeit</b></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {/* Es müssen pro Durchgang 3 Zeilen erstellt werden */}
+                        
+                        {
+                          [...Array(rows)].map((index, rows) => 
+                              <tr>
+                                <td align="start" style={{fontSize:"0.5rem"}}>{orderedDataX[1]}</td>
+                                <td align="start" style={{fontSize:"0.5rem"}}>{orderedDataX[2]}</td>
+                                <td align="start" style={{fontSize:"0.5rem"}}>{orderedDataX[3]}</td>
+                              </tr>
+                          )
+                        }
+                      </tbody>
+                    </table>
+                  </div>
+
+                
+                )
+                : null
+            }
     </div>
   )
 }
-
