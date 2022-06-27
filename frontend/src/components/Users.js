@@ -19,7 +19,7 @@ export default function Users(props) {
 
     useEffect(() => {
         fetchAllPersonen()
-    }, [loadingInProgress])
+    }, [])
 
     async function fetchAllPersonen() {
         const url = "/zeit/personen";
@@ -56,7 +56,7 @@ export default function Users(props) {
                                 color="primary"
                             >
                                 {personen.map((item) =>
-                                    <MenuItem value={item.benutzername} style={{ color: "#00bcd4" }}>{item.benutzername}</MenuItem>
+                                    <MenuItem key={item} value={item.benutzername} style={{ color: "#00bcd4" }}>{item.benutzername}</MenuItem>
                                 )
                                 }
                             </Select>

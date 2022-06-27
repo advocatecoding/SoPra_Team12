@@ -36,6 +36,7 @@ export default function CreateProjectModal(props) {
 
     // Usestates für Post Projekt
     const [projektname, setProjektname] = useState("");
+    
     const [auftraggeber, setAuftraggeber] = useState("");
     const [projektleiter, setProjekleiter] = useState("");
     const [modalOpen, setModalOpen] = useState(true);
@@ -43,12 +44,8 @@ export default function CreateProjectModal(props) {
     const [teamErstellen, setTeamErstellen] = useState(false);
 
 
-
-
-    // UseStates für Mitarbeiter in Projekt
+    const [projekt_id, setProjektId] = useState("");
     const [mitarbeiter, setMitarbeiter] = useState("");
-    // projekt entspricht hier projektId
-    const [projekt, setProjektId] = useState("");
 
     const getSettedProjektId = useCallback((projId) => {
         setProjektId((prevData) => {
@@ -74,39 +71,54 @@ export default function CreateProjectModal(props) {
             const data = response.data;
             console.log(data)
             console.log("Die ProjektId soll ab hier gespeichert werden:", data.id)
-            setProjektId(data.id)
-            console.log("Projekt wurde gepostet", projekt)
+            //setProjektId(data.id)
+            //console.log("Projekt wurde gepostet", projekt_id)
+            let projekt_id = data.id
+            test()
+            teamFields.map((data) => {
+                postTeam(data.mitarbeiter_id, data.verkaufte_stunden, projekt_id);
+            }
+            )
+            aktivitätenFields.map((data) => {
+                postAktivitäten(data.aktivitätsname, data.dauer, data.kapazität, 1211, projekt_id);
+            })
         }).catch(err => { console.log(err) })
     };
 
 
-    function postAktivitäten(aktivitaetname, dauer, kapazität, id) {
-        getSettedProjektId()
-        const projektname = projekt
+    function test(){
+        console.log("feierabend")
+    }
+
+    function postAktivitäten(aktivitaetname, dauer, kapazität, id, projekt_id) {
+        //getSettedProjektId()
         const url = `/zeit/aktivitaten`;
         axios.post(url, {
             id,
             aktivitaetname,
-            projektname,
+            projekt_id,
             dauer,
             kapazität
         }).then((response) => {
             console.log(response)
-            const data = response.data;
+            const data = response.data
             console.log("Die ProjektId soll ab hier AUCH gespeichert werden:", data.id)
+            console.log("Post Aktivität Response: ", data)
         }).catch(err => { console.log(err) })
     }
 
-    function postTeam(mitarbeiter, verkaufte_stunden) {
-        getSettedProjektId();
-        console.log("ProjektId in postTeam:", projekt)
+    function postTeam(mitarbeiter, verkaufte_stunden,  projekt_id) {
+        //getSettedProjektId();
+        console.log("ProjektId in postTeam:", projekt_id)
         const url = `/zeit/mitarbeiter_in_projekt`;
         axios.post(url, {
             mitarbeiter,
-            projekt,
+            projekt_id,
             verkaufte_stunden
         }).then((response) => {
+            console.log(response)
             const data = response.data
+            console.log("Post Team Response:", data)
         }).catch(err => console.log(err))
     };
 
@@ -119,13 +131,7 @@ export default function CreateProjectModal(props) {
         {/** Post-Requests */ }
         postProjekt(1211);
         getSettedProjektId()
-        teamFields.map((data) => {
-            postTeam(data.mitarbeiter_id, data.verkaufte_stunden);
-        }
-        )
-        aktivitätenFields.map((data) => {
-            postAktivitäten(data.aktivitätsname, data.dauer, data.kapazität, 1211);
-        })
+        
     };
 
     const changeProjektname = (event) => {

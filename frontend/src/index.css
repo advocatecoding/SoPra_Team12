@@ -58,12 +58,16 @@ table {
     
 } 
 
+.css-3bmhjh-MuiPaper-root-MuiPopover-paper {
+    border-radius: 0.8rem !important;
+}
+
 :root {
     --bg: #262A2E;
     --bg-accent: #484a4d;
     --text-color: white;
     --nav-size: 60px;
-    --border-radius: 8px;
+    --border-radius: 14px;
     --speed: 450ms;
 }
 

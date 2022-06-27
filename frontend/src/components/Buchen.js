@@ -125,19 +125,19 @@ export default function Buchen(props) {
     var newIntervallObject = new Date();
     newIntervallObject.setHours(hh)
     newIntervallObject.setMinutes(mm)
-    setGearbeiteteZeit(hh + "." + mm)
+    let gearbeiteteZeit = (hh + "." + mm)
     console.log(hh + "." + mm)
     //console.log(hh + " Stunden" + " " + mm + " Minuten")
     let newIntervallString = hh + "h " + mm + "min"
     console.log("Intervall in Stunde u Minuten:", newIntervallString)
     setIntervall(newIntervallString)
-    postZeintervall(1211)
+    postZeintervall(1211, gearbeiteteZeit)
     setProjektId("")
   }
 
-  function postZeintervall(id) {
+  function postZeintervall(id, gearbeitete_zeit) {
     const url = `/zeit/zeitintervallbuchungen`;
-    //console.log("Post daten: " + "personId: " + person_id + "aktivität id: " + aktivitaet_id + "gearbeitete Zeit: " + gearbeitete_zeit + "projektId: " + projekt_id)
+    console.log("Post daten: " + "personId: " + person_id + "aktivität id: " + aktivitaet_id + "gearbeitete Zeit: " + gearbeitete_zeit + "projektId: " + projekt_id)
     axios.post(url, {
       id,
       projekt_id,
@@ -192,7 +192,6 @@ export default function Buchen(props) {
         </Grid>
 
         {/** Aktivitätauswahl wird angezeigt, wenn Projekt ausgewählt wurde */}
-
         {
           projekt_id !== "" ?
             <>
@@ -252,7 +251,7 @@ export default function Buchen(props) {
         </Grid>
       </Grid>
       {
-        endeIsSet === true   ?
+        endeIsSet === true ?
         <>
          <Grid item container justifyContent="center" xs={12} style={{ paddingTop: "2rem" }}>
         <Grid item >

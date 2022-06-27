@@ -8,7 +8,7 @@ import Divider from '@mui/material/Divider';
 
 
 function Header(props) {
-  const [user, setUser] = useState("")
+  const [user, setUser] = useState(null)
   useEffect(() => {
     setUser(props.user)
   }, [props.user])

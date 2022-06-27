@@ -2,7 +2,7 @@ import React, { Component, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { Popover, IconButton, Avatar, ClickAwayListener, Typography, Paper, Button, Grid, Divider } from '@mui/material';
 import { getAuth, signOut } from "firebase/auth";
-
+import "../../index.css"
 
 class ProfileDropDown extends Component {
 
@@ -11,7 +11,6 @@ class ProfileDropDown extends Component {
 
   constructor(props) {
     super(props);
-
     // Init the state
     this.state = {
       open: false,

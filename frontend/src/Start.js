@@ -74,8 +74,6 @@ function Start(props) {
       <ThemeProvider theme={theme}>
         {/* Abstand */}
         <Box sx={{ mt: 5 }}></Box>
-
-
         <Grid container justify="space-between"
         >
           {/* Sidebar -> Projektübersicht */}
@@ -105,11 +103,11 @@ function Start(props) {
 
 
           {/* Hauptbereich */}
-          <Grid container direction="row" justifyContent="space-between" alignItems="start" lg={10} xs={12} md={8} style={{ border: "1px solid gray", borderRadius: "8px", maxWidth: "900px", margin: "auto", padding: "1rem" }}>
-            <Grid container item style={{ borderRadius: "8px", height: "25%", justifyContent: "center", display: "flex", }} >
+          <Grid container direction="row" justifyContent="space-between" alignItems="start" lg={10} xs={12} md={8} style={{  borderRadius: "14px", maxWidth: "900px", margin: "auto", padding: "1rem" }}>
+            <Grid container item style={{ borderRadius: "14px", height: "25%", justifyContent: "center", display: "flex", }} >
               {/* Benutzerinformation*/}
-              <Grid xs={8} item container style={{ backgroundColor: "#262A2E", borderRadius: "17px", display: "flex", justifyContent: "flex-start" }}>
-                <div style={{ padding: "0.5rem" }}>
+              <Grid xs={8} item container style={{ backgroundColor: "#262A2E", borderRadius: "14px", display: "flex", justifyContent: "flex-start" }}>
+                <div style={{ paddingLeft: "1.5rem", paddingTop: "1.5rem" }}>
                   {
                     userIdIsSet ?
                       <>
@@ -118,7 +116,6 @@ function Start(props) {
                       : null
                   }
                 </div>
-
               </Grid>
 
               {/* Stundenübersicht erstellen + Urlaub buchen Button*/}
@@ -135,31 +132,21 @@ function Start(props) {
                 <Grid item container>
                   <UrlaubBuchen openUrlaubBuchenModal={open => setUrlaubModalOpen(open)}></UrlaubBuchen>
                 </Grid>
-
-
               </Grid>
-
             </Grid>
 
             {/* Buchbereich*/}
-            <Grid container item xs={12} style={{ backgroundColor: "#262A2E", borderRadius: "17px", borderRadius: "17px", marginTop: "2rem", height: "65%" }}>
+            <Grid container item xs={12} style={{ backgroundColor: "#262A2E", borderRadius: "14px", marginTop: "2rem", height: "65%" }}>
 
               <Grid style={{ height: "30%", width: "100%", padding: "2rem", paddingBottom: "0rem" }}>
                 <Typography variant="h5" align="center" style={{ marginBottom: "2rem" }}>Buchbereich</Typography>
-                <Anwesenheit></Anwesenheit>
-
+                <Anwesenheit/>
               </Grid>
+
               <Grid style={{ height: "70%", width: "100%", padding: "2rem", paddingTop:"5rem" }}>
                 <Buchen id={userId} />
-
               </Grid>
-
-
-
-
-
             </Grid>
-
           </Grid>
 
         </Grid>

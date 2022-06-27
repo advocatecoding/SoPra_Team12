@@ -25,9 +25,9 @@ export default function PersonInformationen(props) {
 
 
     return (
-        <div>
+        <div style={{display:"flex"}}>
             <AccountCircleIcon style={{ color: "#00bcd4", fontSize: "40px" }}></AccountCircleIcon>
-            <Typography color="white" variant="h6" style={{paddingLeft: "0.4rem"}}>
+            <Typography color="white" variant="h6" style={{paddingLeft: "1.2rem", marginTop:"-2px"}}>
                 Name: {personData.vorname} {personData.nachname}
                 <br/>
                 Benutzername: {personData.benutzername}
