@@ -17,6 +17,7 @@ from db.AktivitaetMapper import AktivitaetMapper
 from db.UrlaubMapper import UrlaubMapper
 from db.PauseMapper import PauseMapper
 from bo.Projekt import Projekt
+from db.ProjektarbeitMapper import ProjektarbeitMapper
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
 from db.VerkaufteStundenInAktivitaetMapper import VerkaufteStundenInAktivitaetMapper
@@ -146,7 +147,7 @@ class Administration(object):
         with AktivitaetMapper() as mapper:
             return mapper.update(aktivitaet)
 
-
+    """Pause"""
     def create_pause(self, person_id, start_pause, ende_pause):
         """Pause anlegen"""
 
@@ -178,6 +179,26 @@ class Administration(object):
 
         with PauseMapper() as mapper:
             return mapper.update(pause)
+
+    """Projektarbeit"""
+    def create_projektarbeit(self, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit):
+        """Pause anlegen"""
+
+        projektarbeit = Projektarbeit()
+        projektarbeit.set_id(1211)
+        projektarbeit.set_projekt_id(projekt_id)
+        projektarbeit.set_person_id(person_id)
+        projektarbeit.set_aktivitaet_id(aktivitaet_id)
+        projektarbeit.set_gearbeitete_zeit(gearbeitete_zeit)
+        projektarbeit.set_letzte_aenderung()
+
+        with ProjektarbeitMapper() as mapper:
+            return mapper.insert(projektarbeit)
+
+
+    def get_all_projektarbeit(self):
+        with ProjektarbeitMapper() as mapper:
+            return mapper.find_all()
 
 
     """Urlaub"""

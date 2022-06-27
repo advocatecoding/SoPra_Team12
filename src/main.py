@@ -8,6 +8,7 @@ from flask_cors import CORS
 # Zugriff auf Administration & BO-Klassen
 from bo.Person import Person
 from bo.Projekt import Projekt
+from bo.Projektarbeit import Projektarbeit
 from Administration import Administration
 from bo.Aktivitaet import Aktivitaet
 from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
@@ -93,6 +94,13 @@ sollzeit = api.inherit('SollZeit', bo, {
     "gebuchte_stunden": fields.String(attribute="_gebuchte_stunden", description="gebuchte Stunden"),
     "bezeichnung": fields.String(attribute="_bezeichnung", description="Bezeichnung")
 
+})
+
+projektarbeit = api.inherit('SollZeit', bo, {
+    "person_id": fields.String(attribute="_person_id", description="Mitarbeiter"),
+    "aktivitaet_id": fields.String(attribute="_aktivitaet_id", description="Aktivität"),
+    "projekt_id": fields.String(attribute="_projekt_id", description="Projekt"),
+    "gearbeitete_zeit": fields.String(attribute="_gearbeitete_zeit", description="gearbeitete Zeit"),
 })
 
 mitarbeiteransicht = api.inherit('MitarbeiterAnsicht', bo, {
@@ -499,12 +507,6 @@ class PauseListOperations(Resource):
             return '', 500
 
 
-
-
-
-
-
-
 """ Mitarbeiter werden zur zugeordneten Projekt_ID ausgegeben """
 @zeiterfassung.route("/mitarbeiter_in_projekt/<int:person_idd>")
 @zeiterfassung.param("person_idd", "Die Id der gewünschten Person")
@@ -516,9 +518,6 @@ class MitarbeiterInProjektById(Resource):
         person = adm.get_mitarbeiter_in_projekt_by_idd(person_idd)
         print(person)
         return person
-
-
-
 
 
 """ Verkaufte_Stunden_in_Aktivität(e) wird gelesen und erstellt  """
@@ -725,6 +724,33 @@ class GehenListOperations(Resource):
         if gehen_object is not None:
             """ Wir erstellen in Administration Gehen mithilfe der Daten vom api.payload """
             c = adm.create_gehen(gehen_object.get_person_id(), gehen_object.get_ende())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
+""" Projektarbeit"""
+@zeiterfassung.route("/projektarbeit")
+class ProjektarbeitListOperations(Resource):
+    @zeiterfassung.marshal_with(projektarbeit)
+    def get(self):
+        """ Auslesen der Projektarbeits-Objekte """
+        adm = Administration()
+        projektarbeit = adm.get_all_projektarbeit()
+        return projektarbeit
+
+    @zeiterfassung.marshal_with(pause, code=201)
+    @zeiterfassung.expect(pause)
+    def post(self):
+        """ Pausen Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Pause, indem wir die 
+        Attribute aus den Werten von api.payload setzen. pause_object = Pause-Objekt """
+        pause_object = Pause.from_dict(api.payload)
+
+        if pause_object is not None:
+            """ Wir erstellen in Administration Urlaub mithilfe der Daten vom api.payload """
+            c = adm.create_pause(pause_object.get_person_id(), pause_object.get_start_pause(), pause_object.get_ende_pause())
             return c, 200
         else:
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
