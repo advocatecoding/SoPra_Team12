@@ -481,7 +481,22 @@ class PauseListOperations(Resource):
         pause = adm.get_all_pause()
         return pause
 
+    @zeiterfassung.marshal_with(pause, code=201)
+    @zeiterfassung.expect(pause)
+    def post(self):
+        """ Pausen Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Pause, indem wir die 
+        Attribute aus den Werten von api.payload setzen. pause_object = Pause-Objekt """
+        pause_object = Pause.from_dict(api.payload)
 
+        if pause_object is not None:
+            """ Wir erstellen in Administration Urlaub mithilfe der Daten vom api.payload """
+            c = adm.create_pause(pause_object.get_person_id(), pause_object.get_start_pause(), pause_object.get_ende_pause())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
 
 
 

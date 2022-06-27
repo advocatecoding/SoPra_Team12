@@ -64,10 +64,9 @@ class PauseMapper(Mapper):
         pause_daten = cursor.fetchall()
 
         try:
-            (pause_id, projekt_id, person_id, start_pause, ende_pause, letzte_aenderung) = pause_daten[0]
+            (pause_id, person_id, start_pause, ende_pause, letzte_aenderung) = pause_daten[0]
             pause = Pause()
             pause.set_id(pause_id)
-            pause.set_projekt_id(projekt_id)
             pause.set_person_id(person_id)
             pause.set_start_pause(start_pause)
             pause.set_ende_pause(ende_pause)
