@@ -6,6 +6,8 @@ import { TextField } from "@mui/material";
 import axios from 'axios';
 import FormControl from '@mui/material/FormControl';
 import MenuItem from '@mui/material/MenuItem';
+import SaveAsRoundedIcon from '@mui/icons-material/SaveAsRounded';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import "../../index.css"
@@ -138,10 +140,11 @@ export default function AktivitätBuchenModal(props) {
         </button>
       </div>
       <div className="title">
-        <h2>Aktivität buchen</h2>
+        <h2> <CalendarMonthIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />Aktivität zuweisen
+        </h2>
       </div>
       <div className="body">
-        <div style={{ marginTop: "2rem" }}>
+        <div style={{ marginTop: "1rem" }}>
           <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px" ,  minWidth:"270px" }} sx={{ m: 1, minWidth: 200 }} >
             <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Projekt</InputLabel>
             <Select style={{ color: "white" }}
@@ -157,7 +160,7 @@ export default function AktivitätBuchenModal(props) {
           </FormControl>
           <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Projekt aus.</Typography>
 
-          <div style={{paddingTop:"1.5rem"}}>
+          <div style={{paddingTop:"1rem"}}>
             <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px",  minWidth:"270px" }} sx={{ m: 1, minWidth: 200 }} >
               <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Aktivität</InputLabel>
               <Select style={{ color: "white" }}
@@ -174,7 +177,7 @@ export default function AktivitätBuchenModal(props) {
             <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Aktivität aus.</Typography>
           </div>
 
-            <div style={{paddingTop:"1.5rem"}}>
+            <div style={{paddingTop:"1rem"}}>
             <TextField autoFocus
             required
             margin="dense"
@@ -188,9 +191,10 @@ export default function AktivitätBuchenModal(props) {
          
         </div>
 
-        <div style={{ paddingTop:"2.5rem" }}>
+        <div style={{ paddingTop:"1rem" }}>
           <Button variant="outlined" onClick={HandleClose} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", textAlign: "center", display: "inline", marginBottom: "0" }} >
-            Akitvität Buchen
+          <SaveAsRoundedIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />
+            Speichern
           </Button>
         </div>
       </div>
