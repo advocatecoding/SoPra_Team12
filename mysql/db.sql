@@ -293,7 +293,7 @@ VALUES('3', '1', '1', '1',  100, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
 VALUES('4', '1', '1', '1',  100, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
-VALUES('5', '2', '1', '2', 100, '2022-04-13 05:30:00');
+VALUES('5', '2', '1', '5', 100, '2022-04-13 05:30:00');
 
 
 
