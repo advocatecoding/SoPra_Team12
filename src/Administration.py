@@ -9,8 +9,6 @@ from bo.Zeitintervall import Zeitintervall
 from bo.Projektarbeit import Projektarbeit
 from bo.Aktivitaet import Aktivitaet
 from bo.Pause import Pause
-from bo.Startbuchung import Startbuchung
-from bo.Endbuchung import Endbuchung
 from bo.VerkaufteStundenInAktivitaet import VerkaufteStundenInAktivitaet
 
 from db.ProjektMapper import ProjektMapper

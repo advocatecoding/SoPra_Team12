@@ -61,21 +61,6 @@ export default function ProjektListe(props) {
 
 
 
-  function postProjekt(id) {
-    const url = `/zeit/projekte`;
-    axios.post(url, {
-      id,
-      projektname,
-      auftraggeber,
-      projektleiter
-    }).then(data => console.log("Projekt wurde gepostet", data).catch(err => console.log(err)))
-  };
-
-
-
-
-
-
   function ListItem(props) {
     return (
       <a href="#" className="menu-item" >
@@ -116,7 +101,6 @@ export default function ProjektListe(props) {
               <AddCircleOutlineIcon id="add-project-icon" style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer", paddingLeft:"1rem" }} onClick={addProject}/>
     
             </div>
-
           </div>
           {
             mitarbeiterProjekte.map((item) =>
