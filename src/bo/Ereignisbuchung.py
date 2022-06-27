@@ -1,20 +1,19 @@
 from bo import BusinessObject as bo
 
 class Ereignisbuchung(bo.BusinessObject):
-    def __init__(self, start, ende):
+    def __init__(self):
         super().__init__()
-        self.__startereignis = start.get_start()
-        self.__endereignis = ende.get_ende()
-        #self.__ereignis_type = type(self.__ereignis).__name__
-        self.__person = start.get_person()
-        """ Da in der Init-Methode alle Attribute gesetzt werden, benötigen wir keine setter-Methoden mehr"""
+        self._kommen_id = ""
+        self._gehen_id = ""
 
-    def get_startereignis(self):
-        return self.__startereignis
+    def get_kommen_id(self):
+        return self._kommen_id
 
-    def get_endereignis(self):
-        return self.__endereignis
+    def set_kommen_id(self, value):
+        self._kommen_id = value
 
-    def get_person(self):
-        return self.__person
+    def get_gehen_id(self):
+        return self._gehen_id
 
+    def set_gehen_id(self, value):
+        self._gehen_id = value

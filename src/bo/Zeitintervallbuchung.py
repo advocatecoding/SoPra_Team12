@@ -29,13 +29,11 @@ class Zeitinverallbuchung(bo):
     def set_zeitintervall(self, value):
         self._zeitintervall = value
 
-
     def get_projekt(self):
         return self._projekt_id
 
     def get_person_id(self):
         return self._person_id
-
 
     def set_person_id(self, value):
         self._person_id = value

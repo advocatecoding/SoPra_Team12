@@ -3,25 +3,19 @@ from bo import BusinessObject as bo
 
 class Ereignis(bo.BusinessObject):
 
-    def __init__(self, zeitpunkt, person):
+    def __init__(self):
         super().__init__()
-        self.__zeitpunkt = zeitpunkt
-        self.__person = person
+        self._person_id = ""
+        self._type = ""
 
-    def get_zeitpunkt(self):
-        return self.__zeitpunkt
-
-    def set_zeitpunkt(self, value):
-        self.__zeitpunkt = value
-
-    def get_person(self):
-        return self.__person
+    def get_person_id(self):
+        return self._person_id
 
     def set_person(self, value):
-        self.__person = value
+        self._person_id = value
 
-    def get_aktivitaet(self):
-        return self.__aktivitaet
+    def get_type(self):
+        return self._type
 
-    def set_aktivitaet(self, value):
-        self.__aktivitaet = value
+    def set_type(self, value):
+        self._type = value

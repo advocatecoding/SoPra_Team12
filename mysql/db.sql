@@ -69,27 +69,95 @@ CREATE TABLE IF NOT EXISTS `Person` (
     REFERENCES `Person` (`person_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
+
+-- -----------------------------------------------------------------------
+-- Tabelle erstellen 'Kommen'
+-- -----------------------------------------------------------------------
+   CREATE TABLE IF NOT EXISTS `Kommen` (
+  `kommen_id` INT NOT NULL,
+  `person_id` INT NOT NULL ,
+  `start` DATETIME NULL,
+  `ende` DATETIME NULL,
+  `letzte_aenderung` DATETIME NULL,
+  PRIMARY KEY (`kommen_id`),
+    FOREIGN KEY (`person_id`)
+    REFERENCES `Person` (`person_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+
+-- -----------------------------------------------------------------------
+-- Tabelle erstellen 'Gehen'
+-- -----------------------------------------------------------------------
+   CREATE TABLE IF NOT EXISTS `Gehen` (
+  `gehen_id` INT NOT NULL,
+  `person_id` INT NOT NULL ,
+  `start` DATETIME NULL,
+  `ende` DATETIME NULL,
+  `letzte_aenderung` DATETIME NULL,
+  PRIMARY KEY (`gehen_id`),
+    FOREIGN KEY (`person_id`)
+    REFERENCES `Person` (`person_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+
+-- -----------------------------------------------------------------------
+-- Tabelle erstellen 'Ereignisbuchung'
+-- -----------------------------------------------------------------------
+   CREATE TABLE IF NOT EXISTS `Ereignisbuchung` (
+  `ereignisbuchung_id` INT NOT NULL,
+  `gehen_id` INT NOT NULL,
+  `kommen_id` INT NOT NULL,
+  `letzte_aenderung` DATETIME NULL,
+  PRIMARY KEY (`ereignisbuchung_id`),
+    FOREIGN KEY (`kommen_id`)
+    REFERENCES `Kommen` (`kommen_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY (`gehen_id`)
+    REFERENCES `Gehen` (`gehen_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
     
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Pause'
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Pause` (
-  `pause_id` VARCHAR(45) NOT NULL ,
-  `projekt_id` INT NOT NULL,
-  `person_id` INT NOT NULL ,
-  `pause_start` DATETIME NULL,
-  `pause_ende` DATETIME NULL,
+  `pause_id` INT NOT NULL,
+  `person_id` INT NOT NULL,
+  `start` DATETIME NULL,
+  `ende` DATETIME NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`pause_id`),
-	FOREIGN KEY (`projekt_id`)
-	REFERENCES `Projekt` (`projekt_id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
     FOREIGN KEY (`person_id`)
     REFERENCES `Person` (`person_id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
-  
+
+
+-- -----------------------------------------------------------------------
+-- Tabelle erstellen 'Zeitintervall'
+-- -----------------------------------------------------------------------
+   CREATE TABLE IF NOT EXISTS `Projektarbeit` (
+  `projektarbeit_id` INT NOT NULL,
+  `person_id` INT NOT NULL ,
+  `start` DATETIME NULL,
+  `ende` DATETIME NULL,
+  `aktivitaet_id` INT NOT NULL,
+  `letzte_aenderung` DATETIME NULL,
+ PRIMARY KEY (`projektarbeit_id`),
+    FOREIGN KEY (`person_id`)
+    REFERENCES `Person` (`person_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+    FOREIGN KEY (`aktivitaet_id`)
+    REFERENCES `Aktivitaet` (`aktivitaet_id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+
+
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Zeitintervallbuchung'
 -- -----------------------------------------------------------------------
@@ -293,7 +361,7 @@ VALUES('3', '1', '1', '1',  100, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
 VALUES('4', '1', '1', '1',  100, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
-VALUES('5', '2', '1', '5', 100, '2022-04-13 05:30:00');
+VALUES('5', '2', '1', '2', 100, '2022-04-13 05:30:00');
 
 
 

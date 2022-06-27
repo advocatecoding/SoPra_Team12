@@ -3,22 +3,11 @@ import React, { useState, useEffect, useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import LoadingProgress from '../components/Loading/LoadingProgress';
 import IconButton from "@material-ui/core/IconButton";
-import { Button, Typography, TextField } from '@material-ui/core';
-import Box from '@mui/material/Box';
+import {  Typography } from '@material-ui/core';
 import ArticleIcon from '@mui/icons-material/Article';
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import axios from 'axios';
-import Dialog from '@mui/material/Dialog';
-import CloseIcon from '@mui/icons-material/Close';
-import DialogTitle from '@mui/material/DialogTitle';
-import DialogContent from '@mui/material/DialogContent';
-import SaveAsIcon from '@mui/icons-material/SaveAs';
-import DialogActions from '@mui/material/DialogActions';
-import FormControl from '@mui/material/FormControl';
-import InputAdornment from '@mui/material/InputAdornment';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
-import { v4 as uuidv4 } from 'uuid';
+import ReplayIcon from '@mui/icons-material/Replay';
 
 import CreateProjectModal from './modals/CreateProjectModal';
 
@@ -123,8 +112,9 @@ export default function ProjektListe(props) {
               <Typography variant="h5" style={{ color: "white", paddingLeft: "1rem" }}>Meine Projekte</Typography>
             </div>
             <div style={{ display: "inline-block", marginLeft: "auto", paddingRight: "1rem" }}>
-              <AddCircleOutlineIcon id="add-project-icon" style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer" }} onClick={addProject}>
-              </AddCircleOutlineIcon>
+              <ReplayIcon style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer", paddingLeft:"1rem" }} />
+              <AddCircleOutlineIcon id="add-project-icon" style={{ color: "#00bcd4", transform: "scale(1.3)", cursor: "pointer", paddingLeft:"1rem" }} onClick={addProject}/>
+    
             </div>
 
           </div>

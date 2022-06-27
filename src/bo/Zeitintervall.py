@@ -1,47 +1,47 @@
 from bo import BusinessObject as bo
-import datetime
 
 class Zeitintervall(bo.BusinessObject):
-    def __init__(self, ereignisbuchung=None):
+    def __init__(self):
         super().__init__()
-        """ Wir prüfen ob überhaut eine ereignisbuchung gepassed wurde oder ob direkt ein Zeitintervall geucht wird ohen Ereignisse """
-        if ereignisbuchung is not None:
-            self.__person = ereignisbuchung.get_person()
+        self._type = ""
+        self._person_id = ""
+        self._start = ""
+        self._ende = ""
+        self._projektarbeit_id = None
+        self._pause_id = None
 
-            """ Zeitintervall wird ausgerechnet durch Ende und Start """
-            start = ereignisbuchung.get_startereignis()
-            ende = ereignisbuchung.get_endereignis()
-            time_new = ende - start
-            time_new = int(time_new.total_seconds() / 3600)
-            self.__zeitintervall = time_new
-    
-    
-    """ Die set-Methoden werden genutzt wenn keine Ereignisbuchung weitergegeben wird, sondern stattdessen direkt ein Zeitintervall gebucht wird, sowohl
-        für eine Projektarbeit/Pause, als auch nur für eine Projektlaufzeit """
-    def set_projektlaufzeit(self, value):
-        self.__zeitintervall = value
+    def set_type(self, value):
+        self._type = value
 
-    def get_zeitintervall(self):
-        return self.__zeitintervall
-    
-    def set_zeitintervall(self, value):
-        self.__zeitintervall = value
+    def get_type(self):
+        return self._type
 
-    def get_person(self):
-        return self.__person
+    def set_projektarbeit_id(self, value):
+        self._projektarbeit_id = value
 
-    def set_person(self, value):
-        self.__person = value
+    def get_projektarbeit_id(self):
+        return self._projektarbeit_id
 
+    def get_pause_id(self, value):
+        self._pause_id = value
 
-    def set_aktivitaet(self, value):
-        self.__aktivitaet = value
-"""
-    def set_zeitintervall(self, ereignisbuchung):
-        self.__start = ereignisbuchung.get_startereignis()
-        self.__ende = ereignisbuchung.get_endereignis()
-        time_new = self.__ende - self.__start
-        time_new = int(time_new.total_seconds() / 3600)
-        self.__zeitintervall = time_new
-"""
-   
+    def get_pause_id(self):
+        return self._pause_id
+
+    def get_person_id(self):
+        return self._person_id
+
+    def set_person_id(self, value):
+        self._person_id = value
+
+    def get_start(self):
+        return self._start
+
+    def set_start(self, value):
+        self._start = value
+
+    def get_ende(self):
+        return self._ende
+
+    def set_ende(self, value):
+        self._ende = value

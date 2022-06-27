@@ -188,18 +188,22 @@ function ProjectTime(props) {
    /* Algorithmus, der die gefetchten Daten der Sollstunden in das georderte Array integriert  **/
   function addSollzeitToOrderedData(data) {
     var j = 0
-    console.log(orderedData)
+
+    console.log("-----", data)
     const loopLength = (data.length + orderedData.length)
     for (let i = 0; i < loopLength; i++) {
       console.log(i)
       // Es wird nach jedem Element, welches eine Zahl ist die dazugehörige Sollzeit hinzugefügt 
       if ((orderedData[i]).match(numberReg)) {
-        console.log("number")
-        console.log("Gebuchte Stunde: ",  data[j].gebuchte_stunden)
+        console.log("number:", j)
+        console.log("Gebuchte Stunde: ",  data[1].gebuchte_stunden)
         orderedData.splice(i+1, 0, data[j].gebuchte_stunden);
         console.log(orderedData)
         i++;
-        j++;
+        console.log()
+        if (j < data.length) {
+          j++;
+        } 
       }
       
     }
@@ -212,9 +216,11 @@ function ProjectTime(props) {
   return (
     <div>
       {
-        sollZeitIsAdded ?
-        orderedDataX.map((item) =>
-          <p style={{ fontSize: "1rem" }}>{item}</p>
+        orderedData !== [] ?
+        orderedData.map(item => {
+          <p style={{ fontSize: "1rem" }}>{item.name}</p>
+        }
+          
         )
           : null
       }
