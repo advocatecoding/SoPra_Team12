@@ -72,42 +72,45 @@ return (
                 </DialogTitle>
                 <DialogContent className="dialog-bg">
            
-                            <DialogContentText >
+                            <DialogContentText       
+                                component="form"
+                                sx={{
+                                    '& .MuiTextField-root': { m: 1, width: '25ch' },
+                                }}
+                                noValidate
+                                autoComplete="off">
                                 <div>
                                 <TextField
                                 required
                                 id="filled-required"
-                                label="Required"
+                                label="Pflichtfeld"
                                 defaultValue="Vorname"
                                 variant="filled"
                                 />
                                 <TextField
                                 required
                                 id="filled-required"
-                                label="Required"
+                                label="Pflichtfeld"
                                 defaultValue="Nachname"
                                 variant="filled"
                                 />
                                 <TextField
                                 required
                                 id="filled-required"
-                                label="Required"
-                                defaultValue="Mail-Adresse"
+                                label="Pflichtfeld"
+                                defaultValue="E-Mail-Adresse"
                                 variant="filled"
                                 />
                                 <TextField
                                 required
                                 id="filled-required"
-                                label="Required"
+                                label="Pflichtfeld"
                                 defaultValue="Benutzername"
                                 variant="filled"
                                 />
                                 </div>
-                                <br />
-                                <br />
-                                <br />
-                                <br />
-                                <div> <Typography>Sind Ihre Eingaben korrekt? Wenn ja, dann drücken Sie auf "Speichern"</Typography></div>
+                                <Box mt={8} />
+                                <div> <Typography>Sind Ihre Eingaben korrekt? Wenn ja, dann drücken Sie auf <span style={{color: "#00bcd4"}}>Speichern</span></Typography></div>
                                 <Box mt={2} />
                                 <Fab variant="extended" onClick={() => { handleClickOpen() }} style={{ color: "white", backgroundColor: "#30343C" }} >
                                     <SaveAsRoundedIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />
