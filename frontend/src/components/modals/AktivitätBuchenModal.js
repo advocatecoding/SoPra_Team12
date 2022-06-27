@@ -18,11 +18,14 @@ export default function AktivitätBuchenModal(props) {
   const [gebuchte_stunden, setStunden] = useState(null);
   const [mitarbeiter, setPersonID] = useState(null);
   const [aktivitaet, setAktivitaetID] = useState(null);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [projekt_id, setSelectedProject] = useState(null);
   const [mitarbeiterProjekte, setMitarbeiterProjekte] = useState([]);
   const [aktivitätListe, setAktivitätListe] = useState([]);
   const [loadingInProgress, setLoading] = useState(true);
 
+  // Post für Empty Zeitintervall
+  const [person_id, setPersonID2] = useState(null);
+  const [aktivitaet_id, setAktivitaetID2] = useState(null);
 
   useEffect(() => {
     iDerhalten(props.id)
@@ -48,7 +51,7 @@ export default function AktivitätBuchenModal(props) {
 
 
   async function FetchAktivität(id) {
-    console.log("Kommt was an.", selectedProject)
+    console.log("Kommt was an.", projekt_id)
     const url = `/zeit/aktivitaet/projekt/${id}`;
 
     console.log(url)
@@ -77,28 +80,49 @@ export default function AktivitätBuchenModal(props) {
   };
 
 
+  function postEmptyZeitintervallBuchung(id, gearbeitete_zeit) {
+    const url = `/zeit/zeitintervallbuchungen`;
+    console.log("Aykut 2")
+    axios.post(url, {
+      id,
+      projekt_id,
+      person_id,
+      aktivitaet_id,
+      gearbeitete_zeit
+    }).then(data => console.log(" Empty Zeitintervall wurde gepostet", data).catch(err => console.log(err)))
+  };
+
+  //projekt_id"
+  //person_id"
+  //aktivitaet_id"
+  //gearbeitete_zeit
+
+
   const changeStunden = (event) => {
     setStunden(event.target.value)
   }
 
   const iDerhalten = (id) => {
     setPersonID(id)
+    setPersonID2(id)
   }
 
   const HandleClose = (e) => {
     e.preventDefault();
     props.setOpenModal(false);
     postAktivität();
+    postEmptyZeitintervallBuchung(999,0)
   }
 
   const handleChange1 = (event) => {
     setAktivitaetID(event.target.value)
+    setAktivitaetID2(event.target.value)
   }
 
 
   const handleChangee = (event) => {
     setSelectedProject(event.target.value)
-    console.log({ selectedProject }, "huhu")
+    console.log({ projekt_id }, "huhu")
     FetchAktivität(event.target.value)
   }
 
