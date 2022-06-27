@@ -11,7 +11,7 @@ class Ereignis(bo.BusinessObject):
     def get_person_id(self):
         return self._person_id
 
-    def set_person(self, value):
+    def set_person_id(self, value):
         self._person_id = value
 
     def get_type(self):

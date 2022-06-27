@@ -12,3 +12,13 @@ class Gehen(Ereignis):
 
     def get_ende(self):
         return self._ende
+
+    def from_dict(dictionary=dict()):
+        """Umwandeln eines Python dict() in ein Gehen()."""
+        obj = Gehen()
+        obj.set_id(dictionary["id"])
+        obj.set_person_id(dictionary["person_id"])
+        obj.set_ende(dictionary["ende"])
+        obj.set_letzte_aenderung()
+
+        return obj

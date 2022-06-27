@@ -21,6 +21,8 @@ from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.MitarbeiterInProjektMapper import MitarbeiterInProjektMapper
 from db.VerkaufteStundenInAktivitaetMapper import VerkaufteStundenInAktivitaetMapper
 from db.ZeitintervallbuchungMapper import ZeitintervallbuchungMapper
+from db.KommenMapper import KommenMapper
+from db.GehenMapper import GehenMapper
 import datetime
 
 
@@ -329,4 +331,43 @@ class Administration(object):
     def create_ereignisbuchung(self, startereignis, endereignis):
         ereignisbuchung = Ereignisbuchung(startereignis, endereignis)
         ereignisbuchung.set_id(1211)
+
+
+    """Kommen"""
+    def create_kommen(self, person_id, start_kommen):
+        """Kommen anlegen."""
+
+        kommen = Kommen()
+        kommen.set_id(1211)
+        kommen.set_person_id(person_id)
+        kommen.set_start_kommen(start_kommen)
+        kommen.set_letzte_aenderung()
+        """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
+
+        with KommenMapper() as mapper:
+            return mapper.insert(kommen)
+
+    def get_all_kommen(self):
+        """Wir geben Kommen von allen aus"""
+        with KommenMapper() as mapper:
+            return mapper.find_all()
+
+    """Gehen"""
+    def create_gehen(self, person_id, ende):
+        """Gehen anlegen."""
+
+        gehen = Gehen()
+        gehen.set_id(1211)
+        gehen.set_person_id(person_id)
+        gehen.set_ende(ende)
+        gehen.set_letzte_aenderung()
+        """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
+
+        with GehenMapper() as mapper:
+            return mapper.insert(gehen)
+
+    def get_all_gehen(self):
+        """Wir geben Gehen von allen aus"""
+        with GehenMapper() as mapper:
+            return mapper.find_all()
 
