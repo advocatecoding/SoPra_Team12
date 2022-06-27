@@ -15,6 +15,8 @@ from bo.Urlaub import Urlaub
 from bo.VerkaufteStundenInAktivitaet import VerkaufteStundenInAktivitaet
 from bo.Zeitintervallbuchung import Zeitinverallbuchung
 from bo.SollZeit import Sollzeit
+from bo.Kommen import Kommen
+from bo.Gehen import Gehen
 
 """ Wir erstellen ein "Flask-Objekt" """
 app = Flask(__name__)
@@ -108,7 +110,14 @@ zeitintervallbuchung = api.inherit('Zeitintervallbuchung', bo, {
     "gearbeitete_zeit": fields.String(attribute="_zeitintervall", description="Gearbeitete Zeit")
 })
 
-
+kommen = api.inherit('Kommen', bo, {
+    "person_id": fields.String(attribute="_person_id", description="Mitarbeiter"),
+    "start_kommen": fields.String(attribute="_start_kommen", description="Unternehmenskommen"),
+})
+gehen = api.inherit('Gehen', bo, {
+    "person_id": fields.String(attribute="_person_id", description="Mitarbeiter"),
+    "ende": fields.String(attribute="_ende", description="Unternehmensgehen"),
+})
 
 
 
@@ -635,6 +644,57 @@ class ZeitintervallbuchungenByProjektId(Resource):
         return zeitintervallbuchung
 
 
+@zeiterfassung.route("/kommen")
+class KommenListOperations(Resource):
+    @zeiterfassung.marshal_with(kommen)
+    def get(self):
+        """ Auslesen der Kommen-Objekte """
+        adm = Administration()
+        kommen = adm.get_all_kommen()
+        return kommen
+
+    @zeiterfassung.marshal_with(kommen, code=201)
+    @zeiterfassung.expect(kommen)
+    def post(self):
+        """ Kommen Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit Kommen, indem wir die 
+        Attribute aus den Werten von api.payload setzen. kommen_object = Kommen-Objekt """
+        kommen_object = Kommen.from_dict(api.payload)
+
+        if kommen_object is not None:
+            """ Wir erstellen in Administration Kommen mithilfe der Daten vom api.payload """
+            c = adm.create_kommen(kommen_object.get_person_id(), kommen_object.get_start_kommen())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
+@zeiterfassung.route("/gehen")
+class GehenListOperations(Resource):
+    @zeiterfassung.marshal_with(gehen)
+    def get(self):
+        """ Auslesen der Gehen-Objekte """
+        adm = Administration()
+        gehen = adm.get_all_gehen()
+        return gehen
+
+    @zeiterfassung.marshal_with(gehen, code=201)
+    @zeiterfassung.expect(gehen)
+    def post(self):
+        """ Gehen Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit Gehen, indem wir die 
+        Attribute aus den Werten von api.payload setzen. gehen_object = Gehen-Objekt """
+        gehen_object = Gehen.from_dict(api.payload)
+
+        if gehen_object is not None:
+            """ Wir erstellen in Administration Gehen mithilfe der Daten vom api.payload """
+            c = adm.create_gehen(gehen_object.get_person_id(), gehen_object.get_ende())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
 
 """ Server läuft auf localhost:5000 bzw. 127.0.0.1:5000 """
 if __name__ == '__main__':

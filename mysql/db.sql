@@ -76,8 +76,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
    CREATE TABLE IF NOT EXISTS `Kommen` (
   `kommen_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
-  `start` DATETIME NULL,
-  `ende` DATETIME NULL,
+  `start_kommen` DATETIME NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`kommen_id`),
     FOREIGN KEY (`person_id`)
@@ -92,7 +91,6 @@ CREATE TABLE IF NOT EXISTS `Person` (
    CREATE TABLE IF NOT EXISTS `Gehen` (
   `gehen_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
-  `start` DATETIME NULL,
   `ende` DATETIME NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`gehen_id`),
@@ -393,8 +391,33 @@ INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebucht
 VALUES('3', '2','2500', '2022-04-19 02:33:00');
 
 
+-- --------------------------------------------------------------------------------------------------------------------------
+-- Kommen Entitäten erstellen
+-- --------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `Kommen` (kommen_id, person_id, start_kommen, letzte_aenderung)  
+VALUES('1', '1','2022-04-19 08:00:00','2022-04-19 08:00:00');
+INSERT INTO `Kommen` (kommen_id, person_id, start_kommen, letzte_aenderung)  
+VALUES('2', '1','2022-04-20 09:00:00','2022-04-20 09:00:00');
+INSERT INTO `Kommen` (kommen_id, person_id, start_kommen, letzte_aenderung)  
+VALUES('3', '1','2022-04-21 10:00:00','2022-04-21 10:00:00');
+INSERT INTO `Kommen` (kommen_id, person_id, start_kommen, letzte_aenderung)  
+VALUES('4', '2','2022-04-19 08:30:00','2022-04-19 08:30:00');
+INSERT INTO `Kommen` (kommen_id, person_id, start_kommen, letzte_aenderung)  
+VALUES('5', '2','2022-04-20 09:00:00','2022-04-20 09:00:00');
 
-
+-- --------------------------------------------------------------------------------------------------------------------------
+-- Gehen Entitäten erstellen
+-- --------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung)  
+VALUES('1', '1','2022-04-19 16:00:00','2022-04-19 16:00:00');
+INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung) 
+VALUES('2', '1','2022-04-20 17:00:00','2022-04-20 17:00:00');
+INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung)
+VALUES('3', '1','2022-04-21 18:00:00','2022-04-21 18:00:00');
+INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung) 
+VALUES('4', '2','2022-04-19 16:30:00','2022-04-19 16:30:00');
+INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung)  
+VALUES('5', '2','2022-04-20 17:00:00','2022-04-20 17:00:00');
 
 
 -- Verschlüsseln von strings test 
