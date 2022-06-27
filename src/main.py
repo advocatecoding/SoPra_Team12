@@ -77,8 +77,8 @@ urlaub = api.inherit('Urlaub', bo, {
 })
 pause = api.inherit('Pause', bo, {
     "person_id": fields.String(attribute="_person_id", description="Mitarbeiter"),
-    "start_pause": fields.String(attribute="start_pause", description="Pausenbeginn"),
-    "ende_pause": fields.String(attribute="ende_pause", description="Pausenende")
+    "start_pause": fields.String(attribute="_start_pause", description="Pausenbeginn"),
+    "ende_pause": fields.String(attribute="_ende_pause", description="Pausenende")
 })
 
 verkaufte_stunden_in_aktivitaet = api.inherit('VerkaufteStundenInAktivitaet', bo, {
