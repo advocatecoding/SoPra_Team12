@@ -102,7 +102,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
         result = []
 
         cursor = self._cnx.cursor()
-        command = "SELECT vorname, projektname, bezeichnung, SUM(gearbeitete_zeit) FROM Zeitintervallbuchung INNER JOIN Person ON Zeitintervallbuchung.person_id = Person.person_id INNER JOIN Projekt ON Zeitintervallbuchung.projekt_id = Projekt.projekt_id INNER JOIN Aktivitaet ON Zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id WHERE Zeitintervallbuchung.person_id={0} GROUP BY bezeichnung ORDER BY projektname ASC;".format(person_id)
+        command = "SELECT vorname, projektname, bezeichnung, SUM(gearbeitete_zeit) FROM Zeitintervallbuchung INNER JOIN Person ON Zeitintervallbuchung.person_id = Person.person_id INNER JOIN Projekt ON Zeitintervallbuchung.projekt_id = Projekt.projekt_id INNER JOIN Aktivitaet ON Zeitintervallbuchung.aktivitaet_id = Aktivitaet.aktivitaet_id WHERE Zeitintervallbuchung.person_id={0} GROUP BY bezeichnung ORDER BY projektname ASC".format(person_id)
         cursor.execute(command)
         projekt_daten = cursor.fetchall()
 

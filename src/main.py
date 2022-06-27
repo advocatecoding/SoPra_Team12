@@ -55,14 +55,14 @@ projekt = api.inherit('Projekt', bo, {
 
 aktivitaet = api.inherit('Aktivitaet', bo, {
     "aktivitaetname": fields.String(attribute="_name", description="Aktivitätenname"),
-    "projektname": fields.String(attribute="_projektname", description="Projektname"),
+    "projekt_id": fields.String(attribute="_projektname", description="Projektname"),
     "dauer": fields.String(attribute="_dauer", description="Dauer"),
     "kapazität": fields.String(attribute="_kapazität", description="Kapazität")
 })
 
 mitarbeiter_in_projekt = api.inherit('Mitarbeiterinprojekt', bo, {
     "mitarbeiter": fields.String(attribute="_person", description="Mitarbeiter"),
-    "projekt": fields.String(attribute="_projekt", description="Projekt"),
+    "projekt_id": fields.String(attribute="_projekt", description="Projekt"),
     "verkaufte_stunden": fields.String(attribute="_verkaufte_stunden", description="verkaufte Stunden")
 })
 

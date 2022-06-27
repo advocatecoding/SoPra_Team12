@@ -316,11 +316,16 @@ VALUES('9', '1', '2', '3',  300, '2022-04-13 05:30:00');
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden,letzte_aenderung)  
 VALUES('1', '1','15', '2022-04-19 02:33:00');
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
+VALUES('2', '1','2500', '2022-04-19 02:33:00');
+INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
 VALUES('3', '1','10', '2022-04-19 02:33:00');
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
-VALUES('4', '1','2500', '2022-04-19 02:33:00');
+VALUES('4', '1','250', '2022-04-19 02:33:00');
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
-VALUES('2', '1','2500', '2022-04-19 02:33:00');
+VALUES('3', '2','2500', '2022-04-19 02:33:00');
+
+
+
 
 
 

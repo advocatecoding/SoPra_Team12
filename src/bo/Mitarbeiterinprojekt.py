@@ -37,7 +37,7 @@ class MitarbeiterInProjekt(bo.BusinessObject):
     def from_dict(dictionary=dict()):
         obj = MitarbeiterInProjekt()
         obj.set_person(dictionary["mitarbeiter"])
-        obj.set_projekt(dictionary["projekt"])
+        obj.set_projekt(dictionary["projekt_id"])
         obj.set_verkaufte_stunden(dictionary["verkaufte_stunden"])
         obj.set_letzte_aenderung()
 
