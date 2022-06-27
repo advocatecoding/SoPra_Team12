@@ -37,7 +37,7 @@ class ProjektarbeitMapper(Mapper):
         """
 
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT MAX(zeit_id) AS maxid FROM Zeitintervall")
+        cursor.execute("SELECT MAX(zeit_id) AS maxid FROM Zeitintervallbuchung")
         tuples = cursor.fetchall()
 
         for (maxid) in tuples:
@@ -46,7 +46,7 @@ class ProjektarbeitMapper(Mapper):
 
         """ Hier wird die Projektarbeit Instanz in die Datenbank mit dem Insert Befehl gespeichert """
         command = "INSERT INTO Zeitintervallbuchung (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung) VALUES (%s,%s,%s,%s,%s,%s)"
-        data = (projektarbeit.get_id(), projektarbeit.get_projekt_id(), projektarbeit.get_person_id(), projektarbeit.get_aktivitaet_id(),
+        data = (projektarbeit.get_id(),projektarbeit.get_projekt_id(), projektarbeit.get_person_id(), projektarbeit.get_aktivitaet_id(),
                 projektarbeit.get_gearbeitete_zeit(), projektarbeit.get_letzte_aenderung())
         cursor.execute(command, data)
 

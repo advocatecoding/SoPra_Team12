@@ -96,7 +96,7 @@ sollzeit = api.inherit('SollZeit', bo, {
 
 })
 
-projektarbeit = api.inherit('SollZeit', bo, {
+projektarbeit = api.inherit('Projektarbeitszeit', bo, {
     "person_id": fields.String(attribute="_person_id", description="Mitarbeiter"),
     "aktivitaet_id": fields.String(attribute="_aktivitaet_id", description="Aktivität"),
     "projekt_id": fields.String(attribute="_projekt_id", description="Projekt"),
@@ -739,18 +739,19 @@ class ProjektarbeitListOperations(Resource):
         projektarbeit = adm.get_all_projektarbeit()
         return projektarbeit
 
-    @zeiterfassung.marshal_with(pause, code=201)
-    @zeiterfassung.expect(pause)
+    @zeiterfassung.marshal_with(projektarbeit, code=201)
+    @zeiterfassung.expect(projektarbeit)
     def post(self):
-        """ Pausen Instanz erstellen """
+        """ Projektarbeits Instanz erstellen """
         adm = Administration()
-        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Pause, indem wir die 
-        Attribute aus den Werten von api.payload setzen. pause_object = Pause-Objekt """
-        pause_object = Pause.from_dict(api.payload)
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit Projektarbeit, indem wir die 
+        Attribute aus den Werten von api.payload setzen. projektarbeit_object = Projektarbeit-Objekt """
+        projektarbeit_object = Projektarbeit.from_dict(api.payload)
 
-        if pause_object is not None:
-            """ Wir erstellen in Administration Urlaub mithilfe der Daten vom api.payload """
-            c = adm.create_pause(pause_object.get_person_id(), pause_object.get_start_pause(), pause_object.get_ende_pause())
+        if projektarbeit_object is not None:
+            """ Wir erstellen in Administration Projektarbeit mithilfe der Daten vom api.payload """
+            c = adm.create_projektarbeit(projektarbeit_object.get_person_id(), projektarbeit_object.get_aktivitaet_id(),
+                                         projektarbeit_object.get_projekt_id(), projektarbeit_object.get_gearbeitete_zeit())
             return c, 200
         else:
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.

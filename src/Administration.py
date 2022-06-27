@@ -182,7 +182,7 @@ class Administration(object):
 
     """Projektarbeit"""
     def create_projektarbeit(self, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit):
-        """Pause anlegen"""
+        """Projektarbeit anlegen"""
 
         projektarbeit = Projektarbeit()
         projektarbeit.set_id(1211)

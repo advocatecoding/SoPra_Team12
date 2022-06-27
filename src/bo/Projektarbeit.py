@@ -27,7 +27,7 @@ class Projektarbeit(Zeitintervall):
         return self._gearbeitete_zeit
 
     def from_dict(dictionary=dict()):
-        """Umwandeln eines Python dict() in ein Urlaub()."""
+        """Umwandeln eines Python dict() in Projektarbeit()."""
         obj = Projektarbeit()
         obj.set_id(dictionary["id"])
         obj.set_person_id(dictionary["person_id"])
