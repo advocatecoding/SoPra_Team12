@@ -83,30 +83,30 @@ return (
                                 <TextField
                                 required
                                 id="filled-required"
-                                label="Pflichtfeld"
-                                defaultValue="Vorname"
-                                variant="filled"
+                                label="Vorname"
+                                type="text"
+                                variant="standard" placeholder="Vorname" 
                                 />
                                 <TextField
                                 required
                                 id="filled-required"
-                                label="Pflichtfeld"
-                                defaultValue="Nachname"
-                                variant="filled"
+                                label="Nachname"
+                                type="text"
+                                variant="standard" placeholder="Nachname"
                                 />
                                 <TextField
                                 required
                                 id="filled-required"
-                                label="Pflichtfeld"
-                                defaultValue="E-Mail-Adresse"
-                                variant="filled"
+                                label="E-Mail-Adresse"
+                                type="text"
+                                variant="standard" placeholder="E-Mail-Adresse"
                                 />
                                 <TextField
                                 required
                                 id="filled-required"
-                                label="Pflichtfeld"
-                                defaultValue="Benutzername"
-                                variant="filled"
+                                label="Benutzername"
+                                type="text"
+                                variant="standard" placeholder="Benutzername"
                                 />
                                 </div>
                                 <Box mt={8} />

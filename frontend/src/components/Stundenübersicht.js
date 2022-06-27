@@ -88,7 +88,7 @@ export default function Stundenübersicht(props) {
                                             <tr>
                                                 <th style={{ color: "#00bcd4" }}><b>Projekt</b></th>
                                                 <th style={{ color: "#00bcd4" }}><b>Aktivität</b></th>
-                                                <th style={{ color: "#00bcd4" }}><b>Gearbeitete Zeit</b></th>
+                                                <th style={{ color: "#00bcd4" }}><b>Gearbeitete Zeit (h)</b></th>
                                             </tr>
                                         </thead>
                                         <tbody>
