@@ -1,15 +1,14 @@
 from bo.Gehen import Gehen
 from bo.Kommen import Kommen
-from bo.Arbeitszeitkonto import Arbeitszeitkonto
 from bo.Ereignisbuchung import Ereignisbuchung
 from bo.Urlaub import Urlaub
 from bo.Person import Person
 from bo.Zeitintervallbuchung import Zeitinverallbuchung
-from bo.Zeitintervall import Zeitintervall
 from bo.Projektarbeit import Projektarbeit
 from bo.Aktivitaet import Aktivitaet
 from bo.Pause import Pause
 from bo.VerkaufteStundenInAktivitaet import VerkaufteStundenInAktivitaet
+from bo.User import User
 
 from db.ProjektMapper import ProjektMapper
 from db.PersonMapper import PersonMapper
@@ -25,6 +24,7 @@ from db.ZeitintervallbuchungMapper import ZeitintervallbuchungMapper
 from db.KommenMapper import KommenMapper
 from db.GehenMapper import GehenMapper
 from db.EreignisbuchungMapper import EreignisbuchungMapper
+from db.UserMapper import UserMapper
 import datetime
 
 
@@ -32,6 +32,54 @@ class Administration(object):
 
     def __init__(self):
         pass
+
+    def create_user(self, name, email, google_user_id):
+        """Einen Benutzer anlegen"""
+        user = User()
+        user.set_name(name)
+        user.set_email(email)
+        user.set_user_id(google_user_id)
+        user.set_id(1)
+
+        with UserMapper() as mapper:
+            return mapper.insert(user)
+
+    def get_user_by_name(self, name):
+        """Alle Benutzer mit Namen name auslesen."""
+        with UserMapper() as mapper:
+            return mapper.find_by_name(name)
+
+    def get_user_by_id(self, number):
+        """Den Benutzer mit der gegebenen ID auslesen."""
+        with UserMapper() as mapper:
+            return mapper.find_by_key(number)
+
+    def get_user_by_email(self, email):
+        """Alle Benutzer mit gegebener E-Mail-Adresse auslesen."""
+        with UserMapper() as mapper:
+            return mapper.find_by_email(email)
+
+    def get_user_by_google_user_id(self, id):
+        """Den Benutzer mit der gegebenen Google ID auslesen."""
+        with UserMapper() as mapper:
+            return mapper.find_by_google_user_id(id)
+
+    def get_all_users(self):
+        """Alle Benutzer auslesen."""
+        with UserMapper() as mapper:
+            return mapper.find_all()
+
+    def save_user(self, user):
+        """Den gegebenen Benutzer speichern."""
+        with UserMapper() as mapper:
+            mapper.update(user)
+
+    def delete_user(self, user):
+        """Den gegebenen Benutzer aus unserem System löschen."""
+        with UserMapper() as mapper:
+            mapper.delete(user)
+
+
 
     """Person"""
     def create_person(self, vorname, nachname, mail_adresse, benutzername, google_user_id):
@@ -71,10 +119,6 @@ class Administration(object):
         with PersonMapper() as mapper:
             #person = self.get_all_personen()
             return mapper.delete(person_id)
-        """ if not (person is None):
-                for person_id in person:
-                    self.delete(person_id)
-        """
 
     def update_person(self, person):
         person.set_letzte_aenderung()
@@ -82,9 +126,7 @@ class Administration(object):
         with PersonMapper() as mapper:
             return mapper.update(person)
 
-    def get_person_by_google_user_id(self, id):
-        with PersonMapper() as mapper:
-            return mapper.find_by_google_user_id(id)
+
 
 
     """Projekt"""

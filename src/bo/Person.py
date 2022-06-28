@@ -10,7 +10,7 @@ class Person(bo.BusinessObject):
         self._benutzername = ""
         self._urlaubstage = 0
         self._ueberstunden = 0
-        self._user_id = ""
+
 
     def get_vorname(self):
         """Auslesen des Vornamens."""
@@ -60,11 +60,6 @@ class Person(bo.BusinessObject):
         """Setzen der Überstunden."""
         self._ueberstunden = value
 
-    def get_user_id(self):
-        return self._user_id
-
-    def set_user_id(self, value):
-        self._user_id = value
 
 
     def from_dict(dictionary=dict()):
@@ -78,7 +73,6 @@ class Person(bo.BusinessObject):
         obj.set_urlaubstage(dictionary["urlaubstage"])
         obj.set_ueberstunden(dictionary["überstunden"])
         obj.set_letzte_aenderung()
-        obj.set_user_id(dictionary["user_id"])
 
         return obj
 

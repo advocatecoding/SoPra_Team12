@@ -4,6 +4,7 @@ import google.oauth2.id_token
 
 from Administration import Administration
 
+
 def secured(function):
     """Decorator zur Google Firebase-basierten Authentifizierung von Benutzern
 
@@ -25,7 +26,6 @@ def secured(function):
         error_message = None
         claims = None
         objects = None
-
         if id_token:
             try:
                 # Verify the token against the Firebase Auth API. This example
@@ -40,27 +40,27 @@ def secured(function):
                     adm = Administration()
 
                     google_user_id = claims.get("user_id")
-                    mail_adresse = claims.get("mail_adresse")
-                    benutzername = claims.get("benutzername")
+                    email = claims.get("email")
+                    name = claims.get("name")
 
-                    user = adm.get_person_by_google_user_id(google_user_id)
+                    user = adm.get_user_by_google_user_id(google_user_id)
                     if user is not None:
                         """Fall: Der Benutzer ist unserem System bereits bekannt.
                         Wir gehen davon aus, dass die google_user_id sich nicht ändert.
                         Wohl aber können sich der zugehörige Klarname (name) und die
                         E-Mail-Adresse ändern. Daher werden diese beiden Daten sicherheitshalber
                         in unserem System geupdated."""
-                        user.set_benutzername(benutzername)
-                        user.set_mail_adresse(mail_adresse)
+                        user.set_name(name)
+                        user.set_email(email)
                         adm.save_user(user)
                     else:
                         """Fall: Der Benutzer war bislang noch nicht eingelogged. 
                         Wir legen daher ein neues User-Objekt an, um dieses ggf. später
                         nutzen zu können.
                         """
-                        user = adm.create_user(benutzername, mail_adresse, google_user_id)
+                        user = adm.create_user(name, email, google_user_id)
 
-                    print(request.method, request.path, "angefragt durch:", benutzername, mail_adresse)
+                    print(request.method, request.path, "angefragt durch:", name, email)
 
                     objects = function(*args, **kwargs)
                     return objects

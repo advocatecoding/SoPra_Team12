@@ -179,6 +179,7 @@ class PersonenListOperations(Resource):
 @zeiterfassung.param("person_id", "Die Id der gewünschten Person")
 class PersonByIdOperations(Resource):
     @zeiterfassung.marshal_with(person)
+    @secured
     def get(self, person_id):
         """ Auslesen der Person Instanz.
         Das zu auslesende Objekt wird anhand der id bestimmt

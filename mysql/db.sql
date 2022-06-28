@@ -18,12 +18,22 @@ CREATE TABLE IF NOT EXISTS `Person` (
   `urlaubstage` INT NULL,
   `ueberstunden` INT NULL,
   `letzte_aenderung` DATETIME NULL,
-  `google_user_id` VARCHAR(128) NOT NULL DEFAULT '',
   -- Damit nicht mehrmals der gleiche Benutzername verwendet werden kann
   UNIQUE (benutzername),
   PRIMARY KEY (`person_id`));
   
-
+  
+  -- -----------------------------------------------------------------------
+-- Tabelle erstellen 'User' bzw. Googleuser
+-- -----------------------------------------------------------------------
+CREATE TABLE IF NOT EXISTS `Users` (
+  `id` int(11) NOT NULL DEFAULT '0',
+  `name` varchar(128) NOT NULL DEFAULT '',
+  `email` varchar(256) NOT NULL DEFAULT '',
+  `google_user_id` varchar(128) NOT NULL DEFAULT '',
+  PRIMARY KEY (`id`)
+);
+  
   
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Projekt'
