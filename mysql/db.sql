@@ -245,26 +245,7 @@ INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, 
 VALUES('4', 'Annie', 'Leonhart', 'annie.leonhart@gmx.de', 'hiiamannie', 30, 0, '2022-04-13 02:30:00');
 INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
 VALUES('5', 'Armin', 'Arlert', 'armin.arlert@gmail.de', 'armin_the_strategist', 30, 10, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('6', 'Jean', 'Kirstein', 'jean@hotmail.de', 'jean_the_leader', 30, 55, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('7', 'Erwin', 'Smith', 'erwin.smith@hotmail.de', 'erwin_the_real_leader', 30, 70, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('8', 'Connie', 'Springer', 'connie@hotmail.de', 'loyal_connie', 0, 25, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('9', 'Sasha', 'Braus', 'braus.sasha@gmail.com', 'sasha_loves_meat', 0, 3, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('10', 'Frederick', 'Brooks', 'frederick.brooks@yahoo.com', 'Brooks', 30, 0, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('11', 'Martin', 'Schindler', 'martin.schindler@gmail.com', 'TheWall', 30, 0, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('12', 'Peter', 'Wright', 'peter.wright@gmail.com', 'Snakebite', 30, 0, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('13', 'Rob', 'Cross', 'rob.cross@gmail.com', 'Voltage', 30, 0, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('14', 'Jonny', 'Clayton', 'jonny.clayton@gmail.com', 'TheFerret', 30, 0, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('15', 'Mensur', 'Suljovic', 'mensur.suljovic@gmail.com', 'TheGentle', 30, 0, '2022-04-13 02:30:00');
+
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Projekt Entitäten erstellen
@@ -351,6 +332,26 @@ INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden,
 VALUES('1', '2','180', '2022-04-19 02:33:00');
 INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
 VALUES('2', '1','180', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('2', '4','10', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('2', '5','80', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('3', '5','18', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('3', '6','70', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('3', '1','180', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('4', '1','20', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('4', '3','32', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('5', '1','13', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('5', '2','180', '2022-04-19 02:33:00');
+INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
+VALUES('5', '5','100', '2022-04-19 02:33:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Zeitintervallbuchung Entitäten erstellen
