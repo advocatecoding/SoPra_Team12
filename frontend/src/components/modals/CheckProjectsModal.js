@@ -119,9 +119,7 @@ function ProjectTime(props) {
   const [aktivitäten, setAktivitäten] = useState(null)
   const [rows, setRows] = useState(0)
 
-  const [mainData, setMainData] = useState([
-    { akt: '', name: '', istzeit: '', sollzeit: '' },
-]);
+  const [mainData, setMainData] = useState({});
 
   var orderedData = []
 
@@ -159,20 +157,27 @@ function ProjectTime(props) {
     ;
   }
 
+  let mainDataNew = []
+
   const aktivitäten1 = []
   /* Algorithmus, der die Daten des Json-Objekts in 
   die benötigte Reihenfolge bringt und in ein neues Array lädt **/
   function orderData(data) {
     // Wir speichern die aktuelle Aktivität
     var cur_akt = "";
-    var temp_obj = []
-    var j = 1
+    
     console.log("Rohdaten:", data)
+
     for (let i = 0; i < data.length; i++) {
       // Prüfen ob 4 Werte gesetzt wurden
-      if (j%3 == 0) {
-        
-      }
+        var temp_obj = { akt: '', name: '', gearbeitete_zeit: '', gebuchte_stunden: '' }
+        temp_obj.akt = data[i].bezeichnung
+        temp_obj.name = data[i].vorname
+        temp_obj.gearbeitete_zeit = data[i].gearbeitete_zeit
+        //setMainData(oldArray => [...oldArray, temp_obj])
+        mainDataNew.push(temp_obj)
+
+        console.log("Temp Object:", temp_obj)
       if (cur_akt !== data[i].bezeichnung) {
         cur_akt = data[i].bezeichnung;
         aktivitäten1.push(cur_akt)
@@ -186,6 +191,9 @@ function ProjectTime(props) {
       
       //setaktivitätenFields([...aktivitätenFields,{ aktivitätsname: '', name: '', istzeit: '', sollzeit: '' }])
     }
+    
+    console.log("Main Data New: ", mainDataNew)
+    
     setDataIsOrdered(true)
     fetchSollZeit(props.projekt_id)
   }
@@ -200,13 +208,19 @@ function ProjectTime(props) {
     let countRows = 0
     console.log("-----", data)
     const loopLength = (data.length + orderedData.length)
+    var temp_obj2 = {gebuchte_stunden: ""}
     for (let i = 0; i < loopLength; i++) {
-      console.log(i)
       // Es wird nach jedem Element, welches eine Zahl ist die dazugehörige Sollzeit hinzugefügt 
       if ((orderedData[i]).match(numberReg)) {
         countRows ++;
-        console.log("number:", j)
-        console.log("Gebuchte Stunde: ", data[1].gebuchte_stunden)
+        console.log("number j:", j)
+        // Mit States fkt es nicht !!
+        //let cur = {gebuchte_stunden: data[j].gebuchte_stunden}
+        //setMainData(oldArray => [...oldArray[j], cur])
+
+        mainDataNew[j].gebuchte_stunden = data[j].gebuchte_stunden
+        
+        //console.log("Gebuchte Stunde: ", data[1].gebuchte_stunden)
         orderedData.splice(i + 1, 0, data[j].gebuchte_stunden);
         console.log(orderedData)
         i++;
@@ -222,6 +236,8 @@ function ProjectTime(props) {
     setRows(countRows)
     console.log("Zeilen:", countRows)
     console.log("AktivitätenListw:", aktivitäten1)
+    console.log("Main Data finished: ", mainDataNew)
+    setMainData(mainDataNew)
   }
 
   var x = 1
@@ -235,13 +251,19 @@ function ProjectTime(props) {
               aktivitäten !== null && sollZeitIsAdded ?
                 aktivitäten.map((item) => 
                   <div>
-                    {console.log(aktivitäten)}
-                    {console.log(orderedDataX)}
-                    {console.log(item)}
-                    
-                    <Typography align="left" variant="h6" style={{paddingBottom:"0.5rem"}}>{cur_aktivität = item}</Typography>
+                    {/*console.log(aktivitäten)*/}
+                    {/*console.log(orderedDataX)*/}
+                    {/*console.log("Main Data mit Index:", mainData[0][0])*/}
 
-                    <table class="table table-striped" style={{marginBottom:"1rem"}}>
+                    {(mainData.length > 0) ?
+                    console.log("daknflksdds", mainData)
+                    : null
+                    }
+                    {console.log("Main Data:", mainData)}
+                    
+                    <Typography align="left" variant="h6" style={{paddingBottom:"1rem"}}>{cur_aktivität = item}</Typography>
+
+                    <table class="table table-striped" style={{marginBottom:"2rem"}}>
                       <thead>
                         <tr>
                           <th style={{ color: "#00bcd4", fontSize:"1rem" }}><b>Name</b></th>
@@ -251,15 +273,18 @@ function ProjectTime(props) {
                       </thead>
                       <tbody>
                         {/* Es müssen pro Durchgang 3 Zeilen erstellt werden */}
-                        
                         {
-                          orderedDataX.map((item) => 
+                          (mainData.length > 0) ?
+                          mainData.map((item, index) => 
+                              item.akt === cur_aktivität ?
                               <tr>
-                                <td align="start" style={{fontSize:"0.5rem"}}>{item}</td>
-                                <td align="start" style={{fontSize:"0.5rem"}}>{item}</td>
-                                <td align="start" style={{fontSize:"0.5rem"}}>{item}</td>
+                                <td align="start" style={{fontSize:"1rem"}}>{item.name}</td>
+                                <td align="start" style={{fontSize:"1rem"}}>{item.gearbeitete_zeit}</td>
+                                <td align="start" style={{fontSize:"1rem"}}>{item.gebuchte_stunden}</td>
                               </tr>
+                              : null
                           )
+                          :  null
                         }
                       </tbody>
                     </table>
