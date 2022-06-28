@@ -11,19 +11,20 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContentText from '@mui/material/DialogContentText';
 import axios from 'axios';
-
-
+import SuccessAlert from "./Alerts/SuccessAlert";
+import "../index.css"
 
 
 export default function CreateNewUser(props) {
 
-    const [newuser, setnewuser] = useState(null);
+    //const [newuser, setnewuser] = useState(null);
     const [openModal, setOpenModal] = useState(false);
 
     const [vorname, setVorname] = useState(null);
     const [nachname, setNachname] = useState(null);
     const [mail_adresse, setMail] = useState(null);
     const [benutzername, setBenutzername] = useState(null);
+    const [successAlertOpen, setSuccessAlertOpen] = useState(false);
 
     function postMitarbeiter(id, urlaubstage, überstunden) {
         const url = `/zeit/personen`;
@@ -36,7 +37,10 @@ export default function CreateNewUser(props) {
           benutzername,
           urlaubstage,
           überstunden
-        }).then(data => console.log(" Mitarbeiter wurde gepostet", data).catch(err => console.log(err)))
+        })
+        .then(data => console.log(" Mitarbeiter wurde gepostet", data), openAlert())
+        .catch(err => console.log(err))
+        
       };
 
 
@@ -46,9 +50,6 @@ export default function CreateNewUser(props) {
 
     };
 
-    useEffect(() => {
-
-    }, [])
 
     const handleClickOpen = () => {
         setOpenModal(true);
@@ -77,12 +78,24 @@ export default function CreateNewUser(props) {
         setBenutzername(event.target.value)
     }
 
-
+    const openAlert = () => {
+        console.log("nsjdknjds")
+        setSuccessAlertOpen(true)
+    }
 
     return (
-
-
         <div align="center">
+            {successAlertOpen ? 
+            <>
+            <SuccessAlert setAlertOpen={open => setSuccessAlertOpen(open)} alertmessage={"Das Anlegen eines neuen Benutzers war erfolgreich!"}></SuccessAlert>            
+            </>
+            : null}
+            
+
+            <Box mt={3} />
+            <Button onClick={openAlert}>Alert</Button>
+
+
             <Typography style={{ marginTop: "50px", color: "white" }}>Sie haben noch keinen Benutzer?</Typography>
             <Box mt={3} />
             <Fab variant="extended" onClick={() => { handleClickOpen() }} style={{ color: "white", backgroundColor: "#30343C" }}>

@@ -192,7 +192,7 @@ function ProjectTime(props) {
       //setaktivitätenFields([...aktivitätenFields,{ aktivitätsname: '', name: '', istzeit: '', sollzeit: '' }])
     }
     
-    console.log("Main Data New: ", mainDataNew)
+    //console.log("Main Data New: ", mainDataNew)
     
     setDataIsOrdered(true)
     fetchSollZeit(props.projekt_id)

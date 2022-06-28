@@ -67,10 +67,6 @@ export default function AktivitätBuchenModal(props) {
   }
 
 
-
-
-
-
   function postAktivität() {
     const url = `/zeit/verkaufte_stunden_in_aktivitaet`;
     console.log(mitarbeiter, aktivitaet, gebuchte_stunden, "ZEIG AN")
@@ -93,11 +89,6 @@ export default function AktivitätBuchenModal(props) {
       gearbeitete_zeit
     }).then(data => console.log(" Empty Zeitintervall wurde gepostet", data).catch(err => console.log(err)))
   };
-
-  //projekt_id"
-  //person_id"
-  //aktivitaet_id"
-  //gearbeitete_zeit
 
 
   const changeStunden = (event) => {
@@ -136,7 +127,7 @@ export default function AktivitätBuchenModal(props) {
             props.setOpenModal(false);
           }}
         >
-          X
+          X 
         </button>
       </div>
       <div className="title">

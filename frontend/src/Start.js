@@ -35,9 +35,6 @@ function Start(props) {
   const [AktivitätModalOpen, setAktivitätModalOpen] = useState(false);
 
 
-
-
-
   useEffect(() => {
     fetchPersonByUsername(props.username)
   }, [props.username])
