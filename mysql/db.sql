@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `Person` (
   `urlaubstage` INT NULL,
   `ueberstunden` INT NULL,
   `letzte_aenderung` DATETIME NULL,
+  `google_user_id` VARCHAR(128) NOT NULL DEFAULT '',
   -- Damit nicht mehrmals der gleiche Benutzername verwendet werden kann
   UNIQUE (benutzername),
   PRIMARY KEY (`person_id`));
@@ -235,16 +236,18 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Person Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('1', 'Levi', 'Ackermann', 'levi.ackermann@gmail.com', 'beyblade', 30, 75, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('2', 'Eren', 'Jäger', 'eren.jäger@hotmail.de', 'idealist', 30, 3, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('3', 'Mikasa', 'Ackermann', 'mikasa123@hotmail.de', 'redScarf', 30, 99, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('4', 'Annie', 'Leonhart', 'annie.leonhart@gmx.de', 'hiiamannie', 30, 0, '2022-04-13 02:30:00');
-INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung)  
-VALUES('5', 'Armin', 'Arlert', 'armin.arlert@gmail.de', 'armin_the_strategist', 30, 10, '2022-04-13 02:30:00');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung, google_user_id)  
+VALUES('1', 'Levi', 'Ackermann', 'levi.ackermann@gmail.com', 'beyblade', 30, 75, '2022-04-13 02:30:00','GJyAC4Hsx1VVgu3ixb6irDtqsg12');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung, google_user_id)  
+VALUES('2', 'Eren', 'Jäger', 'eren.jäger@hotmail.de', 'idealist', 30, 3, '2022-04-13 02:30:00','GJyAC4Hsx1VVgu3ixb6irDtqsg13');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung, google_user_id)  
+VALUES('3', 'Mikasa', 'Ackermann', 'mikasa123@hotmail.de', 'redScarf', 30, 99, '2022-04-13 02:30:00','GJyAC4Hsx1VVgu3ixb6irDtqsg14');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung, google_user_id)  
+VALUES('4', 'Annie', 'Leonhart', 'annie.leonhart@gmx.de', 'hiiamannie', 30, 0, '2022-04-13 02:30:00' ,'GJyAC4Hsx1VVgu3ixb6irDtqsg15');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung, google_user_id)  
+VALUES('5', 'Armin', 'Arlert', 'armin.arlert@gmail.de', 'armin_the_strategist', 30, 10, '2022-04-13 02:30:00','GJyAC4Hsx1VVgu3ixb6irDtqsg16');
+INSERT INTO `Person` (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung, google_user_id)  
+VALUES('6', 'Jean', 'Kirstein', 'jean@hotmail.de', 'jean_the_leader', 30, 55, '2022-04-13 02:30:00','GJyAC4Hsx1VVgu3ixb6irDtqsg17');
 
 
 -- ---------------------------------------------------------------------------------------------------------------------------

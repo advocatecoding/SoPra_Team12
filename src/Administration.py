@@ -34,7 +34,7 @@ class Administration(object):
         pass
 
     """Person"""
-    def create_person(self, vorname, nachname, mail_adresse, benutzername):
+    def create_person(self, vorname, nachname, mail_adresse, benutzername, google_user_id):
         """Eine Person anlegen."""
 
         person = Person()
@@ -45,6 +45,7 @@ class Administration(object):
         person.set_benutzername(benutzername)
         person.set_urlaubstage(30)
         person.set_ueberstunden(0)
+        person.set_user_id(google_user_id)
         """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
         person.set_letzte_aenderung()
 
@@ -80,6 +81,10 @@ class Administration(object):
 
         with PersonMapper() as mapper:
             return mapper.update(person)
+
+    def get_person_by_google_user_id(self, id):
+        with PersonMapper() as mapper:
+            return mapper.find_by_google_user_id(id)
 
 
     """Projekt"""
