@@ -120,7 +120,7 @@ function ProjectTime(props) {
   const [rows, setRows] = useState(0)
 
   const [mainData, setMainData] = useState([
-    { aktivitätsname: '', name: '', istzeit: '', sollzeit: '' },
+    { akt: '', name: '', istzeit: '', sollzeit: '' },
 ]);
 
   var orderedData = []
@@ -165,7 +165,14 @@ function ProjectTime(props) {
   function orderData(data) {
     // Wir speichern die aktuelle Aktivität
     var cur_akt = "";
+    var temp_obj = []
+    var j = 1
+    console.log("Rohdaten:", data)
     for (let i = 0; i < data.length; i++) {
+      // Prüfen ob 4 Werte gesetzt wurden
+      if (j%3 == 0) {
+        
+      }
       if (cur_akt !== data[i].bezeichnung) {
         cur_akt = data[i].bezeichnung;
         aktivitäten1.push(cur_akt)
@@ -246,11 +253,11 @@ function ProjectTime(props) {
                         {/* Es müssen pro Durchgang 3 Zeilen erstellt werden */}
                         
                         {
-                          [...Array(rows)].map((index, rows) => 
+                          orderedDataX.map((item) => 
                               <tr>
-                                <td align="start" style={{fontSize:"0.5rem"}}>{orderedDataX[1]}</td>
-                                <td align="start" style={{fontSize:"0.5rem"}}>{orderedDataX[2]}</td>
-                                <td align="start" style={{fontSize:"0.5rem"}}>{orderedDataX[3]}</td>
+                                <td align="start" style={{fontSize:"0.5rem"}}>{item}</td>
+                                <td align="start" style={{fontSize:"0.5rem"}}>{item}</td>
+                                <td align="start" style={{fontSize:"0.5rem"}}>{item}</td>
                               </tr>
                           )
                         }

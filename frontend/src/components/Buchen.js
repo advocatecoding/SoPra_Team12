@@ -131,11 +131,12 @@ export default function Buchen(props) {
     let newIntervallString = hh + "h " + mm + "min"
     console.log("Intervall in Stunde u Minuten:", newIntervallString)
     setIntervall(newIntervallString)
-    postZeintervall(1211, gearbeiteteZeit)
+    postZeitintervallbuchung(1211, gearbeiteteZeit)
+    postProjektarbeit(1211, gearbeiteteZeit)
     setProjektId("")
   }
 
-  function postZeintervall(id, gearbeitete_zeit) {
+  function postZeitintervallbuchung(id, gearbeitete_zeit) {
     const url = `/zeit/zeitintervallbuchungen`;
     console.log("Post daten: " + "personId: " + person_id + "aktivität id: " + aktivitaet_id + "gearbeitete Zeit: " + gearbeitete_zeit + "projektId: " + projekt_id)
     axios.post(url, {
@@ -148,6 +149,20 @@ export default function Buchen(props) {
       console.log(response)
   }).catch(err => { console.log(err) })
   };
+
+  function postProjektarbeit(id, gearbeitete_zeit) {
+    const url = `/zeit/projektarbeit`;
+    axios.post(url, {
+      id,
+      projekt_id,
+      person_id,
+      aktivitaet_id,
+      gearbeitete_zeit
+    }).then((response) => {
+      console.log(response)
+  }).catch(err => { console.log(err) })
+  };
+
 
 
   const handleChangee = (event) => {
