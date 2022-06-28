@@ -19,6 +19,7 @@ from bo.Zeitintervallbuchung import Zeitinverallbuchung
 from bo.SollZeit import Sollzeit
 from bo.Kommen import Kommen
 from bo.Gehen import Gehen
+from bo.Ereignisbuchung import Ereignisbuchung
 
 """ Wir erstellen ein "Flask-Objekt" """
 app = Flask(__name__)
@@ -131,6 +132,10 @@ kommen = api.inherit('Kommen', bo, {
 gehen = api.inherit('Gehen', bo, {
     "person_id": fields.String(attribute="_person_id", description="Mitarbeiter"),
     "ende": fields.String(attribute="_ende", description="Unternehmensgehen"),
+})
+ereignisbuchung = api.inherit('Ereignisbuchung', bo, {
+    "kommen_id": fields.String(attribute="_kommen_id", description="Unternehmenskommen"),
+    "gehen_id": fields.String(attribute="_gehen_id", description="Unternehmensgehen"),
 })
 
 
@@ -756,6 +761,33 @@ class ProjektarbeitListOperations(Resource):
         else:
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
             return '', 500
+
+@zeiterfassung.route("/ereignisbuchung")
+class EreignisbuchungListOperations(Resource):
+    @zeiterfassung.marshal_with(ereignisbuchung)
+    def get(self):
+        """ Auslesen der Ereignisbuchung-Objekte """
+        adm = Administration()
+        ereignisbuchung = adm.get_all_ereignisbuchung()
+        return ereignisbuchung
+
+    @zeiterfassung.marshal_with(ereignisbuchung, code=201)
+    @zeiterfassung.expect(ereignisbuchung)
+    def post(self):
+        """ Ereignisbuchung Instanz erstellen """
+        adm = Administration()
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit Ereignisbuchung, indem wir die 
+        Attribute aus den Werten von api.payload setzen. ereignisbuchung_object = Ereignisbuchung-Objekt """
+        ereignisbuchung_object = Ereignisbuchung.from_dict(api.payload)
+
+        if ereignisbuchung_object is not None:
+            """ Wir erstellen in Administration Ereignisbuchung mithilfe der Daten vom api.payload """
+            c = adm.create_ereignisbuchung(ereignisbuchung_object.get_kommen_id(), ereignisbuchung_object.get_gehen_id())
+            return c, 200
+        else:
+            # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
+            return '', 500
+
 
 """ Server läuft auf localhost:5000 bzw. 127.0.0.1:5000 """
 if __name__ == '__main__':

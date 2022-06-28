@@ -17,3 +17,13 @@ class Ereignisbuchung(bo.BusinessObject):
 
     def set_gehen_id(self, value):
         self._gehen_id = value
+
+    def from_dict(dictionary=dict()):
+        """Umwandeln eines Python dict() in ein Ereignisbuchung()."""
+        obj = Ereignisbuchung()
+        obj.set_id(dictionary["id"])
+        obj.set_kommen_id(dictionary["kommen_id"])
+        obj.set_gehen_id(dictionary["gehen_id"])
+        obj.set_letzte_aenderung()
+
+        return obj

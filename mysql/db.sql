@@ -105,8 +105,8 @@ CREATE TABLE IF NOT EXISTS `Person` (
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Ereignisbuchung` (
   `ereignisbuchung_id` INT NOT NULL,
-  `gehen_id` INT NOT NULL,
   `kommen_id` INT NOT NULL,
+  `gehen_id` INT NOT NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`ereignisbuchung_id`),
     FOREIGN KEY (`kommen_id`)
@@ -423,6 +423,20 @@ INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung)
 VALUES('4', '2','2022-04-19 16:30:00','2022-04-19 16:30:00');
 INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung)  
 VALUES('5', '2','2022-04-20 17:00:00','2022-04-20 17:00:00');
+
+-- --------------------------------------------------------------------------------------------------------------------------
+-- Ereignisbuchung Entitäten erstellen
+-- --------------------------------------------------------------------------------------------------------------------------
+INSERT INTO `Ereignisbuchung` (ereignisbuchung_id, kommen_id, gehen_id, letzte_aenderung)  
+VALUES('1', '1','1','2022-04-19 16:00:00');
+INSERT INTO `Ereignisbuchung` (ereignisbuchung_id, kommen_id, gehen_id, letzte_aenderung)  
+VALUES('2', '2','2','2022-04-20 17:00:00');
+INSERT INTO `Ereignisbuchung` (ereignisbuchung_id, kommen_id, gehen_id, letzte_aenderung)  
+VALUES('3', '3','3','2022-04-21 18:00:00');
+INSERT INTO `Ereignisbuchung` (ereignisbuchung_id, kommen_id, gehen_id, letzte_aenderung)  
+VALUES('4', '4','4','2022-04-19 16:30:00');
+INSERT INTO `Ereignisbuchung` (ereignisbuchung_id, kommen_id, gehen_id, letzte_aenderung)  
+VALUES('5', '5','5','2022-04-20 17:00:00');
 
 
 -- Verschlüsseln von strings test 

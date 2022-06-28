@@ -24,6 +24,7 @@ from db.VerkaufteStundenInAktivitaetMapper import VerkaufteStundenInAktivitaetMa
 from db.ZeitintervallbuchungMapper import ZeitintervallbuchungMapper
 from db.KommenMapper import KommenMapper
 from db.GehenMapper import GehenMapper
+from db.EreignisbuchungMapper import EreignisbuchungMapper
 import datetime
 
 
@@ -392,3 +393,22 @@ class Administration(object):
         with GehenMapper() as mapper:
             return mapper.find_all()
 
+    """Ereignisbuchung"""
+
+    def create_ereignisbuchung(self, kommen_id, gehen_id):
+        """Ereignisbuchung anlegen."""
+
+        ereignisbuchung = Ereignisbuchung()
+        ereignisbuchung.set_id(1211)
+        ereignisbuchung.set_kommen_id(kommen_id)
+        ereignisbuchung.set_gehen_id(gehen_id)
+        ereignisbuchung.set_letzte_aenderung()
+        """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
+
+        with EreignisbuchungMapper() as mapper:
+            return mapper.insert(ereignisbuchung)
+
+    def get_all_ereignisbuchung(self):
+        """Wir geben Ereignisbuchung von allen aus"""
+        with EreignisbuchungMapper() as mapper:
+            return mapper.find_all()
