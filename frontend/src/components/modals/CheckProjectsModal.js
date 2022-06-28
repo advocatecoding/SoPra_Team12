@@ -12,7 +12,7 @@ import "../../index.css"
 export default function CheckProjectsModal(props) {
 
   const [projectsToCheck, setProjectsToCheck] = useState([]);
-  const [selectedProject, setSelectedProject] = useState(null);
+  const [selectedProject, setSelectedProject] = useState(null); 
 
   const [createListIsClicked, setCreateListIsClicked] = useState(false);
 
@@ -92,7 +92,7 @@ export default function CheckProjectsModal(props) {
         :
         <>
           <div className="title">
-            <h2>Stundenübersicht des Projekts {selectedProject}</h2>
+            <h2>Stundenübersicht des Projekts</h2>
           </div>
           <div className="body" style={{height:"100%"}}>
             <div>

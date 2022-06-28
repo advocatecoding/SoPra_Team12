@@ -84,7 +84,6 @@ class Administration(object):
     """Person"""
     def create_person(self, vorname, nachname, mail_adresse, benutzername, google_user_id):
         """Eine Person anlegen."""
-
         person = Person()
         person.set_id(1211)
         person.set_vorname(vorname)
@@ -386,26 +385,9 @@ class Administration(object):
             return mapper.insert(buchung)
 
 
-
-
-
-    """ Buchungen """
-    def create_startbuchung(self, zeitpunkt, person):
-        """ Startbuchung für Aktivitäten oder Pausen anlegen """
-        startbuchung = Startbuchung()
-        startbuchung.set_id(1211)
-        startbuchung.set_zeitpunkt(zeitpunkt)
-        startbuchung.set_person(person)
-
-    def create_ereignisbuchung(self, startereignis, endereignis):
-        ereignisbuchung = Ereignisbuchung(startereignis, endereignis)
-        ereignisbuchung.set_id(1211)
-
-
     """Kommen"""
     def create_kommen(self, person_id, start_kommen):
         """Kommen anlegen."""
-
         kommen = Kommen()
         kommen.set_id(1211)
         kommen.set_person_id(person_id)
