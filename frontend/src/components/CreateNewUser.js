@@ -79,23 +79,20 @@ export default function CreateNewUser(props) {
     }
 
     const openAlert = () => {
-        console.log("nsjdknjds")
         setSuccessAlertOpen(true)
     }
 
+
     return (
-        <div align="center">
-            {successAlertOpen ? 
-            <>
-            <SuccessAlert setAlertOpen={open => setSuccessAlertOpen(open)} alertmessage={"Das Anlegen eines neuen Benutzers war erfolgreich!"}></SuccessAlert>            
-            </>
-            : null}
+       
+        <div align="center"  >
+            {successAlertOpen ?
+            <div style={{position:"absolute", width:"100%", height:"100%",  left: "50%", top:"0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor:"rgba(0,0,0,0.7)"}}>
+            <SuccessAlert style={{marginTop:"20% !important", width:"5rem"}} setAlertOpen={open => setSuccessAlertOpen(open)} alertmessage={"Das Anlegen eines neuen Benutzers war erfolgreich!"}></SuccessAlert>            
+            </div> 
             
-
-            <Box mt={3} />
-            <Button onClick={openAlert}>Alert</Button>
-
-
+            : null
+            }
             <Typography style={{ marginTop: "50px", color: "white" }}>Sie haben noch keinen Benutzer?</Typography>
             <Box mt={3} />
             <Fab variant="extended" onClick={() => { handleClickOpen() }} style={{ color: "white", backgroundColor: "#30343C" }}>
