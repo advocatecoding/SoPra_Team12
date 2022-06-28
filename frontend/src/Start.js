@@ -140,7 +140,14 @@ function Start(props) {
 
               <Grid style={{ height: "30%", width: "100%", padding: "2rem", paddingBottom: "0rem" }}>
                 <Typography variant="h5" align="center" style={{ marginBottom: "2rem" }}>Buchbereich</Typography>
-                <Anwesenheit/>
+                {
+                    userIdIsSet ?
+                      <>
+                        <Anwesenheit id={userId} />
+                      </>
+                      : null
+                  }
+                
               </Grid>
 
               <Grid style={{ height: "70%", width: "100%", padding: "2rem", paddingTop:"5rem" }}>
