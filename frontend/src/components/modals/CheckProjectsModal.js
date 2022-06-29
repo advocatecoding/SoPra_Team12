@@ -8,6 +8,8 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import "../../index.css"
+import LoadingProgress from "../Loading/LoadingProgress";
+
 
 export default function CheckProjectsModal(props) {
 
@@ -110,6 +112,7 @@ export default function CheckProjectsModal(props) {
 
 
 
+
 function ProjectTime(props) {
 
   const [dataIsOrdered, setDataIsOrdered] = useState(false);
@@ -172,7 +175,7 @@ function ProjectTime(props) {
       // Prüfen ob 4 Werte gesetzt wurden
         var temp_obj = { akt: '', name: '', gearbeitete_zeit: '', gebuchte_stunden: '' }
         temp_obj.akt = data[i].bezeichnung
-        temp_obj.name = data[i].vorname
+        temp_obj.name = (data[i].vorname + " " +data[i].nachname)
         temp_obj.gearbeitete_zeit = data[i].gearbeitete_zeit
         //setMainData(oldArray => [...oldArray, temp_obj])
         mainDataNew.push(temp_obj)
@@ -289,10 +292,10 @@ function ProjectTime(props) {
                       </tbody>
                     </table>
                   </div>
-
-                
-                )
-                : null
+                ) 
+                : 
+                <>
+                <LoadingProgress style={{marginTop:"3rem"}} show={true}></LoadingProgress></>
             }
     </div>
   )

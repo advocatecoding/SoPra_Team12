@@ -122,7 +122,7 @@ class PersonMapper(Mapper):
 
 
         """ Hier wird die Person Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO Person (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+        command = "INSERT INTO Person (person_id, vorname, nachname, mail_adresse, benutzername, urlaubstage, ueberstunden, letzte_aenderung) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
         data = (person.get_id(), person.get_vorname(), person.get_nachname(), person.get_mail_adresse(), person.get_benutzername(), person.get_urlaubstage(), person.get_ueberstunden(), person.get_letzte_aenderung())
         cursor.execute(command, data)
 

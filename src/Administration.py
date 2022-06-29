@@ -82,7 +82,7 @@ class Administration(object):
 
 
     """Person"""
-    def create_person(self, vorname, nachname, mail_adresse, benutzername, google_user_id):
+    def create_person(self, vorname, nachname, mail_adresse, benutzername):
         """Eine Person anlegen."""
         person = Person()
         person.set_id(1211)
@@ -92,7 +92,6 @@ class Administration(object):
         person.set_benutzername(benutzername)
         person.set_urlaubstage(30)
         person.set_ueberstunden(0)
-        person.set_user_id(google_user_id)
         """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
         person.set_letzte_aenderung()
 
