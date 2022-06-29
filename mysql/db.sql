@@ -308,6 +308,10 @@ INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazit
 VALUES('5', '2', 'Teile prüfen', '2022-05-01 14:00:00','150', '2022-04-19 02:33:00');
 INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
 VALUES('6', '2', 'beschädigte Teile reklamieren', '2022-05-01 14:00:00','70', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('7', '3', 'Maschinen warten', '2022-05-01 14:00:00','150', '2022-04-19 02:33:00');
+INSERT INTO `Aktivitaet` (aktivitaet_id, projekt_id, bezeichnung, dauer, kapazitaet, letzte_aenderung)  
+VALUES('8', '3', 'Ressourcen prüfen', '2022-05-01 14:00:00','80', '2022-04-19 02:33:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Urlaub Entitäten erstellen
@@ -347,11 +351,11 @@ VALUES('2', '1','180', '2022-04-19 02:33:00');
 INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
 VALUES('2', '4','10', '2022-04-19 02:33:00');
 INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
-VALUES('2', '5','80', '2022-04-19 02:33:00');
+VALUES('2', '2','80', '2022-04-19 02:33:00');
 INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
 VALUES('3', '5','18', '2022-04-19 02:33:00');
 INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
-VALUES('3', '6','70', '2022-04-19 02:33:00');
+VALUES('3', '3','70', '2022-04-19 02:33:00');
 INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
 VALUES('3', '1','180', '2022-04-19 02:33:00');
 INSERT INTO `Mitarbeiter_in_Projekt` (person_idd, projekt_id, verkaufte_stunden, letzte_aenderung)  
@@ -378,19 +382,31 @@ INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_i
 VALUES('4', '1', '1', '1',  100, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
 VALUES('5', '2', '1', '2', 100, '2022-04-13 05:30:00');
-
-
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
+VALUES('6', '2', '1', '1',  1, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
+VALUES('7', '2', '2', '3',  10, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
+VALUES('8', '3', '1', '8',  90, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
+VALUES('9', '3', '1', '7',  100, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
+VALUES('10', '3', '3', '7', 10, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
+VALUES('11', '3', '3', '8',  70, '2022-04-13 05:30:00');
+INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
+VALUES('12', '3', '3', '8', 40, '2022-04-13 05:30:00');
 
 
 -- Eren jäger  PROJEKT 1 UND 2
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('6', '2', '2', '2', 100, '2022-04-13 05:30:00');
+VALUES('13', '2', '2', '2', 100, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('7', '2', '2', '2', 100, '2022-04-13 05:30:00');
+VALUES('14', '2', '2', '2', 100, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('8', '1', '2', '3',  500, '2022-04-13 05:30:00');
+VALUES('15', '1', '2', '3',  500, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('9', '1', '2', '3',  300, '2022-04-13 05:30:00');
+VALUES('16', '1', '2', '3',  300, '2022-04-13 05:30:00');
 
 
 
