@@ -5,6 +5,7 @@ class MitarbeiterAnsicht(bo.BusinessObject):
     def __init__(self):
         super().__init__()
         self._person = ""
+        self._nachname = ""
         self._aktivitaet = ""
         self._projekt = ""
         self._gearbeitete_zeit = 0
@@ -17,6 +18,14 @@ class MitarbeiterAnsicht(bo.BusinessObject):
     def set_person(self, value):
         """Setzen der Person ID."""
         self._person = value
+
+    def get_nachname(self):
+        """Auslesen des Nachnamens """
+        return self._nachname
+
+    def set_nachname(self, value):
+        """Setzen des Nachnamens."""
+        self._nachname = value
 
     def get_aktivitaet(self):
         """Auslesen der Aktivität ID."""
@@ -45,9 +54,12 @@ class MitarbeiterAnsicht(bo.BusinessObject):
         self._gearbeitete_zeit = gearbeitete_zeit
 
 
+
+
     def from_dict(dictionary=dict()):
         obj = MitarbeiterAnsicht()
         obj.set_person(dictionary["mitarbeiter"])
+        obj.set_nachname(dictionary["nachname"])
         obj.set_aktivitaet(dictionary["aktivitaet"])
         obj.set_projekt(dictionary["projekt"])
         obj.set_gearbeitete_zeit(dictionary["gearbeitete_zeit"])

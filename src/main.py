@@ -109,6 +109,7 @@ projektarbeit = api.inherit('Projektarbeitszeit', bo, {
 
 mitarbeiteransicht = api.inherit('MitarbeiterAnsicht', bo, {
     "vorname": fields.String(attribute="_person", description="Mitarbeiter"),
+    "nachname": fields.String(attribute="_nachname", description="Nachname"),
     "bezeichnung": fields.String(attribute="_aktivitaet", description="Aktivität"),
     "projekt": fields.String(attribute="_projekt", description="Projekt"),
     "gearbeitete_zeit": fields.String(attribute="_gearbeitete_zeit", description="gebuchte Stunden")
@@ -586,7 +587,6 @@ class VerkaufteStundenInAktivitaetOperations(Resource):
 @zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
 class SollzeitOperations(Resource):
     @zeiterfassung.marshal_with(sollzeit)
-    @secured
     def get(self,projekt_id):
         """ Auslesen der Sollzeit szenario 4.
         Das zu auslesende Objekt wird anhand der id bestimmt
@@ -601,7 +601,6 @@ class SollzeitOperations(Resource):
 @zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
 class MitarbeiteransichtOperations(Resource):
     @zeiterfassung.marshal_with(mitarbeiteransicht)
-    @secured
     def get(self,projekt_id):
         """ Auslesen der IstStunden szenario 4.
         Das zu auslesende Objekt wird anhand der id bestimmt
@@ -616,7 +615,6 @@ class MitarbeiteransichtOperations(Resource):
 @zeiterfassung.param("person_id", "Die Id der gewünschten Person")
 class PersoenlicheOperations(Resource):
     @zeiterfassung.marshal_with(mitarbeiteransicht)
-    @secured
     def get(self,person_id):
         """ Auslesen der IstStunden auf allen Projekten szenario 3.
         Das zu auslesende Objekt wird anhand der id bestimmt
