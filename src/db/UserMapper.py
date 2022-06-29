@@ -3,12 +3,7 @@ from db.Mapper import Mapper
 
 
 class UserMapper (Mapper):
-    """Mapper-Klasse, die User-Objekte auf eine relationale
-    Datenbank abbildet. Hierzu wird eine Reihe von Methoden zur Verfügung
-    gestellt, mit deren Hilfe z.B. Objekte gesucht, erzeugt, modifiziert und
-    gelöscht werden können. Das Mapping ist bidirektional. D.h., Objekte können
-    in DB-Strukturen und DB-Strukturen in Objekte umgewandelt werden.
-    """
+    """User-Mapper-Klasse aus dem Bankbeispiel, sodass der SecurityDecorator funktioniert. """
 
     def __init__(self):
         super().__init__()
@@ -21,7 +16,7 @@ class UserMapper (Mapper):
         """
         result = []
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT * from Users")
+        cursor.execute("SELECT * FROM Users")
         tuples = cursor.fetchall()
 
         for (id, name, email, user_id) in tuples:
@@ -46,7 +41,7 @@ class UserMapper (Mapper):
         """
         result = []
         cursor = self._cnx.cursor()
-        command = "SELECT id, name, email, google_user_id FROM users WHERE name LIKE '{}' ORDER BY name".format(name)
+        command = "SELECT id, name, email, google_user_id FROM Users WHERE name LIKE '{}' ORDER BY name".format(name)
         cursor.execute(command)
         tuples = cursor.fetchall()
 

@@ -8,6 +8,7 @@ class AktivitaetMapper(Mapper):
         super().__init__()
 
     def find_all(self):
+        """ Wir suchen alle Aktivitäten """
         result = []
         cursor = self._cnx.cursor()
         cursor.execute("SELECT * FROM Aktivitaet")
@@ -74,6 +75,9 @@ class AktivitaetMapper(Mapper):
 
 
     def update(self, aktivitaet):
+        """Wiederholtes Schreiben eines Aktivitäten-Objekts in die Datenbank.
+        :param aktivitaet das Objekt, das in die DB geschrieben werden soll
+        """
         cursor = self._cnx.cursor()
 
         command = "UPDATE Aktivitaet " + "SET projekt_id=%s, bezeichnung=%s, dauer=%s, kapazitaet=%s, letzte_aenderung=%s WHERE aktivitaet_id=%s"
@@ -110,6 +114,7 @@ class AktivitaetMapper(Mapper):
         return aktivitaet
 
     def find_all_aktivitaeten_by_projekt_id(self, projekt_id):
+        """ Wir suchen alle Aktivitäten anhand der jeweiligen Projekt ID """
         result = []
         cursor = self._cnx.cursor()
         cursor.execute("SELECT * FROM Aktivitaet WHERE projekt_id={0}".format(projekt_id))

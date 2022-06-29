@@ -115,11 +115,13 @@ class Administration(object):
             return mapper.find_by_benutzername(benutzername)
 
     def delete_person_by_person_id(self, person_id):
+        """ Wir löschen die Person anhand der angegebenen Personen ID """
         with PersonMapper() as mapper:
             #person = self.get_all_personen()
             return mapper.delete(person_id)
 
     def update_person(self, person):
+        """ Wir aktualisieren die Person und weißen letzte_aenderung neu zu"""
         person.set_letzte_aenderung()
 
         with PersonMapper() as mapper:
@@ -148,10 +150,12 @@ class Administration(object):
             return mapper.find_all()
 
     def delete_projekt_by_id(self, projekt_id):
+        """ Wir löschen ein Projekt anhand der angegebenen ID """
         with ProjektMapper() as mapper:
             return mapper.delete(projekt_id)
 
     def update_projekt(self, projekt):
+        """ Wir aktualisieren das Projekt und weißen letzte_aenderung neu zu"""
         projekt.set_letzte_aenderung()
 
         with ProjektMapper() as mapper:
@@ -185,10 +189,12 @@ class Administration(object):
             return mapper.find_by_id(aktivitaet_id)
 
     def delete_aktivitaet_by_aktivitaet_id(self, aktivitaet_id):
+        """ Wir löschen die Aktivität anhand der angegebenen Aktivität ID """
         with AktivitaetMapper() as mapper:
             return mapper.delete(aktivitaet_id)
 
     def update_aktivitaet(self, aktivitaet):
+        """ Wir aktualisieren die Aktivität und weißen letzte_aenderung neu zu"""
         aktivitaet.set_letzte_aenderung()
 
         with AktivitaetMapper() as mapper:
@@ -210,18 +216,22 @@ class Administration(object):
 
 
     def get_all_pause(self):
+        """ Wir geben alle Pausen aus """
         with PauseMapper() as mapper:
             return mapper.find_all()
 
     def get_pause_by_id(self, pause_id):
+        """ Wir geben die Pause mit der angegebenen ID zurück """
         with PauseMapper() as mapper:
             return mapper.find_by_id(pause_id)
 
     def delete_pause_by_pause_id(self, pause_id):
+        """ Wir löschen die Pause anhand der angegebenen Pause ID """
         with PauseMapper() as mapper:
             return mapper.delete(pause_id)
 
     def update_pause(self, pause):
+        """ Wir aktualisieren die Pause und weißen letzte_aenderung neu zu"""
         pause.set_letzte_aenderung()
 
         with PauseMapper() as mapper:
@@ -244,6 +254,7 @@ class Administration(object):
 
 
     def get_all_projektarbeit(self):
+        """ Wir geben alle Projektarbeiten aus """
         with ProjektarbeitMapper() as mapper:
             return mapper.find_all()
 
@@ -274,10 +285,12 @@ class Administration(object):
             return mapper.find_by_id(urlaub_id)
 
     def delete_urlaub_by_urlaub_id(self, urlaub_id):
+        """ Wir löschen den Urlaub anhand der angegebenen Urlaub ID """
         with UrlaubMapper() as mapper:
             return mapper.delete(urlaub_id)
 
     def update_urlaub(self, urlaub):
+        """ Wir aktualisieren den Urlaub und weißen letzte_aenderung neu zu"""
         urlaub.set_letzte_aenderung()
 
         with UrlaubMapper() as mapper:
@@ -306,6 +319,7 @@ class Administration(object):
             return mapper.find_by_id(person_idd)
 
     def get_person_by_person_id_and_projekt_by_projekt_id(self, person_idd, projekt_id):
+        """ Wir geben die Person mit der angegebenen Person ID und das Projekt mit der angegebenen Projekt ID zurück """
         with MitarbeiterInProjektMapper() as mapper:
             return mapper.delete(person_idd, projekt_id)
 
@@ -348,30 +362,34 @@ class Administration(object):
 
 
     def get_sollzeit_by_id(self, projekt_id):
+        """ Wir geben die Sollzeit mit der angegebenen ID zurück """
         with VerkaufteStundenInAktivitaetMapper() as mapper:
             return mapper.find_by_id(projekt_id)
 
 
     def get_mitarbeiteransicht_by_id(self, projekt_id):
+        """ Wir geben die Mitarbeiteransicht mit der angegebenen ID zurück """
         with VerkaufteStundenInAktivitaetMapper() as mapper:
             return mapper.mitarbeiteransicht_find_by_id(projekt_id)
 
 
     def get_persoenliche_mitarbeiteransicht_by_id(self, person_id):
+        """ Wir geben die persönliche Mitarbeiteransicht mit der angegebenen ID zurück """
         with VerkaufteStundenInAktivitaetMapper() as mapper:
             return mapper.persoenliche_mitarbeiteransicht_find_by_id(person_id)
 
     def get_projekte_by_projekt_id_and_person_id_buchen(self, person_id, projekt_id):
+        """ Wir geben die Projekte mit der angegebenen Projekt und Personen ID zurück """
         with AktivitaetMapper() as mapper:
             return mapper.buchen_ansicht_frontend(person_id, projekt_id)
 
     def get_zeitintervallbuchung_by_id(self, projekt_id):
-        """ Wir geben die Projekte mit der angegebenen ID zurück """
+        """ Wir geben die Zeitintervallbuchung mit der angegebenen ID zurück """
         with ZeitintervallbuchungMapper() as mapper:
             return mapper.find_by_projekt_id(projekt_id)
 
     def create_zeitintervallbuchung(self, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit):
-        """Eine Person anlegen."""
+        """Eine Zeitintervallbuchung anlegen."""
 
         buchung = Zeitinverallbuchung()
         buchung.set_id(1211)
@@ -387,7 +405,7 @@ class Administration(object):
 
     """Kommen"""
     def create_kommen(self, person_id, start_kommen):
-        """Kommen anlegen."""
+        """Ein Kommen anlegen."""
         kommen = Kommen()
         kommen.set_id(1211)
         kommen.set_person_id(person_id)
@@ -423,7 +441,6 @@ class Administration(object):
             return mapper.find_all()
 
     """Ereignisbuchung"""
-
     def create_ereignisbuchung(self, kommen_id, gehen_id):
         """Ereignisbuchung anlegen."""
 

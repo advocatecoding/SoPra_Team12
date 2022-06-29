@@ -12,6 +12,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
 
 
     def find_all(self):
+        """ Wir suchen alle Verkaufte Stunden in Aktivität """
         result = []
         cursor = self._cnx.cursor()
         cursor.execute("SELECT * FROM verkaufte_stunden_in_aktivitaet")
@@ -51,7 +52,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
 
 
     def find_by_id(self, projekt_id):
-        """ Wir suchen das Projekt mit der jeweiligen ID """
+        """ Wir suchen die Verkaufte Stunden in Aktivität mit der jeweiligen ID """
         result = []
 
         cursor = self._cnx.cursor()
@@ -74,7 +75,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
 
 
     def mitarbeiteransicht_find_by_id(self, projekt_id):
-        """ Wir suchen das Projekt mit der jeweiligen ID """
+        """ Wir suchen die Mitarbeiteransicht mit der jeweiligen ID """
         result = []
 
         cursor = self._cnx.cursor()
@@ -98,7 +99,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
 
 
     def persoenliche_mitarbeiteransicht_find_by_id(self, person_id):
-        """ Wir suchen das Projekt mit der jeweiligen ID """
+        """ Wir suchen die persönliche Mitarbeiteransicht mit der jeweiligen ID """
         result = []
 
         cursor = self._cnx.cursor()

@@ -7,6 +7,7 @@ class ProjektarbeitMapper(Mapper):
         super().__init__()
 
     def find_all(self):
+        """ Wir suchen alle Projektarbeiten """
         result = []
         cursor = self._cnx.cursor()
         cursor.execute("SELECT * FROM Zeitintervallbuchung")

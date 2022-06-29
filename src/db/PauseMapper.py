@@ -7,6 +7,7 @@ class PauseMapper(Mapper):
         super().__init__()
 
     def find_all(self):
+        """ Wir suchen alle Pausen """
         result = []
         cursor = self._cnx.cursor()
         cursor.execute("SELECT * FROM Pause")
@@ -97,8 +98,10 @@ class PauseMapper(Mapper):
         return pause
 
 
-
     def update(self, pause):
+        """Wiederholtes Schreiben eines Pausen-Objekts in die Datenbank.
+        :param pause das Objekt, das in die DB geschrieben werden soll
+        """
         cursor = self._cnx.cursor()
 
         command = "UPDATE Pause " + "SET projekt_id =%s, person_id=%s, start_pause=%s, ende_pause=%s, letzte_aenderung=%s WHERE pause_id=%s"
@@ -107,14 +110,6 @@ class PauseMapper(Mapper):
 
         self._cnx.commit()
         cursor.close()
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':

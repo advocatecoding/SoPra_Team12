@@ -7,6 +7,7 @@ class ProjektMapper(Mapper):
         super().__init__()
 
     def find_all(self):
+        """ Wir suchen alle Projekte """
         result = []
         cursor = self._cnx.cursor()
         cursor.execute("SELECT projektname, auftraggeber, projekt_id, person_id, letzte_aenderung from Projekt")
@@ -100,6 +101,9 @@ class ProjektMapper(Mapper):
 
 
     def update(self, projekt):
+        """Wiederholtes Schreiben eines Projekt-Objekts in die Datenbank.
+        :param projekt das Objekt, das in die DB geschrieben werden soll
+        """
         cursor = self._cnx.cursor()
 
         command = "UPDATE Projekt " + "SET person_id=%s, projektname=%s, auftraggeber=%s, letzte_aenderung=%s WHERE projekt_id=%s"
@@ -134,7 +138,7 @@ class ProjektMapper(Mapper):
 
 
     def find_projektnamen(self, person_id):
-        """ Wir suchen das Projekt mit der jeweiligen ID """
+        """ Wir suchen den Projektnamen mit der jeweiligen ID """
         result1 = []
 
         cursor = self._cnx.cursor()

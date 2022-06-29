@@ -7,6 +7,7 @@ class UrlaubMapper(Mapper):
         super().__init__()
 
     def find_all(self):
+        """ Wir suchen alle Urlaube """
         result = []
         cursor = self._cnx.cursor()
         cursor.execute("SELECT * FROM Urlaub")
@@ -99,6 +100,9 @@ class UrlaubMapper(Mapper):
 
 
     def update(self, urlaub):
+        """Wiederholtes Schreiben eines Urlaub-Objekts in die Datenbank.
+        :param urlaub das Objekt, das in die DB geschrieben werden soll
+        """
         cursor = self._cnx.cursor()
 
         command = "UPDATE Urlaub " + "SET person_id=%s, start_datum=%s, end_datum=%s, letzte_aenderung=%s WHERE urlaub_id=%s"
@@ -107,14 +111,6 @@ class UrlaubMapper(Mapper):
 
         self._cnx.commit()
         cursor.close()
-
-
-
-
-
-
-
-
 
 
 if __name__ == '__main__':

@@ -10,6 +10,7 @@ class MitarbeiterInProjektMapper(Mapper):
 
 
     def find_all(self):
+        """ Wir suchen alle Mitarbeiter in Projekten """
         result = []
         cursor = self._cnx.cursor()
         cursor.execute("SELECT * FROM Mitarbeiter_in_Projekt")
@@ -30,6 +31,7 @@ class MitarbeiterInProjektMapper(Mapper):
         return result
 
     def find_by_id(self, person_idd):
+        """ Wir suchen den Mitarbeiter in Projekt mit der jeweiligen Person ID """
         # result = []
         personl = []
         cursor = self._cnx.cursor()
@@ -59,6 +61,10 @@ class MitarbeiterInProjektMapper(Mapper):
 
 
     def insert(self, mitarbeiter_in_projekt):
+        """ Einfügen eines neuen Mitarbeiter_in_Projekt-Objekts in die Datenbank.
+        parameter: Mitarbeiter_in_Projekt Instanz die in der Datenbank gespeichert werden soll
+        return: Die Mitarbeiter_in_Projekt Instanz mit korrigierter bzw. inkrementierte ID
+        """
 
         cursor = self._cnx.cursor()
 

@@ -7,6 +7,7 @@ class PersonMapper(Mapper):
         super().__init__()
 
     def find_all(self):
+        """ Wir suchen alle Personen """
         result = []
         cursor = self._cnx.cursor()
         cursor.execute("SELECT * FROM Person")
@@ -131,6 +132,9 @@ class PersonMapper(Mapper):
         return person
 
     def update(self, person):
+        """Wiederholtes Schreiben eines Personen-Objekts in die Datenbank.
+        :param person das Objekt, das in die DB geschrieben werden soll
+        """
         cursor = self._cnx.cursor()
         command = "UPDATE Person " + "SET vorname=%s, nachname=%s, mail_adresse=%s, urlaubstage=%s, letzte_aenderung=%s WHERE person_id=%s"
         data = (person.get_vorname(), person.get_nachname(), person.get_mail_adresse(), person.get_urlaubstage(), person.get_letzte_aenderung(), person.get_id())
