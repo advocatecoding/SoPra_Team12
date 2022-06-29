@@ -174,7 +174,7 @@ class PersonenListOperations(Resource):
             return '', 500
 
 
-""" Person Objekt wird gelöscht und erstellt - ein bestimmtes Person Objekt wird gelesen   """
+""" Person Objekt wird gelöscht und aktualisiert - ein bestimmtes Person Objekt wird gelesen   """
 @zeiterfassung.route("/personen/<int:person_id>")
 @zeiterfassung.param("person_id", "Die Id der gewünschten Person")
 class PersonByIdOperations(Resource):
@@ -251,7 +251,7 @@ class ProjekteListOperations(Resource):
         projekt_object = Projekt.from_dict(api.payload)
 
         if projekt_object is not None:
-            """ Wir erstellen in Administration eine Person mithilfe der Daten vom api.payload """
+            """ Wir erstellen in Administration eine Projekt mithilfe der Daten vom api.payload """
             c = adm.create_projekt(projekt_object.get_projektleiter(), projekt_object.get_name(),
                                   projekt_object.get_auftraggeber())
             return c, 200
@@ -260,7 +260,7 @@ class ProjekteListOperations(Resource):
             return '', 500
 
 
-""" Projekt Objekt wird gelöscht und erstellt - ein bestimmtes Projekt Objekt wird gelesen """
+""" Projekt Objekt wird gelöscht und aktualisiert - ein bestimmtes Projekt Objekt wird gelesen """
 @zeiterfassung.route("/projekt/<int:projekt_id>")
 @zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
 class ProjektByIdOperations(Resource):
@@ -310,7 +310,7 @@ class MitarbeiterInProjektListOperations(Resource):
     @zeiterfassung.marshal_with(mitarbeiter_in_projekt)
     @secured
     def get(self):
-        """ Auslesen der Mitarbeiter_in_Projekt -Objekte """
+        """ Auslesen der Mitarbeiter_in_Projekt-Objekte """
         adm = Administration()
         mitarbeiter_in_projekt = adm.get_all_mitarbeiter_in_projekt()
         return mitarbeiter_in_projekt
@@ -321,8 +321,8 @@ class MitarbeiterInProjektListOperations(Resource):
     def post(self):
         """ Mitarbeiter_in_Projekt Instanz erstellen """
         adm = Administration()
-        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
-        Attribute aus den Werten von api.payload setzen. """
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit ein Mitarbeiter_in_Projekt, indem wir ihre 
+        Attribute aus den Werten von api.payload setzen. mitarbeiter_in_projekt_object = MitarbeiterInProjekt-Objekt"""
         mitarbeiter_in_projekt_object = MitarbeiterInProjekt.from_dict(api.payload)
 
         if mitarbeiter_in_projekt_object is not None:
@@ -335,7 +335,7 @@ class MitarbeiterInProjektListOperations(Resource):
             return '', 500
 
 
-""" Mitarbeiter_in_Projekt wird gelöscht und erstellt """
+""" Mitarbeiter_in_Projekt wird gelöscht"""
 @zeiterfassung.route("/mitarbeiter_in_projekt/<int:person_idd>/<int:projekt_id>")
 @zeiterfassung.doc(params={"projekt_id": {"description:" : "Die Id des gewünschten Projekts"},
                            "person_idd" :{"description:" : "Die Id der gewünschten Person"}})
@@ -348,13 +348,7 @@ class MitarbeiterInProjektByIdOperations(Resource):
         """
         adm = Administration()
         mip = adm.get_person_by_person_id_and_projekt_by_projekt_id(person_idd, projekt_id)
-        print(mip)
         return mip
-
-    """Dennis Kühnberger """
-    def put(self, projekt_id):
-        """Dennis Kühnberger """
-        pass
 
 
 
@@ -375,12 +369,12 @@ class AktivitaetenListOperations(Resource):
     def post(self):
         """ Aktivität Instanz erstellen """
         adm = Administration()
-        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit ein Projekt, indem wir ihre 
-        Attribute aus den Werten von api.payload setzen. projekt_object = Projekt-Objekt """
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Aktivität, indem wir ihre 
+        Attribute aus den Werten von api.payload setzen. aktivitaet_object = Aktivitaet-Objekt """
         aktivitaet_object = Aktivitaet.from_dict(api.payload)
 
         if aktivitaet_object is not None:
-            """ Wir erstellen in Administration eine Person mithilfe der Daten vom api.payload """
+            """ Wir erstellen in Administration eine Aktivität mithilfe der Daten vom api.payload """
             c = adm.create_aktivitaet(aktivitaet_object.get_projektname(), aktivitaet_object.get_name(), aktivitaet_object.get_dauer(),
                                       aktivitaet_object.get_kapazitaet())
             return c, 200
@@ -389,7 +383,7 @@ class AktivitaetenListOperations(Resource):
             return '', 500
 
 
-""" Aktivität Objekt wird gelöscht und erstellt - ein bestimmtes Aktivität Objekt wird gelesen """
+""" Aktivität Objekt wird gelöscht"""
 @zeiterfassung.route("/aktivitaten/<int:aktivitaet_id>")
 @zeiterfassung.param("aktivitaet_id", "Die Id der gewünschten Aktivität")
 class AktivitaetenByIdOperations(Resource):
@@ -404,8 +398,7 @@ class AktivitaetenByIdOperations(Resource):
         return aktivitaet
 
 
-    """ Aktivitäten Objekt(e) werden gelesen und erstellt, eine bestimmte Aktivität wird herausgelesen  """
-
+    """ Aktivitäten Objekt(e) werden gelesen und akutalisiert"""
     @zeiterfassung.route("/aktivitaet/<int:aktivitaet_id>")
     @zeiterfassung.param("aktivitaet_id", "Die Id der gewünschten Aktivitaet")
     class AktivitaetenByIdOperations(Resource):
@@ -451,7 +444,7 @@ class AktivitaetenInProjektByIdOperations(Resource):
         return aktivitaeten
 
 
-
+""" Urlaub Objekt(e) wird gelesen und erstellt  """
 @zeiterfassung.route("/urlaub")
 class UrlaubListOperations(Resource):
     @zeiterfassung.marshal_with(urlaub)
@@ -468,19 +461,19 @@ class UrlaubListOperations(Resource):
     def post(self):
         """ Urlaubs Instanz erstellen """
         adm = Administration()
-        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit Urlaub, indem wir die 
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit einen Urlaub, indem wir die 
         Attribute aus den Werten von api.payload setzen. urlaub_object = Urlaub-Objekt """
         urlaub_object = Urlaub.from_dict(api.payload)
 
         if urlaub_object is not None:
-            """ Wir erstellen in Administration Urlaub mithilfe der Daten vom api.payload """
+            """ Wir erstellen in Administration einen Urlaub mithilfe der Daten vom api.payload """
             c = adm.create_urlaub(urlaub_object.get_person_id(), urlaub_object.get_end_date(), urlaub_object.get_start_date())
             return c, 200
         else:
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
             return '', 500
 
-
+""" Urlaub Objekt wird gelöscht und aktualisiert"""
 @zeiterfassung.route("/urlaub/<int:urlaub_id>")
 @zeiterfassung.expect(urlaub, validate=True)
 class UrlaubByIdOperations(Resource):
@@ -492,7 +485,6 @@ class UrlaubByIdOperations(Resource):
         """
         adm = Administration()
         urlaub = adm.delete_urlaub_by_urlaub_id(urlaub_id)
-        print(urlaub)
         return urlaub
 
     @secured
@@ -511,7 +503,7 @@ class UrlaubByIdOperations(Resource):
             return '', 500
 
 
-""" Pause"""
+""" Pause Objekt(e) wird gelesen und erstellt"""
 @zeiterfassung.route("/pause")
 class PauseListOperations(Resource):
     @zeiterfassung.marshal_with(pause)
@@ -551,11 +543,10 @@ class MitarbeiterInProjektById(Resource):
         """ Auslesen der Mitarbeiter innerhalb eines Projektes"""
         adm = Administration()
         person = adm.get_mitarbeiter_in_projekt_by_idd(person_idd)
-        print(person)
         return person
 
 
-""" Verkaufte_Stunden_in_Aktivität(e) wird gelesen und erstellt  """
+""" Verkaufte_Stunden_in_Aktivität(en) wird gelesen und erstellt  """
 @zeiterfassung.route("/verkaufte_stunden_in_aktivitaet")
 class VerkaufteStundenInAktivitaetOperations(Resource):
     @zeiterfassung.marshal_with(verkaufte_stunden_in_aktivitaet)
@@ -574,8 +565,8 @@ class VerkaufteStundenInAktivitaetOperations(Resource):
     def post(self):
         """ Verkaufte_Stunden_in_Aktivität erstellen """
         adm = Administration()
-        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
-        Attribute aus den Werten von api.payload setzen. person_object = Person-Objekt """
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit die Verkaufte_Stunden_in_Aktivität, 
+        indem wir ihre Attribute aus den Werten von api.payload setzen. person_object = VerkaufteStundeninAktivität-Objekt """
         person_object = VerkaufteStundenInAktivitaet.from_dict(api.payload)
 
         if person_object is not None:
@@ -590,7 +581,7 @@ class VerkaufteStundenInAktivitaetOperations(Resource):
 
 
 
-""" Sollzeit  """
+""" Sollzeit Objekt(e) wird gelesen """
 @zeiterfassung.route("/sollzeit/<int:projekt_id>")
 @zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
 class SollzeitOperations(Resource):
@@ -636,14 +627,14 @@ class PersoenlicheOperations(Resource):
 
 
 
-""" Projekt Objekte werden anhand dem projektleiter ausgegeben"""
+""" Projekt Objekte werden anhand dem Projektleiter ausgegeben"""
 @zeiterfassung.route("/projekt/projektleiter/<int:projektleiter>")
 @zeiterfassung.param("projektleiter", "Die Id des gewünschten Projektleiters")
 class ProjByIdOperations(Resource):
     @zeiterfassung.marshal_with(projekt)
     @secured
     def get(self,projektleiter):
-        """ Projekt Objekte werden anhand dem projektleiter ausgegeben
+        """ Projekt Objekte werden anhand dem Projektleiter ausgegeben
         Das zu auslesende Objekt wird anhand der person_id bestimmt
         """
         adm = Administration()
@@ -682,11 +673,10 @@ class AktivitaetBuchenOperations(Resource):
         """
         adm = Administration()
         mip = adm.get_projekte_by_projekt_id_and_person_id_buchen(person_id, projekt_id)
-        print(mip)
         return mip
 
 
-""" Buchungen  """
+""" Zeitintervallbuchungen werden erstellt """
 @zeiterfassung.route("/zeitintervallbuchungen")
 class ZeitintervallbuchungenListOperations(Resource):
     @zeiterfassung.marshal_with(zeitintervallbuchung, code=201)
@@ -695,12 +685,12 @@ class ZeitintervallbuchungenListOperations(Resource):
     def post(self):
         """ Zeitintervallbuchung Instanz erstellen """
         adm = Administration()
-        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Person, indem wir ihre 
-        Attribute aus den Werten von api.payload setzen. person_object = Person-Objekt """
+        """ Wir setzen den api.payload in die from_dict Methode ein und erstellen damit eine Zeitintervallbuchung,
+         indem wir ihre Attribute aus den Werten von api.payload setzen. zb_object = Zeitintervallbuchung-Objekt """
         zb_object = Zeitinverallbuchung.from_dict(api.payload)
 
         if zb_object is not None:
-            """ Wir erstellen in Administration eine Person mithilfe der Daten vom api.payload """
+            """ Wir erstellen in Administration eine Zeitintervallbuchung mithilfe der Daten vom api.payload """
             c = adm.create_zeitintervallbuchung(zb_object.get_projekt_id(),zb_object.get_person_id(), zb_object.get_aktivitaet_id(),
                 zb_object.get_zeitintervall())
             return c, 200
@@ -718,10 +708,10 @@ class ZeitintervallbuchungenByProjektId(Resource):
         """ Auslesen der Aktivitäten innerhalb eines Projektes"""
         adm = Administration()
         zeitintervallbuchung = adm.get_zeitintervallbuchung_by_id(projekt_id)
-        print(projekt)
         return zeitintervallbuchung
 
 
+""" Kommen Objekt wird erstellt - ein bestimmtes Kommen Objekt wird gelesen"""
 @zeiterfassung.route("/kommen")
 class KommenListOperations(Resource):
     @zeiterfassung.marshal_with(kommen)
@@ -750,6 +740,8 @@ class KommenListOperations(Resource):
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
             return '', 500
 
+
+""" Gehen Objekt wird erstellt - ein bestimmtes Gehen Objekt wird gelesen"""
 @zeiterfassung.route("/gehen")
 class GehenListOperations(Resource):
     @zeiterfassung.marshal_with(gehen)
@@ -778,7 +770,7 @@ class GehenListOperations(Resource):
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
             return '', 500
 
-""" Projektarbeit"""
+""" Projektarbeit Objekt wird erstellt - ein bestimmtes Projektarbeit Objekt wird gelesen"""
 @zeiterfassung.route("/projektarbeit")
 class ProjektarbeitListOperations(Resource):
     @zeiterfassung.marshal_with(projektarbeit)
@@ -808,6 +800,8 @@ class ProjektarbeitListOperations(Resource):
             # Wenn irgendetwas schiefgeht, dann geben wir nichts zurück und werfen einen Server-Fehler.
             return '', 500
 
+
+""" Ereignisbuchung Objekt wird erstellt - ein bestimmtes Ereignisbuchung Objekt wird gelesen"""
 @zeiterfassung.route("/ereignisbuchung")
 class EreignisbuchungListOperations(Resource):
     @zeiterfassung.marshal_with(ereignisbuchung)

@@ -4,20 +4,12 @@ import google.oauth2.id_token
 
 from Administration import Administration
 
-
+""" Wir haben den Decorator zur Google Firebase-basierten Authentifizierung von Benutzern aus 
+    dem Bankbeispiel übernommen. Es kann also jeder, der einen durch Firebase akzeptierten
+    Account besitzt, sich an unserem System anmelden. Bei jeder Anmeldung werden Name,
+    Mail-Adresse sowie die Google User ID in unserem System gespeichert bzw. geupdated."""
 def secured(function):
-    """Decorator zur Google Firebase-basierten Authentifizierung von Benutzern
 
-    Da es sich bei diesem System um eine basale Fallstudie zu Lehrzwecken handelt, wurde hier
-    bewusst auf ein ausgefeiltes Berechtigungskonzept verzichtet. Vielmehr soll dieses Decorator
-    einen Weg aufzeigen, wie man technisch mit vertretbarem Aufwand in eine Authentifizierung
-    einsteigen kann.
-
-    POLICY: Die hier demonstrierte Policy ist, dass jeder, der einen durch Firebase akzeptierten
-    Account besitzt, sich an diesem System anmelden kann. Bei jeder Anmeldung werden Klarname,
-    Mail-Adresse sowie die Google User ID in unserem System gespeichert bzw. geupdated. Auf diese
-    Weise könnte dann für eine Erweiterung des Systems auf jene Daten zurückgegriffen werden.
-    """
     firebase_request_adapter = requests.Request()
 
     def wrapper(*args, **kwargs):
@@ -45,17 +37,16 @@ def secured(function):
 
                     user = adm.get_user_by_google_user_id(google_user_id)
                     if user is not None:
-                        """Fall: Der Benutzer ist unserem System bereits bekannt.
-                        Wir gehen davon aus, dass die google_user_id sich nicht ändert.
-                        Wohl aber können sich der zugehörige Klarname (name) und die
-                        E-Mail-Adresse ändern. Daher werden diese beiden Daten sicherheitshalber
-                        in unserem System geupdated."""
+                        """Der Benutzer ist in unserem System bereits bekannt, weshalb sich
+                        die google_user_id sich nicht ändert.Der zugehörige Name und die
+                        E-Mail-Adresse könnten sich aber ändern, weshalb diese beiden Daten zur Sicherheit
+                        in unserem System geupdated werden."""
                         user.set_name(name)
                         user.set_email(email)
                         adm.save_user(user)
                     else:
-                        """Fall: Der Benutzer war bislang noch nicht eingelogged. 
-                        Wir legen daher ein neues User-Objekt an, um dieses ggf. später
+                        """Wenn der Benutzer bisher noch nicht eingelogged war, 
+                        wird ein neues User-Objekt angelegt, um dieses gegebenenfalls später
                         nutzen zu können.
                         """
                         user = adm.create_user(name, email, google_user_id)

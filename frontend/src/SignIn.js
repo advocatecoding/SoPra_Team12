@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Button, Grid, Typography, withStyles, Box } from '@material-ui/core';
 
-
+    /**
+     * Wir nutzen dieselbe SignIn Datei, wie im Bankbeispiel, sodass
+     sich die Nutzer über Firebase einloggen, um unser System nutzen zu können.
+	 */
 class SignIn extends Component {
 
 	/** 

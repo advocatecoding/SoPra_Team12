@@ -8,6 +8,9 @@ import Header from './components/header/Header'
 import Login from './Login'
 import Start from './Start';
 
+/** Wir nutzen auch eine Firebase Authentifizierungs-Anbindung,
+    welche ebenfalls im Bankbeispiel angewendet wurde  */
+
 class App extends React.Component {
 
     #firebaseConfig = {
@@ -34,7 +37,7 @@ class App extends React.Component {
 	}
 
 	/** 
-	 * Create an error boundary for this app and recieve all errors from below the component tree.
+	 * Create an error boundary for this app and receive all errors from below the component tree.
  	 */
 	static getDerivedStateFromError(error) {
 		// Update state so the next render will show the fallback UI.
