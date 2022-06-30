@@ -1,5 +1,4 @@
 import React from "react";
-import Button from '@mui/material/Button';
 import { Fab } from '@material-ui/core';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
@@ -10,7 +9,7 @@ export default function UrlaubBuchen(props) {
 
 
     const handleChange = () => {
-        console.log("Modal is shown.")
+        //console.log("Modal is shown.")
         props.openUrlaubBuchenModal(true)
     };
 

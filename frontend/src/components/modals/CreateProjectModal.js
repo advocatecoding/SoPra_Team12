@@ -29,10 +29,6 @@ export default function CreateProjectModal(props) {
     }, [])
 
 
-    const [mitarbeiterProjekte, setMitarbeiterProjekte] = useState([]);
-    const dropdownRef = useRef(null);
-    const [loadingInProgress, setLoading] = useState(true);
-
 
     // Usestates für Post Projekt
     const [projektname, setProjektname] = useState("");
@@ -69,12 +65,9 @@ export default function CreateProjectModal(props) {
         }).then((response) => {
             console.log(response)
             const data = response.data;
-            console.log(data)
-            console.log("Die ProjektId soll ab hier gespeichert werden:", data.id)
-            //setProjektId(data.id)
-            //console.log("Projekt wurde gepostet", projekt_id)
+            //console.log(data)
+            //console.log("Die ProjektId soll ab hier gespeichert werden:", data.id)
             let projekt_id = data.id
-            test()
             teamFields.map((data) => {
                 postTeam(data.mitarbeiter_id, data.verkaufte_stunden, projekt_id);
             }
@@ -85,10 +78,6 @@ export default function CreateProjectModal(props) {
         }).catch(err => { console.log(err) })
     };
 
-
-    function test(){
-        console.log("feierabend")
-    }
 
     function postAktivitäten(aktivitaetname, dauer, kapazität, id, projekt_id) {
         //getSettedProjektId()
@@ -102,8 +91,8 @@ export default function CreateProjectModal(props) {
         }).then((response) => {
             console.log(response)
             const data = response.data
-            console.log("Die ProjektId soll ab hier AUCH gespeichert werden:", data.id)
-            console.log("Post Aktivität Response: ", data)
+            //console.log("Die ProjektId soll ab hier AUCH gespeichert werden:", data.id)
+            //console.log("Post Aktivität Response: ", data)
         }).catch(err => { console.log(err) })
     }
 
@@ -131,7 +120,14 @@ export default function CreateProjectModal(props) {
         {/** Post-Requests */ }
         postProjekt(1211);
         getSettedProjektId()
-        
+        props.closeModal(false)
+        props.setAlertOpen(true)
+        setaktivitätenFields([
+            { id: uuidv4(), aktivitätsname: '', dauer: '', kapazität: '' },
+        ])
+        setTeamFields([
+            { id: uuidv4(), mitarbeiter_id: '', verkaufte_stunden: '', },
+        ])
     };
 
     const changeProjektname = (event) => {
@@ -153,7 +149,7 @@ export default function CreateProjectModal(props) {
         ])
         setAktivitaetenErstellen(false);
         setTeamErstellen(false);
-        props.setOpenModal(false)
+        props.closeModal(false)
     };
 
 
@@ -161,12 +157,12 @@ export default function CreateProjectModal(props) {
     const showAktivitaetenErstellen = (e) => {
         e.preventDefault();
         setAktivitaetenErstellen(true)
-
     };
 
     const showTeamErstellen = (e) => {
         e.preventDefault();
         setTeamErstellen(true);
+        setAktivitaetenErstellen(false);
     }
 
     const zurück1 = (e) => {
@@ -182,7 +178,7 @@ export default function CreateProjectModal(props) {
     const iDerhalten = (id) => {
         setProjekleiter(id)
         setMitarbeiter(id)
-        console.log({ projektleiter }, "ayk projektleiter wird gesetzt")
+        console.log({ projektleiter }, "Projektleiter wird gesetzt")
     }
 
 
@@ -258,7 +254,7 @@ export default function CreateProjectModal(props) {
 
     return (
         <div style={{ backgroundColor: "red" }}>
-            <Dialog open={props.showModal} style={{ backgroundColor: "rgba(33,37,31, 0.7)"}}
+            <Dialog  open={props.showModal} style={{ backgroundColor: "rgba(33,37,31, 0.7)"}}
                 PaperProps={{
                     sx: {
                         minHeight: 300,
@@ -267,7 +263,7 @@ export default function CreateProjectModal(props) {
                     }
                 }}>
                 <DialogTitle className="dialog-bg" sx={{ m: 0, p: 2 }}>Projekt anlegen <Button startIcon={<CloseIcon />} onClick={() => {
-                    props.setOpenModal(false);
+                    props.closeModal(false);
                 }}
                     sx={{
                         right: 0,

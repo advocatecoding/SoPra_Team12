@@ -74,20 +74,20 @@ export default function AktivitätBuchenModal(props) {
       mitarbeiter,
       aktivitaet,
       gebuchte_stunden
-    }).then(data => console.log("Gebuchte Stunden wurde gepostet", data).catch(err => console.log(err)))
+    }).then(data => {console.log("Gebuchte Stunden wurde gepostet", data)}, props.setAlertOpen(true)).catch(err => console.log(err))
   };
 
 
   function postEmptyZeitintervallBuchung(id, gearbeitete_zeit) {
     const url = `/zeit/zeitintervallbuchungen`;
-    console.log("Aykut 2")
     axios.post(url, {
       id,
       projekt_id,
       person_id,
       aktivitaet_id,
       gearbeitete_zeit
-    }).then(data => console.log(" Empty Zeitintervall wurde gepostet", data).catch(err => console.log(err)))
+    }).then(data => {console.log("Zeitintervall wurde gepostet", data)})
+    .catch(err => console.log(err))
   };
 
 

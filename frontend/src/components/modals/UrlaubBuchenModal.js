@@ -31,7 +31,8 @@ export default function UrlaubBuchenModal(props) {
     })
     .then(data => {
       console.log("Urlaub wure gepostet", data)
-    })
+    },
+    props.setAlertOpen(true))
     .catch(err => { console.log(err) })
   };
 

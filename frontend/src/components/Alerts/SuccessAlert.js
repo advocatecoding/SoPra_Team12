@@ -16,12 +16,12 @@ function SuccessAlert(props) {
 
   const handleChange = () => {
     props.setAlertOpen(false)
-};
+  };
 
   return (
-    <div style={{marginTop:"20% !important"}} className="div5">
+    <div >
       {alertOpen ?
-        <Stack sx={{ width: '25%' }} spacing={2} style={{marginTop:"20% !important"}}>
+        <Stack spacing={2}>
           <Alert onClose={ handleChange} style={{marginTop:"20% !important"}}
             icon={<CheckIcon fontSize="inherit" />} severity="success">{props.alertmessage}</Alert>
         </Stack>

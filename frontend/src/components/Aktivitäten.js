@@ -8,9 +8,7 @@ import "../index.css"
 
 
 export default function Aktivitäten(props) {
-    const [aktivität, setAktivität] = useState('');
     const [aktivitäten, setAktivitäten] = useState([1, 2]);
-    const [aktivitätSelected, setAktivitätSelected] = useState(false);
 
     const handleChange = (event) => {
         props.setAktivität(event.target.value)

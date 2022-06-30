@@ -147,7 +147,7 @@ export default function Buchen(props) {
       gearbeitete_zeit
     }).then((response) => {
       console.log(response)
-  }).catch(err => { console.log(err) })
+  }, props.setAlertOpen(true)).catch(err => { console.log(err) })
   };
 
   function postProjektarbeit(id, gearbeitete_zeit) {

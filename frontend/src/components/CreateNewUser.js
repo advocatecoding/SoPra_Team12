@@ -44,13 +44,6 @@ export default function CreateNewUser(props) {
       };
 
 
-    const pressButton = (event) => {
-        event.preventDefault();
-        console.log("button clicked");
-
-    };
-
-
     const handleClickOpen = () => {
         setOpenModal(true);
     };

@@ -12,6 +12,7 @@ import AktivitätBuchen from "./components/AktivitätBuchen";
 import AktivitätBuchenModal from "./components/modals/AktivitätBuchenModal";
 import Buchen from "./components/Buchen";
 import Anwesenheit from "./components/Anwesenheit";
+import SuccessAlert from "./components/Alerts/SuccessAlert";
 
 
 const theme = createTheme({
@@ -25,14 +26,17 @@ const theme = createTheme({
 });
 
 
-
-
 function Start(props) {
   const [userId, setUserId] = useState("");
   const [userIdIsSet, setUserIdTrue] = useState(false);
   const [checkProjects, setCheckProjects] = useState(false);
   const [urlaubModalOpen, setUrlaubModalOpen] = useState(false);
   const [AktivitätModalOpen, setAktivitätModalOpen] = useState(false);
+  const [successAlertOpen, setSuccessAlertOpen] = useState(false);
+  const [successAlertBuchenOpen, setSuccessAlertBuchenOpen] = useState(false);
+  const [successAlertAktivitätOpen, setSuccessAlertAktivitätOpen] = useState(false);
+  const [successAlertProjekteOpen, setSuccessAlertProjekteOpen] = useState(false);
+  
 
 
   useEffect(() => {
@@ -54,9 +58,41 @@ function Start(props) {
   }
 
 
-
   return (
     <div >
+      {/** Hier werden die Success Alerts geladen, falls die Posts bzw. Fetches erfolgreich ausgeführt wurden */}
+      {successAlertOpen ?
+        <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
+          <SuccessAlert setAlertOpen={open => setSuccessAlertOpen(open)} alertmessage={"Das Buchen eines neuen Urlaubs war erfolgreich!"}></SuccessAlert>
+        </div>
+
+        : null
+      }
+
+      {successAlertBuchenOpen ?
+        <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
+          <SuccessAlert setAlertOpen={open => setSuccessAlertBuchenOpen(open)} alertmessage={"Das Buchen einer neuen Projektarbeit war erfolgreich!"}></SuccessAlert>
+        </div>
+
+        : null
+      }
+
+      {successAlertAktivitätOpen ?
+        <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
+          <SuccessAlert setAlertOpen={open => setSuccessAlertAktivitätOpen(open)} alertmessage={"Das Zuweisen von einer neuen Aktivität war erfolgreich!"}></SuccessAlert>
+        </div>
+
+        : null
+      }
+
+{successAlertProjekteOpen ?
+        <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
+          <SuccessAlert setAlertOpen={open => setSuccessAlertProjekteOpen(open)} alertmessage={"Das Laden der Projekte war erfolgreich!"}></SuccessAlert>
+        </div>
+
+        : null
+      }
+
       {checkProjects ?
         <>
           <CheckProjectsModal setOpenModal={setCheckProjects} mitarbeiter_id={userId} />
@@ -64,9 +100,10 @@ function Start(props) {
         : null
       }
 
-      {urlaubModalOpen && <UrlaubBuchenModal setOpenModal={setUrlaubModalOpen} id={userId}></UrlaubBuchenModal>}
+      {urlaubModalOpen && <UrlaubBuchenModal setAlertOpen={setSuccessAlertOpen} setOpenModal={setUrlaubModalOpen} id={userId}></UrlaubBuchenModal>}
 
-      {AktivitätModalOpen && <AktivitätBuchenModal setOpenModal={setAktivitätModalOpen} id={userId}></AktivitätBuchenModal>}
+
+      {AktivitätModalOpen && <AktivitätBuchenModal setAlertOpen={setSuccessAlertAktivitätOpen} setOpenModal={setAktivitätModalOpen} id={userId}></AktivitätBuchenModal>}
 
       <ThemeProvider theme={theme}>
         {/* Abstand */}
@@ -79,7 +116,7 @@ function Start(props) {
               {
                 userId !== "" ?
                   <>
-                    <ProjektListe id={userId}></ProjektListe>
+                    <ProjektListe setAlertOpen={setSuccessAlertProjekteOpen} id={userId}></ProjektListe>
                   </>
                   : null
               }
@@ -100,7 +137,7 @@ function Start(props) {
 
 
           {/* Hauptbereich */}
-          <Grid container direction="row" justifyContent="space-between" alignItems="start" lg={10} xs={12} md={8} style={{  borderRadius: "14px", maxWidth: "900px", margin: "auto", padding: "1rem" }}>
+          <Grid container direction="row" justifyContent="space-between" alignItems="start" lg={10} xs={12} md={8} style={{ borderRadius: "14px", maxWidth: "900px", margin: "auto", padding: "1rem" }}>
             <Grid container item style={{ borderRadius: "14px", height: "25%", justifyContent: "center", display: "flex", }} >
               {/* Benutzerinformation*/}
               <Grid xs={8} item container style={{ backgroundColor: "#262A2E", borderRadius: "14px", display: "flex", justifyContent: "flex-start" }}>
@@ -138,17 +175,17 @@ function Start(props) {
               <Grid style={{ height: "30%", width: "100%", padding: "2rem", paddingBottom: "0rem" }}>
                 <Typography variant="h5" align="center" style={{ marginBottom: "2rem" }}>Buchbereich</Typography>
                 {
-                    userIdIsSet ?
-                      <>
-                        <Anwesenheit id={userId} />
-                      </>
-                      : null
-                  }
-                
+                  userIdIsSet ?
+                    <>
+                      <Anwesenheit id={userId} />
+                    </>
+                    : null
+                }
+
               </Grid>
 
-              <Grid style={{ height: "70%", width: "100%", padding: "2rem", paddingTop:"5rem" }}>
-                <Buchen id={userId} />
+              <Grid style={{ height: "70%", width: "100%", padding: "2rem", paddingTop: "5rem" }}>
+                <Buchen setAlertOpen={open => setSuccessAlertBuchenOpen(open)} id={userId} />
               </Grid>
             </Grid>
           </Grid>
