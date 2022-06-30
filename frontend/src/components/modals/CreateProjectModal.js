@@ -258,7 +258,6 @@ export default function CreateProjectModal(props) {
                 PaperProps={{
                     sx: {
                         minHeight: 300,
-                        minWidth: 740,
                         maxHeight: 700
                     }
                 }}>
@@ -307,7 +306,6 @@ export default function CreateProjectModal(props) {
                 PaperProps={{
                     sx: {
                         minHeight: 300,
-                        minWidth: 740,
                         maxHeight: 700
                     }
                 }}>
@@ -388,7 +386,6 @@ export default function CreateProjectModal(props) {
                 PaperProps={{
                     sx: {
                         minHeight: 300,
-                        minWidth: 740,
                         maxHeight: 700
                     }
                 }}>

@@ -13,6 +13,7 @@ import AktivitätBuchenModal from "./components/modals/AktivitätBuchenModal";
 import Buchen from "./components/Buchen";
 import Anwesenheit from "./components/Anwesenheit";
 import SuccessAlert from "./components/Alerts/SuccessAlert";
+import "./index.css"
 
 
 const theme = createTheme({
@@ -109,6 +110,7 @@ function Start(props) {
         {/* Abstand */}
         <Box sx={{ mt: 5 }}></Box>
         <Grid container justify="space-between"
+        id="main-grid"
         >
           {/* Sidebar -> Projektübersicht */}
           <Grid lg={3} xs={8} md={4} style={{ display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "auto", marginRight: "auto", padding: "1rem" }}>
@@ -138,9 +140,9 @@ function Start(props) {
 
           {/* Hauptbereich */}
           <Grid container direction="row" justifyContent="space-between" alignItems="start" lg={10} xs={12} md={8} style={{ borderRadius: "14px", maxWidth: "900px", margin: "auto", padding: "1rem" }}>
-            <Grid container item style={{ borderRadius: "14px", height: "25%", justifyContent: "center", display: "flex", }} >
+            <Grid id="restbereich" container item style={{ borderRadius: "14px", height: "25%", justifyContent: "center", display: "flex", }} >
               {/* Benutzerinformation*/}
-              <Grid xs={8} item container style={{ backgroundColor: "#262A2E", borderRadius: "14px", display: "flex", justifyContent: "flex-start" }}>
+              <Grid xs={12} md={8} item container style={{ backgroundColor: "#262A2E", borderRadius: "14px", display: "flex", justifyContent: "flex-start" }}>
                 <div style={{ paddingLeft: "1.5rem", paddingTop: "1.5rem" }}>
                   {
                     userIdIsSet ?
@@ -153,7 +155,7 @@ function Start(props) {
               </Grid>
 
               {/* Stundenübersicht erstellen + Urlaub buchen Button*/}
-              <Grid xs={4} item container direction="column" justifyContent="start" alignItems="flex-start"  >
+              <Grid xs={12} md={4} item container direction="column" justifyContent="start" alignItems="flex-start"  >
                 <Grid item container >
                   {
                     userIdIsSet ?
@@ -170,7 +172,7 @@ function Start(props) {
             </Grid>
 
             {/* Buchbereich*/}
-            <Grid container item xs={12} style={{ backgroundColor: "#262A2E", borderRadius: "14px", marginTop: "2rem", height: "65%" }}>
+            <Grid id="buchbereich" container item xs={12} style={{ backgroundColor: "#262A2E", borderRadius: "14px", marginTop: "2rem", height: "65%" }}>
 
               <Grid style={{ height: "30%", width: "100%", padding: "2rem", paddingBottom: "0rem" }}>
                 <Typography variant="h5" align="center" style={{ marginBottom: "2rem" }}>Buchbereich</Typography>

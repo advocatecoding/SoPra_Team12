@@ -52,7 +52,7 @@ export default function Stundenübersicht(props) {
     return (
 
 
-        <div style={{marginLeft:"auto"}}>
+        <div class="buttons-right" style={{marginLeft:"auto"}}>
 
             <Fab variant="extended" onClick={() => { handleClickOpen() }} style={{ color: "white", backgroundColor: "#30343C" }} >
                 <TimelapseIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />
@@ -64,7 +64,6 @@ export default function Stundenübersicht(props) {
                 PaperProps={{
                     style: {
                         minHeight: 390,
-                        minWidth: 600,
                         maxHeight: 280,
                         borderRadius: '12px',
                     }

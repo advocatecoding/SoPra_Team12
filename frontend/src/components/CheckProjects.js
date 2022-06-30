@@ -16,7 +16,7 @@ export default function CheckProjects(props) {
 
     return (
 
-        <div style={{marginTop: "2rem"}}>
+        <div className="buttons-right" style={{marginTop: "2rem"}}>
              <Fab variant="extended" onClick={() => {handleChange()}} style={{color: "white", backgroundColor:"#30343C"}}>
                 <DashboardIcon sx={{ mr: "1rem" }}  onClick={() => {handleChange()}} style={{color: "#00bcd4"}} />
                 Projektkontrolle durchführen

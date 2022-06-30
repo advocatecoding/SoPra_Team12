@@ -1,7 +1,7 @@
 import React from "react";
-import Button from '@mui/material/Button';
 import { Fab } from '@material-ui/core';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import "../index.css"
 
 
 
@@ -17,7 +17,7 @@ export default function AktivitätBuchen(props) {
 
     return (
 
-        <div style={{marginTop: "2rem"}}>
+        <div className="buttons-right" style={{marginTop: "2rem"}}>
             <Fab variant="extended" onClick={() => { handleChange() }} style={{ color: "white", backgroundColor: "#30343C" }}>
                 <CalendarMonthIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />
                 Aktivitäten zuweisen

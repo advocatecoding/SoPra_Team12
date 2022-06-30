@@ -50,7 +50,7 @@ function Login() {
                 direction="column"
                 alignItems="center"
                 justifyContent="center">
-                <Typography style={{ marginTop: "50px", color: "white" }} fontSize={25}>Wählen Sie ihren Benutzer aus und drücken Sie auf <span style={{color: "#00bcd4"}}>Anmelden</span></Typography>
+                <Typography style={{ marginTop: "50px", color: "white", textAlign:"center" }} fontSize={25}>Wählen Sie ihren Benutzer aus und drücken Sie auf <span style={{color: "#00bcd4"}}>Anmelden</span></Typography>
                 <Box mt={5} />
                 <Users setUsername={user => setUsernamePar(user)} style={{ minWidth: "100px" }}></Users>
                 {

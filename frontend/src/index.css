@@ -126,6 +126,8 @@ a {
     padding: 1rem;
     overflow: hidden;
     transition: height var(--speed) ease;
+    min-width: 380px;
+
 }
 
 .menu {
@@ -171,4 +173,26 @@ a {
 
 .css-1e0d89p-MuiButtonBase-root-MuiIconButton-root {
     color: #A7DDF5 !important;
+}
+
+@media only screen and (max-width: 600px)  {
+    .buttons-right {
+        margin-right: auto !important;
+        text-align: center !important;
+        margin-top: 2rem;
+    }
+    #personinformationen {
+        padding-bottom: 1.5rem;
+    }
+    #main-grid {
+        flex-direction: column-reverse;
+    }
+    #buchbereich {
+        order: 1;
+        margin-top: 0px !important;
+        margin-bottom: 3rem;
+    }
+    #restbereich {
+        order: 2
+    }
 }

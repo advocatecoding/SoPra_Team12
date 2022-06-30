@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Typography from '@mui/material/Typography';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import "../index.css"
 
 
 export default function PersonInformationen(props) {
@@ -27,7 +28,7 @@ export default function PersonInformationen(props) {
     return (
         <div style={{display:"flex"}}>
             <AccountCircleIcon style={{ color: "#00bcd4", fontSize: "40px" }}></AccountCircleIcon>
-            <Typography color="white" variant="h6" style={{paddingLeft: "1.2rem", marginTop:"-2px"}}>
+            <Typography id="personinformationen" color="white" variant="h6" style={{paddingLeft: "1.2rem", marginTop:"-2px"}}>
                 Name: {personData.vorname} {personData.nachname}
                 <br/>
                 Benutzername: {personData.benutzername}

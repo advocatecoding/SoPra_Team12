@@ -28,8 +28,8 @@ function Header(props) {
         
         </Grid>
 
-        <Grid item>
-          <Typography style={textColor} align='center' variant='h4'>Zeiterfassung HdM WebApp</Typography>
+        <Grid item xs={8}>
+          <Typography align='center' variant='h4'>Zeiterfassung HdM WebApp</Typography>
         </Grid>
         <Grid item>
           <ProfileDropDown user={user}></ProfileDropDown>

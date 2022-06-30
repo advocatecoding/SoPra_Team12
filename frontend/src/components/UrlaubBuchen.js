@@ -16,7 +16,7 @@ export default function UrlaubBuchen(props) {
 
     return (
 
-        <div style={{marginTop: "2rem", marginLeft: "auto"}}>
+        <div className="buttons-right" style={{marginTop: "2rem", marginLeft: "auto"}}>
             <Fab variant="extended" onClick={() => { handleChange() }} style={{ color: "white", backgroundColor: "#30343C" }}>
                 <CalendarMonthIcon sx={{ mr: "1rem" }} style={{ color: "#00bcd4" }} />
                 Urlaub buchen
