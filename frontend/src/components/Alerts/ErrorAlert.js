@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import Alert from '@mui/material/Alert';
 import Stack from '@mui/material/Stack';
-import CheckIcon from '@mui/icons-material/Check';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import "../../index.css"
 
 
-
-function SuccessAlert(props) {
+function ErrorAlert(props) {
 
   const [alertOpen, setAlertOpen] = useState(true)
 
@@ -22,8 +21,8 @@ function SuccessAlert(props) {
     <div >
       {alertOpen ?
         <Stack spacing={2}>
-          <Alert id="success-alert" onClose={ handleChange} style={{marginTop:"20% !important"}}
-            icon={<CheckIcon fontSize="inherit" />} severity="success">{props.alertmessage}</Alert>
+          <Alert id="error-alert" onClose={handleChange} style={{marginTop:"20% !important"}}
+            icon={<ErrorOutlineIcon id="error-icon" fontSize="inherit" />} severity="error">{props.alertmessage}</Alert>
         </Stack>
         : null
       }
@@ -31,4 +30,4 @@ function SuccessAlert(props) {
     </div>
   )
 }
-export default SuccessAlert
+export default ErrorAlert

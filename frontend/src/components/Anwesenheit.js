@@ -3,7 +3,6 @@ import { Grid, Button, Typography } from '@material-ui/core';
 import TextField from "@material-ui/core/TextField";
 import axios from 'axios';
 import "../index.css"
-import SuccessAlert from './Alerts/SuccessAlert';
 
 export default function Anwesenheit(props) {
     const [intervall, setIntervall] = useState("0h 0min");
@@ -20,11 +19,6 @@ export default function Anwesenheit(props) {
     const [person_id, setPersonID] = useState(null);
     const [start_kommen, setStartKommen] = useState(null);
     const [ende, setGehen] = useState(null);
-
-    //Post Pause
-    const [start_pause, setStartPause] = useState(null);
-    const [ende_pause, setEndePause] = useState(null);
-
 
     useEffect(() => {
         iDerhalten(props.id)
@@ -47,8 +41,6 @@ export default function Anwesenheit(props) {
         console.log("Person Id", person_id)
     }
 
-
-
     function postKommen(id) {
         const url = `/zeit/kommen`;
         console.log("Kommen", id, person_id, start_kommen)
@@ -58,7 +50,6 @@ export default function Anwesenheit(props) {
             start_kommen
         }).then(data => console.log(" Kommen wurde gepostet", data).catch(err => console.log(err)))
     };
-
 
     function postGehen(id) {
         const url = `/zeit/gehen`;
@@ -70,22 +61,10 @@ export default function Anwesenheit(props) {
         }).then(data => console.log(" Gehen wurde gepostet", data).catch(err => console.log(err)))
     };
 
-
-    function postPause(id) {
-        const url = `/zeit/pause`;
-        console.log("Gehen", id, person_id, start_kommen)
-        axios.post(url, {
-            id,
-            person_id,
-            start_pause,
-            ende_pause
-        }).then(data => console.log(" Pause wurde gepostet", data).catch(err => console.log(err)))
-    };
-
     const changeKommen = (event) => {
         setStartKommen(event.target.value)
-        // checkTime()
         var time = event.target.value;
+        console.log(time)
         setStart(time)
         var start1 = new Date()
         var timeInInt = time.split(":");
@@ -110,29 +89,12 @@ export default function Anwesenheit(props) {
         setEndeTime(ende1)
     };
 
-    const changePauseStart = (event) => {
-        setStartPause(event.target.value)
-        checkTime()
-    };
-
-
-    const changePauseEnde = (event) => {
-        setEndePause(event.target.value)
-    };
-
     const PostKommenUndGehen = (e) => {
         e.preventDefault();
         postKommen(1211)
         postGehen(1211)
 
     };
-
-
-    const ChangePause = (e) => {
-        e.preventDefault();
-        postPause(999)
-    };
-
 
     function checkTime() {
         /* An dieser Stelle Problem: der zuletzt gesetzte wert stimmt, aber der andere nicht */
@@ -214,46 +176,7 @@ export default function Anwesenheit(props) {
             </Grid>
 
 
-            <Grid id="pause-grid" container justify="center" alignItems="center" style={{ marginTop: "1rem" }}>
-                <Grid item md={3} xs={6} style={{ alignSelf: "end" }}>
-                    <Typography variant="h5" >Pause</Typography>
-                </Grid>
-                <Grid item xs={3}>
-                    <form noValidate>
-                        <TextField
-                            className="time"
-                            label="Start"
-                            type="time"
-                            defaultValue="00:00"
-                            InputLabelProps={{
-                                shrink: true
-                            }}
-                            onChange={changePauseStart}
-                        />
-                    </form>
-                </Grid>
-                <Grid item xs={3} >
-                    <form noValidate>
-                        <TextField
-                            className="time"
-                            label="Ende"
-                            type="time"
-                            defaultValue="00:00"
-                            InputLabelProps={{
-                                shrink: true
-                            }}
-                            onChange={changePauseEnde}
-                        />
-                    </form>
-
-                </Grid>
-                <Grid item md={3} className="button-anwesenheit" >
-                    <Button className="outlined-button" variant="outlined" onClick={ChangePause} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px" }} >
-                        Buchen
-                    </Button>
-
-                </Grid>
-            </Grid>
+          
         </div>
 
     )

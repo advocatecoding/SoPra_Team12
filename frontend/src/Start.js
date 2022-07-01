@@ -12,7 +12,9 @@ import AktivitätBuchen from "./components/AktivitätBuchen";
 import AktivitätBuchenModal from "./components/modals/AktivitätBuchenModal";
 import Buchen from "./components/Buchen";
 import Anwesenheit from "./components/Anwesenheit";
+import Pause from "./components/Pause";
 import SuccessAlert from "./components/Alerts/SuccessAlert";
+import ErrorAlert from "./components/Alerts/ErrorAlert";
 import "./index.css"
 
 
@@ -37,9 +39,12 @@ function Start(props) {
   const [successAlertBuchenOpen, setSuccessAlertBuchenOpen] = useState(false);
   const [successAlertAktivitätOpen, setSuccessAlertAktivitätOpen] = useState(false);
   const [successAlertProjekteOpen, setSuccessAlertProjekteOpen] = useState(false);
-  const [successAlertAnwesenheitOpen, setSuccessAlertAnwesenheitOpen] = useState(false);
 
-  const[errorAlertAnwesenheitOpen, setErrorAlertAnwesenheitOpen] = useState(false)
+  const [successAlertAnwesenheitOpen, setSuccessAlertAnwesenheitOpen] = useState(false);
+  const[errorAlertAnwesenheitOpen, setErrorAlertAnwesenheitOpen] = useState(false);
+
+  const [successAlertPauseOpen, setSuccessAlertPauseOpen] = useState(false);
+  const[errorAlertPauseOpen, setErrorAlertPauseOpen] = useState(false);
   
 
 
@@ -96,7 +101,7 @@ function Start(props) {
 
         : null
       }
-
+    {/** Anwesenheit Alerts */}
     {successAlertAnwesenheitOpen ?
         <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
           <SuccessAlert setAlertOpen={open => setSuccessAlertAnwesenheitOpen(open)} alertmessage={"Das Buchen Ihrer Anwesenheit war erfolgreich!"}></SuccessAlert>
@@ -106,7 +111,23 @@ function Start(props) {
 
       {errorAlertAnwesenheitOpen ?
         <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
-          <SuccessAlert setAlertOpen={open => setErrorAlertAnwesenheitOpen(open)} alertmessage={"Überprüfen Sie Ihre Eingabe. Sie dürfen nicht mehr als 7.5h pro Tag buchen."}></SuccessAlert>
+          <ErrorAlert setAlertOpen={open => setErrorAlertAnwesenheitOpen(open)} alertmessage={"Überprüfen Sie Ihre Eingabe. Sie dürfen nicht mehr als 7.5h pro Tag buchen."}></ErrorAlert>
+        </div>
+
+        : null
+      }
+
+  {/** Pause Alerts */}
+{successAlertPauseOpen ?
+        <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
+          <SuccessAlert setAlertOpen={open => setSuccessAlertPauseOpen(open)} alertmessage={"Das Buchen Ihrer Pause war erfolgreich!"}></SuccessAlert>
+        </div>
+        : null
+      }
+
+      {errorAlertPauseOpen ?
+        <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
+          <ErrorAlert setAlertOpen={open => setErrorAlertPauseOpen(open)} alertmessage={"Überprüfen Sie Ihre Eingabe. Sie dürfen nicht mehr als 0.5h pro Tag buchen."}></ErrorAlert>
         </div>
 
         : null
@@ -197,6 +218,7 @@ function Start(props) {
               <Grid style={{ height: "30%", width: "100%", padding: "2rem", paddingBottom: "0rem" }}>
                 <Typography variant="h5" align="center" style={{ marginBottom: "2rem" }}>Buchbereich</Typography>
                 <Anwesenheit setErrorAlertOpen={open => setErrorAlertAnwesenheitOpen(open)} setAlertOpen={open => setSuccessAlertAnwesenheitOpen(open)} id={userId} />
+                <Pause setErrorAlertOpen={open => setErrorAlertPauseOpen(open)} setAlertOpen={open => setSuccessAlertPauseOpen(open)} id={userId}></Pause>
               </Grid>
 
               <Grid style={{ height: "70%", width: "100%", padding: "2rem", paddingTop: "5rem" }}>
