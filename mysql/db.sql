@@ -191,16 +191,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
     ON DELETE CASCADE
     ON UPDATE CASCADE);  
     
--- -----------------------------------------------------------------------
--- Tabelle erstellen 'Arbeitszeitkonto'
--- -----------------------------------------------------------------------
-   CREATE TABLE IF NOT EXISTS `Arbeitszeitkonto` (
-  `zeit_id` INT NOT NULL ,
-   password VARBINARY(100) default null,
-   PRIMARY KEY (`zeit_id`));
- 
-    
-    
+
 -- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Mitarbeiter_in_Projekt'
 -- -----------------------------------------------------------------------
@@ -377,36 +368,20 @@ VALUES('1', '1', '1', '1',  1, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
 VALUES('2', '1', '1', '3',  10, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
-VALUES('3', '1', '1', '1',  100, '2022-04-13 05:30:00');
+VALUES('3', '1', '1', '1',  10, '2022-04-13 05:30:00');
+
+
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('4', '1', '1', '1',  100, '2022-04-13 05:30:00');
-INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
-VALUES('5', '2', '1', '2', 100, '2022-04-13 05:30:00');
-INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
-VALUES('6', '2', '1', '1',  1, '2022-04-13 05:30:00');
-INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('7', '2', '2', '3',  10, '2022-04-13 05:30:00');
-INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
-VALUES('8', '3', '1', '8',  90, '2022-04-13 05:30:00');
-INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('9', '3', '1', '7',  100, '2022-04-13 05:30:00');
-INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
-VALUES('10', '3', '3', '7', 10, '2022-04-13 05:30:00');
-INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('11', '3', '3', '8',  70, '2022-04-13 05:30:00');
-INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id,  gearbeitete_zeit, letzte_aenderung)  
-VALUES('12', '3', '3', '8', 40, '2022-04-13 05:30:00');
+VALUES('4', '2', '1', '4',  2, '2022-04-13 05:30:00');
+
 
 
 -- Eren jäger  PROJEKT 1 UND 2
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('13', '2', '2', '2', 100, '2022-04-13 05:30:00');
+VALUES('5', '1', '2', '1',  3, '2022-04-13 05:30:00');
 INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('14', '2', '2', '2', 100, '2022-04-13 05:30:00');
-INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('15', '1', '2', '3',  500, '2022-04-13 05:30:00');
-INSERT INTO `Zeitintervallbuchung` (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung)  
-VALUES('16', '1', '2', '3',  300, '2022-04-13 05:30:00');
+VALUES('6', '1', '2', '1',  2, '2022-04-13 05:30:00');
+
 
 
 
@@ -416,13 +391,14 @@ VALUES('16', '1', '2', '3',  300, '2022-04-13 05:30:00');
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden,letzte_aenderung)  
 VALUES('1', '1','15', '2022-04-19 02:33:00');
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
-VALUES('2', '1','2500', '2022-04-19 02:33:00');
-INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
 VALUES('3', '1','10', '2022-04-19 02:33:00');
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
-VALUES('4', '1','250', '2022-04-19 02:33:00');
+VALUES('1', '2','10', '2022-04-19 02:33:00');
+
+
+
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
-VALUES('3', '2','2500', '2022-04-19 02:33:00');
+VALUES('4', '1','4', '2022-04-19 02:33:00');
 
 
 -- --------------------------------------------------------------------------------------------------------------------------
@@ -466,15 +442,3 @@ INSERT INTO `Ereignisbuchung` (ereignisbuchung_id, kommen_id, gehen_id, letzte_a
 VALUES('4', '4','4','2022-04-19 16:30:00');
 INSERT INTO `Ereignisbuchung` (ereignisbuchung_id, kommen_id, gehen_id, letzte_aenderung)  
 VALUES('5', '5','5','2022-04-20 17:00:00');
-
-
--- Verschlüsseln von strings test 
-INSERT INTO `Arbeitszeitkonto` (zeit_id, password)  
-VALUES('100', aes_encrypt('selam','TEST'));
-
-
-
-SELECT Aktivitaet.aktivitaet_id, bezeichnung, projektname FROM Aktivitaet
-INNER JOIN Verkaufte_stunden_in_aktivitaet ON Aktivitaet.aktivitaet_id = Verkaufte_stunden_in_aktivitaet.aktivitaet_id 
-INNER JOIN Projekt ON Aktivitaet.projekt_id = Projekt.projekt_id
-WHERE Verkaufte_stunden_in_aktivitaet.person_id = 1 AND Aktivitaet.projekt_id = 1;

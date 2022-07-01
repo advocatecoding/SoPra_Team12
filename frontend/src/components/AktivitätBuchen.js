@@ -10,7 +10,6 @@ export default function AktivitätBuchen(props) {
 
 
     const handleChange = () => {
-        console.log("Kommen Test.")
         props.openAktivitätModal(true)
     };
 

@@ -61,7 +61,7 @@ export default function CreateProjectModal(props) {
 
     function postProjekt(id) {
         getSettedProjektId()
-        console.log({ projektleiter }, "ayk projektleiter wird gesetzt")
+        //console.log({ projektleiter }, "ayk projektleiter wird gesetzt")
         const url = `/zeit/projekte`;
         axios.post(url, {
             id,
@@ -104,7 +104,7 @@ export default function CreateProjectModal(props) {
 
     function postTeam(mitarbeiter, verkaufte_stunden,  projekt_id) {
         //getSettedProjektId();
-        console.log("ProjektId in postTeam:", projekt_id)
+        //console.log("ProjektId in postTeam:", projekt_id)
         const url = `/zeit/mitarbeiter_in_projekt`;
         axios.post(url, {
             mitarbeiter,
@@ -184,7 +184,7 @@ export default function CreateProjectModal(props) {
     const iDerhalten = (id) => {
         setProjekleiter(id)
         setMitarbeiter(id)
-        console.log({ projektleiter }, "Projektleiter wird gesetzt")
+        //console.log({ projektleiter }, "Projektleiter wird gesetzt")
     }
 
 
@@ -196,11 +196,11 @@ export default function CreateProjectModal(props) {
 
     const addAktivitätenFields = () => {
         setaktivitätenFields([...aktivitätenFields, { id: uuidv4(), aktivitätsname: '', dauer: '', kapazität: '' }])
-        console.log(aktivitätenFields)
+        //console.log(aktivitätenFields)
     }
 
     const removeAktivitätenFields = id => {
-        console.log(id)
+        //console.log(id)
         if (id !== 1) {
             const values = [...aktivitätenFields];
             values.splice(values.findIndex(value => value.id === id), 1);
@@ -218,7 +218,7 @@ export default function CreateProjectModal(props) {
     }
 
     const removeTeamFields = id => {
-        console.log(id)
+        //console.log(id)
         if (id !== 1) {
             const values = [...teamFields];
             values.splice(values.findIndex(value => value.id === id), 1);
@@ -254,7 +254,7 @@ export default function CreateProjectModal(props) {
             return i;
         })
         setTeamFields(newTeamFields)
-        console.log(teamFields)
+        //console.log(teamFields)
     }
 
 

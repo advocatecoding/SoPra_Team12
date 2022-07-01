@@ -34,9 +34,9 @@ export default function Anwesenheit(props) {
         defaultTime.setHours(0)
         defaultTime.setMinutes(0)
         defaultTime.setSeconds(0)
-        console.log("defaultTime", defaultTime)
-        console.log("Default start (Date):", startTime)
-        console.log("Default ende (Date):", endeTime)
+        //console.log("defaultTime", defaultTime)
+        //console.log("Default start (Date):", startTime)
+        //console.log("Default ende (Date):", endeTime)
         //setIntervall(defaultTime.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }))
         setStart(defaultTime.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }))
         setEnde(defaultTime.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }))
@@ -46,14 +46,14 @@ export default function Anwesenheit(props) {
 
     const iDerhalten = (id) => {
         setPersonID(id)
-        console.log("Person Id", person_id)
+        //console.log("Person Id", person_id)
     }
 
     
 
     function postEreignisBuchung(id, kommen_id, gehen_id) {
         const url = `/zeit/ereignisbuchung`;
-        console.log("Ereignisbuchung:", id, kommen_id, gehen_id)
+        //console.log("Ereignisbuchung:", id, kommen_id, gehen_id)
         axios.post(url, {
             id,
             kommen_id,
@@ -63,7 +63,7 @@ export default function Anwesenheit(props) {
 
     function postKommen(id) {
         const url = `/zeit/kommen`;
-        console.log("Kommen", id, person_id, start_kommen)
+        //console.log("Kommen", id, person_id, start_kommen)
         axios.post(url, {
             id,
             person_id,
@@ -91,7 +91,7 @@ export default function Anwesenheit(props) {
             const data = response.data;
             let kommen_id = data.id
             let gehen_id = data.id
-            console.log("Wert",gehen_id)
+            //console.log("Wert",gehen_id)
             postEreignisBuchung(1211, kommen_id, gehen_id)     
         }).catch(err => console.log(err))
     };
@@ -99,14 +99,14 @@ export default function Anwesenheit(props) {
     const changeKommen = (event) => {
         setStartKommen(event.target.value)
         var time = event.target.value;
-        console.log(time)
+        //console.log(time)
         setStart(time)
         var start1 = new Date()
         var timeInInt = time.split(":");
-        console.log(timeInInt[0], timeInInt[1])
+        //console.log(timeInInt[0], timeInInt[1])
         start1.setHours(timeInInt[0])
         start1.setMinutes(timeInInt[1])
-        console.log("Start als Date nach Änderung:", start1)
+        //console.log("Start als Date nach Änderung:", start1)
         //console.log("Ende als Date nach Änderung:",endeTime)
         setStartTime(start1)
     }
@@ -117,10 +117,10 @@ export default function Anwesenheit(props) {
         setEnde(time)
         var ende1 = new Date()
         var timeInInt = time.split(":");
-        console.log(timeInInt[0], timeInInt[1])
+        //console.log(timeInInt[0], timeInInt[1])
         ende1.setHours(timeInInt[0])
         ende1.setMinutes(timeInInt[1])
-        console.log("Ende als Date nach Änderung:", ende1)
+        //console.log("Ende als Date nach Änderung:", ende1)
         setEndeTime(ende1)
     };
 
@@ -132,14 +132,14 @@ export default function Anwesenheit(props) {
 
     function checkTime() {
         /* An dieser Stelle Problem: der zuletzt gesetzte wert stimmt, aber der andere nicht */
-        console.log("Time is Set!!")
-        console.log("Start:", start_kommen)
-        console.log("Ende:", ende)
+        //console.log("Time is Set!!")
+        //console.log("Start:", start_kommen)
+        //console.log("Ende:", ende)
         let newIntervall = new Date();
         newIntervall = (endeTime - startTime)
-        console.log("SetTime: start (Date):", startTime)
-        console.log("SetTime: ende (Date):", endeTime)
-        console.log("Intervallzeit als Date:", newIntervall)
+        //console.log("SetTime: start (Date):", startTime)
+        //console.log("SetTime: ende (Date):", endeTime)
+        //console.log("Intervallzeit als Date:", newIntervall)
 
         var msec = newIntervall;
         var hh = Math.floor(msec / 1000 / 60 / 60);
@@ -152,13 +152,13 @@ export default function Anwesenheit(props) {
         //console.log(hh + " Stunden" + " " + mm + " Minuten")
         let newIntervallString = hh + "." + mm + "h"
         let newIntervallFloat = parseFloat(newIntervallString)
-        console.log("Intervall in Stunde u Minuten:", newIntervallString)
+        //console.log("Intervall in Stunde u Minuten:", newIntervallString)
         {/** Wir prüfen ob die gebuchte Anwesenheit 7.5h überschritten hat oder nicht */ }
         if (newIntervallFloat > 7.3) {
             props.setErrorAlertOpen(true)
         }
         else {
-            console.log("Das passt!")
+            //console.log("Das passt!")
             props.setAlertOpen(true)
             PostKommenUndGehen()
         }

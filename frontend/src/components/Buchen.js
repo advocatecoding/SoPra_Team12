@@ -43,33 +43,33 @@ export default function Buchen(props) {
     defaultTime.setHours(0)
     defaultTime.setMinutes(0)
     defaultTime.setSeconds(0)
-    console.log("defaultTime", defaultTime)
+    //console.log("defaultTime", defaultTime)
 
-    console.log("Default start (Date):", startTime)
-    console.log("Default ende (Date):", endeTime)
+    //console.log("Default start (Date):", startTime)
+    //console.log("Default ende (Date):", endeTime)
     setStart(defaultTime.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }))
     setEnde(defaultTime.toLocaleTimeString(navigator.language, { hour: '2-digit', minute: '2-digit' }))
   }, [props.id]
   );
 
   async function FetchProjekte(id) {
-    console.log("Perso GCKEN.")
-    console.log(id, "22")
+    //console.log("Perso GCKEN.")
+    //console.log(id, "22")
     const url = `/zeit/projekt/mitarbeiter/${id}`;
     try {
       const response = await fetch(url);
       const data = await response.json();
       setMitarbeiterProjekte(data)
-      console.log(data)
-      console.log("ID---", data.id)
+      //console.log(data)
+      //console.log("ID---", data.id)
     } catch (e) {
-      console.log(e.message)
+      //console.log(e.message)
     }
   }
 
   async function FetchAktivität(mitarbeiter, id) {
     const url = `/zeit/aktivitaet/buchen/${mitarbeiter}/${id}`;
-    console.log(url)
+    //console.log(url)
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -85,10 +85,10 @@ export default function Buchen(props) {
     setStart(time)
     var start1 = new Date()
     var timeInInt = time.split(":");
-    console.log(timeInInt[0], timeInInt[1])
+    //console.log(timeInInt[0], timeInInt[1])
     start1.setHours(timeInInt[0])
     start1.setMinutes(timeInInt[1])
-    console.log("Start als Date nach Änderung:", start1)
+    //console.log("Start als Date nach Änderung:", start1)
     //console.log("Ende als Date nach Änderung:",endeTime)
     setStartTime(start1)
 
@@ -99,24 +99,24 @@ export default function Buchen(props) {
     setEnde(time)
     var ende1 = new Date()
     var timeInInt = time.split(":");
-    console.log(timeInInt[0], timeInInt[1])
+    //console.log(timeInInt[0], timeInInt[1])
     ende1.setHours(timeInInt[0])
     ende1.setMinutes(timeInInt[1])
-    console.log("Ende als Date nach Änderung:", ende1)
+    //console.log("Ende als Date nach Änderung:", ende1)
     setEndeTime(ende1)
     setEndeIsSet(true)
   }
 
   function setTime() {
     /* An dieser Stelle Problem: der zuletzt gesetzte wert stimmt, aber der andere nicht */
-    console.log("Time is Set!!")
-    console.log("Start:", startTime)
-    console.log("Ende:", endeTime)
+    //console.log("Time is Set!!")
+    //console.log("Start:", startTime)
+    //console.log("Ende:", endeTime)
     let newIntervall = new Date();
     newIntervall = (endeTime - startTime)
-    console.log("SetTime: start (Date):", startTime)
-    console.log("SetTime: ende (Date):", endeTime)
-    console.log("Intervallzeit als Date:", newIntervall)
+    //console.log("SetTime: start (Date):", startTime)
+    //console.log("SetTime: ende (Date):", endeTime)
+    //console.log("Intervallzeit als Date:", newIntervall)
 
     var msec = newIntervall;
     var hh = Math.floor(msec / 1000 / 60 / 60);
@@ -127,10 +127,10 @@ export default function Buchen(props) {
     newIntervallObject.setHours(hh)
     newIntervallObject.setMinutes(mm)
     let gearbeiteteZeit = (hh + "." + mm)
-    console.log(hh + "." + mm)
+    //console.log(hh + "." + mm)
     //console.log(hh + " Stunden" + " " + mm + " Minuten")
     let newIntervallString = hh + "h " + mm + "min"
-    console.log("Intervall in Stunde u Minuten:", newIntervallString)
+    //console.log("Intervall in Stunde u Minuten:", newIntervallString)
     setIntervall(newIntervallString)
     postZeitintervallbuchung(1211, gearbeiteteZeit)
     postProjektarbeit(1211, gearbeiteteZeit)
@@ -139,7 +139,7 @@ export default function Buchen(props) {
 
   function postZeitintervallbuchung(id, gearbeitete_zeit) {
     const url = `/zeit/zeitintervallbuchungen`;
-    console.log("Post daten: " + "personId: " + person_id + "aktivität id: " + aktivitaet_id + "gearbeitete Zeit: " + gearbeitete_zeit + "projektId: " + projekt_id)
+    //console.log("Post daten: " + "personId: " + person_id + "aktivität id: " + aktivitaet_id + "gearbeitete Zeit: " + gearbeitete_zeit + "projektId: " + projekt_id)
     axios.post(url, {
       id,
       projekt_id,
@@ -166,7 +166,7 @@ export default function Buchen(props) {
 
   const handleChangee = (event) => {
     setProjektId(event.target.value)
-    console.log({ projekt_id }, "huhu")
+    //console.log({ projekt_id }, "huhu")
     FetchAktivität(person_id, event.target.value)
   }
 

@@ -37,8 +37,8 @@ export default function AktivitätBuchenModal(props) {
 
 
   async function FetchProjekte(id) {
-    console.log("Perso GCKEN.")
-    console.log(id, "22")
+    //console.log("Perso GCKEN.")
+    //console.log(id, "22")
     const url = `/zeit/projekt/mitarbeiter/${id}`;
 
     console.log(url)
@@ -53,10 +53,10 @@ export default function AktivitätBuchenModal(props) {
 
 
   async function FetchAktivität(id) {
-    console.log("Kommt was an.", projekt_id)
+    //console.log("Kommt was an.", projekt_id)
     const url = `/zeit/aktivitaet/projekt/${id}`;
 
-    console.log(url)
+    //console.log(url)
     try {
       const response = await fetch(url);
       const data = await response.json();
@@ -69,7 +69,7 @@ export default function AktivitätBuchenModal(props) {
 
   function postAktivität() {
     const url = `/zeit/verkaufte_stunden_in_aktivitaet`;
-    console.log(mitarbeiter, aktivitaet, gebuchte_stunden, "ZEIG AN")
+    //console.log(mitarbeiter, aktivitaet, gebuchte_stunden, "ZEIG AN")
     axios.post(url, {
       mitarbeiter,
       aktivitaet,
@@ -115,7 +115,7 @@ export default function AktivitätBuchenModal(props) {
 
   const handleChangee = (event) => {
     setSelectedProject(event.target.value)
-    console.log({ projekt_id }, "huhu")
+    //console.log({ projekt_id }, "huhu")
     FetchAktivität(event.target.value)
   }
 

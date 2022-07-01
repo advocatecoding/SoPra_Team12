@@ -28,7 +28,7 @@ export default function CreateNewUser(props) {
 
     function postMitarbeiter(id, urlaubstage, überstunden) {
         const url = `/zeit/personen`;
-        console.log("Mitarbeiter", id, vorname, nachname,mail_adresse,benutzername)
+        //console.log("Mitarbeiter", id, vorname, nachname,mail_adresse,benutzername)
         axios.post(url, {
           id,
           vorname,

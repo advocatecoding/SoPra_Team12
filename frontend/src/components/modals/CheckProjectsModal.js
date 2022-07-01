@@ -216,14 +216,14 @@ function ProjectTime(props) {
   function addSollzeitToOrderedData(data) {
     var j = 0
     let countRows = 0
-    console.log("-----", data)
+    //console.log("-----", data)
     const loopLength = (data.length + orderedData.length)
     var temp_obj2 = {gebuchte_stunden: ""}
     for (let i = 0; i < loopLength; i++) {
       // Es wird nach jedem Element, welches eine Zahl ist die dazugehörige Sollzeit hinzugefügt 
       if ((orderedData[i]).match(numberReg)) {
         countRows ++;
-        console.log("number j:", j)
+        //console.log("number j:", j)
         // Mit States fkt es nicht !!
         //let cur = {gebuchte_stunden: data[j].gebuchte_stunden}
         //setMainData(oldArray => [...oldArray[j], cur])
@@ -232,9 +232,9 @@ function ProjectTime(props) {
         
         //console.log("Gebuchte Stunde: ", data[1].gebuchte_stunden)
         orderedData.splice(i + 1, 0, data[j].gebuchte_stunden);
-        console.log(orderedData)
+        //console.log(orderedData)
         i++;
-        console.log()
+        //console.log()
         if (j < data.length) {
           j++;
         }
@@ -244,9 +244,9 @@ function ProjectTime(props) {
     setSollZeitIsAdded(true)
     setAktivitäten(aktivitäten1)
     setRows(countRows)
-    console.log("Zeilen:", countRows)
-    console.log("AktivitätenListw:", aktivitäten1)
-    console.log("Main Data finished: ", mainDataNew)
+    //console.log("Zeilen:", countRows)
+    //console.log("AktivitätenListw:", aktivitäten1)
+    //console.log("Main Data finished: ", mainDataNew)
     setMainData(mainDataNew)
   }
 

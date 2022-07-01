@@ -28,7 +28,6 @@ function Login() {
 
     const pressButton = (event) =>  {
         event.preventDefault();
-        console.log("button clicked");
         selectUser(true);
     };
 

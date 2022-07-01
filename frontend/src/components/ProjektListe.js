@@ -50,7 +50,7 @@ export default function ProjektListe(props) {
       const data = await response.json();
       setMitarbeiterProjekte(data)
       setLoading(false)
-      console.log("Projekte gefetcht!")
+      //console.log("Projekte gefetcht!")
     } catch (e) {
       console.log(e.message)
     }

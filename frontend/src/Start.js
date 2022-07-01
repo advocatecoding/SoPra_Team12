@@ -63,12 +63,12 @@ function Start(props) {
 
 
   async function fetchPersonByUsername(username) {
-    //console.log("Person wird gefetcht. in Start")
+    //"Person wird gefetcht. in Start"
     try {
       const response = await fetch(`/zeit/personen/${username}`);
       const data = await response.json();
       setUserId(data.id)
-      console.log(data.id)
+      //console.log(data.id)
       setUserIdTrue(true)
     } catch (e) {
       console.log(e.message)

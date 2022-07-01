@@ -28,7 +28,7 @@ export default function Users(props) {
             const response = await fetch(url);
             //console.log(response.data)
             const data = await response.json();
-            console.log("fetched Personen!")
+            //console.log("fetched Personen!")
             setPersonen(data)
             setLoadingInProgress(false)
         } catch (e) {

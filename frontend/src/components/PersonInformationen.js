@@ -14,7 +14,7 @@ export default function PersonInformationen(props) {
 
 
     async function fetchPersonById(id) {
-        console.log("Person wird gefetcht.")
+        //console.log("Person wird gefetcht.")
         try {
             const response = await fetch(`/zeit/personen/${id}`);
             const data = await response.json();

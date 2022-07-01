@@ -15,7 +15,7 @@ export default function CheckProjects(props) {
 
 
     const handleChange = () => {
-        console.log("Modal is shown.")
+        //console.log("Modal is shown.")
         props.openCheckProjectsModal(true)
     };
 

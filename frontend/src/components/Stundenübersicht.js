@@ -34,12 +34,11 @@ export default function Stundenübersicht(props) {
 
     // Stundenübersicht     
     async function fetchStundenübersicht(mitarbeiter_id) {
-        console.log("Stundenübersicht wird gefetcht.")
+        //console.log("Stundenübersicht wird gefetcht.")
         const url = `/zeit/persoenliche_mitarbeiteransicht/${mitarbeiter_id}`;
         try {
             const response = await fetch(url);
             const data = await response.json();
-            console.log("jnnfskdfkfdkfds", data)
             setStundenübersicht(data)
             setDataIsFetched(true)
         } catch (e) {
