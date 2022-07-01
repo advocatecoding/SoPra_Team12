@@ -175,6 +175,9 @@ a {
     color: #A7DDF5 !important;
 }
 
+.outlined-button{
+    border: 1px solid #00bcd4 !important;
+}
 @media only screen and (max-width: 600px)  {
     .buttons-right {
         margin-right: auto !important;
@@ -194,5 +197,11 @@ a {
     }
     #restbereich {
         order: 2
+    }
+    .button-anwesenheit {
+        margin-top: 2rem !important;
+    }
+    #pause-grid {
+        margin-top: 3rem !important;
     }
 }

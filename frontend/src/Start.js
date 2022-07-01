@@ -37,6 +37,9 @@ function Start(props) {
   const [successAlertBuchenOpen, setSuccessAlertBuchenOpen] = useState(false);
   const [successAlertAktivitätOpen, setSuccessAlertAktivitätOpen] = useState(false);
   const [successAlertProjekteOpen, setSuccessAlertProjekteOpen] = useState(false);
+  const [successAlertAnwesenheitOpen, setSuccessAlertAnwesenheitOpen] = useState(false);
+
+  const[errorAlertAnwesenheitOpen, setErrorAlertAnwesenheitOpen] = useState(false)
   
 
 
@@ -94,12 +97,29 @@ function Start(props) {
         : null
       }
 
+    {successAlertAnwesenheitOpen ?
+        <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
+          <SuccessAlert setAlertOpen={open => setSuccessAlertAnwesenheitOpen(open)} alertmessage={"Das Buchen Ihrer Anwesenheit war erfolgreich!"}></SuccessAlert>
+        </div>
+        : null
+      }
+
+      {errorAlertAnwesenheitOpen ?
+        <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
+          <SuccessAlert setAlertOpen={open => setErrorAlertAnwesenheitOpen(open)} alertmessage={"Überprüfen Sie Ihre Eingabe. Sie dürfen nicht mehr als 7.5h pro Tag buchen."}></SuccessAlert>
+        </div>
+
+        : null
+      }
+
+
       {checkProjects ?
         <>
           <CheckProjectsModal setOpenModal={setCheckProjects} mitarbeiter_id={userId} />
         </>
         : null
       }
+      
 
       {urlaubModalOpen && <UrlaubBuchenModal setAlertOpen={setSuccessAlertOpen} setOpenModal={setUrlaubModalOpen} id={userId}></UrlaubBuchenModal>}
 
@@ -176,14 +196,7 @@ function Start(props) {
 
               <Grid style={{ height: "30%", width: "100%", padding: "2rem", paddingBottom: "0rem" }}>
                 <Typography variant="h5" align="center" style={{ marginBottom: "2rem" }}>Buchbereich</Typography>
-                {
-                  userIdIsSet ?
-                    <>
-                      <Anwesenheit id={userId} />
-                    </>
-                    : null
-                }
-
+                <Anwesenheit setErrorAlertOpen={open => setErrorAlertAnwesenheitOpen(open)} setAlertOpen={open => setSuccessAlertAnwesenheitOpen(open)} id={userId} />
               </Grid>
 
               <Grid style={{ height: "70%", width: "100%", padding: "2rem", paddingTop: "5rem" }}>
