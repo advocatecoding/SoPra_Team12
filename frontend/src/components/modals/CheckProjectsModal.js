@@ -10,6 +10,13 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import "../../index.css"
 import LoadingProgress from "../Loading/LoadingProgress";
 
+/**
+ * Zeigt die gearbeitete Zeit, Soll-Zeit & Aktivitäten auf den Projekten auf 
+ * denen der eingeloggte User Projektleiter ist
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+*/
 
 export default function CheckProjectsModal(props) {
 

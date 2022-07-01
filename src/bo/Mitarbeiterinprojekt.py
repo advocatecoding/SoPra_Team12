@@ -29,9 +29,8 @@ class MitarbeiterInProjekt(bo.BusinessObject):
         """Auslesen der E-Mail Adresse."""
         return self._verkaufte_stunden
 
-
-    def set_verkaufte_stunden(self, verkaufte_stunden):
-         self._verkaufte_stunden = verkaufte_stunden
+    def set_verkaufte_stunden(self, value):
+         self._verkaufte_stunden = value
 
 
     def from_dict(dictionary=dict()):

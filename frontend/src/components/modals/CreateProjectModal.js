@@ -20,6 +20,12 @@ import { v4 as uuidv4 } from 'uuid';
 import UsersProject from '../UsersProject'
 import "./modal.css"
 
+/**
+ * Modal um ein neues Projekt anzulegen
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
+
 
 export default function CreateProjectModal(props) {
 

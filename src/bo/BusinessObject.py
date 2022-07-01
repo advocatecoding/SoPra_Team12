@@ -6,13 +6,17 @@ class BusinessObject(ABC):
         self._id = 0
         self._letzte_aenderung = None
 
+
     def get_id(self):
+        """Auslesen der ID."""
         return self._id
 
     def set_id(self, value):
+        """Setzen der ID."""
         self._id = value
 
     def get_letzte_aenderung(self):
+        """Auslesen der letzten Änderung."""
         return self._letzte_aenderung
 
     def set_letzte_aenderung(self):

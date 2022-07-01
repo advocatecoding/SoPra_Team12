@@ -1,6 +1,5 @@
 from bo import Person
 
-
 class Mitarbeiter(Person):
 
     def __init__(self):

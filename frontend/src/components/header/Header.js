@@ -6,6 +6,14 @@ import Avatar from '@mui/material/Avatar';
 import logo from '../../assets/logo_transparent512.png'; 
 import Divider from '@mui/material/Divider';
 
+/**
+ * Der Header beinhaltet die Überschrift der WebApp, sowie das Logo und das Profil
+ * des eingeloggten Googleusers
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+*/
+
 
 function Header(props) {
   const [user, setUser] = useState(null)

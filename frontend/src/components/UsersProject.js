@@ -5,11 +5,14 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Typography from '@mui/material/Typography';
 
+/**
+ * Eine Dropdownliste, die alle User anzeigt
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
 
 export default function Users({onChange}) {
     const [personen, setPersonen] = useState([1, 2]);
-    //const [userSelected, setUserSelected] = useState(false);
-
 
     useEffect(() => {
         fetchAllPersonen()

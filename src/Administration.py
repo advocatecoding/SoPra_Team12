@@ -79,8 +79,6 @@ class Administration(object):
         with UserMapper() as mapper:
             mapper.delete(user)
 
-
-
     """Person"""
     def create_person(self, vorname, nachname, mail_adresse, benutzername):
         """Eine Person anlegen."""
@@ -126,9 +124,6 @@ class Administration(object):
         with PersonMapper() as mapper:
             return mapper.update(person)
 
-
-
-
     """Projekt"""
     def create_projekt(self, projektleiter, projektname, auftraggeber):
             """Ein Projekt anlegen."""
@@ -159,7 +154,6 @@ class Administration(object):
 
         with ProjektMapper() as mapper:
             return mapper.update(projekt)
-
 
     """Aktivität"""
     def create_aktivitaet(self, projekt_id, bezeichnung, dauer, kapazitaet):
@@ -251,12 +245,10 @@ class Administration(object):
         with ProjektarbeitMapper() as mapper:
             return mapper.insert(projektarbeit)
 
-
     def get_all_projektarbeit(self):
         """ Wir geben alle Projektarbeiten aus """
         with ProjektarbeitMapper() as mapper:
             return mapper.find_all()
-
 
     """Urlaub"""
     def create_urlaub(self, person_id, start_datum, end_datum):
@@ -269,7 +261,6 @@ class Administration(object):
         urlaub.set_end_date(end_datum)
         urlaub.set_letzte_aenderung()
         """ Kein Attribut wird vergeben, da datetime.now() ausgeführt und gespeichert wird"""
-
         with UrlaubMapper() as mapper:
             return mapper.insert(urlaub)
 

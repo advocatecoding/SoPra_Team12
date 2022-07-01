@@ -4,10 +4,10 @@ import { Popover, IconButton, Avatar, ClickAwayListener, Typography, Paper, Butt
 import { getAuth, signOut } from "firebase/auth";
 import "../../index.css"
 
-    /**
-     * Wir nutzen dieselben ProfilDropdown Datei, wie im Bankbeispiel, um stets den eingeloggten Firebase User
-     oben rechts anzeigen zu lassen und ihm die Möglichkeit zu geben, sich auszuloggen.
-	 */
+/**
+ * Wir nutzen dieselben ProfilDropdown Datei, wie im Bankbeispiel, um stets den eingeloggten Firebase User
+ oben rechts anzeigen zu lassen und ihm die Möglichkeit zu geben, sich auszuloggen.
+*/
 
 class ProfileDropDown extends Component {
 

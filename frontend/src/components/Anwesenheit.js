@@ -4,6 +4,12 @@ import TextField from "@material-ui/core/TextField";
 import axios from 'axios';
 import "../index.css"
 
+/**
+ * Beinhaltet die Buchungen für Kommen und Gehen
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
+
 export default function Anwesenheit(props) {
     const [intervall, setIntervall] = useState("0h 0min");
     const [start, setStart] = useState(null);
@@ -54,14 +60,6 @@ export default function Anwesenheit(props) {
             gehen_id
         }).then(data => console.log(" Ereignisbuchung wurde gepostet", data).catch(err => console.log(err)))
     };
-
-
-
-
-
-
-
-
 
     function postKommen(id) {
         const url = `/zeit/kommen`;

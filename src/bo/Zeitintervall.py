@@ -11,6 +11,7 @@ class Zeitintervall(bo.BusinessObject):
         self._pause_id = None
 
     def set_type(self, value):
+        """Auslesen der Person ID """
         self._type = value
 
     def get_type(self):

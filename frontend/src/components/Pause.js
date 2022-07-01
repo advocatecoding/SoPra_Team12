@@ -4,6 +4,14 @@ import TextField from "@material-ui/core/TextField";
 import axios from 'axios';
 import "../index.css"
 
+
+/**
+ * Beinhaltet die Buchungen für Pausen
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+*/
+
 function Pause(props) {
     const [person_id, setPersonID] = useState(null);
     //Post Pause

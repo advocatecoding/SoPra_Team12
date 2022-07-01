@@ -10,7 +10,7 @@ class VerkaufteStundenInAktivitaet(bo.BusinessObject):
 
 
     def get_person(self):
-        """Auslesen der Person ID """
+        """Auslesen der Person ID."""
         return self._person
 
     def set_person(self, value):
@@ -28,7 +28,6 @@ class VerkaufteStundenInAktivitaet(bo.BusinessObject):
     def get_gebuchte_stunden(self):
         """Auslesen der gebuchten stunden."""
         return self._gebuchte_stunden
-
 
     def set_gebuchte_stunden(self, gebuchte_stunden):
         """Setzen der gebuchten stunden."""

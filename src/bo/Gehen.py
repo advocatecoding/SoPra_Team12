@@ -8,9 +8,11 @@ class Gehen(Ereignis):
         self.set_type("Gehen")
 
     def set_ende(self, value):
+        """Setzen der Endzeit."""
         self._ende = value
 
     def get_ende(self):
+        """Auslesen der Endzeit."""
         return self._ende
 
     def from_dict(dictionary=dict()):

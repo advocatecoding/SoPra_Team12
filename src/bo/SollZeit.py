@@ -19,7 +19,6 @@ class Sollzeit(bo.BusinessObject):
         """Setzen der Person ID."""
         self._bezeichnung = value
 
-
     def get_person(self):
         """Auslesen der Person ID """
         return self._person
@@ -44,11 +43,9 @@ class Sollzeit(bo.BusinessObject):
         """Setzen der Aktivität ID."""
         self._projekt = value
 
-
     def get_gebuchte_stunden(self):
         """Auslesen der gebuchten stunden."""
         return self._gebuchte_stunden
-
 
     def set_gebuchte_stunden(self, gebuchte_stunden):
         """Setzen der gebuchten stunden."""

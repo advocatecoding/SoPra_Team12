@@ -43,11 +43,9 @@ class MitarbeiterAnsicht(bo.BusinessObject):
         """Setzen der Aktivität ID."""
         self._projekt = value
 
-
     def get_gearbeitete_zeit(self):
         """Auslesen der gebuchten stunden."""
         return self.__gearbeitete_zeit
-
 
     def set_gearbeitete_zeit(self, gearbeitete_zeit):
         """Setzen der gebuchten stunden."""

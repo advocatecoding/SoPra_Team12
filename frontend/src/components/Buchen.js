@@ -8,13 +8,19 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import "../index.css"
 
+/**
+ * Beinhaltet die Buchungen für Projektarbeiten
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+*/
 
 export default function Buchen(props) {
 
   const [intervall, setIntervall] = useState("0h 0min");
   const [start, setStart] = useState(null);
   const [ende, setEnde] = useState(null);
-  const[endeIsSet, setEndeIsSet] = useState(false);
+  const [endeIsSet, setEndeIsSet] = useState(false);
   let defaultTime = new Date()
   defaultTime.setHours(0)
   defaultTime.setMinutes(0)
@@ -46,7 +52,6 @@ export default function Buchen(props) {
   }, [props.id]
   );
 
-
   async function FetchProjekte(id) {
     console.log("Perso GCKEN.")
     console.log(id, "22")
@@ -61,7 +66,6 @@ export default function Buchen(props) {
       console.log(e.message)
     }
   }
-
 
   async function FetchAktivität(mitarbeiter, id) {
     const url = `/zeit/aktivitaet/buchen/${mitarbeiter}/${id}`;
@@ -144,7 +148,7 @@ export default function Buchen(props) {
       gearbeitete_zeit
     }).then((response) => {
       console.log(response)
-  }, props.setAlertOpen(true)).catch(err => { console.log(err) })
+    }, props.setAlertOpen(true)).catch(err => { console.log(err) })
   };
 
   function postProjektarbeit(id, gearbeitete_zeit) {
@@ -157,10 +161,8 @@ export default function Buchen(props) {
       gearbeitete_zeit
     }).then((response) => {
       console.log(response)
-  }).catch(err => { console.log(err) })
+    }).catch(err => { console.log(err) })
   };
-
-
 
   const handleChangee = (event) => {
     setProjektId(event.target.value)
@@ -180,104 +182,111 @@ export default function Buchen(props) {
 
   return (
     <div>
-      <Typography variant="h5" align="center" sx={{pb:5}}>Projektarbeit buchen</Typography>
       <Grid container
         direction="row"
         justifyContent="center"
         alignItems="center"
-        spacing={10}>
-        <Grid item xs={4}>
-          <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px", minWidth: "270px" }} sx={{ m: 1, minWidth: 200 }} >
-            <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Projekt</InputLabel>
-            <Select style={{ color: "white" }}
-              onChange={handleChangee}
-              label="Projekttest"
-              color="primary"
-            >
-              {mitarbeiterProjekte.map((item) =>
-                <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.projektname}</MenuItem>
-              )
-              }
-            </Select>
-          </FormControl>
-          <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Projekt aus.</Typography>
+        id="buchen-grid"
+      >
+        <Grid item xs={12} sx={{ mb: 5 }}>
+          <Typography variant="h5" align="center">Projektarbeit buchen</Typography>
+        </Grid>
+        <Grid item container justifyContent="center" lg={4} xs={12} sx={{ mr: 3 }}>
+          <Grid item>
+            <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px", minWidth: "270px" }} sx={{ m: 1, minWidth: 200 }} >
+              <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Projekt</InputLabel>
+              <Select style={{ color: "white" }}
+                onChange={handleChangee}
+                label="Projekttest"
+                color="primary"
+              >
+                {mitarbeiterProjekte.map((item) =>
+                  <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.projektname}</MenuItem>
+                )
+                }
+              </Select>
+            </FormControl>
+            <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie ein Projekt aus.</Typography>
+          </Grid>
+
         </Grid>
 
         {/** Aktivitätauswahl wird angezeigt, wenn Projekt ausgewählt wurde */}
         {
           projekt_id !== "" ?
             <>
-              <Grid item xs={4}>
-                <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px", minWidth: "270px" }} sx={{ m: 1, minWidth: 200 }} >
-                  <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Aktivität</InputLabel>
-                  <Select style={{ color: "white" }}
-                    onChange={handleChange1}
-                    label="Aktivität"
-                    color="primary"
-                  >
-                    {aktivitätListe.map((item) =>
-                      <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.aktivitaetname}</MenuItem>
-                    )
-                    }
-                  </Select>
-                </FormControl>
-                <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Aktivität aus.</Typography>
+              <Grid item container justifyContent="center" lg={4} xs={12} sx={{ mr: 3 }}>
+                <Grid item>
+                  <FormControl style={{ borderColor: "white", color: "white", backgroundColor: "rgba(79, 79, 79, 0.61)", borderRadius: "5px", minWidth: "270px" }} sx={{ m: 1, minWidth: 200 }} >
+                    <InputLabel style={{ color: "white" }} id="demo-simple-select-autowidth-label">Aktivität</InputLabel>
+                    <Select style={{ color: "white" }}
+                      onChange={handleChange1}
+                      label="Aktivität"
+                      color="primary"
+                    >
+                      {aktivitätListe.map((item) =>
+                        <MenuItem value={item.id} style={{ color: "#00bcd4" }}>{item.aktivitaetname}</MenuItem>
+                      )
+                      }
+                    </Select>
+                  </FormControl>
+                  <Typography style={{ color: "white", textAlign: "center" }} fontSize={9}>Wählen Sie eine Aktivität aus.</Typography>
+                </Grid>
+
               </Grid>
             </>
             : null
         }
 
-
-        <Grid item container justifyContent="space-evenly" direction="row" xs={3} style={{marginLeft:"1rem"}}>
+        {/** Timepicker */}
+        <Grid id="buchen-timepicker" item container justifyContent="space-evenly" direction="row" xs={10} lg={3} style={{ marginLeft: "1rem", marginBottom: "0.5rem" }}>
           <Grid item xs={6} >
-          <form noValidate>
-            <TextField
-              className="time"
-              label="Start"
-              type="time"
-              defaultValue="00:00"
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={changeStart}
-            />
-          </form>
+            <form noValidate>
+              <TextField
+                className="time"
+                label="Start"
+                type="time"
+                defaultValue="00:00"
+                InputLabelProps={{
+                  shrink: true
+                }}
+                onChange={changeStart}
+              />
+            </form>
           </Grid>
 
-          <Grid item xs={6} style={{paddingLeft:"2rem"}}>
-          <form noValidate>
-            <TextField
-              className="time"
-              label="Ende"
-              type="time"
-              defaultValue="00:00"
-
-
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={changeEnde}
-            />
-          </form>
+          <Grid item xs={6} style={{ paddingLeft: "1rem" }}>
+            <form noValidate>
+              <TextField
+                className="time"
+                label="Ende"
+                type="time"
+                defaultValue="00:00"
+                InputLabelProps={{
+                  shrink: true
+                }}
+                onChange={changeEnde}
+              />
+            </form>
           </Grid>
         </Grid>
       </Grid>
       {
         endeIsSet === true ?
-        <>
-         <Grid item container justifyContent="center" xs={12} style={{ paddingTop: "2rem" }}>
-        <Grid item >
-          <Button variant="outlined" onClick={setTime} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", color: "red" }} >
-            Buchen
-          </Button>
+          <>
+            <Grid item container justifyContent="center" xs={12} style={{ paddingTop: "2rem" }}>
+              <Grid item >
+                <Button variant="outlined" onClick={setTime} style={{ borderWidth: "2px", borderRadius: "25px", height: "50px", minWidth: "180px", color: "red" }} >
+                  Buchen
+                </Button>
 
-        </Grid>
+              </Grid>
 
-      </Grid>
-        </>
-        : null
+            </Grid>
+          </>
+          : null
       }
-     
+
 
 
     </div>

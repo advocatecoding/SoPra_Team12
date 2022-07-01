@@ -28,6 +28,15 @@ const theme = createTheme({
   },
 });
 
+/**
+ * Dies ist das Main Dashboard, indem alle Hauptkomponenten angezeigt werden
+ * 
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Nicola Pany](https://github.com/NicolaPany)
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
+
 
 function Start(props) {
   const [userId, setUserId] = useState("");
@@ -41,11 +50,11 @@ function Start(props) {
   const [successAlertProjekteOpen, setSuccessAlertProjekteOpen] = useState(false);
 
   const [successAlertAnwesenheitOpen, setSuccessAlertAnwesenheitOpen] = useState(false);
-  const[errorAlertAnwesenheitOpen, setErrorAlertAnwesenheitOpen] = useState(false);
+  const [errorAlertAnwesenheitOpen, setErrorAlertAnwesenheitOpen] = useState(false);
 
   const [successAlertPauseOpen, setSuccessAlertPauseOpen] = useState(false);
-  const[errorAlertPauseOpen, setErrorAlertPauseOpen] = useState(false);
-  
+  const [errorAlertPauseOpen, setErrorAlertPauseOpen] = useState(false);
+
 
 
   useEffect(() => {
@@ -94,15 +103,15 @@ function Start(props) {
         : null
       }
 
-{successAlertProjekteOpen ?
+      {successAlertProjekteOpen ?
         <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
           <SuccessAlert setAlertOpen={open => setSuccessAlertProjekteOpen(open)} alertmessage={"Das Laden der Projekte war erfolgreich!"}></SuccessAlert>
         </div>
 
         : null
       }
-    {/** Anwesenheit Alerts */}
-    {successAlertAnwesenheitOpen ?
+      {/** Anwesenheit Alerts */}
+      {successAlertAnwesenheitOpen ?
         <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
           <SuccessAlert setAlertOpen={open => setSuccessAlertAnwesenheitOpen(open)} alertmessage={"Das Buchen Ihrer Anwesenheit war erfolgreich!"}></SuccessAlert>
         </div>
@@ -117,8 +126,8 @@ function Start(props) {
         : null
       }
 
-  {/** Pause Alerts */}
-{successAlertPauseOpen ?
+      {/** Pause Alerts */}
+      {successAlertPauseOpen ?
         <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
           <SuccessAlert setAlertOpen={open => setSuccessAlertPauseOpen(open)} alertmessage={"Das Buchen Ihrer Pause war erfolgreich!"}></SuccessAlert>
         </div>
@@ -140,7 +149,7 @@ function Start(props) {
         </>
         : null
       }
-      
+
 
       {urlaubModalOpen && <UrlaubBuchenModal setAlertOpen={setSuccessAlertOpen} setOpenModal={setUrlaubModalOpen} id={userId}></UrlaubBuchenModal>}
 
@@ -151,7 +160,7 @@ function Start(props) {
         {/* Abstand */}
         <Box sx={{ mt: 5 }}></Box>
         <Grid container justify="space-between"
-        id="main-grid"
+          id="main-grid"
         >
           {/* Sidebar -> Projektübersicht */}
           <Grid lg={3} xs={8} md={4} style={{ display: "flex", flexDirection: "column", alignItems: "center", marginLeft: "auto", marginRight: "auto", padding: "1rem" }}>

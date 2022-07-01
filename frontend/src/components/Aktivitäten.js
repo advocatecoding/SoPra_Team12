@@ -3,9 +3,13 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
-import Typography from '@mui/material/Typography';
 import "../index.css"
 
+/**
+ * Aktivitäten liest alle Aktivitäten aus
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
 
 export default function Aktivitäten(props) {
     const [aktivitäten, setAktivitäten] = useState([1, 2]);
@@ -33,7 +37,6 @@ export default function Aktivitäten(props) {
     }
 
 
-    //const list1 = ["chocolate", "vanilla", "ice"]
     return (
         <div>
             <FormControl sx={{ m: 1, minWidth: 200 }} >

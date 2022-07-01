@@ -3,6 +3,12 @@ import { Fab } from '@material-ui/core';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 
 
+/**
+ * Button für Projektkontrolle
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
+
 export default function CheckProjects(props) {
 
     const [openModal, setOpenModal] = useState(false);

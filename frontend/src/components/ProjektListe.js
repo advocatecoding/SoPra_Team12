@@ -10,7 +10,12 @@ import ReplayIcon from '@mui/icons-material/Replay';
 import SuccessAlert from './Alerts/SuccessAlert';
 import CreateProjectModal from './modals/CreateProjectModal';
 
-
+/**
+ * Gibt die Projekte aus, die dem eingeloggten User zugewiesen sind
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+*/
 
 export default function ProjektListe(props) {
 

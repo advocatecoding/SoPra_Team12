@@ -5,6 +5,11 @@ import CheckIcon from '@mui/icons-material/Check';
 import "../../index.css"
 
 
+/**
+ * Success Alert, der angezeigt wird, wenn die Eingaben eines Posts erfolgreich waren 
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
 
 function SuccessAlert(props) {
 

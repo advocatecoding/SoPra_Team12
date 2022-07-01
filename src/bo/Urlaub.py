@@ -9,21 +9,27 @@ class Urlaub (bo.BusinessObject):
         self._end_date = None
 
     def set_person_id(self, person_id):
+        """Setzen der Person ID."""
         self._person_id = person_id
 
     def get_person_id(self):
+        """Auslesen der Person ID."""
         return self._person_id
 
     def set_start_date(self, start_date):
+        """Setzen der Start Date."""
         self._start_date = start_date
 
     def get_start_date(self):
+        """Auslesen der Start Date."""
         return self._start_date
 
     def set_end_date(self, end_date):
+        """Setzen der End Date."""
         self._end_date = end_date
 
     def get_end_date(self):
+        """Auslesen der End Date."""
         return self._end_date
 
 

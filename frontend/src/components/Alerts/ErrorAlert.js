@@ -4,6 +4,11 @@ import Stack from '@mui/material/Stack';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import "../../index.css"
 
+/**
+ * Error Alert, der angezeigt wird, wenn die Eingaben eines Posts nicht korrekt sind 
+ * 
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
 
 function ErrorAlert(props) {
 
