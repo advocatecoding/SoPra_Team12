@@ -20,9 +20,24 @@ function Pause(props) {
     const [endeTime, setEndeTime] = useState(defaultTime);
     const [startTime, setStartTime] = useState(defaultTime);
 
+
+    useEffect(() => {
+        iDerhalten(props.id)
+      }, []
+      )
+
+
+
+      const iDerhalten = (id) => {
+        setPersonID(id)
+      }
+    
+
+
+
     function postPause(id) {
         const url = `/zeit/pause`;
-        console.log("Pause", id, person_id, start_pause)
+        console.log("Pause", id, person_id, start_pause, ende_pause)
         axios.post(url, {
             id,
             person_id,
@@ -57,6 +72,7 @@ function Pause(props) {
         {/** Wir prüfen ob die gebuchte Anwesenheit 7.5h überschritten hat oder nicht */ }
         if (newIntervallFloat > 0.3) {
             console.log("Die Pause ist zu lang!")
+            console.log(newIntervallFloat)
             props.setErrorAlertOpen(true)
         }
         else {

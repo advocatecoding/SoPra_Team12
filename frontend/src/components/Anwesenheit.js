@@ -20,6 +20,8 @@ export default function Anwesenheit(props) {
     const [start_kommen, setStartKommen] = useState(null);
     const [ende, setGehen] = useState(null);
 
+
+
     useEffect(() => {
         iDerhalten(props.id)
         let defaultTime = new Date()
@@ -41,6 +43,26 @@ export default function Anwesenheit(props) {
         console.log("Person Id", person_id)
     }
 
+    
+
+    function postEreignisBuchung(id, kommen_id, gehen_id) {
+        const url = `/zeit/ereignisbuchung`;
+        console.log("Ereignisbuchung:", id, kommen_id, gehen_id)
+        axios.post(url, {
+            id,
+            kommen_id,
+            gehen_id
+        }).then(data => console.log(" Ereignisbuchung wurde gepostet", data).catch(err => console.log(err)))
+    };
+
+
+
+
+
+
+
+
+
     function postKommen(id) {
         const url = `/zeit/kommen`;
         console.log("Kommen", id, person_id, start_kommen)
@@ -48,17 +70,32 @@ export default function Anwesenheit(props) {
             id,
             person_id,
             start_kommen
-        }).then(data => console.log(" Kommen wurde gepostet", data).catch(err => console.log(err)))
+        }).then((response) => {
+            console.log("Kommen wurde gepostet",response)
+            const data = response.data;
+            let kommen_id = data.id
+            let gehen_id = data.id
+            console.log("Kommen Response",kommen_id)     
+            postGehen(1211)
+            
+        }).catch(err => console.log(err))
     };
 
     function postGehen(id) {
         const url = `/zeit/gehen`;
-        console.log("Gehen", id, person_id, start_kommen)
+        console.log("Gehen saaaa", id, person_id, ende)
         axios.post(url, {
             id,
             person_id,
             ende
-        }).then(data => console.log(" Gehen wurde gepostet", data).catch(err => console.log(err)))
+        }).then((response) => {
+            console.log("Gehen wurde gepostet",response)
+            const data = response.data;
+            let kommen_id = data.id
+            let gehen_id = data.id
+            console.log("Wert",gehen_id)
+            postEreignisBuchung(1211, kommen_id, gehen_id)     
+        }).catch(err => console.log(err))
     };
 
     const changeKommen = (event) => {
@@ -89,10 +126,9 @@ export default function Anwesenheit(props) {
         setEndeTime(ende1)
     };
 
-    const PostKommenUndGehen = (e) => {
-        e.preventDefault();
+    const PostKommenUndGehen = () => {
         postKommen(1211)
-        postGehen(1211)
+
 
     };
 

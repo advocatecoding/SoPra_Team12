@@ -217,8 +217,15 @@ function Start(props) {
 
               <Grid style={{ height: "30%", width: "100%", padding: "2rem", paddingBottom: "0rem" }}>
                 <Typography variant="h5" align="center" style={{ marginBottom: "2rem" }}>Buchbereich</Typography>
-                <Anwesenheit setErrorAlertOpen={open => setErrorAlertAnwesenheitOpen(open)} setAlertOpen={open => setSuccessAlertAnwesenheitOpen(open)} id={userId} />
-                <Pause setErrorAlertOpen={open => setErrorAlertPauseOpen(open)} setAlertOpen={open => setSuccessAlertPauseOpen(open)} id={userId}></Pause>
+                {
+                    userIdIsSet ?
+                      <>
+                        <Anwesenheit setErrorAlertOpen={open => setErrorAlertAnwesenheitOpen(open)} setAlertOpen={open => setSuccessAlertAnwesenheitOpen(open)} id={userId} />
+                        <Pause setErrorAlertOpen={open => setErrorAlertPauseOpen(open)} setAlertOpen={open => setSuccessAlertPauseOpen(open)} id={userId}></Pause>
+                      </>
+                      : null
+                  }
+                
               </Grid>
 
               <Grid style={{ height: "70%", width: "100%", padding: "2rem", paddingTop: "5rem" }}>

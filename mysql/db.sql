@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
    CREATE TABLE IF NOT EXISTS `Kommen` (
   `kommen_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
-  `start_kommen` DATETIME NULL,
+  `start_kommen` VARCHAR(45) NOT NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`kommen_id`),
     FOREIGN KEY (`person_id`)
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
    CREATE TABLE IF NOT EXISTS `Gehen` (
   `gehen_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
-  `ende` DATETIME NULL,
+  `ende` VARCHAR(45) NOT NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`gehen_id`),
     FOREIGN KEY (`person_id`)
@@ -136,8 +136,8 @@ CREATE TABLE IF NOT EXISTS `Users` (
    CREATE TABLE IF NOT EXISTS `Pause` (
   `pause_id` INT NOT NULL,
   `person_id` INT NOT NULL,
-  `start_pause` DATETIME NULL,
-  `ende_pause` DATETIME NULL,
+  `start_pause` VARCHAR(45) NOT NULL,
+  `ende_pause`  VARCHAR(45) NOT NULL,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`pause_id`),
     FOREIGN KEY (`person_id`)
@@ -329,13 +329,13 @@ VALUES('4', '1', '2022-07-19', '2022-08-25', '2022-04-19 02:33:00');
 -- Pause Entitäten erstellen
 -- ---------------------------------------------------------------------------------------------------------------------------
 INSERT INTO `Pause` (pause_id, person_id, start_pause, ende_pause, letzte_aenderung)
-VALUES ('1', '1', '2022-04-19 02:33:00', '2022-04-19 02:34:00', '2022-04-19 02:35:00');
+VALUES ('1', '1', '02:33', '02:34', '2022-04-19 02:35:00');
 INSERT INTO `Pause` (pause_id, person_id, start_pause, ende_pause, letzte_aenderung)
-VALUES ('2', '2', '2022-04-19 02:33:00', '2022-04-19 02:34:00', '2022-04-19 02:34:00');
+VALUES ('2', '2', '02:33', '02:34', '2022-04-19 02:34:00');
 INSERT INTO `Pause` (pause_id, person_id, start_pause, ende_pause, letzte_aenderung)
-VALUES ('3', '3', '2022-04-19 02:33:00', '2022-04-19 02:34:00', '2022-04-19 02:34:00');
+VALUES ('3', '3', '02:33', '02:34', '2022-04-19 02:34:00');
 INSERT INTO `Pause` (pause_id, person_id, start_pause, ende_pause, letzte_aenderung)
-VALUES ('4', '4', '2022-04-19 02:33:00', '2022-04-19 02:34:00', '2022-04-19 02:34:00');
+VALUES ('4', '4', '02:33', '02:34', '2022-04-19 02:34:00');
 
 -- ---------------------------------------------------------------------------------------------------------------------------
 -- Mitarbeiter_in_Projekt Entitäten erstellen
@@ -429,29 +429,29 @@ VALUES('3', '2','2500', '2022-04-19 02:33:00');
 -- Kommen Entitäten erstellen
 -- --------------------------------------------------------------------------------------------------------------------------
 INSERT INTO `Kommen` (kommen_id, person_id, start_kommen, letzte_aenderung)  
-VALUES('1', '1','2022-04-19 08:00:00','2022-04-19 08:00:00');
+VALUES('1', '1','08:00','2022-04-19 08:00:00');
 INSERT INTO `Kommen` (kommen_id, person_id, start_kommen, letzte_aenderung)  
-VALUES('2', '1','2022-04-20 09:00:00','2022-04-20 09:00:00');
+VALUES('2', '1','09:00','2022-04-20 09:00:00');
 INSERT INTO `Kommen` (kommen_id, person_id, start_kommen, letzte_aenderung)  
-VALUES('3', '1','2022-04-21 10:00:00','2022-04-21 10:00:00');
+VALUES('3', '1','10:00','2022-04-21 09:00:00');
 INSERT INTO `Kommen` (kommen_id, person_id, start_kommen, letzte_aenderung)  
-VALUES('4', '2','2022-04-19 08:30:00','2022-04-19 08:30:00');
+VALUES('4', '2','08:30','2022-04-22 09:00:00');
 INSERT INTO `Kommen` (kommen_id, person_id, start_kommen, letzte_aenderung)  
-VALUES('5', '2','2022-04-20 09:00:00','2022-04-20 09:00:00');
+VALUES('5', '2','09:00','2022-04-23 09:00:00');
 
 -- --------------------------------------------------------------------------------------------------------------------------
 -- Gehen Entitäten erstellen
 -- --------------------------------------------------------------------------------------------------------------------------
 INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung)  
-VALUES('1', '1','2022-04-19 16:00:00','2022-04-19 16:00:00');
+VALUES('1', '1','16:00','2022-04-19 16:00:00');
 INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung) 
-VALUES('2', '1','2022-04-20 17:00:00','2022-04-20 17:00:00');
+VALUES('2', '1','17:00','2022-04-20 17:00:00');
 INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung)
-VALUES('3', '1','2022-04-21 18:00:00','2022-04-21 18:00:00');
+VALUES('3', '1','18:00','2022-04-21 18:00:00');
 INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung) 
-VALUES('4', '2','2022-04-19 16:30:00','2022-04-19 16:30:00');
+VALUES('4', '2','16:30','2022-04-19 16:30:00');
 INSERT INTO `Gehen` (gehen_id, person_id, ende, letzte_aenderung)  
-VALUES('5', '2','2022-04-20 17:00:00','2022-04-20 17:00:00');
+VALUES('5', '2','17:00','2022-04-20 17:00:00');
 
 -- --------------------------------------------------------------------------------------------------------------------------
 -- Ereignisbuchung Entitäten erstellen

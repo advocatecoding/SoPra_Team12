@@ -803,7 +803,6 @@ class ProjektarbeitListOperations(Resource):
 @zeiterfassung.route("/ereignisbuchung")
 class EreignisbuchungListOperations(Resource):
     @zeiterfassung.marshal_with(ereignisbuchung)
-    @secured
     def get(self):
         """ Auslesen der Ereignisbuchung-Objekte """
         adm = Administration()
@@ -812,7 +811,6 @@ class EreignisbuchungListOperations(Resource):
 
     @zeiterfassung.marshal_with(ereignisbuchung, code=201)
     @zeiterfassung.expect(ereignisbuchung)
-    @secured
     def post(self):
         """ Ereignisbuchung Instanz erstellen """
         adm = Administration()
