@@ -231,7 +231,7 @@ class Administration(object):
             return mapper.update(pause)
 
     """Projektarbeit"""
-    def create_projektarbeit(self, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit):
+    def create_projektarbeit(self, projekt_id, person_id, aktivitaet_id, start, ende):
         """Projektarbeit anlegen"""
 
         projektarbeit = Projektarbeit()
@@ -239,7 +239,8 @@ class Administration(object):
         projektarbeit.set_projekt_id(projekt_id)
         projektarbeit.set_person_id(person_id)
         projektarbeit.set_aktivitaet_id(aktivitaet_id)
-        projektarbeit.set_gearbeitete_zeit(gearbeitete_zeit)
+        projektarbeit.set_start(start)
+        projektarbeit.set_ende(ende)
         projektarbeit.set_letzte_aenderung()
 
         with ProjektarbeitMapper() as mapper:

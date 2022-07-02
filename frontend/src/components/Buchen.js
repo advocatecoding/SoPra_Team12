@@ -151,14 +151,16 @@ export default function Buchen(props) {
     }, props.setAlertOpen(true)).catch(err => { console.log(err) })
   };
 
-  function postProjektarbeit(id, gearbeitete_zeit) {
+  function postProjektarbeit(id) {
     const url = `/zeit/projektarbeit`;
+    console.log(id, projekt_id, person_id, aktivitaet_id, start, ende)
     axios.post(url, {
       id,
       projekt_id,
       person_id,
       aktivitaet_id,
-      gearbeitete_zeit
+      start,
+      ende
     }).then((response) => {
       console.log(response)
     }).catch(err => { console.log(err) })

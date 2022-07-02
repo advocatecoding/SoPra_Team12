@@ -151,10 +151,11 @@ CREATE TABLE IF NOT EXISTS `Users` (
 -- -----------------------------------------------------------------------
    CREATE TABLE IF NOT EXISTS `Projektarbeit` (
   `projektarbeit_id` INT NOT NULL,
+  `projekt_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
-  `start` DATETIME NULL,
-  `ende` DATETIME NULL,
   `aktivitaet_id` INT NOT NULL,
+  `start` VARCHAR(45) NOT NULL,
+  `ende` VARCHAR(45) NOT NULL,
   `letzte_aenderung` DATETIME NULL,
  PRIMARY KEY (`projektarbeit_id`),
     FOREIGN KEY (`person_id`)
@@ -175,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `Users` (
   `projekt_id` INT NOT NULL,
   `person_id` INT NOT NULL ,
   `aktivitaet_id` INT NOT NULL,
-  `gearbeitete_zeit` INT NULL,
+  `gearbeitete_zeit` Double,
   `letzte_aenderung` DATETIME NULL,
   PRIMARY KEY (`zeit_id`),
 	FOREIGN KEY (`projekt_id`)
@@ -389,17 +390,32 @@ VALUES('6', '1', '2', '1',  2, '2022-04-13 05:30:00');
 -- verkaufte_stunden_in_aktivitaet Entitäten erstellen
 -- --------------------------------------------------------------------------------------------------------------------------
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden,letzte_aenderung)  
-VALUES('1', '1','15', '2022-04-19 02:33:00');
+VALUES('1', '1', 15, '2022-04-19 02:33:00');
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
-VALUES('3', '1','10', '2022-04-19 02:33:00');
+VALUES('3', '1', 10, '2022-04-19 02:33:00');
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
-VALUES('1', '2','10', '2022-04-19 02:33:00');
+VALUES('1', '2', 10, '2022-04-19 02:33:00');
 
 
 
 INSERT INTO `Verkaufte_stunden_in_aktivitaet` (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung)  
-VALUES('4', '1','4', '2022-04-19 02:33:00');
+VALUES('4', '1', 4, '2022-04-19 02:33:00');
 
+
+
+
+
+
+-- --------------------------------------------------------------------------------------------------------------------------
+-- Projektarbeit Entitäten erstellen
+-- --------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO `Projektarbeit` (projektarbeit_id, projekt_id, person_id, aktivitaet_id, start, ende, letzte_aenderung)  
+VALUES('1', '1', '1', '1',  '12:00','13:00', '2022-04-13 05:30:00');
+INSERT INTO `Projektarbeit` (projektarbeit_id, projekt_id, person_id, aktivitaet_id, start, ende, letzte_aenderung)  
+VALUES('2', '1', '1', '1',  '10:00','20:00', '2022-04-13 05:30:00');
+INSERT INTO `Projektarbeit` (projektarbeit_id, projekt_id, person_id, aktivitaet_id, start, ende, letzte_aenderung)  
+VALUES('3', '1', '1', '3',  '10:00','20:00', '2022-04-13 05:30:00');
 
 -- --------------------------------------------------------------------------------------------------------------------------
 -- Kommen Entitäten erstellen
