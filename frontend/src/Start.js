@@ -15,6 +15,7 @@ import Anwesenheit from "./components/Anwesenheit";
 import Pause from "./components/Pause";
 import SuccessAlert from "./components/Alerts/SuccessAlert";
 import ErrorAlert from "./components/Alerts/ErrorAlert";
+import LogoutUser from "./components/LogoutUser";
 import "./index.css"
 
 
@@ -78,6 +79,7 @@ function Start(props) {
 
   return (
     <div >
+      <LogoutUser></LogoutUser>
       {/** Hier werden die Success Alerts geladen, falls die Posts bzw. Fetches erfolgreich ausgeführt wurden */}
       {successAlertOpen ?
         <div style={{ position: "absolute", display: "flex", justifyContent: "center", width: "100%", height: "100%", left: "50%", top: "0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor: "rgba(0,0,0,0.7)" }}>
