@@ -27,6 +27,13 @@ from db.EreignisbuchungMapper import EreignisbuchungMapper
 from db.UserMapper import UserMapper
 import datetime
 
+"""
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Nicola Pany](https://github.com/NicolaPany)
+ * @author [Talha Yildirim](https://github.com/talha16)
+ * @author [Manuel Bräuninger](https://github.com/manu-br)
+"""
 
 class Administration(object):
 

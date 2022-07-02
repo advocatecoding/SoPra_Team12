@@ -7,6 +7,10 @@ import Typography from '@mui/material/Typography';
 import LoadingProgress from "./Loading/LoadingProgress";
 import "../index.css"
 
+/**
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
+
 export default function Users(props) {
     const [personen, setPersonen] = useState([1, 2]);
     const [loadingInProgress, setLoadingInProgress] = useState(true);

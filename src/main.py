@@ -24,6 +24,14 @@ from bo.Ereignisbuchung import Ereignisbuchung
 # Wir nutzen zudem den SecurityDecorator aus dem Bankbeispiel, welcher die Authentifikation übernimmt
 from SecurityDecorator import secured
 
+"""
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Nicola Pany](https://github.com/NicolaPany)
+ * @author [Talha Yildirim](https://github.com/talha16)
+ * @author [Manuel Bräuninger](https://github.com/manu-br)
+"""
+
 """ Wir erstellen ein "Flask-Objekt" """
 app = Flask(__name__)
 

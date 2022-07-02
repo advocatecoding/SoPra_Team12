@@ -2,6 +2,10 @@ from bo.Projektarbeit import Projektarbeit
 from db.Mapper import Mapper
 
 class ProjektarbeitMapper(Mapper):
+    """
+     * @author [Aykut Demir](https://github.com/AykutDemirr)
+     * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+    """
 
     def __init__(self):
         super().__init__()

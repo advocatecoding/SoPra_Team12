@@ -1,5 +1,9 @@
 from bo import BusinessObject as bo
 
+"""
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Manuel Bräuninger](https://github.com/manu-br)
+"""
 
 class Ereignis(bo.BusinessObject):
 

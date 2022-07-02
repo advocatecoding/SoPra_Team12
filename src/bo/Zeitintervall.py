@@ -1,5 +1,10 @@
 from bo import BusinessObject as bo
 
+"""
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Manuel Bräuninger](https://github.com/manu-br)
+"""
+
 class Zeitintervall(bo.BusinessObject):
     def __init__(self):
         super().__init__()

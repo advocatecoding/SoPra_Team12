@@ -1,5 +1,11 @@
 from bo import BusinessObject as bo
 
+"""
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Talha Yildirim](https://github.com/talha16)
+
+"""
+
 class Person(bo.BusinessObject):
 
     def __init__(self):

@@ -5,6 +5,7 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 /**
  * Shows a loading progress, if the show prop is true.
+ * @author [Talha Yildirim](https://github.com/talha16)
  */
 class LoadingProgress extends Component {
 

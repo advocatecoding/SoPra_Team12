@@ -14,6 +14,11 @@ import axios from 'axios';
 import SuccessAlert from "./Alerts/SuccessAlert";
 import "../index.css"
 
+/**
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Nicola Pany](https://github.com/NicolaPany)
+*/
+
 
 export default function CreateNewUser(props) {
 

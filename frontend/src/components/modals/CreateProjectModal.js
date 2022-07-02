@@ -24,6 +24,7 @@ import "./modal.css"
  * Modal um ein neues Projekt anzulegen
  * 
  * @author [Talha Yildirim](https://github.com/talha16)
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
 */
 
 

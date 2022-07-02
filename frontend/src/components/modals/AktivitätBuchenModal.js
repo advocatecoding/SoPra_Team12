@@ -12,6 +12,12 @@ import Select from '@mui/material/Select';
 import InputLabel from '@mui/material/InputLabel';
 import "../../index.css"
 
+
+/**
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Manuel Bräuninger](https://github.com/manu-br)
+*/
+
 export default function AktivitätBuchenModal(props) {
 
   // mit setSelectedProject den nächsten fetch ausführen

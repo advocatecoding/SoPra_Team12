@@ -4,6 +4,9 @@ from bo.VerkaufteStundenInAktivitaet import VerkaufteStundenInAktivitaet
 from bo.SollZeit import Sollzeit
 from bo.MitarbeiterAnsicht import MitarbeiterAnsicht
 
+"""
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+"""
 
 class VerkaufteStundenInAktivitaetMapper(Mapper):
 

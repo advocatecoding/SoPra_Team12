@@ -3,6 +3,9 @@ import { Fab } from '@material-ui/core';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import "../index.css"
 
+/**
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+*/
 
 
 export default function AktivitätBuchen(props) {

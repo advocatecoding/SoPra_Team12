@@ -1,5 +1,10 @@
 from bo import BusinessObject as bo
 
+"""
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Nicola Pany](https://github.com/NicolaPany)
+"""
+
 class Urlaub (bo.BusinessObject):
 
     def __init__(self):

@@ -8,6 +8,7 @@ import "../index.css"
  * Beinhaltet die Buchungen für Kommen und Gehen
  * 
  * @author [Talha Yildirim](https://github.com/talha16)
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
 */
 
 export default function Anwesenheit(props) {

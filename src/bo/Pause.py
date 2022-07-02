@@ -1,5 +1,9 @@
 from bo.Zeitintervall import Zeitintervall
 
+"""
+ * @author [Manuel Bräuninger](https://github.com/manu-br)
+"""
+
 class Pause(Zeitintervall):
     def __init__(self):
         super().__init__()

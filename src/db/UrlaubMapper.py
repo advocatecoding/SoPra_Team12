@@ -1,6 +1,11 @@
 from bo.Urlaub import Urlaub
 from db.Mapper import Mapper
 
+"""
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Nicola Pany](https://github.com/NicolaPany)
+"""
+
 class UrlaubMapper(Mapper):
 
     def __init__(self):

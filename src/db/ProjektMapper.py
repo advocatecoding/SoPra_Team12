@@ -1,6 +1,13 @@
 from bo.Projekt import Projekt
 from db.Mapper import Mapper
 
+"""
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Nicola Pany](https://github.com/NicolaPany)
+ * @author [Talha Yildirim](https://github.com/talha16)
+"""
+
 class ProjektMapper(Mapper):
 
     def __init__(self):

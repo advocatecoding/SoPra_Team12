@@ -1,5 +1,10 @@
 from bo import BusinessObject as bo
 
+"""
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Talha Yildirim](https://github.com/talha16)
+"""
+
 class Projekt(bo.BusinessObject):
     def __init__(self):
         super().__init__()

@@ -2,6 +2,12 @@ from bo.Mitarbeiterinprojekt import MitarbeiterInProjekt
 from db.Mapper import Mapper
 from bo.Projekt import Projekt
 
+"""
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Nicola Pany](https://github.com/NicolaPany)
+"""
+
 
 class MitarbeiterInProjektMapper(Mapper):
 

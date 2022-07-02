@@ -8,6 +8,11 @@ import Header from './components/header/Header'
 import Login from './Login'
 import Start from './Start';
 
+/**
+ * @author [Manuel Bräuninger](https://github.com/manu-br)
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
+
 /** Wir nutzen auch eine Firebase Authentifizierungs-Anbindung,
     welche ebenfalls im Bankbeispiel angewendet wurde  */
 

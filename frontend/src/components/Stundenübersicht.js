@@ -9,6 +9,12 @@ import DialogContentText from '@mui/material/DialogContentText';
 import './modals/modal.css'
 import '../index.css'
 
+/**
+ * @author [Talha Yildirim](https://github.com/talha16)
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Nicola Pany](https://github.com/NicolaPany)
+*/
 
 export default function Stundenübersicht(props) {
 

@@ -3,6 +3,9 @@ import Typography from '@mui/material/Typography';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import "../index.css"
 
+/**
+ * @author [Talha Yildirim](https://github.com/talha16)
+*/
 
 export default function PersonInformationen(props) {
 

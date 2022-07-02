@@ -2,14 +2,16 @@ import React from "react";
 import { Fab } from '@material-ui/core';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 
-
+/**
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+*/
 
 export default function UrlaubBuchen(props) {
 
 
 
     const handleChange = () => {
-        //console.log("Modal is shown.")
         props.openUrlaubBuchenModal(true)
     };
 

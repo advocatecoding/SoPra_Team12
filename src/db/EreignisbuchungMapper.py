@@ -1,6 +1,11 @@
 from bo.Ereignisbuchung import Ereignisbuchung
 from db.Mapper import Mapper
 
+"""
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Manuel Bräuninger](https://github.com/manu-br)
+"""
+
 class EreignisbuchungMapper(Mapper):
 
     def __init__(self):

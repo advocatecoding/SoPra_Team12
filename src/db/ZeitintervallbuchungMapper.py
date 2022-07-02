@@ -6,6 +6,9 @@ from bo.Zeitintervall import Zeitintervall
 
 from db.Mapper import Mapper
 
+"""
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+"""
 
 class ZeitintervallbuchungMapper(Mapper):
 

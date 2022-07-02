@@ -1,5 +1,10 @@
 from bo.Ereignis import Ereignis
 
+"""
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ * @author [Manuel Bräuninger](https://github.com/manu-br)
+"""
+
 class Gehen(Ereignis):
 
     def __init__(self):

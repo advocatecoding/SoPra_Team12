@@ -1,6 +1,12 @@
 from abc import ABC
 from datetime import datetime
 
+"""
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Talha Yildirim](https://github.com/talha16)
+
+"""
+
 class BusinessObject(ABC):
     def __init__(self):
         self._id = 0

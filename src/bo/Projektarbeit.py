@@ -1,5 +1,10 @@
 from bo.Zeitintervall import Zeitintervall
 
+"""
+ * @author [Aykut Demir](https://github.com/AykutDemirr)
+ * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+"""
+
 class Projektarbeit(Zeitintervall):
     def __init__(self):
         super().__init__()

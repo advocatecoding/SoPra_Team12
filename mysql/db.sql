@@ -7,6 +7,14 @@ CREATE SCHEMA IF NOT EXISTS `Zeiterfassung` DEFAULT CHARACTER SET utf8mb4;
 USE `Zeiterfassung` ;
 
 -- -----------------------------------------------------------------------
+ -- * @author [Aykut Demir](https://github.com/AykutDemirr)
+ -- * @author [Dennis Kühnberger](https://github.com/Dennis-248)
+ -- * @author [Nicola Pany](https://github.com/NicolaPany)
+ -- * @author [Talha Yildirim](https://github.com/talha16)
+ -- * @author [Manuel Bräuninger](https://github.com/manu-br)
+-- -----------------------------------------------------------------------
+
+-- -----------------------------------------------------------------------
 -- Tabelle erstellen 'Person'
 -- -----------------------------------------------------------------------
 CREATE TABLE IF NOT EXISTS `Person` (
