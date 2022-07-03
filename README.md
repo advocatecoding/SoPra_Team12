@@ -2,24 +2,24 @@ Software-Praktikum Team 12
 Ziel dieser Website ist es, ein verteiltes System zur kollaborativen Zeiterfassung und Auswertung von Projektarbeit zu realisieren.
 
 Dokumentation
-Unter diesem Link können Sie auf unsere Dokumentation zugreifen.
+Unter diesem Link können Sie auf unsere Dokumentation zugreifen: https://docs.google.com/document/d/1mavLu48Wm8RXVt6pkdIwZhE70LGvlnCe/edit?usp=sharing&ouid=103319458359290724389&rtpof=true&sd=true
 
 Installationsanleitung
-Downloaden Sie unser Projekt unter folgendem Link: https://github.com/talha16/SoPra_Team12#sopra_team12
+1.	Der Projektcode kann unter folgendem Link heruntergeladen werden: https://github.com/talha16/SoPra_Team12 
+2.	Die „db.sql“ Datei in der MySQL Workbench ausführen.  
+3.	Das Projekt mit einer adäquaten Entwicklungsumgebung öffnen.
+4.	In die „requirements.txt“ Datei navigieren und die Packages installieren.
+5.	In den Frontend Ordner navigieren und den Befehl „npm install“ eingeben.
+6.	Den Befehl „python -i main.py“ eingegeben, um das Backend starten.
+7.	Den Befehl „npm start“ eingegeben, um das Frontend starten.
+8.	Im Browser die URL 127.0.0.1:3000 aufrufen.
 
-Installieren Sie unser Projekt mit npm
-
-  npm install Software-Praktikum_Team12
-  cd Software-Praktikum_Team12
-Installieren Sie nun folgende Packages: (Packages einfügen)
-
-Über das Terminal wird der Befehl python -i main.pyeingegeben, um das Backend starten. Über das Terminal wird der Befehl npm start eingegeben, um das Frontend starten. Rufen Sie dann im Browser die URL 127.0.0.1:3000 auf.
 
 Deployment
 Eine ausführliche Beschreibung finden Sie auf folgender Seite: (https://facebook.github.io/create-react-app/docs/deployment)
 
 Handbuch
-Rufen Sie die Website unter folgendem Link auf: (Link einfügen). Öffnen Sie ggf. die lokale Applikation unter der URL 127.0.0.1:3000.
+Rufen Sie die Website unter folgendem Link auf: https://docs.google.com/document/d/1mavLu48Wm8RXVt6pkdIwZhE70LGvlnCe/edit?usp=sharing&ouid=103319458359290724389&rtpof=true&sd=true. Öffnen Sie ggf. die lokale Applikation unter der URL 127.0.0.1:3000.
 
 Bei Aufruf der Webseite wird die Login-Maske angezeigt. Hier steht Ihnen die Funktion „Mit Google anmelden“ zur Verfügung. Damit wird bei erstmaliger Nutzung der Registrierungsprozess ausgeführt. Wenn ein Nutzer mit dem ausgewähltem Google-Konto bereits existiert, wird direkt die Startseite aufgerufen.
 
@@ -68,4 +68,3 @@ Autoren
 @talha16
 @NicolaPany
 @Dennis-248
-@Nina
