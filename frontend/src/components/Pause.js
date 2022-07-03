@@ -31,16 +31,12 @@ function Pause(props) {
 
     useEffect(() => {
         iDerhalten(props.id)
-      }, []
-      )
+    }, []
+    )
 
-
-
-      const iDerhalten = (id) => {
+    const iDerhalten = (id) => {
         setPersonID(id)
-      }
-    
-
+    }
 
 
     function postPause(id) {
@@ -51,7 +47,11 @@ function Pause(props) {
             person_id,
             start_pause,
             ende_pause
-        }).then(data => console.log(" Pause wurde gepostet", data).catch(err => console.log(err)))
+        })
+        .then(data => 
+            {console.log(" Pause wurde gepostet", data)
+        })
+        .catch(err => { console.log(err) })
     };
 
     function checkTime() {

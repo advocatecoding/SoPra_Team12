@@ -57,7 +57,7 @@ class ZeitintervallbuchungMapper(Mapper):
             zeitintervallbuchung.set_id(maxid[0] + 1)
 
         """ Hier wird die Person Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO zeitintervallbuchung (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung) VALUES (%s,%s,%s,%s,%s,%s)"
+        command = "INSERT INTO Zeitintervallbuchung (zeit_id, projekt_id, person_id, aktivitaet_id, gearbeitete_zeit, letzte_aenderung) VALUES (%s,%s,%s,%s,%s,%s)"
         data = (zeitintervallbuchung.get_id(), zeitintervallbuchung.get_projekt_id(),zeitintervallbuchung.get_person_id(),zeitintervallbuchung.get_aktivitaet(),
                 zeitintervallbuchung.get_zeitintervall(), zeitintervallbuchung.get_letzte_aenderung())
         cursor.execute(command, data)

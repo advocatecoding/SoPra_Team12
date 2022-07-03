@@ -157,7 +157,7 @@ ereignisbuchung = api.inherit('Ereignisbuchung', bo, {
 @zeiterfassung.route("/personen")
 class PersonenListOperations(Resource):
     @zeiterfassung.marshal_with(person)
-    @secured
+    #@secured
     def get(self):
         """ Auslesen der Personen-Objekte """
         adm = Administration()
@@ -366,7 +366,7 @@ class MitarbeiterInProjektByIdOperations(Resource):
 @zeiterfassung.route("/aktivitaten")
 class AktivitaetenListOperations(Resource):
     @zeiterfassung.marshal_with(aktivitaet)
-    @secured
+    #@secured
     def get(self):
         """ Auslesen der Aktivität-Objekte """
         adm = Administration()

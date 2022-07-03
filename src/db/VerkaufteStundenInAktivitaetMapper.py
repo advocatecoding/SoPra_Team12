@@ -18,7 +18,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
         """ Wir suchen alle Verkaufte Stunden in Aktivität """
         result = []
         cursor = self._cnx.cursor()
-        cursor.execute("SELECT * FROM verkaufte_stunden_in_aktivitaet")
+        cursor.execute("SELECT * FROM Verkaufte_stunden_in_aktivitaet")
         person_daten = cursor.fetchall()
 
         for (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung) in person_daten:
@@ -43,7 +43,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
         cursor = self._cnx.cursor()
 
         """ Hier wird die verkaufte_stunden_in_Aktivität Instanz in die Datenbank mit dem Insert Befehl gespeichert """
-        command = "INSERT INTO verkaufte_stunden_in_aktivitaet (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung) VALUES (%s,%s,%s,%s)"
+        command = "INSERT INTO Verkaufte_stunden_in_aktivitaet (aktivitaet_id, person_id, gebuchte_stunden, letzte_aenderung) VALUES (%s,%s,%s,%s)"
         data = (averkaufte_stunden.get_aktivitaet(), averkaufte_stunden.get_person(), averkaufte_stunden.get_gebuchte_stunden(), averkaufte_stunden.get_letzte_aenderung())
         cursor.execute(command, data)
 
@@ -59,7 +59,7 @@ class VerkaufteStundenInAktivitaetMapper(Mapper):
         result = []
 
         cursor = self._cnx.cursor()
-        command = "SELECT gebuchte_stunden, bezeichnung FROM verkaufte_stunden_in_aktivitaet INNER JOIN Person ON verkaufte_stunden_in_aktivitaet.person_id = Person.person_id INNER JOIN Zeitintervallbuchung ON verkaufte_stunden_in_aktivitaet.aktivitaet_id = Zeitintervallbuchung.aktivitaet_id INNER JOIN Aktivitaet ON verkaufte_stunden_in_aktivitaet.aktivitaet_id = Aktivitaet.aktivitaet_id WHERE Zeitintervallbuchung.projekt_id={0} GROUP BY Zeitintervallbuchung.aktivitaet_id, vorname ORDER BY bezeichnung, vorname ASC;".format(projekt_id)
+        command = "SELECT gebuchte_stunden, bezeichnung FROM Verkaufte_stunden_in_aktivitaet INNER JOIN Person ON Verkaufte_stunden_in_aktivitaet.person_id = Person.person_id INNER JOIN Zeitintervallbuchung ON Verkaufte_stunden_in_aktivitaet.aktivitaet_id = Zeitintervallbuchung.aktivitaet_id INNER JOIN Aktivitaet ON Verkaufte_stunden_in_aktivitaet.aktivitaet_id = Aktivitaet.aktivitaet_id WHERE Zeitintervallbuchung.projekt_id={0} GROUP BY Zeitintervallbuchung.aktivitaet_id, vorname ORDER BY bezeichnung, vorname ASC;".format(projekt_id)
         cursor.execute(command)
         projekt_daten = cursor.fetchall()
 

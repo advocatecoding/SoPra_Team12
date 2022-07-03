@@ -59,7 +59,8 @@ export default function Anwesenheit(props) {
             id,
             kommen_id,
             gehen_id
-        }).then(data => console.log(" Ereignisbuchung wurde gepostet", data).catch(err => console.log(err)))
+        }).then(data => {console.log(" Ereignisbuchung wurde gepostet", data)})
+        .catch(err => {console.log(err)})
     };
 
     function postKommen(id) {
@@ -69,7 +70,8 @@ export default function Anwesenheit(props) {
             id,
             person_id,
             start_kommen
-        }).then((response) => {
+        })
+        .then((response) => {
             console.log("Kommen wurde gepostet",response)
             const data = response.data;
             let kommen_id = data.id
@@ -77,7 +79,7 @@ export default function Anwesenheit(props) {
             console.log("Kommen Response",kommen_id)     
             postGehen(1211)
             
-        }).catch(err => console.log(err))
+        }).catch(err => {console.log(err)})
     };
 
     function postGehen(id) {
@@ -94,7 +96,7 @@ export default function Anwesenheit(props) {
             let gehen_id = data.id
             //console.log("Wert",gehen_id)
             postEreignisBuchung(1211, kommen_id, gehen_id)     
-        }).catch(err => console.log(err))
+        }).catch(err => {console.log(err)})
     };
 
     const changeKommen = (event) => {
