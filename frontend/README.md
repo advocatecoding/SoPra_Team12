@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# Software-Praktikum Team 12
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ziel dieser Website ist es, ein verteiltes System
+zur kollaborativen Zeiterfassung und Auswertung
+von Projektarbeit zu realisieren.
 
-## Available Scripts
 
-In the project directory, you can run:
+## Dokumentation
 
-### `npm start`
+Unter diesem Link können Sie auf unsere [Dokumentation](Link einfügen) zugreifen.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installationsanleitung
 
-### `npm test`
+Downloaden Sie unser Projekt unter folgendem Link: https://github.com/talha16/SoPra_Team12#sopra_team12
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Installieren Sie unser Projekt mit npm
 
-### `npm run build`
+```bash
+  npm install Software-Praktikum_Team12
+  cd Software-Praktikum_Team12
+```
+Installieren Sie nun folgende Packages: (Packages einfügen)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Über das Terminal wird der Befehl ``` python -i main.py ```eingegeben, um das Backend starten.
+Über das Terminal wird der Befehl ```npm start``` eingegeben, um das Frontend starten.
+Rufen Sie dann im Browser die URL 127.0.0.1:3000 auf.
+   
+## Deployment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Eine ausführliche Beschreibung finden Sie auf folgender Seite:
+(https://facebook.github.io/create-react-app/docs/deployment)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Handbuch
 
-### `npm run eject`
+Rufen Sie die Website unter folgendem Link auf: (Link einfügen).
+Öffnen Sie ggf. die lokale Applikation unter der URL 127.0.0.1:3000.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+Bei Aufruf der Webseite wird die Login-Maske angezeigt. 
+Hier steht Ihnen die Funktion „Mit Google anmelden“ zur Verfügung. 
+Damit wird bei erstmaliger Nutzung der Registrierungsprozess ausgeführt. 
+Wenn ein Nutzer mit dem ausgewähltem Google-Konto bereits existiert, 
+wird direkt die Startseite aufgerufen.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Nachdem Sie sich angemeldet haben,
+wird Ihnen eine Drop-Down Liste mit den verfügbaren Nutzern angezeigt, 
+aus welcher Sie einen Benutzername auswählen müssen, 
+mit dem Sie dann angemeldet werden.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Falls noch kein Benutzer vorhanden ist, 
+können Sie unter „Benutzer erstellen“ einen neuen Benutzer erstellen. 
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Nachdem Sie sich mit einem Benutzer angemeldet haben, 
+gelangen Sie man den Startbildschirm der App. 
 
-## Learn More
+### Bedeutung der einzelnen Buttons
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Klicken Sie rechts oben auf den Button **„Stundenübersicht“**, 
+erscheint ein Modal Pop Up Fenster, 
+in dem die Stundenübersicht des Benutzers in den jeweiligen Projekten angezeigt wird.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Mit einem Klick auf den Button **„Urlaub buchen“** kann der jeweilige Benutzer seinen Urlaub eintragen, 
+dieser wird dann gespeichert.
 
-### Code Splitting
+Mit dem Button **„Projektkontrolle durchführen“** kann sich der Benutzer 
+mit Hilfe einer Dropdown-Liste die Arbeitszeiten in seinen Projekten anzeigen lassen.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Wenn der Benutzer sich die Arbeitszeiten anzeigen lässt, 
+erscheint eine Tabelle mit den Projekten und Aktivitäten an denen gearbeitet wurde. 
+Zusätzlich wird hier noch die Ist- und Soll-Zeit der Aktivitäten angezeigt.
 
-### Analyzing the Bundle Size
+Mit dem Button **„Aktivität zuweisen“** können gearbeitete Stunden auf einer Aktivität gespeichert werden.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Im **Buchungsbereich** kann der Benutzer seine Anwesenheit und zusätzlich seine Pausen angeben und auf sein Arbeitszeitkonto buchen. 
+Hier wird ebenfalls die Projektarbeit mit einem zugehörigen Projekt gebucht mit einer Start- und Endzeit.
 
-### Making a Progressive Web App
+Im Abschnitt **„Meine Projekte“** kann der Benutzer seine Projekte einsehen, 
+neue Projekte erstellen und aktualisieren.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Wenn der Benutzer im Bereich **„Meine Projekte“** auf den **„+“**-Button klickt, 
+erscheint ein Modal-Pop-Up mit der Möglichkeit ein Projekt anzulegen. 
+Hierfür muss ein Projektname und der Auftraggeber angegeben werden.
 
-### Advanced Configuration
+Der Benutzer kann sich aus der App abmelden, 
+indem er im rechten oberen Eck auf das Google-Icon klickt, 
+wodurch sich ein Modal-Pop-Up öffnet mit den Google-Benutzerinformationen 
+und einem **„Logout“**-Button.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Für genauere Informationen und zugehörige Screenshots, 
+klicken Sie unter *„Dokumentation“* auf den beigefügten Link.
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Wichtige Screenshots
 
-### `npm run build` fails to minify
+Unter diesem Abschnitt finden Sie unsere Diagramme und Modelle.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### Use-Case-Diagramm
+![Use-Case-Diagramm](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+### Klassendiagramm
+![Klassendiagramm](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+
+### Entity-Relationship-Modell
+![Entity-Relationship-Modell](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+## Autoren
+
+- [@manu-br](https://github.com/manu-br)
+- [@AykutDemirr](https://github.com/AykutDemirr)
+- [@talha16](https://github.com/talha16)
+- [@NicolaPany](https://github.com/NicolaPany)
+- [@Dennis-248](https://github.com/Dennis-248)
+- [@Nina](Link einfügen)
