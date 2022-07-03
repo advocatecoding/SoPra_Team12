@@ -21,8 +21,13 @@ class Mapper(AbstractContextManager, ABC):
             Die App befindet sich somit im **Production Mode** und zwar im *Standard Environment*.
             Hierbei handelt es sich also um die Verbindung zwischen Google App Engine und Cloud SQL."""
             self._cnx = connector.connect(user='root', password='Sopragruppe12!',
-                                          unix_socket='/cloudsql/hdm-zeiterfassung:europe-west3:zeiterfassung-instanz',
+                                          unix_socket='/cloudsql/zeiterfassung-hdm:europe-west3:zeiterfassung-hdm-db',
                                           database='Zeiterfassung')
+        else:
+            """Es soll eine Verbindung zur Datenbank erstellt werden"""
+            self._cnx = connector.connect(user='root', password='Sopragruppe12!',
+                                  host='127.0.0.1',
+                                  database='Zeiterfassung', auth_plugin='mysql_native_password')
         return self
 
     def __exit__(self,  exc_type, exc_val, exc_tb):

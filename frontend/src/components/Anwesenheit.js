@@ -76,7 +76,7 @@ export default function Anwesenheit(props) {
             const data = response.data;
             let kommen_id = data.id
             let gehen_id = data.id
-            console.log("Kommen Response",kommen_id)     
+            //console.log("Kommen Response",kommen_id)     
             postGehen(1211)
             
         }).catch(err => {console.log(err)})

@@ -2,7 +2,7 @@
   "name": "sopra",
   "version": "0.1.0",
   "private": true,
-  "proxy": "https://hdm-zeiterfassung.ey.r.appspot.com",
+  "proxy": "http://127.0.0.1:5000/",
   "homepage": "/static/reactclient",
   "dependencies": {
     "@emotion/react": "^11.9.0",

@@ -127,14 +127,12 @@ export default function Buchen(props) {
     newIntervallObject.setHours(hh)
     newIntervallObject.setMinutes(mm)
     let gearbeiteteZeit = (hh + "." + mm)
-    //console.log(hh + "." + mm)
-    //console.log(hh + " Stunden" + " " + mm + " Minuten")
     let newIntervallString = hh + "h " + mm + "min"
-    //console.log("Intervall in Stunde u Minuten:", newIntervallString)
     setIntervall(newIntervallString)
     postZeitintervallbuchung(1211, gearbeiteteZeit)
     postProjektarbeit(1211, gearbeiteteZeit)
     setProjektId("")
+    setEndeIsSet(false)
   }
 
   function postZeitintervallbuchung(id, gearbeitete_zeit) {

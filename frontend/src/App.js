@@ -14,18 +14,18 @@ import Start from './Start';
 */
 
 /** Wir nutzen auch eine Firebase Authentifizierungs-Anbindung,
-    welche ebenfalls im Bankbeispiel angewendet wurde  */
+	welche ebenfalls im Bankbeispiel angewendet wurde  */
 
 class App extends React.Component {
 
-    #firebaseConfig = {
-        apiKey: "AIzaSyDYY1X2Mtxg5xeSHsuFWNK8vuw_qwAfgM4",
-  authDomain: "bankbeispiel-426c2.firebaseapp.com",
-  projectId: "bankbeispiel-426c2",
-  storageBucket: "bankbeispiel-426c2.appspot.com",
-  messagingSenderId: "54183409381",
-  appId: "1:54183409381:web:b21f7ca930084dccfb860c"
-       };
+	#firebaseConfig = {
+		apiKey: "AIzaSyCrUgCRiHcbrdWEhdm5_J1P570Ps3uaHpc",
+		authDomain: "zeiterfassung-e0590.firebaseapp.com",
+		projectId: "zeiterfassung-e0590",
+		storageBucket: "zeiterfassung-e0590.appspot.com",
+		messagingSenderId: "579508962479",
+		appId: "1:579508962479:web:5a8fa311cf54b53315005a"
+	};
 
 
 	/** Constructor of the app, which initializes firebase  */
@@ -43,7 +43,7 @@ class App extends React.Component {
 
 	/** 
 	 * Create an error boundary for this app and receive all errors from below the component tree.
- 	 */
+	   */
 	static getDerivedStateFromError(error) {
 		// Update state so the next render will show the fallback UI.
 		return { appError: error };
@@ -88,9 +88,9 @@ class App extends React.Component {
 		}
 	}
 
-  /** 
-   * Handles the sign in request of the SignIn component uses the firebase.auth() component to sign in.
-	 */
+	/** 
+	 * Handles the sign in request of the SignIn component uses the firebase.auth() component to sign in.
+	   */
 	handleSignIn = () => {
 		this.setState({
 			authLoading: true
@@ -115,24 +115,24 @@ class App extends React.Component {
 	render() {
 		const { currentUser } = this.state;
 		return (
-          <Router basename={process.env.PUBLIC_URL}>
-					<Container maxWidth='xl'>
+			<Router basename={process.env.PUBLIC_URL}>
+				<Container maxWidth='xl'>
 					<Header user={currentUser}></Header>
-						{
-							// Ist der Benutzer schon eingeloggt -> Dann soll <Login> geladen werden
-							currentUser ?
-								<>
+					{
+						// Ist der Benutzer schon eingeloggt -> Dann soll <Login> geladen werden
+						currentUser ?
+							<>
 								{/** zu Testzwecken wird Login übersprungen */}
-									<Login></Login>
-								</>
-								:
-								// Wenn der Benutzer nicht eingeloggt ist -> Dann soll <SignIn> geladen werden
-								<>
-									<SignIn onSignIn={this.handleSignIn} />
-								</>
-						}
-					</Container>
-				</Router>
+								<Login></Login>
+							</>
+							:
+							// Wenn der Benutzer nicht eingeloggt ist -> Dann soll <SignIn> geladen werden
+							<>
+								<SignIn onSignIn={this.handleSignIn} />
+							</>
+					}
+				</Container>
+			</Router>
 		);
 	}
 }

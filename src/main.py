@@ -157,7 +157,7 @@ ereignisbuchung = api.inherit('Ereignisbuchung', bo, {
 @zeiterfassung.route("/personen")
 class PersonenListOperations(Resource):
     @zeiterfassung.marshal_with(person)
-    #@secured
+    @secured
     def get(self):
         """ Auslesen der Personen-Objekte """
         adm = Administration()
@@ -366,7 +366,7 @@ class MitarbeiterInProjektByIdOperations(Resource):
 @zeiterfassung.route("/aktivitaten")
 class AktivitaetenListOperations(Resource):
     @zeiterfassung.marshal_with(aktivitaet)
-    #@secured
+    @secured
     def get(self):
         """ Auslesen der Aktivität-Objekte """
         adm = Administration()
@@ -596,6 +596,7 @@ class VerkaufteStundenInAktivitaetOperations(Resource):
 @zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
 class SollzeitOperations(Resource):
     @zeiterfassung.marshal_with(sollzeit)
+    @secured
     def get(self,projekt_id):
         """ Auslesen der Sollzeit szenario 4.
         Das zu auslesende Objekt wird anhand der id bestimmt
@@ -610,6 +611,7 @@ class SollzeitOperations(Resource):
 @zeiterfassung.param("projekt_id", "Die Id des gewünschten Projektes")
 class MitarbeiteransichtOperations(Resource):
     @zeiterfassung.marshal_with(mitarbeiteransicht)
+    @secured
     def get(self,projekt_id):
         """ Auslesen der IstStunden szenario 4.
         Das zu auslesende Objekt wird anhand der id bestimmt
@@ -624,6 +626,7 @@ class MitarbeiteransichtOperations(Resource):
 @zeiterfassung.param("person_id", "Die Id der gewünschten Person")
 class PersoenlicheOperations(Resource):
     @zeiterfassung.marshal_with(mitarbeiteransicht)
+    @secured
     def get(self,person_id):
         """ Auslesen der IstStunden auf allen Projekten szenario 3.
         Das zu auslesende Objekt wird anhand der id bestimmt
@@ -781,6 +784,7 @@ class GehenListOperations(Resource):
 @zeiterfassung.route("/projektarbeit")
 class ProjektarbeitListOperations(Resource):
     @zeiterfassung.marshal_with(projektarbeit)
+    @secured
     def get(self):
         """ Auslesen der Projektarbeits-Objekte """
         adm = Administration()
@@ -789,6 +793,7 @@ class ProjektarbeitListOperations(Resource):
 
     @zeiterfassung.marshal_with(projektarbeit, code=201)
     @zeiterfassung.expect(projektarbeit)
+    @secured
     def post(self):
         """ Projektarbeits Instanz erstellen """
         adm = Administration()
@@ -810,6 +815,7 @@ class ProjektarbeitListOperations(Resource):
 @zeiterfassung.route("/ereignisbuchung")
 class EreignisbuchungListOperations(Resource):
     @zeiterfassung.marshal_with(ereignisbuchung)
+    @secured
     def get(self):
         """ Auslesen der Ereignisbuchung-Objekte """
         adm = Administration()
@@ -818,6 +824,7 @@ class EreignisbuchungListOperations(Resource):
 
     @zeiterfassung.marshal_with(ereignisbuchung, code=201)
     @zeiterfassung.expect(ereignisbuchung)
+    @secured
     def post(self):
         """ Ereignisbuchung Instanz erstellen """
         adm = Administration()

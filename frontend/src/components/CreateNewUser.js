@@ -90,7 +90,10 @@ export default function CreateNewUser(props) {
         <div align="center"  >
             {successAlertOpen ?
             <div style={{position:"absolute", width:"100%", height:"100%",  left: "50%", top:"0", transform: "translate(-50%, 0)", zIndex: "999", backgroundColor:"rgba(0,0,0,0.7)"}}>
-            <SuccessAlert style={{marginTop:"20% !important", width:"5rem"}} setAlertOpen={open => setSuccessAlertOpen(open)} alertmessage={"Das Anlegen eines neuen Benutzers war erfolgreich!"}></SuccessAlert>            
+                <div id="success-user">
+                <SuccessAlert style={{marginTop:"20% !important", width:"5rem"}} setAlertOpen={open => setSuccessAlertOpen(open)} alertmessage={"Das Anlegen eines neuen Benutzers war erfolgreich!"}></SuccessAlert>            
+                </div>
+            
             </div> 
             : null
             }
